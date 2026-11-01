@@ -5,6 +5,22 @@ Ye guide zero se live deployment tak le jata hai. Har step ke baad kya check kar
 **Total time:** ~45–60 minutes
 **Cost:** ₹0 (Firebase Spark plan, GitHub free, Gmail SMTP free, Telegram free)
 
+## Progress status
+
+| Step | Status |
+|---|---|
+| 0. Tools (Node, Git, browser) | ✅ Done |
+| 1. Firebase project + web config | ✅ Done (`followupdates`) |
+| 1.6 Firestore rules + indexes deploy | ✅ Done |
+| 2. Service account JSON | ⛔ **Pending** — needed for real data pull |
+| 3. GitHub repo + Actions secrets/variables | ✅ Done (repo public, defaults set) |
+| 3.4 Remaining secrets (`FIREBASE_SERVICE_ACCOUNT`, `SMTP_*`, `TELEGRAM_*`) | ⛔ **Pending** |
+| 4. Gmail app password | ⛔ **Pending** |
+| 5. Telegram bot + channel | ⛔ **Pending** |
+| 6.2 Hosting deploy | ✅ Done → https://followupdates.web.app |
+| 6.3 Admin account + `admins/{uid}` doc | ⛔ **Pending** |
+| 6.5 First real job publish | ⛔ **Pending** (site abhi 12 demo jobs dikha raha hai) |
+
 > ⚠️ `.env`, service-account JSON aur app passwords kabhi GitHub par commit na karein. Ye guide ki commands safe hain.
 
 ---
@@ -30,6 +46,8 @@ Copy-Item .env.example .env
 ---
 
 ## 1. Firebase project + web config
+
+> ✅ **Ho chuka hai.** Project ID: **`followupdates`**. `.env` aur `.firebaserc` already isi se set hain. Neeche ke steps sirf naye project ke liye hain.
 
 ### 1.1 Project banayein
 
@@ -157,21 +175,24 @@ git --version
 
 ### 3.2 GitHub par repo banayein
 
+> ✅ **Ye ho chuka hai.** Repo public hai: **https://github.com/surakshasavingssociety-sketch/followexam**
+> GitHub CLI (`gh`) bhi installed + authenticated hai.
+
+Naya repo banana ho to:
+
 1. [github.com/new](https://github.com/new) kholein.
 2. Repository name: `followexam`.
-3. **Private** select karein.
+3. **Public** select karein (public repo par Actions minutes unlimited/free hain).
 4. **Create repository** (README/gitignore add na karein).
 
 ### 3.3 Code push karein
 
+> ✅ **`main` already push ho chuka hai.** Sirf tab chalayein jab naya clone banaya ho:
+
 ```powershell
-cd "C:\Users\tinte\Documents\Default Project"
-git init
-git add .
-git commit -m "feat: FollowExam v1"
-git branch -M main
-git remote add origin https://github.com/<your-username>/followexam.git
-git push -u origin main
+git clone https://github.com/surakshasavingssociety-sketch/followexam.git
+cd followexam
+npm install
 ```
 
 Pehli baar browser me GitHub login maangega — sign in kar lein.
@@ -179,6 +200,9 @@ Pehli baar browser me GitHub login maangega — sign in kar lein.
 > `node_modules`, `dist`, `.env` automatically ignore hain (`.gitignore` ki wajah se). Push ke baad GitHub par sirf source code dikhna chahiye.
 
 ### 3.4 GitHub Secrets add karein
+
+> ✅ **Non-sensitive defaults already set hain** (`FIREBASE_PROJECT_ID`, `SITE_URL`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `MAIL_FROM`, `EMAIL_DELAY_MS`, `MAX_EMAILS_PER_RUN`, `NOTIFY_LOOKBACK_DAYS`).
+> ⛔ **Ye 5 abhi khali hain, aapko add karni hain:** `FIREBASE_SERVICE_ACCOUNT`, `SMTP_USER`, `SMTP_PASS`, `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`.
 
 GitHub repo → **Settings** → **Secrets and variables** → **Actions** → **Secrets** → **New repository secret**.
 
@@ -200,6 +224,8 @@ GitHub repo → **Settings** → **Secrets and variables** → **Actions** → *
 | `TELEGRAM_CHAT_ID` | `@yourchannel` ya `-100...` (Step 5) |
 
 ### 3.5 GitHub Variables add karein
+
+> ✅ **Saare variables already set hain** (Firebase public config, site URL, contact email, query counts).
 
 Wahi page → **Variables** tab → **New repository variable**.
 
@@ -292,6 +318,8 @@ npm run preview
 > `npm run build` se pehle `prebuild` automatically `data/exams.json` regenerate karta hai (`exam-catalog.json` + `states.json` se). Alag se chahiye to `npm run exams:build`.
 
 ### 6.2 Firestore rules + Hosting deploy
+
+> ✅ **Ho chuka hai** — rules + indexes deployed, 309 files hosting par, site live.
 
 ```powershell
 npx firebase-tools@latest deploy --only firestore:rules,firestore:indexes,hosting --project followupdates
