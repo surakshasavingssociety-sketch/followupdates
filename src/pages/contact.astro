@@ -1,0 +1,112 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE } from "../lib/constants";
+---
+
+<BaseLayout
+  title="Contact FollowExam"
+  description="FollowExam se contact karein — correction request, nayi notification, partnership ya feedback ke liye."
+>
+  <section class="section-tight" style="padding-top:34px">
+    <div class="container">
+      <div class="breadcrumb" style="padding:0 0 14px">
+        <a href="/">Home</a><span>/</span><span>Contact</span>
+      </div>
+
+      <div class="grid-2" style="align-items:start">
+        <article class="prose">
+          <h1>Contact us</h1>
+          <p>
+            Correction, nayi notification, copyright request ya feedback — sabke liye neeche diye email par likhein.
+            Hum usually 1–2 working days me reply karte hain.
+          </p>
+
+          <h2>Email</h2>
+          <p>
+            <a href={`mailto:${SITE.email}`} style="font-weight:700;font-size:1.05rem">{SITE.email}</a>
+          </p>
+
+          <h2>Kis cheez ke liye likhein</h2>
+          <ul>
+            <li><strong>Correction:</strong> kisi post me galat date, fee, vacancy ya link ho to post ka URL bhejein.</li>
+            <li><strong>Nayi notification:</strong> official source ka link aur short details bhejein.</li>
+            <li><strong>Copyright / removal:</strong> apna role, organization aur affected URL likhein.</li>
+            <li><strong>Alerts:</strong> email unsubscribe ya Telegram issue ke liye apna registered email bhejein.</li>
+          </ul>
+
+          <h2>Important</h2>
+          <p class="small muted">
+            FollowExam kisi government recruitment ka part nahi hai. Application, fee payment, admit card ya result se
+            judi problem ke liye sirf official department se contact karein.
+          </p>
+        </article>
+
+        <div class="panel">
+          <h2 style="font-size:1.2rem">Quick message</h2>
+          <p class="muted small">
+            Form submit karne par aapka email app khulega, jisme message pre-filled hoga. Isse aap apne hi email
+            account se message bhej sakte hain.
+          </p>
+
+          <form id="contact-form" class="form-grid">
+            <div class="field">
+              <label for="contact-name">Aapka naam</label>
+              <input class="input" id="contact-name" name="name" autocomplete="name" required />
+            </div>
+            <div class="field">
+              <label for="contact-email">Aapka email</label>
+              <input class="input" id="contact-email" name="email" type="email" autocomplete="email" required />
+            </div>
+            <div class="field">
+              <label for="contact-topic">Topic</label>
+              <select class="select" id="contact-topic" name="topic">
+                <option>Correction request</option>
+                <option>Nayi notification</option>
+                <option>Copyright / removal</option>
+                <option>Alert / unsubscribe</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="contact-message">Message</label>
+              <textarea class="textarea" id="contact-message" name="message" required></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">Open email app</button>
+          </form>
+
+          <p class="form-message" id="contact-status" role="status"></p>
+
+          <div style="border-top:1px solid var(--line);margin-top:18px;padding-top:14px">
+            <p class="small muted" style="margin:0">
+              Ya seedha email karein:
+              <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script define:vars={{ contactEmail: SITE.email }}>
+  const form = document.querySelector("#contact-form");
+  const status = document.querySelector("#contact-status");
+
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+    const name = String(data.get("name") || "").trim();
+    const email = String(data.get("email") || "").trim();
+    const topic = String(data.get("topic") || "").trim();
+    const message = String(data.get("message") || "").trim();
+
+    const subject = `[FollowExam] ${topic} — ${name}`;
+    const body = [`Name: ${name}`, `Email: ${email}`, `Topic: ${topic}`, "", message].join("\n");
+
+    window.location.href = `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    if (status) {
+      status.textContent = "Email app khul raha hai. Agar na khule, to upar diye email par seedha likhein.";
+      status.className = "form-message show info";
+    }
+  });
+</script>

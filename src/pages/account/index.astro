@@ -1,0 +1,290 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="My account" description="Saved jobs and alert preferences." noindex>
+  <section class="container">
+    <div id="account-loading" class="panel" style="margin:34px 0">
+      <p class="muted">Account load ho raha hai…</p>
+    </div>
+
+    <div id="account-config" class="form-card hidden">
+      <h1>Firebase setup required</h1>
+      <p>Login aur saved jobs ke liye Firebase configure karein. <code>.env.example</code> dekhein.</p>
+      <a class="btn btn-outline" href="/jobs/">Browse jobs</a>
+    </div>
+
+    <div id="account-auth" class="form-card hidden">
+      <h1>My FollowExam</h1>
+      <p class="muted small">Saved jobs aur email alerts ke liye sign in karein.</p>
+      <div class="form-message" data-auth-message role="status"></div>
+      <form id="account-login-form" class="form-grid">
+        <div class="field">
+          <label for="account-email">Email</label>
+          <input class="input" id="account-email" type="email" autocomplete="email" required />
+        </div>
+        <div class="field">
+          <label for="account-password">Password</label>
+          <input class="input" id="account-password" type="password" autocomplete="current-password" required />
+        </div>
+        <button class="btn btn-primary" type="submit">Sign in</button>
+        <button class="btn btn-outline" type="button" id="account-google">Continue with Google</button>
+        <button class="btn btn-ghost" type="button" id="account-signup">Create a new account</button>
+      </form>
+      <p class="small muted" style="margin:14px 0 0">
+        Guest ke roop me saved jobs sirf is browser me store hote hain.
+      </p>
+    </div>
+
+    <div id="account-panel" class="account-grid hidden">
+      <aside class="account-nav">
+        <div class="account-user">
+          <div class="avatar" id="account-avatar">FE</div>
+          <div>
+            <strong id="account-name" style="display:block;font-size:.9rem">Student</strong>
+            <span class="small muted" id="account-user-email"></span>
+          </div>
+        </div>
+        <a href="#saved">Saved jobs</a>
+        <a href="#alerts">Alert settings</a>
+        <a href="/jobs/">Browse jobs</a>
+        <button type="button" id="account-signout">Sign out</button>
+      </aside>
+
+      <div>
+        <section id="saved" class="panel" style="margin-bottom:18px">
+          <div class="section-head" style="margin-bottom:12px">
+            <div>
+              <h2 style="font-size:1.3rem">Saved jobs</h2>
+              <p>Aapke bookmarked updates.</p>
+            </div>
+            <span class="badge badge-blue" id="saved-count">0</span>
+          </div>
+          <div id="saved-list" class="grid-2"></div>
+        </section>
+
+        <section id="alerts" class="panel">
+          <h2 style="font-size:1.3rem">Alert settings</h2>
+          <p class="muted small">Daily digest email se updates paayein. Aap kabhi bhi off kar sakte hain.</p>
+          <form id="alert-form" class="form-grid" style="max-width:420px">
+            <div class="field">
+              <label for="alert-name">Name</label>
+              <input class="input" id="alert-name" autocomplete="name" />
+            </div>
+            <label style="display:flex;gap:9px;align-items:center;font-size:.9rem">
+              <input id="alert-enabled" type="checkbox" />
+              Daily email alerts bhejein
+            </label>
+            <button class="btn btn-primary" type="submit">Save settings</button>
+          </form>
+          <div class="form-message" id="alert-message" role="status"></div>
+        </section>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  import {
+    GoogleAuthProvider,
+    createUserWithEmailAndPassword,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+    signInWithPopup,
+    signOut,
+    type User,
+  } from "firebase/auth";
+  import { doc, getDoc, getDocs, collection, setDoc } from "firebase/firestore";
+  import { firebaseConfigured, getFirebaseAuth, getFirebaseDb } from "../../lib/firebase";
+  import { getSavedIds, toggleJobSaved } from "../../lib/saved";
+
+  type Job = {
+    id: string;
+    slug: string;
+    title: string;
+    organization: string;
+    category: string;
+    state: string;
+    postDate: string;
+    applyEnd?: string | null;
+    demo?: boolean;
+  };
+
+  const loading = document.querySelector<HTMLElement>("#account-loading");
+  const configPanel = document.querySelector<HTMLElement>("#account-config");
+  const authPanel = document.querySelector<HTMLElement>("#account-auth");
+  const accountPanel = document.querySelector<HTMLElement>("#account-panel");
+  const authMessage = document.querySelector<HTMLElement>("[data-auth-message]");
+  const alertMessage = document.querySelector<HTMLElement>("#alert-message");
+  const savedList = document.querySelector<HTMLElement>("#saved-list");
+  const savedCount = document.querySelector<HTMLElement>("#saved-count");
+  const nameInput = document.querySelector<HTMLInputElement>("#alert-name");
+  const enabledInput = document.querySelector<HTMLInputElement>("#alert-enabled");
+
+  let db = getFirebaseDb();
+  let currentUser: User | null = null;
+  let allJobs: Job[] = [];
+
+  function showPanel(panel: HTMLElement | null) {
+    [loading, configPanel, authPanel, accountPanel].forEach((element) => element?.classList.add("hidden"));
+    panel?.classList.remove("hidden");
+  }
+
+  function message(element: HTMLElement | null, text: string, type: "error" | "success" | "info") {
+    if (!element) return;
+    element.textContent = text;
+    element.className = `form-message show ${type}`;
+    if (type === "success") setTimeout(() => element.classList.remove("show"), 3500);
+  }
+
+  function esc(value: unknown) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function jobCard(job: Job) {
+    return `<article class="job-card">
+      <div class="job-card-top">
+        <span class="badge badge-blue">${esc(job.category)}</span>
+        <span class="badge badge-muted">${esc(job.state || "All India")}</span>
+      </div>
+      <h3><a href="/jobs/${encodeURIComponent(job.slug)}/">${esc(job.title)}</a></h3>
+      <div class="job-org"><span aria-hidden="true">🏛</span>${esc(job.organization)}</div>
+      <div class="card-foot">
+        <a class="link-arrow" href="/jobs/${encodeURIComponent(job.slug)}/">View →</a>
+        <button class="btn btn-outline btn-sm" type="button" data-remove-saved="${esc(job.id)}">Remove</button>
+      </div>
+    </article>`;
+  }
+
+  async function loadSaved() {
+    if (!currentUser || !savedList) return;
+    const ids = await getSavedIds(currentUser);
+    const saved = allJobs.filter((job) => ids.includes(job.id));
+    if (savedCount) savedCount.textContent = String(saved.length);
+    savedList.innerHTML = saved.length
+      ? saved.map(jobCard).join("")
+      : `<div class="empty" style="grid-column:1/-1"><h3>Abhi koi saved job nahi</h3><p>Job page par "Save this update" dabayein.</p><a class="btn btn-primary btn-sm" href="/jobs/" style="margin-top:10px">Browse jobs</a></div>`;
+  }
+
+  async function boot(user: User) {
+    currentUser = user;
+    showPanel(accountPanel);
+    const displayName = user.displayName || user.email?.split("@")[0] || "Student";
+    document.querySelector("#account-name")!.textContent = displayName;
+    document.querySelector("#account-user-email")!.textContent = user.email || "";
+    document.querySelector("#account-avatar")!.textContent = displayName.slice(0, 1).toUpperCase();
+
+    if (!allJobs.length) {
+      try {
+        allJobs = await (await fetch("/jobs.json")).json();
+      } catch {
+        allJobs = [];
+      }
+    }
+    await loadSaved();
+
+    if (db) {
+      try {
+        const profile = await getDoc(doc(db, "users", user.uid));
+        const data = profile.data() || {};
+        if (nameInput) nameInput.value = data.name || displayName;
+        if (enabledInput) enabledInput.checked = Boolean(data.emailAlerts);
+      } catch {
+        /* no profile yet */
+      }
+    }
+  }
+
+  if (!firebaseConfigured) {
+    showPanel(configPanel);
+  } else {
+    const auth = getFirebaseAuth();
+    db = getFirebaseDb();
+    if (!auth) {
+      showPanel(configPanel);
+    } else {
+      onAuthStateChanged(auth, (user) => {
+        if (user) boot(user);
+        else {
+          currentUser = null;
+          showPanel(authPanel);
+        }
+      });
+
+      document.querySelector("#account-login-form")?.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const email = document.querySelector<HTMLInputElement>("#account-email")?.value.trim() || "";
+        const password = document.querySelector<HTMLInputElement>("#account-password")?.value || "";
+        try {
+          message(authMessage, "Signing in…", "info");
+          await signInWithEmailAndPassword(auth, email, password);
+        } catch (error) {
+          message(authMessage, error instanceof Error ? error.message : "Login failed", "error");
+        }
+      });
+
+      document.querySelector("#account-google")?.addEventListener("click", async () => {
+        try {
+          await signInWithPopup(auth, new GoogleAuthProvider());
+        } catch (error) {
+          message(authMessage, error instanceof Error ? error.message : "Google login failed", "error");
+        }
+      });
+
+      document.querySelector("#account-signup")?.addEventListener("click", async () => {
+        const email = document.querySelector<HTMLInputElement>("#account-email")?.value.trim() || "";
+        const password = document.querySelector<HTMLInputElement>("#account-password")?.value || "";
+        if (!email || password.length < 6) {
+          message(authMessage, "Email aur kam se kam 6 character ka password daalein.", "error");
+          return;
+        }
+        try {
+          await createUserWithEmailAndPassword(auth, email, password);
+        } catch (error) {
+          message(authMessage, error instanceof Error ? error.message : "Account create nahi hua", "error");
+        }
+      });
+
+      document.querySelector("#account-signout")?.addEventListener("click", () => signOut(auth));
+    }
+  }
+
+  savedList?.addEventListener("click", async (event) => {
+    const target = (event.target as HTMLElement).closest<HTMLElement>("[data-remove-saved]");
+    if (!target || !currentUser) return;
+    const id = target.dataset.removeSaved;
+    if (!id) return;
+    await toggleJobSaved(id, currentUser);
+    await loadSaved();
+  });
+
+  document.querySelector("#alert-form")?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!currentUser || !db) return;
+    const name = nameInput?.value.trim() || "";
+    const emailAlerts = Boolean(enabledInput?.checked);
+    const email = currentUser.email || "";
+    try {
+      await setDoc(
+        doc(db, "users", currentUser.uid),
+        { name, emailAlerts, email, updatedAt: new Date().toISOString() },
+        { merge: true },
+      );
+
+      if (email) {
+        await setDoc(
+          doc(db, "subscribers", email.replace(/[^a-z0-9@._+-]/g, "_")),
+          { email, name, active: emailAlerts, source: "account", updatedAt: new Date().toISOString() },
+          { merge: true },
+        );
+      }
+      message(alertMessage, "Settings save ho gayi.", "success");
+    } catch (error) {
+      message(alertMessage, error instanceof Error ? error.message : "Settings save nahi hui", "error");
+    }
+  });
+</script>

@@ -1,0 +1,58 @@
+---
+import type { Job } from "../lib/types";
+import { CATEGORY_META } from "../lib/constants";
+import { getExam } from "../lib/exams";
+import { daysLeft, formatDateShort, isNew } from "../lib/jobs";
+
+type Props = { job: Job; compact?: boolean };
+
+const { job, compact = false } = Astro.props;
+const exam = job.examId ? getExam(job.examId) : undefined;
+const meta = CATEGORY_META[job.category] || {
+  label: job.category,
+  tone: "blue",
+  slug: "latest-jobs",
+};
+const left = daysLeft(job.applyEnd);
+const newJob = isNew(job.postDate);
+---
+
+<article class:list={["job-card", { compact }]}>
+  <div class="job-card-top">
+    <span class:list={["badge", `badge-${meta.tone}`]}>{meta.label}</span>
+    <span class="badge badge-muted">{job.state || "All India"}</span>
+  </div>
+
+  <h3>
+    <a href={`/jobs/${job.slug}/`}>{job.title}</a>
+  </h3>
+  <div class="job-org">
+    <span aria-hidden="true">🏛</span>
+    {job.organization}
+  </div>
+
+  {exam ? (
+    <a class="exam-tag" href={`/exams/${exam.slug}/`}>🎯 {exam.name} cycle →</a>
+  ) : job.examName ? (
+    <span class="exam-tag">🎯 {job.examName}</span>
+  ) : null}
+
+  <div class="job-meta">
+    {job.vacancies ? <span>👥 {job.vacancies.toLocaleString("en-IN")} posts</span> : null}
+    {job.qualification?.length ? <span>🎓 {job.qualification.slice(0, 2).join(", ")}</span> : null}
+    <span>📅 {formatDateShort(job.postDate)}</span>
+  </div>
+
+  <div class="card-foot">
+    <a class="link-arrow" href={`/jobs/${job.slug}/`}>View details →</a>
+    <span style="display:flex;gap:6px;align-items:center">
+      {newJob && <span class="badge badge-green">New</span>}
+      {job.demo && <span class="badge badge-amber">Sample</span>}
+      {left !== null && left >= 0 && (
+        <span class:list={["deadline", { ok: left > 7 }]}>
+          {left === 0 ? "Last day" : `${left}d left`}
+        </span>
+      )}
+    </span>
+  </div>
+</article>

@@ -1,0 +1,33 @@
+---
+import type { Exam } from "../lib/types";
+import { examSearchText, monthLabel, nextPhaseLabel } from "../lib/exams";
+
+type Props = { exam: Exam };
+
+const { exam } = Astro.props;
+const search = examSearchText(exam);
+---
+
+<article class="exam-card" data-exam-item data-search={search}>
+  <div class="job-card-top">
+    <span class="badge badge-blue">{exam.streamIcon} {exam.streamName}</span>
+    <span class="badge badge-muted">{exam.scope === "state" ? exam.stateName : "All India"}</span>
+  </div>
+
+  <h3><a href={`/exams/${exam.slug}/`}>{exam.name}</a></h3>
+  <p class="exam-full">{exam.fullName}</p>
+
+  <div class="exam-facts">
+    <span><span aria-hidden="true">🏛</span> {exam.bodyShort}</span>
+    <span><span aria-hidden="true">🎓</span> {exam.level}</span>
+  </div>
+
+  <div class="exam-next">
+    <span class="badge badge-amber">Next: {nextPhaseLabel(exam)}</span>
+  </div>
+
+  <div class="job-meta">
+    <span>📢 {monthLabel(exam.cycle.notification)}</span>
+    <span>📝 {monthLabel(exam.cycle.exam)}</span>
+  </div>
+</article>

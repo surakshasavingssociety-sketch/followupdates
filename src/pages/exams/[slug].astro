@@ -1,0 +1,259 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CycleTimeline from "../../components/CycleTimeline.astro";
+import ExamCard from "../../components/ExamCard.astro";
+import JobCard from "../../components/JobCard.astro";
+import SubscribeForm from "../../components/SubscribeForm.astro";
+import { SITE } from "../../lib/constants";
+import {
+  exams,
+  getExam,
+  getStream,
+  monthLabel,
+  nextPhase,
+  PHASE_META,
+  PHASES,
+} from "../../lib/exams";
+import { jobs } from "../../lib/jobs";
+import { getState } from "../../lib/states";
+import type { Exam } from "../../lib/types";
+
+export function getStaticPaths() {
+  return exams.map((exam) => ({ params: { slug: exam.slug }, props: { exam } }));
+}
+
+type Props = { exam: Exam };
+const { exam } = Astro.props;
+
+const stream = getStream(exam.stream);
+const stateInfo = exam.stateId ? getState(exam.stateId) : undefined;
+const next = nextPhase(exam);
+
+const relatedJobs = jobs
+  .filter((job) => job.examId === exam.id || (job.examName && job.examName === exam.name))
+  .slice(0, 3);
+
+const relatedExams = exams
+  .filter((item) => item.id !== exam.id && (item.stream === exam.stream || (exam.stateId && item.stateId === exam.stateId)))
+  .slice(0, 6);
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: `${exam.name} — notification, exam and result cycle`,
+    description: `${exam.fullName}. ${exam.body}. Indicative cycle: notification ${monthLabel(exam.cycle.notification)}, exam ${monthLabel(exam.cycle.exam)}, result ${monthLabel(exam.cycle.result)}.`,
+    url: `${SITE.url}/exams/${exam.slug}/`,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE.url}/` },
+      { "@type": "ListItem", position: 2, name: "Exams", item: `${SITE.url}/exams/` },
+      { "@type": "ListItem", position: 3, name: exam.name, item: `${SITE.url}/exams/${exam.slug}/` },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title={`${exam.name} 2026-27 — Notification, Exam Date & Result Cycle`}
+  description={`${exam.fullName} by ${exam.body}. Check eligibility, official link and the typical notification, exam and result months. Indicative cycle only — verify on the official website.`}
+  type="article"
+  schema={schema}
+>
+  <div class="container breadcrumb">
+    <a href="/">Home</a>
+    <span>/</span>
+    <a href="/exams/">Exams</a>
+    <span>/</span>
+    {stateInfo ? <a href={`/states/${stateInfo.id}/`}>{stateInfo.name}</a> : <span>{stream?.name || "Central"}</span>}
+  </div>
+
+  <div class="container detail-layout">
+    <article class="panel detail-header">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <span class="badge badge-blue">{exam.streamIcon} {exam.streamName}</span>
+        <span class="badge badge-muted">{exam.scope === "state" ? exam.stateName : "All India"}</span>
+        <span class="badge badge-violet">{exam.level}</span>
+      </div>
+
+      <h1>{exam.name}</h1>
+      <div class="detail-sub">
+        <span>🏛 {exam.body}</span>
+        <span>🔁 {exam.frequency === "biannual" ? "Usually twice a year" : exam.frequency === "irregular" ? "Irregular cycle" : "Usually once a year"}</span>
+        {next ? <span>⏭ Next: {PHASE_META[next.phase].short} · {monthLabel([next.month])} {next.year}</span> : null}
+      </div>
+
+      <p class="detail-summary">
+        {exam.fullName}. {exam.body} dwara conduct kiya jata hai. Neeche is exam ka typical cycle, eligibility
+        aur official link diya gaya hai. FollowExam khud koi exam conduct nahi karta.
+      </p>
+
+      <div class="key-grid">
+        <div class="key-item">
+          <small>Conducting body</small>
+          <strong>{exam.bodyShort}</strong>
+        </div>
+        <div class="key-item">
+          <small>Level</small>
+          <strong>{exam.level}</strong>
+        </div>
+        <div class="key-item">
+          <small>Typical notification</small>
+          <strong>{monthLabel(exam.cycle.notification)}</strong>
+        </div>
+        <div class="key-item">
+          <small>Typical exam month</small>
+          <strong>{monthLabel(exam.cycle.exam)}</strong>
+        </div>
+        <div class="key-item">
+          <small>Typical result</small>
+          <strong>{monthLabel(exam.cycle.result)}</strong>
+        </div>
+        <div class="key-item">
+          <small>Age limit</small>
+          <strong>{exam.age}</strong>
+        </div>
+      </div>
+
+      <section class="detail-section">
+        <h2>Exam cycle at a glance</h2>
+        <CycleTimeline exam={exam} />
+        <p class="small muted" style="margin-top:12px">{exam.cycleNote}</p>
+      </section>
+
+      <section class="detail-section">
+        <h2>Eligibility snapshot</h2>
+        <div class="table-wrap">
+          <table>
+            <tbody>
+              <tr><th>Qualification</th><td>{exam.qualification.join(", ")}</td></tr>
+              <tr><th>Age</th><td>{exam.age}</td></tr>
+              <tr><th>Level</th><td>{exam.level}</td></tr>
+              <tr><th>Conducting body</th><td>{exam.body}</td></tr>
+              <tr><th>Scope</th><td>{exam.scope === "state" ? `${exam.stateName} state` : "All India"}</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small muted" style="margin-top:10px">
+          Age relaxation, category-wise eligibility aur educational requirements official notification me diye jate hain.
+          Ye table sirf quick reference hai.
+        </p>
+      </section>
+
+      <section class="detail-section">
+        <h2>Important dates kaise kaam karte hain</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Phase</th><th>Typical months</th><th>Kya hota hai</th></tr>
+            </thead>
+            <tbody>
+              {PHASES.map((phase) => (
+                <tr>
+                  <td><span class:list={["badge", `badge-${PHASE_META[phase].tone}`]}>{PHASE_META[phase].short}</span></td>
+                  <td>{monthLabel(exam.cycle[phase])}</td>
+                  <td>{PHASE_META[phase].label}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Ye windows pichhle cycles ke pattern par based hain. Har saal dates badal sakti hain, isliye notification
+          release hone par official website par exact dates confirm karein.
+        </p>
+      </section>
+
+      <section class="detail-section">
+        <h2>Apply / check update — step by step</h2>
+        <ol>
+          <li>Official website kholiye aur latest notification ya advertisement download karein.</li>
+          <li>Qualification, age, category relaxation aur fee apne documents se match karein.</li>
+          <li>Registration karke application form bharein aur required documents upload karein.</li>
+          <li>Fee payment ke baad confirmation page aur receipt save karein.</li>
+          <li>Admit card, exam date aur result updates ke liye is page aur official portal dono check karte rahein.</li>
+        </ol>
+      </section>
+
+      <section class="detail-section">
+        <h2>FAQs</h2>
+        <details>
+          <summary>{exam.name} ka notification kab aata hai?</summary>
+          <p>
+            Historically notification {monthLabel(exam.cycle.notification)} ke aas-paas aata hai. Ye indicative window hai;
+            official announcement kabhi bhi aa sakta hai.
+          </p>
+        </details>
+        <details>
+          <summary>{exam.name} exam kab hota hai?</summary>
+          <p>
+            Typical exam window {monthLabel(exam.cycle.exam)} hai. Exact exam date admit card aur official calendar se confirm karein.
+          </p>
+        </details>
+        <details>
+          <summary>Result kab declare hota hai?</summary>
+          <p>
+            Result usually {monthLabel(exam.cycle.result)} ke around aata hai. Answer key aur final result ke liye official
+            website follow karein.
+          </p>
+        </details>
+      </section>
+
+      {relatedJobs.length > 0 && (
+        <section class="detail-section">
+          <h2>{exam.name} ki latest updates</h2>
+          <div class="grid-3">
+            {relatedJobs.map((job) => <JobCard job={job} />)}
+          </div>
+        </section>
+      )}
+
+      {relatedExams.length > 0 && (
+        <section class="detail-section">
+          <h2>Related exams</h2>
+          <div class="grid-3">
+            {relatedExams.map((item) => <ExamCard exam={item} />)}
+          </div>
+        </section>
+      )}
+    </article>
+
+    <aside>
+      <div class="sidebar-card">
+        <h3>Official links</h3>
+        <p>Notification, application aur result ke liye sirf official website use karein.</p>
+        <div class="sidebar-actions">
+          <a class="btn btn-primary" href={exam.officialUrl} target="_blank" rel="noopener nofollow">
+            Official website ↗
+          </a>
+          {stateInfo ? (
+            <a class="btn btn-outline" href={`/states/${stateInfo.id}/`}>State page</a>
+          ) : (
+            <a class="btn btn-outline" href="/exams/">All exams</a>
+          )}
+          <a class="btn btn-ghost" href="/calendar/">Exam calendar</a>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>Quick facts</h3>
+        <div class="facts">
+          <div><span>Body</span><strong>{exam.bodyShort}</strong></div>
+          <div><span>Level</span><strong>{exam.level}</strong></div>
+          <div><span>Scope</span><strong>{exam.scope === "state" ? exam.stateName : "All India"}</strong></div>
+          <div><span>Frequency</span><strong>{exam.frequency}</strong></div>
+          {stateInfo ? <div><span>Capital</span><strong>{stateInfo.capital}</strong></div> : null}
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>Daily alerts</h3>
+        <p>{exam.name} aur baaki government exam updates email par paayein.</p>
+        <SubscribeForm compact source={`exam-${exam.slug}`} />
+      </div>
+    </aside>
+  </div>
+</BaseLayout>

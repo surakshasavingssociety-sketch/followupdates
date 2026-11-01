@@ -1,0 +1,106 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE } from "../lib/constants";
+
+const updated = "30 October 2026";
+---
+
+<BaseLayout
+  title="Privacy Policy"
+  description="FollowExam privacy policy — kaunsa data collect hota hai, kaise use hota hai, aur aapke rights kya hain."
+>
+  <section class="section-tight" style="padding-top:34px">
+    <div class="container">
+      <div class="breadcrumb" style="padding:0 0 14px">
+        <a href="/">Home</a><span>/</span><span>Privacy</span>
+      </div>
+
+      <article class="prose">
+        <h1>Privacy Policy</h1>
+        <p class="small muted">Last updated: {updated}</p>
+
+        <p>
+          FollowExam aapki privacy ko respect karta hai. Ye policy batati hai ki hum kaunsa data collect karte hain,
+          kyun collect karte hain, aur aap us data ko kaise control kar sakte hain.
+        </p>
+
+        <h2>1. Hum kaunsa data collect karte hain</h2>
+        <ul>
+          <li><strong>Email address aur naam</strong> — jab aap daily alerts ke liye subscribe karte hain.</li>
+          <li><strong>Account data</strong> — agar aap login karte hain (email, display name, saved jobs).</li>
+          <li><strong>Technical data</strong> — browser type, device type, approximate location aur page visits (analytics ke through).</li>
+          <li><strong>Messages</strong> — jo aap contact form ya email ke through bhejte hain.</li>
+        </ul>
+
+        <h2>2. Data kaise use hota hai</h2>
+        <ul>
+          <li>Daily exam update emails bhejne ke liye.</li>
+          <li>Saved jobs aur personalized experience dene ke liye.</li>
+          <li>Site ki speed, content aur usability improve karne ke liye.</li>
+          <li>Spam, abuse aur security issues rokne ke liye.</li>
+        </ul>
+
+        <h2>3. Data kis ke saath share hota hai</h2>
+        <p>
+          Hum aapka personal data bechte nahi hain. Data sirf un service providers ke saath share hota hai jo site
+          chalane ke liye zaroori hain — jaise Firebase (Google), email delivery service aur hosting provider. Ye
+          providers apne privacy terms ke under data handle karte hain.
+        </p>
+
+        <h2>4. Cookies aur local storage</h2>
+        <p>
+          Site login session, saved-jobs preferences aur basic analytics ke liye cookies/local storage use karti hai.
+          Aap browser settings se cookies block kar sakte hain, lekin kuch features phir kaam nahi karenge.
+        </p>
+
+        <h2>5. Email alerts aur unsubscribe</h2>
+        <p>
+          Har alert email me unsubscribe ka option hota hai. Aap kabhi bhi email reply karke ya apne account settings
+          se alerts band kar sakte hain. Unsubscribe request ke baad hum aapko marketing email nahi bhejte.
+        </p>
+
+        <h2>6. Data retention</h2>
+        <p>
+          Subscriber data tab tak rakha jata hai jab tak aap unsubscribe nahi karte. Account data account delete
+          request tak rakha jata hai. Contact messages reasonable time tak rakhe jate hain, phir delete kar diye jate
+          hain.
+        </p>
+
+        <h2>7. Bachchon ki privacy</h2>
+        <p>
+          FollowExam 13 saal se kam umar ke bachchon se jaan-boojh kar personal data collect nahi karta. Agar aapko
+          lagta hai ki kisi minor ka data aa gaya hai, to humein contact karein.
+        </p>
+
+        <h2>8. Aapke rights</h2>
+        <ul>
+          <li>Apna data dekhne ki request.</li>
+          <li>Data correction ki request.</li>
+          <li>Data deletion ki request.</li>
+          <li>Alerts unsubscribe karne ka right.</li>
+        </ul>
+        <p>
+          In requests ke liye <a href={`mailto:${SITE.email}`}>{SITE.email}</a> par likhein.
+        </p>
+
+        <h2>9. Third-party links</h2>
+        <p>
+          Hamare posts me official government websites ke links hote hain. Un websites ki privacy policies alag hain —
+          unhe padhna aapki zimmedari hai. FollowExam un sites ke content ya data practices ke liye responsible nahi
+          hai.
+        </p>
+
+        <h2>10. Policy updates</h2>
+        <p>
+          Ye policy kabhi kabhi update ho sakti hai. Bade changes hone par hum site par notice denge. Latest version
+          hamesha is page par milega.
+        </p>
+
+        <h2>11. Contact</h2>
+        <p>
+          Privacy se judi kisi bhi sawaal ke liye: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+        </p>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

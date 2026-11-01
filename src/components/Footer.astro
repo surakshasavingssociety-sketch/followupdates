@@ -1,0 +1,71 @@
+---
+import { CATEGORY_META, SITE } from "../lib/constants";
+import SubscribeForm from "./SubscribeForm.astro";
+
+const year = new Date().getFullYear();
+const categories = Object.values(CATEGORY_META);
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="/" style="color:#fff">
+          <span class="brand-mark" aria-hidden="true">FE</span>
+          <span>
+            {SITE.name}
+            <small style="color:rgba(255,255,255,.5)">Exam alerts, simplified</small>
+          </span>
+        </a>
+        <p style="margin-top:14px;max-width:320px">
+          Government jobs, results, admit cards, answer keys, exam dates, admissions aur scholarships — ek hi jagah,
+          roz update.
+        </p>
+        <p class="footer-disclaimer">
+          FollowExam kisi bhi government department, board ya commission se affiliated nahi hai. Official notification
+          aur apply link hamesha source website par verify karein.
+        </p>
+      </div>
+
+      <div>
+        <h2>Explore</h2>
+        <a href="/jobs/">All updates</a>
+        <a href="/exams/">Exam database</a>
+        <a href="/states/">State-wise exams</a>
+        <a href="/calendar/">Exam calendar</a>
+        <a href="/category/results/">Results</a>
+        <a href="/category/admit-card/">Admit card</a>
+      </div>
+
+      <div>
+        <h2>Categories</h2>
+        {categories.slice(0, 6).map((category) => (
+          <a href={`/category/${category.slug}/`}>{category.label}</a>
+        ))}
+      </div>
+
+      <div id="alerts">
+        <h2>Daily email alerts</h2>
+        <p style="margin-bottom:8px">Ek email, roz ki important updates. Free.</p>
+        <SubscribeForm compact source="footer" />
+        {SITE.telegram && (
+          <p style="margin-top:12px">
+            <a href={SITE.telegram} target="_blank" rel="noopener" style="color:#ffc45c;font-weight:700">
+              Telegram par join karein →
+            </a>
+          </p>
+        )}
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© {year} {SITE.name}. All rights reserved.</span>
+      <span>
+        <a href="/about/" style="display:inline">About</a> ·
+        <a href="/contact/" style="display:inline">Contact</a> ·
+        <a href="/privacy/" style="display:inline">Privacy</a> ·
+        <a href="/disclaimer/" style="display:inline">Disclaimer</a>
+      </span>
+    </div>
+  </div>
+</footer>

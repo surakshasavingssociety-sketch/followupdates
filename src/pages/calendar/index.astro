@@ -1,0 +1,176 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { SITE } from "../../lib/constants";
+import { exams, monthName, PHASE_META } from "../../lib/exams";
+import type { ExamPhase } from "../../lib/types";
+
+const now = new Date();
+const currentMonth = now.getMonth() + 1;
+const currentYear = now.getFullYear();
+const visiblePhases: ExamPhase[] = ["notification", "exam", "result"];
+
+const calendar = Array.from({ length: 12 }, (_, index) => {
+  const month = ((currentMonth - 1 + index) % 12) + 1;
+  const year = currentYear + (month < currentMonth ? 1 : 0);
+  const phases = visiblePhases.map((phase) => {
+    const all = exams
+      .filter((exam) => exam.cycle[phase].includes(month))
+      .sort((a, b) => {
+        if (a.scope !== b.scope) return a.scope === "central" ? -1 : 1;
+        return a.name.localeCompare(b.name);
+      });
+    return { phase, total: all.length, entries: all.slice(0, 8) };
+  });
+  return { month, year, phases };
+});
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Government exam calendar",
+    description: "Month-wise notification, exam and result windows for central and state government exams.",
+    url: `${SITE.url}/calendar/`,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE.url}/` },
+      { "@type": "ListItem", position: 2, name: "Exam calendar", item: `${SITE.url}/calendar/` },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Government Exam Calendar — Month-wise Notification, Exam & Result Windows"
+  description="12-month calendar of central and state government exam cycles: SSC, UPSC, Railways, Banking, Teaching, Defence, NEET, JEE, state PSC, police, TET and board exams."
+  schema={schema}
+>
+  <section class="section-tight" style="padding-top:30px">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span aria-hidden="true">/</span><span>Exam calendar</span>
+      </nav>
+
+      <div class="section-head" style="margin-bottom:14px">
+        <div>
+          <h1 style="font-size:clamp(1.8rem,3.6vw,2.5rem)">Exam calendar</h1>
+          <p>
+            Agle 12 months ke typical notification, exam aur result windows. Central aur state exams dono cover.
+          </p>
+        </div>
+        <a class="btn btn-outline btn-sm" href="/exams/">Exam database</a>
+      </div>
+
+      <div class="notice-bar" style="margin-bottom:18px">
+        <div class="container" style="padding:0">
+          <strong>Indicative only:</strong> Ye calendar historical patterns par based hai. Official dates notification,
+          admit card aur exam authority ke calendar se confirm karein.
+        </div>
+      </div>
+
+      <div class="filter-panel" style="margin-bottom:22px">
+        <div class="filter-foot" style="margin:0;padding:0;border:0">
+          <div class="chips" id="scope-chips">
+            <button class="chip" type="button" data-scope-filter="all" aria-pressed="true">All exams</button>
+            <button class="chip" type="button" data-scope-filter="central" aria-pressed="false">Central</button>
+            <button class="chip" type="button" data-scope-filter="state" aria-pressed="false">State / UT</button>
+          </div>
+          <span class="result-count">{exams.length} exam cycles tracked</span>
+        </div>
+      </div>
+
+      <nav class="calendar-nav" aria-label="Jump to month">
+        {calendar.map((item) => (
+          <a class="chip" href={`#month-${item.year}-${item.month}`}>{monthName(item.month)} {String(item.year).slice(2)}</a>
+        ))}
+      </nav>
+
+      <div class="calendar-list">
+        {calendar.map((item, index) => (
+          <section class="calendar-month panel" id={`month-${item.year}-${item.month}`}>
+            <div class="section-head" style="margin-bottom:12px">
+              <div>
+                <h2 style="font-size:1.35rem">
+                  {monthName(item.month)} {item.year}
+                  {index === 0 ? <span class="badge badge-blue" style="margin-left:8px">This month</span> : null}
+                </h2>
+                <p>Notification, exam aur result windows ek nazar me.</p>
+              </div>
+            </div>
+
+            <div class="calendar-grid">
+              {item.phases.map((block) => (
+                <div class="calendar-phase" data-phase-block>
+                  <div class="calendar-phase-head">
+                    <span class:list={["badge", `badge-${PHASE_META[block.phase].tone}`]}>
+                      {PHASE_META[block.phase].short}
+                    </span>
+                    <span class="muted small">{block.total} exams</span>
+                  </div>
+                  {block.total > 0 ? (
+                    <ul class="calendar-items">
+                      {block.entries.map((exam) => (
+                        <li data-scope={exam.scope}>
+                          <a href={`/exams/${exam.slug}/`}>{exam.name}</a>
+                          <span class="badge badge-muted">{exam.scope === "state" ? exam.stateName : "Central"}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p class="muted small">Is phase me koi tracked exam nahi.</p>
+                  )}
+                  {block.total > block.entries.length ? (
+                    <a class="link-arrow" href="/exams/">+{block.total - block.entries.length} more exams →</a>
+                  ) : null}
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+
+      <section class="panel" style="margin-top:24px">
+        <div class="section-head" style="margin-bottom:10px">
+          <div>
+            <h2 style="font-size:1.35rem">Notification timing ka logic</h2>
+            <p>Is calendar ko kaise use karein.</p>
+          </div>
+        </div>
+        <p>
+          Har exam ke liye hum notification/apply, exam aur result ke typical months store karte hain. Jab kisi exam ka
+          notification window paas aata hai, ingestion pipeline us exam ke naam se targeted search chalata hai. Isse
+          official notification, apply date, admit card aur result jaldi pakde jaate hain.
+        </p>
+        <p class="muted" style="margin:0">
+          Is page ko bookmark karein aur apne target exam ka month pehle se note kar lein. Exact date ke liye official
+          website hamesha final source hai.
+        </p>
+      </section>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const chips = [...document.querySelectorAll<HTMLButtonElement>("[data-scope-filter]")];
+  const items = [...document.querySelectorAll<HTMLElement>("[data-scope]")];
+  const blocks = [...document.querySelectorAll<HTMLElement>("[data-phase-block]")];
+
+  function apply(scope: string) {
+    items.forEach((item) => {
+      item.hidden = scope !== "all" && item.dataset.scope !== scope;
+    });
+    blocks.forEach((block) => {
+      const visible = [...block.querySelectorAll<HTMLElement>("[data-scope]")].some((item) => !item.hidden);
+      const hasEntries = block.querySelector("[data-scope]") !== null;
+      if (hasEntries) block.hidden = !visible;
+    });
+    chips.forEach((chip) => chip.setAttribute("aria-pressed", String(chip.dataset.scopeFilter === scope)));
+  }
+
+  chips.forEach((chip) => {
+    chip.addEventListener("click", () => apply(chip.dataset.scopeFilter || "all"));
+  });
+</script>

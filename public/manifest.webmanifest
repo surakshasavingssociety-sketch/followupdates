@@ -1,0 +1,17 @@
+{
+  "name": "FollowExam — Government Exam Alerts",
+  "short_name": "FollowExam",
+  "description": "Daily government job, result, admit card, answer key, exam date, admission and scholarship updates.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f8fc",
+  "theme_color": "#0b4f9c",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

@@ -1,0 +1,157 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ExamCard from "../../components/ExamCard.astro";
+import { SITE } from "../../lib/constants";
+import { centralExams, examDatabase, examStreams, examsByStream, stateExams } from "../../lib/exams";
+
+const central = centralExams();
+const stateList = stateExams();
+const stateStream = examStreams.find((stream) => stream.id === "state");
+const groups = examStreams
+  .filter((stream) => stream.id !== "state")
+  .map((stream) => ({ stream, exams: examsByStream(stream.id).filter((exam) => exam.scope === "central") }))
+  .filter((group) => group.exams.length > 0);
+
+if (stateStream && stateList.length) {
+  groups.push({ stream: stateStream, exams: stateList });
+}
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Government exam database",
+    description: "Central and state government exam list with indicative notification, exam and result cycles.",
+    url: `${SITE.url}/exams/`,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE.url}/` },
+      { "@type": "ListItem", position: 2, name: "Exams", item: `${SITE.url}/exams/` },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Government Exam Database — Cycles, Eligibility & Official Links"
+  description="Browse SSC, UPSC, Railways, Banking, Teaching, Defence, Medical, Engineering, Law and state government exams with indicative notification, exam and result cycles."
+  schema={schema}
+>
+  <section class="section-tight" style="padding-top:30px">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span aria-hidden="true">/</span><span>Exams</span>
+      </nav>
+
+      <div class="section-head" style="margin-bottom:14px">
+        <div>
+          <h1 style="font-size:clamp(1.8rem,3.6vw,2.5rem)">Exam database</h1>
+          <p>
+            {examDatabase.counts.total} exams tracked · {examDatabase.counts.central} central · {examDatabase.counts.state} state/UT.
+            Har exam ka typical notification, exam aur result window ek jagah.
+          </p>
+        </div>
+        <a class="btn btn-outline btn-sm" href="/calendar/">📅 Exam calendar</a>
+      </div>
+
+      <div class="notice-bar" style="margin-bottom:18px">
+        <div class="container" style="padding:0">
+          <strong>Note:</strong> Months indicative patterns hain, official schedule nahi. Apply se pehle exam ki official website par dates zaroor check karein.
+        </div>
+      </div>
+
+      <form class="filter-panel" role="search" onsubmit="return false">
+        <div class="filter-row" style="grid-template-columns:1fr auto">
+          <div class="field">
+            <label for="exam-search">Exam dhoondein</label>
+            <input
+              class="input"
+              id="exam-search"
+              type="search"
+              placeholder="SSC CGL, NEET, BPSC, GATE..."
+              autocomplete="off"
+            />
+          </div>
+          <div class="field" style="align-self:end">
+            <span class="result-count" id="exam-count">{examDatabase.counts.total} exams</span>
+          </div>
+        </div>
+        <div class="chips" style="margin-top:12px">
+          {groups.map((group) => (
+            <a class="chip" href={`#stream-${group.stream.id}`}>{group.stream.icon} {group.stream.name}</a>
+          ))}
+          <a class="chip" href="/states/">📍 State-wise pages</a>
+        </div>
+      </form>
+
+      <div id="exam-groups">
+        {groups.map((group) => (
+          <section class="exam-group" id={`stream-${group.stream.id}`} data-exam-group>
+            <div class="section-head" style="margin-bottom:14px">
+              <div>
+                <h2 style="font-size:clamp(1.3rem,2.4vw,1.7rem)">{group.stream.icon} {group.stream.name}</h2>
+                <p>{group.stream.description}</p>
+              </div>
+              <span class="badge badge-muted">{group.exams.length} exams</span>
+            </div>
+            <div class="grid-3">
+              {group.exams.map((exam) => <ExamCard exam={exam} />)}
+            </div>
+          </section>
+        ))}
+      </div>
+
+      <div class="empty" id="exam-empty" hidden>
+        <h3>Koi exam nahi mila</h3>
+        <p>Doosra naam try karein, jaise SSC, UPSC, NEET, BPSC ya GATE.</p>
+      </div>
+
+      <section class="panel mt-3" style="margin-top:28px">
+        <div class="section-head" style="margin-bottom:10px">
+          <div>
+            <h2 style="font-size:1.35rem">📍 State-wise exams</h2>
+            <p>{examDatabase.counts.states} states aur union territories ke PSC, police, TET aur board exams.</p>
+          </div>
+          <a class="btn btn-primary btn-sm" href="/states/">Browse states</a>
+        </div>
+        <p class="muted" style="margin:0">
+          {stateList.length} state-level exam cycles tracked. Apne state ka page kholkar PSC, police constable, SI, TET aur board exam windows dekhein.
+        </p>
+      </section>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const input = document.querySelector<HTMLInputElement>("#exam-search");
+  const groups = [...document.querySelectorAll<HTMLElement>("[data-exam-group]")];
+  const empty = document.querySelector<HTMLElement>("#exam-empty");
+  const count = document.querySelector<HTMLElement>("#exam-count");
+  const items = [...document.querySelectorAll<HTMLElement>("[data-exam-item]")];
+
+  function apply() {
+    const query = (input?.value || "").trim().toLowerCase();
+    let visible = 0;
+
+    items.forEach((item) => {
+      const match = !query || (item.dataset.search || "").includes(query);
+      item.hidden = !match;
+      if (match) visible += 1;
+    });
+
+    groups.forEach((group) => {
+      const anyVisible = [...group.querySelectorAll<HTMLElement>("[data-exam-item]")].some(
+        (item) => !item.hidden,
+      );
+      group.hidden = !anyVisible;
+    });
+
+    if (empty) empty.hidden = visible > 0;
+    if (count) count.textContent = `${visible} exam${visible === 1 ? "" : "s"}`;
+  }
+
+  input?.addEventListener("input", apply);
+</script>

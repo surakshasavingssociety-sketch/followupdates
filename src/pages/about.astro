@@ -1,0 +1,74 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE } from "../lib/constants";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  name: `About ${SITE.name}`,
+  url: `${SITE.url}/about/`,
+  description: SITE.description,
+};
+---
+
+<BaseLayout
+  title="About FollowExam"
+  description="FollowExam ek free government exam aur job update aggregator hai jo official sources se verified information ek hi jagah par deta hai."
+  schema={schema}
+>
+  <section class="section-tight" style="padding-top:34px">
+    <div class="container">
+      <div class="breadcrumb" style="padding:0 0 14px">
+        <a href="/">Home</a><span>/</span><span>About</span>
+      </div>
+
+      <article class="prose">
+        <h1>About FollowExam</h1>
+        <p>
+          FollowExam ek independent, free exam-information portal hai. Hum India ki government jobs, board exams,
+          entrance tests, results, admit cards, answer keys, exam dates, admissions aur scholarships se judi updates ko
+          ek jagah par, simple format me rakhte hain.
+        </p>
+
+        <h2>Hum kya karte hain</h2>
+        <ul>
+          <li>Official government portals, PIB aur public notification feeds se nayi updates detect karte hain.</li>
+          <li>Har entry ko admin review queue me bhejte hain — dates, links aur eligibility verify hone ke baad hi publish hoti hai.</li>
+          <li>Publish hone par Telegram aur email subscribers ko ek-ek karke alert bhejte hain.</li>
+          <li>Har post me official notification ka direct link dete hain, taaki aap source par khud verify kar sakein.</li>
+        </ul>
+
+        <h2>Hum kya nahi karte</h2>
+        <ul>
+          <li>Hum kisi government department, board ya commission se affiliated nahi hain.</li>
+          <li>Hum kisi ki taraf se application accept, fee collect ya result declare nahi karte.</li>
+          <li>Hum doosri websites ka content copy nahi karte — sirf facts, original summary aur official links use karte hain.</li>
+          <li>Hum kisi bhi exam ke liye guaranteed selection ya government job ki guarantee nahi dete.</li>
+        </ul>
+
+        <h2>Content policy</h2>
+        <p>
+          FollowExam par har update ek short original summary ke saath publish hoti hai. Detailed notification, PDF,
+          eligibility rules aur apply link hamesha official source par hi milenge. Agar kisi post me galti dikhe, to
+          humein <a href="/contact/">contact page</a> se batayein — hum jaldi correct karte hain.
+        </p>
+
+        <h2>Copyright</h2>
+        <p>
+          Agar aap kisi government body ya organization se hain aur aapko lagta hai ki kisi entry me aapka content
+          galat tarike se use hua hai, to humein likhein. Valid request par hum content remove ya correct kar denge.
+        </p>
+
+        <h2>Kaise madad karein</h2>
+        <p>
+          Aap humein nayi notification bhej sakte hain, galti report kar sakte hain, ya apne dost ko FollowExam ke
+          baare me bata sakte hain. Daily alerts free hain — <a href="/#alerts">yahan subscribe karein</a>.
+        </p>
+
+        <p class="small muted" style="margin-top:24px">
+          Last updated: {new Date().toISOString().slice(0, 10)}
+        </p>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

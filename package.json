@@ -1,0 +1,31 @@
+{
+  "name": "followexam",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "prebuild": "node scripts/build-exams.mjs",
+    "preview": "astro preview",
+    "ingest": "node scripts/ingest.mjs",
+    "exams:build": "node scripts/build-exams.mjs",
+    "validate": "node scripts/validate.mjs",
+    "linkcheck": "node scripts/linkcheck.mjs",
+    "sync": "node scripts/sync.mjs",
+    "pull": "node scripts/pull-approved.mjs",
+    "notify": "node scripts/notify.mjs",
+    "remove-demo": "node scripts/remove-demo.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.4.4",
+    "cheerio": "^1.2.0",
+    "dotenv": "^17.2.3",
+    "fast-xml-parser": "^5.11.2",
+    "firebase": "^13.1.0",
+    "firebase-admin": "^14.5.0",
+    "fuse.js": "^7.5.0",
+    "nodemailer": "^10.3.1"
+  }
+}

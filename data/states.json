@@ -1,0 +1,554 @@
+{
+  "version": 1,
+  "updated": "2026-10-31",
+  "note": "State and UT reference data for FollowExam. Official links are starting points for verification; government portals occasionally change domains, so always confirm on the department website before applying. No content is copied from any third-party site.",
+  "states": [
+    {
+      "id": "andhra-pradesh",
+      "name": "Andhra Pradesh",
+      "type": "state",
+      "capital": "Amaravati",
+      "region": "South",
+      "portal": "https://www.ap.gov.in/",
+      "psc": ["Andhra Pradesh Public Service Commission", "APPSC", "https://psc.ap.gov.in/"],
+      "police": ["Andhra Pradesh State Level Police Recruitment Board", "APSLPRB", "https://slprb.ap.gov.in/"],
+      "board": ["Board of Secondary Education Andhra Pradesh", "BSEAP", "https://bse.ap.gov.in/"],
+      "labels": { "psc": "APPSC Group 1", "policeConstable": "AP Police Constable", "policeSi": "AP Police SI", "tet": "AP TET" },
+      "cycle": {
+        "psc": { "notification": [12, 1], "exam": [5, 6], "result": [8, 9] },
+        "policeConstable": { "notification": [5, 6], "exam": [8, 9, 10], "result": [11, 12] },
+        "tet": { "notification": [2, 3], "exam": [5, 6], "result": [8, 9] }
+      },
+      "keywords": ["APPSC Group 1", "AP POLYCET", "AP EAMCET", "AP ICET", "AP TET"]
+    },
+    {
+      "id": "arunachal-pradesh",
+      "name": "Arunachal Pradesh",
+      "type": "state",
+      "capital": "Itanagar",
+      "region": "North East",
+      "portal": "https://arunachalpradesh.gov.in/",
+      "psc": ["Arunachal Pradesh Public Service Commission", "APPSC", "https://appsc.gov.in/"],
+      "police": ["Arunachal Pradesh Police", "Arunachal Police", "https://arunpol.nic.in/"],
+      "board": ["Board of Secondary Education Arunachal Pradesh", "BSEAP", "https://bsearunachal.nic.in/"],
+      "labels": { "psc": "APPSC CCE", "policeConstable": "Arunachal Police Constable", "policeSi": "Arunachal Police SI", "tet": "Arunachal TET" },
+      "keywords": ["APPSC Arunachal", "Arunachal Pradesh police recruitment"]
+    },
+    {
+      "id": "assam",
+      "name": "Assam",
+      "type": "state",
+      "capital": "Dispur",
+      "region": "North East",
+      "portal": "https://assam.gov.in/",
+      "psc": ["Assam Public Service Commission", "APSC", "https://apsc.nic.in/"],
+      "police": ["State Level Police Recruitment Board Assam", "SLPRB Assam", "https://slprbassam.in/"],
+      "board": ["Board of Secondary Education Assam", "SEBA", "https://sebaonline.org/"],
+      "labels": { "psc": "APSC CCE", "policeConstable": "Assam Police Constable", "policeSi": "Assam Police SI", "tet": "Assam TET" },
+      "cycle": {
+        "psc": { "notification": [1, 2], "exam": [5, 6], "result": [9, 10] },
+        "policeConstable": { "notification": [2, 3], "exam": [5, 6], "result": [8, 9] }
+      },
+      "keywords": ["APSC CCE", "Assam Police AB UB", "Assam TET", "SEBA result"]
+    },
+    {
+      "id": "bihar",
+      "name": "Bihar",
+      "type": "state",
+      "capital": "Patna",
+      "region": "East",
+      "portal": "https://state.bihar.gov.in/",
+      "psc": ["Bihar Public Service Commission", "BPSC", "https://bpsc.bihar.gov.in/"],
+      "police": ["Central Selection Board of Constable", "CSBC Bihar", "https://csbc.bihar.gov.in/"],
+      "board": ["Bihar School Examination Board", "BSEB", "https://biharboardonline.bihar.gov.in/"],
+      "labels": { "psc": "BPSC CCE", "policeConstable": "Bihar Police Constable", "policeSi": "Bihar Police SI", "tet": "BTET" },
+      "cycle": {
+        "psc": { "notification": [12, 1], "exam": [4, 5], "result": [8, 9] },
+        "policeConstable": { "notification": [6, 7], "exam": [9, 10], "result": [12, 1] },
+        "tet": { "notification": [1, 2], "exam": [4, 5], "result": [6, 7] }
+      },
+      "keywords": ["BPSC TRE", "BPSC 70th", "Bihar Police Constable", "BSEB matric result", "BSEB inter result", "BTET"]
+    },
+    {
+      "id": "chhattisgarh",
+      "name": "Chhattisgarh",
+      "type": "state",
+      "capital": "Raipur",
+      "region": "Central",
+      "portal": "https://cgstate.gov.in/",
+      "psc": ["Chhattisgarh Public Service Commission", "CGPSC", "https://psc.cg.gov.in/"],
+      "police": ["Chhattisgarh Police", "CG Police", "https://cgpolice.gov.in/"],
+      "board": ["Chhattisgarh Board of Secondary Education", "CGBSE", "https://cgbse.nic.in/"],
+      "labels": { "psc": "CGPSC State Service", "policeConstable": "CG Police Constable", "policeSi": "CG Police SI", "tet": "CGTET" },
+      "keywords": ["CGPSC State Service", "CG Police Constable", "CGTET", "CGBSE result"]
+    },
+    {
+      "id": "goa",
+      "name": "Goa",
+      "type": "state",
+      "capital": "Panaji",
+      "region": "West",
+      "portal": "https://goa.gov.in/",
+      "psc": ["Goa Public Service Commission", "GPSC", "https://gpsc.goa.gov.in/"],
+      "police": ["Goa Police", "Goa Police", "https://goapolice.gov.in/"],
+      "board": ["Goa Board of Secondary and Higher Secondary Education", "GBSHSE", "https://gbshse.gov.in/"],
+      "labels": { "psc": "GPSC State Service", "policeConstable": "Goa Police Constable", "policeSi": "Goa Police SI", "tet": "Goa TET" },
+      "keywords": ["GPSC Goa", "Goa Police Constable", "GBSHSE result"]
+    },
+    {
+      "id": "gujarat",
+      "name": "Gujarat",
+      "type": "state",
+      "capital": "Gandhinagar",
+      "region": "West",
+      "portal": "https://gujaratindia.gov.in/",
+      "psc": ["Gujarat Public Service Commission", "GPSC", "https://gpsc.gujarat.gov.in/"],
+      "police": ["Gujarat Subordinate Service Selection Board", "GSSSB", "https://gsssb.gujarat.gov.in/"],
+      "board": ["Gujarat Secondary and Higher Secondary Education Board", "GSEB", "https://gseb.org/"],
+      "labels": { "psc": "GPSC Class 1-2", "policeConstable": "Gujarat Police Constable", "policeSi": "Gujarat Police SI", "tet": "Gujarat TET" },
+      "cycle": {
+        "psc": { "notification": [1, 2], "exam": [4, 5], "result": [7, 8] },
+        "policeConstable": { "notification": [6, 7], "exam": [10, 11], "result": [1, 2] }
+      },
+      "keywords": ["GPSC Class 1-2", "GSSSB recruitment", "Gujarat Police Constable", "GSEB result", "Gujarat TET"]
+    },
+    {
+      "id": "haryana",
+      "name": "Haryana",
+      "type": "state",
+      "capital": "Chandigarh",
+      "region": "North",
+      "portal": "https://haryana.gov.in/",
+      "psc": ["Haryana Public Service Commission", "HPSC", "https://hpsc.gov.in/"],
+      "police": ["Haryana Staff Selection Commission", "HSSC", "https://hssc.gov.in/"],
+      "board": ["Board of School Education Haryana", "BSEH", "https://bseh.org.in/"],
+      "labels": { "psc": "HCS (HPSC)", "policeConstable": "Haryana Police Constable", "policeSi": "Haryana Police SI", "tet": "HTET" },
+      "cycle": {
+        "psc": { "notification": [1, 2], "exam": [5, 6], "result": [8, 9] },
+        "policeConstable": { "notification": [5, 6], "exam": [8, 9], "result": [11, 12] }
+      },
+      "keywords": ["HPSC HCS", "HSSC CET", "Haryana Police Constable", "HTET", "BSEH result"]
+    },
+    {
+      "id": "himachal-pradesh",
+      "name": "Himachal Pradesh",
+      "type": "state",
+      "capital": "Shimla",
+      "region": "North",
+      "portal": "https://himachal.nic.in/",
+      "psc": ["Himachal Pradesh Public Service Commission", "HPPSC", "https://hppsc.hp.gov.in/"],
+      "police": ["Himachal Pradesh Police", "HP Police", "https://hppolice.gov.in/"],
+      "board": ["Himachal Pradesh Board of School Education", "HPBOSE", "https://hpbose.org/"],
+      "labels": { "psc": "HPAS (HPPSC)", "policeConstable": "HP Police Constable", "policeSi": "HP Police SI", "tet": "HPTET" },
+      "keywords": ["HPPSC HPAS", "HP Police Constable", "HPTET", "HPBOSE result"]
+    },
+    {
+      "id": "jharkhand",
+      "name": "Jharkhand",
+      "type": "state",
+      "capital": "Ranchi",
+      "region": "East",
+      "portal": "https://jharkhand.gov.in/",
+      "psc": ["Jharkhand Public Service Commission", "JPSC", "https://jpsc.gov.in/"],
+      "police": ["Jharkhand Staff Selection Commission", "JSSC", "https://jssc.nic.in/"],
+      "board": ["Jharkhand Academic Council", "JAC", "https://jac.jharkhand.gov.in/"],
+      "labels": { "psc": "JPSC CCE", "policeConstable": "Jharkhand Police Constable", "policeSi": "Jharkhand Police SI", "tet": "JTET" },
+      "cycle": {
+        "psc": { "notification": [2, 3], "exam": [6, 7], "result": [10, 11] },
+        "policeConstable": { "notification": [8, 9], "exam": [11, 12], "result": [2, 3] }
+      },
+      "keywords": ["JPSC CCE", "JSSC CGL", "Jharkhand Police Constable", "JTET", "JAC result"]
+    },
+    {
+      "id": "karnataka",
+      "name": "Karnataka",
+      "type": "state",
+      "capital": "Bengaluru",
+      "region": "South",
+      "portal": "https://karnataka.gov.in/",
+      "psc": ["Karnataka Public Service Commission", "KPSC", "https://kpsc.kar.nic.in/"],
+      "police": ["Karnataka Examinations Authority", "KEA", "https://cetonline.karnataka.gov.in/kea/"],
+      "board": ["Karnataka School Examination and Assessment Board", "KSEAB", "https://kseab.karnataka.gov.in/"],
+      "labels": { "psc": "KAS (KPSC)", "policeConstable": "Karnataka Police Constable", "policeSi": "Karnataka Police SI", "tet": "KARTET" },
+      "cycle": {
+        "psc": { "notification": [1, 2], "exam": [5, 6], "result": [8, 9] },
+        "policeConstable": { "notification": [5, 6], "exam": [8, 9], "result": [11, 12] }
+      },
+      "keywords": ["KPSC KAS", "KEA recruitment", "Karnataka Police Constable", "KARTET", "KSEAB result", "KCET"]
+    },
+    {
+      "id": "kerala",
+      "name": "Kerala",
+      "type": "state",
+      "capital": "Thiruvananthapuram",
+      "region": "South",
+      "portal": "https://kerala.gov.in/",
+      "psc": ["Kerala Public Service Commission", "Kerala PSC", "https://keralapsc.gov.in/"],
+      "police": ["Kerala Police", "Kerala Police", "https://keralapolice.gov.in/"],
+      "board": ["Kerala Pareeksha Bhavan", "Pareeksha Bhavan", "https://keralapareekshabhavan.in/"],
+      "labels": { "psc": "KAS (Kerala PSC)", "policeConstable": "Kerala Police Constable", "policeSi": "Kerala Police SI", "tet": "KTET" },
+      "keywords": ["Kerala PSC", "Kerala Police Constable", "KTET", "Pareeksha Bhavan result", "KEAM"]
+    },
+    {
+      "id": "madhya-pradesh",
+      "name": "Madhya Pradesh",
+      "type": "state",
+      "capital": "Bhopal",
+      "region": "Central",
+      "portal": "https://mp.gov.in/",
+      "psc": ["Madhya Pradesh Public Service Commission", "MPPSC", "https://mppsc.mp.gov.in/"],
+      "police": ["Madhya Pradesh Employees Selection Board", "MP ESB", "https://esb.mp.gov.in/"],
+      "board": ["Madhya Pradesh Board of Secondary Education", "MPBSE", "https://mpbse.nic.in/"],
+      "labels": { "psc": "MPPSC State Service", "policeConstable": "MP Police Constable", "policeSi": "MP Police SI", "tet": "MPTET" },
+      "cycle": {
+        "psc": { "notification": [12, 1], "exam": [5, 6], "result": [9, 10] },
+        "policeConstable": { "notification": [5, 6], "exam": [8, 9], "result": [11, 12] },
+        "tet": { "notification": [2, 3], "exam": [5, 6], "result": [8, 9] }
+      },
+      "keywords": ["MPPSC State Service", "MP ESB recruitment", "MP Police Constable", "MPTET", "MPBSE result"]
+    },
+    {
+      "id": "maharashtra",
+      "name": "Maharashtra",
+      "type": "state",
+      "capital": "Mumbai",
+      "region": "West",
+      "portal": "https://maharashtra.gov.in/",
+      "psc": ["Maharashtra Public Service Commission", "MPSC", "https://mpsc.gov.in/"],
+      "police": ["Maharashtra Police", "Maharashtra Police", "https://mahapolice.gov.in/"],
+      "board": ["Maharashtra State Board of Secondary and Higher Secondary Education", "MSBSHSE", "https://mahahsscboard.in/"],
+      "labels": { "psc": "MPSC Rajyaseva", "policeConstable": "Maharashtra Police Constable", "policeSi": "Maharashtra Police SI", "tet": "MAHATET" },
+      "cycle": {
+        "psc": { "notification": [1, 2], "exam": [5, 6], "result": [9, 10] },
+        "policeConstable": { "notification": [1, 2], "exam": [4, 5], "result": [7, 8] }
+      },
+      "keywords": ["MPSC Rajyaseva", "Maharashtra Police Constable", "MAHATET", "MSBSHSE result", "MHT CET"]
+    },
+    {
+      "id": "manipur",
+      "name": "Manipur",
+      "type": "state",
+      "capital": "Imphal",
+      "region": "North East",
+      "portal": "https://manipur.gov.in/",
+      "psc": ["Manipur Public Service Commission", "MPSC Manipur", "https://mpscmanipur.gov.in/"],
+      "police": ["Manipur Police", "Manipur Police", "https://manipurpolice.gov.in/"],
+      "board": ["Board of Secondary Education Manipur", "BOSEM", "https://bosemmanipur.in/"],
+      "labels": { "psc": "Manipur Civil Services", "policeConstable": "Manipur Police Constable", "policeSi": "Manipur Police SI", "tet": "Manipur TET" },
+      "keywords": ["Manipur PSC", "Manipur Police Constable", "BOSEM result"]
+    },
+    {
+      "id": "meghalaya",
+      "name": "Meghalaya",
+      "type": "state",
+      "capital": "Shillong",
+      "region": "North East",
+      "portal": "https://meghalaya.gov.in/",
+      "psc": ["Meghalaya Public Service Commission", "MPSC Meghalaya", "https://mpsc.nic.in/"],
+      "police": ["Meghalaya Police", "Meghalaya Police", "https://megpolice.gov.in/"],
+      "board": ["Meghalaya Board of School Education", "MBOSE", "https://mbose.in/"],
+      "labels": { "psc": "Meghalaya Civil Services", "policeConstable": "Meghalaya Police Constable", "policeSi": "Meghalaya Police SI", "tet": "Meghalaya TET" },
+      "keywords": ["Meghalaya PSC", "Meghalaya Police Constable", "MBOSE result"]
+    },
+    {
+      "id": "mizoram",
+      "name": "Mizoram",
+      "type": "state",
+      "capital": "Aizawl",
+      "region": "North East",
+      "portal": "https://mizoram.gov.in/",
+      "psc": ["Mizoram Public Service Commission", "MPSC Mizoram", "https://mpsc.mizoram.gov.in/"],
+      "police": ["Mizoram Police", "Mizoram Police", "https://police.mizoram.gov.in/"],
+      "board": ["Mizoram Board of School Education", "MBSE", "https://mbse.edu.in/"],
+      "labels": { "psc": "Mizoram Civil Services", "policeConstable": "Mizoram Police Constable", "policeSi": "Mizoram Police SI", "tet": "Mizoram TET" },
+      "keywords": ["Mizoram PSC", "Mizoram Police Constable", "MBSE result"]
+    },
+    {
+      "id": "nagaland",
+      "name": "Nagaland",
+      "type": "state",
+      "capital": "Kohima",
+      "region": "North East",
+      "portal": "https://nagaland.gov.in/",
+      "psc": ["Nagaland Public Service Commission", "NPSC", "https://npsc.nagaland.gov.in/"],
+      "police": ["Nagaland Police", "Nagaland Police", "https://police.nagaland.gov.in/"],
+      "board": ["Nagaland Board of School Education", "NBSE", "https://nbsenl.edu.in/"],
+      "labels": { "psc": "Nagaland Civil Services", "policeConstable": "Nagaland Police Constable", "policeSi": "Nagaland Police SI", "tet": "Nagaland TET" },
+      "keywords": ["NPSC Nagaland", "Nagaland Police Constable", "NBSE result"]
+    },
+    {
+      "id": "odisha",
+      "name": "Odisha",
+      "type": "state",
+      "capital": "Bhubaneswar",
+      "region": "East",
+      "portal": "https://odisha.gov.in/",
+      "psc": ["Odisha Public Service Commission", "OPSC", "https://opsc.gov.in/"],
+      "police": ["Odisha Staff Selection Commission", "OSSC", "https://ossc.gov.in/"],
+      "board": ["Board of Secondary Education Odisha", "BSE Odisha", "https://bseodisha.ac.in/"],
+      "labels": { "psc": "OCS (OPSC)", "policeConstable": "Odisha Police Constable", "policeSi": "Odisha Police SI", "tet": "OTET" },
+      "cycle": {
+        "psc": { "notification": [12, 1], "exam": [5, 6], "result": [9, 10] },
+        "policeConstable": { "notification": [8, 9], "exam": [11, 12], "result": [2, 3] }
+      },
+      "keywords": ["OPSC OCS", "OSSC CGL", "Odisha Police Constable", "OTET", "BSE Odisha result"]
+    },
+    {
+      "id": "punjab",
+      "name": "Punjab",
+      "type": "state",
+      "capital": "Chandigarh",
+      "region": "North",
+      "portal": "https://punjab.gov.in/",
+      "psc": ["Punjab Public Service Commission", "PPSC", "https://ppsc.gov.in/"],
+      "police": ["Punjab Subordinate Services Selection Board", "PSSSB", "https://sssb.punjab.gov.in/"],
+      "board": ["Punjab School Education Board", "PSEB", "https://pseb.ac.in/"],
+      "labels": { "psc": "PCS (PPSC)", "policeConstable": "Punjab Police Constable", "policeSi": "Punjab Police SI", "tet": "PSTET" },
+      "cycle": {
+        "psc": { "notification": [1, 2], "exam": [5, 6], "result": [9, 10] },
+        "policeConstable": { "notification": [4, 5], "exam": [7, 8], "result": [10, 11] }
+      },
+      "keywords": ["PPSC PCS", "PSSSB recruitment", "Punjab Police Constable", "PSTET", "PSEB result"]
+    },
+    {
+      "id": "rajasthan",
+      "name": "Rajasthan",
+      "type": "state",
+      "capital": "Jaipur",
+      "region": "North",
+      "portal": "https://rajasthan.gov.in/",
+      "psc": ["Rajasthan Public Service Commission", "RPSC", "https://rpsc.rajasthan.gov.in/"],
+      "police": ["Rajasthan Staff Selection Board", "RSSB", "https://rssb.rajasthan.gov.in/"],
+      "board": ["Rajasthan Board of Secondary Education", "RBSE", "https://rajeduboard.rajasthan.gov.in/"],
+      "labels": { "psc": "RAS (RPSC)", "policeConstable": "Rajasthan Police Constable", "policeSi": "Rajasthan Police SI", "tet": "REET" },
+      "cycle": {
+        "psc": { "notification": [12, 1], "exam": [5, 6], "result": [9, 10] },
+        "policeConstable": { "notification": [5, 6], "exam": [8, 9], "result": [11, 12] },
+        "tet": { "notification": [12, 1], "exam": [2, 3], "result": [4, 5] }
+      },
+      "keywords": ["RPSC RAS", "RSSB recruitment", "Rajasthan Police Constable", "REET", "RBSE result", "Rajasthan 3rd Grade Teacher"]
+    },
+    {
+      "id": "sikkim",
+      "name": "Sikkim",
+      "type": "state",
+      "capital": "Gangtok",
+      "region": "North East",
+      "portal": "https://sikkim.gov.in/",
+      "psc": ["Sikkim Public Service Commission", "SPSC", "https://spsc.sikkim.gov.in/"],
+      "police": ["Sikkim Police", "Sikkim Police", "https://sikkimpolice.nic.in/"],
+      "board": null,
+      "labels": { "psc": "Sikkim Civil Services", "policeConstable": "Sikkim Police Constable", "policeSi": "Sikkim Police SI", "tet": "Sikkim TET" },
+      "keywords": ["SPSC Sikkim", "Sikkim Police Constable"]
+    },
+    {
+      "id": "tamil-nadu",
+      "name": "Tamil Nadu",
+      "type": "state",
+      "capital": "Chennai",
+      "region": "South",
+      "portal": "https://www.tn.gov.in/",
+      "psc": ["Tamil Nadu Public Service Commission", "TNPSC", "https://www.tnpsc.gov.in/"],
+      "police": ["Tamil Nadu Uniformed Services Recruitment Board", "TNUSRB", "https://www.tnusrbonline.org/"],
+      "board": ["Directorate of Government Examinations Tamil Nadu", "DGE TN", "https://dge.tn.gov.in/"],
+      "labels": { "psc": "TNPSC Group 1", "policeConstable": "TN Police Constable", "policeSi": "TN Police SI", "tet": "TN TET" },
+      "cycle": {
+        "psc": { "notification": [3, 4], "exam": [7, 8], "result": [12, 1] },
+        "policeConstable": { "notification": [6, 7], "exam": [9, 10], "result": [12, 1] },
+        "tet": { "notification": [5, 6], "exam": [8, 9], "result": [11, 12] }
+      },
+      "keywords": ["TNPSC Group 1", "TNPSC Group 2", "TNUSRB PC", "TN Police Constable", "TN TET", "TNEA"]
+    },
+    {
+      "id": "telangana",
+      "name": "Telangana",
+      "type": "state",
+      "capital": "Hyderabad",
+      "region": "South",
+      "portal": "https://www.telangana.gov.in/",
+      "psc": ["Telangana Public Service Commission", "TGPSC", "https://tgpsc.gov.in/"],
+      "police": ["Telangana State Level Police Recruitment Board", "TSLPRB", "https://tslprb.in/"],
+      "board": ["Board of Secondary Education Telangana", "BSE Telangana", "https://bse.telangana.gov.in/"],
+      "labels": { "psc": "TGPSC Group 1", "policeConstable": "TS Police Constable", "policeSi": "TS Police SI", "tet": "TS TET" },
+      "cycle": {
+        "psc": { "notification": [12, 1], "exam": [5, 6], "result": [9, 10] },
+        "policeConstable": { "notification": [3, 4], "exam": [7, 8], "result": [10, 11] }
+      },
+      "keywords": ["TGPSC Group 1", "TSPSC", "TSLPRB Constable", "TS TET", "TS EAMCET", "TS ICET"]
+    },
+    {
+      "id": "tripura",
+      "name": "Tripura",
+      "type": "state",
+      "capital": "Agartala",
+      "region": "North East",
+      "portal": "https://tripura.gov.in/",
+      "psc": ["Tripura Public Service Commission", "TPSC", "https://tpsc.tripura.gov.in/"],
+      "police": ["Tripura Police", "Tripura Police", "https://tripurapolice.gov.in/"],
+      "board": ["Tripura Board of Secondary Education", "TBSE", "https://tbse.tripura.gov.in/"],
+      "labels": { "psc": "Tripura Civil Services", "policeConstable": "Tripura Police Constable", "policeSi": "Tripura Police SI", "tet": "Tripura TET" },
+      "keywords": ["TPSC Tripura", "Tripura Police Constable", "TBSE result"]
+    },
+    {
+      "id": "uttar-pradesh",
+      "name": "Uttar Pradesh",
+      "type": "state",
+      "capital": "Lucknow",
+      "region": "North",
+      "portal": "https://up.gov.in/",
+      "psc": ["Uttar Pradesh Public Service Commission", "UPPSC", "https://uppsc.up.nic.in/"],
+      "police": ["Uttar Pradesh Police Recruitment and Promotion Board", "UPPBPB", "https://uppbpb.gov.in/"],
+      "board": ["Uttar Pradesh Board of High School and Intermediate Education", "UP Board", "https://upmsp.edu.in/"],
+      "labels": { "psc": "UPPSC PCS", "policeConstable": "UP Police Constable", "policeSi": "UP Police SI", "tet": "UPTET" },
+      "cycle": {
+        "psc": { "notification": [12, 1], "exam": [5, 6], "result": [9, 10] },
+        "policeConstable": { "notification": [1, 2], "exam": [8, 9], "result": [11, 12] },
+        "policeSi": { "notification": [5, 6], "exam": [9, 10], "result": [12, 1] },
+        "tet": { "notification": [9, 10], "exam": [11, 12], "result": [1, 2] }
+      },
+      "keywords": ["UPPSC PCS", "UPSSSC PET", "UP Police Constable", "UP Police SI", "UPTET", "UP Board result", "UPSSSC Junior Assistant"]
+    },
+    {
+      "id": "uttarakhand",
+      "name": "Uttarakhand",
+      "type": "state",
+      "capital": "Dehradun",
+      "region": "North",
+      "portal": "https://uk.gov.in/",
+      "psc": ["Uttarakhand Public Service Commission", "UKPSC", "https://ukpsc.gov.in/"],
+      "police": ["Uttarakhand Subordinate Service Selection Commission", "UKSSSC", "https://sssc.uk.gov.in/"],
+      "board": ["Uttarakhand Board of School Education", "UBSE", "https://ubse.uk.gov.in/"],
+      "labels": { "psc": "UKPSC PCS", "policeConstable": "UK Police Constable", "policeSi": "UK Police SI", "tet": "UTET" },
+      "keywords": ["UKPSC PCS", "UKSSSC recruitment", "UK Police Constable", "UTET", "UBSE result"]
+    },
+    {
+      "id": "west-bengal",
+      "name": "West Bengal",
+      "type": "state",
+      "capital": "Kolkata",
+      "region": "East",
+      "portal": "https://wb.gov.in/",
+      "psc": ["West Bengal Public Service Commission", "WBPSC", "https://wbpsc.gov.in/"],
+      "police": ["West Bengal Police Recruitment Board", "WBPRB", "https://wbprb.co.in/"],
+      "board": ["West Bengal Board of Secondary Education", "WBBSE", "https://wbbse.wb.gov.in/"],
+      "labels": { "psc": "WBCS", "policeConstable": "WB Police Constable", "policeSi": "WB Police SI", "tet": "WB TET" },
+      "cycle": {
+        "psc": { "notification": [12, 1], "exam": [5, 6], "result": [9, 10] },
+        "policeConstable": { "notification": [1, 2], "exam": [5, 6], "result": [9, 10] }
+      },
+      "keywords": ["WBCS", "WBPSC", "WB Police Constable", "WB TET", "WBBSE result", "WBJEE"]
+    },
+    {
+      "id": "andaman-and-nicobar-islands",
+      "name": "Andaman and Nicobar Islands",
+      "type": "ut",
+      "capital": "Port Blair",
+      "region": "Islands",
+      "portal": "https://www.andaman.gov.in/",
+      "psc": null,
+      "police": ["Andaman and Nicobar Police", "A&N Police", "https://police.andaman.gov.in/"],
+      "board": null,
+      "labels": { "policeConstable": "A&N Police Constable", "policeSi": "A&N Police SI" },
+      "keywords": ["Andaman Nicobar police recruitment", "Andaman Nicobar government jobs"]
+    },
+    {
+      "id": "chandigarh",
+      "name": "Chandigarh",
+      "type": "ut",
+      "capital": "Chandigarh",
+      "region": "North",
+      "portal": "https://chandigarh.gov.in/",
+      "psc": null,
+      "police": ["Chandigarh Police", "Chandigarh Police", "https://chandigarhpolice.gov.in/"],
+      "board": null,
+      "labels": { "policeConstable": "Chandigarh Police Constable", "policeSi": "Chandigarh Police SI" },
+      "keywords": ["Chandigarh Police Constable", "Chandigarh administration recruitment"]
+    },
+    {
+      "id": "dadra-and-nagar-haveli-and-daman-and-diu",
+      "name": "Dadra and Nagar Haveli and Daman and Diu",
+      "type": "ut",
+      "capital": "Daman",
+      "region": "West",
+      "portal": "https://ddd.gov.in/",
+      "psc": null,
+      "police": null,
+      "board": null,
+      "labels": {},
+      "keywords": ["DNH DD recruitment", "Daman Diu government jobs"]
+    },
+    {
+      "id": "delhi",
+      "name": "Delhi",
+      "type": "ut",
+      "capital": "New Delhi",
+      "region": "North",
+      "portal": "https://delhi.gov.in/",
+      "psc": ["Delhi Subordinate Services Selection Board", "DSSSB", "https://dsssb.delhi.gov.in/"],
+      "police": ["Delhi Police", "Delhi Police", "https://delhipolice.gov.in/"],
+      "board": ["Central Board of Secondary Education", "CBSE", "https://cbse.gov.in/"],
+      "labels": { "psc": "DSSSB Combined Recruitment", "policeConstable": "Delhi Police Constable", "policeSi": "Delhi Police SI", "tet": "Delhi TET" },
+      "cycle": {
+        "psc": { "notification": [2, 3], "exam": [6, 7], "result": [10, 11] },
+        "policeConstable": { "notification": [8, 9], "exam": [11, 12], "result": [2, 3] }
+      },
+      "keywords": ["DSSSB recruitment", "Delhi Police Constable", "Delhi Police SI", "Delhi government jobs"]
+    },
+    {
+      "id": "jammu-and-kashmir",
+      "name": "Jammu and Kashmir",
+      "type": "ut",
+      "capital": "Srinagar / Jammu",
+      "region": "North",
+      "portal": "https://jk.gov.in/",
+      "psc": ["Jammu and Kashmir Public Service Commission", "JKPSC", "https://jkpsc.nic.in/"],
+      "police": ["Jammu and Kashmir Services Selection Board", "JKSSB", "https://jkssb.nic.in/"],
+      "board": ["Jammu and Kashmir Board of School Education", "JKBOSE", "https://jkbose.nic.in/"],
+      "labels": { "psc": "JKPSC CCE", "policeConstable": "J&K Police Constable", "policeSi": "J&K Police SI", "tet": "JKTET" },
+      "cycle": {
+        "psc": { "notification": [1, 2], "exam": [6, 7], "result": [10, 11] },
+        "policeConstable": { "notification": [6, 7], "exam": [9, 10], "result": [12, 1] }
+      },
+      "keywords": ["JKPSC CCE", "JKSSB recruitment", "J&K Police Constable", "JKTET", "JKBOSE result"]
+    },
+    {
+      "id": "ladakh",
+      "name": "Ladakh",
+      "type": "ut",
+      "capital": "Leh",
+      "region": "North",
+      "portal": "https://ladakh.gov.in/",
+      "psc": null,
+      "police": ["Ladakh Police", "Ladakh Police", "https://ladakhpolice.gov.in/"],
+      "board": null,
+      "labels": { "policeConstable": "Ladakh Police Constable", "policeSi": "Ladakh Police SI" },
+      "keywords": ["Ladakh Police recruitment", "Ladakh government jobs"]
+    },
+    {
+      "id": "lakshadweep",
+      "name": "Lakshadweep",
+      "type": "ut",
+      "capital": "Kavaratti",
+      "region": "Islands",
+      "portal": "https://lakshadweep.gov.in/",
+      "psc": null,
+      "police": ["Lakshadweep Police", "Lakshadweep Police", "https://lakshadweep.gov.in/"],
+      "board": null,
+      "labels": { "policeConstable": "Lakshadweep Police Constable", "policeSi": "Lakshadweep Police SI" },
+      "keywords": ["Lakshadweep recruitment", "Lakshadweep government jobs"]
+    },
+    {
+      "id": "puducherry",
+      "name": "Puducherry",
+      "type": "ut",
+      "capital": "Puducherry",
+      "region": "South",
+      "portal": "https://www.py.gov.in/",
+      "psc": null,
+      "police": ["Puducherry Police", "Puducherry Police", "https://police.py.gov.in/"],
+      "board": null,
+      "labels": { "policeConstable": "Puducherry Police Constable", "policeSi": "Puducherry Police SI" },
+      "keywords": ["Puducherry recruitment", "Puducherry Police Constable"]
+    }
+  ]
+}

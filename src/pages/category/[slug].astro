@@ -1,0 +1,65 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import JobCard from "../../components/JobCard.astro";
+import SubscribeForm from "../../components/SubscribeForm.astro";
+import { CATEGORY_META, SITE } from "../../lib/constants";
+import { jobsByCategory } from "../../lib/jobs";
+
+export function getStaticPaths() {
+  return Object.entries(CATEGORY_META).map(([label, meta]) => ({
+    params: { slug: meta.slug },
+    props: { label, meta },
+  }));
+}
+
+const { label, meta } = Astro.props;
+const list = jobsByCategory(label);
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: `${label} — ${SITE.name}`,
+  url: `${SITE.url}/category/${meta.slug}/`,
+  description: meta.description,
+};
+---
+
+<BaseLayout
+  title={`${label} — Latest Updates`}
+  description={`${meta.description} FollowExam par daily updated ${label.toLowerCase()} list.`}
+  schema={schema}
+>
+  <section class="section-tight" style="padding-top:34px">
+    <div class="container">
+      <div class="breadcrumb" style="padding:0 0 14px">
+        <a href="/">Home</a><span>/</span><span>{label}</span>
+      </div>
+
+      <div class="section-head">
+        <div>
+          <div class="eyebrow" style="background:var(--brand-soft);color:var(--brand);border-color:transparent">
+            {meta.icon} {label}
+          </div>
+          <h1 style="font-size:clamp(1.7rem,3.4vw,2.4rem)">{label} updates</h1>
+          <p>{meta.description}</p>
+        </div>
+        <span class="badge badge-blue">{list.length} updates</span>
+      </div>
+
+      <h2 class="sr-only">{label} updates list</h2>
+      {list.length ? (
+        <div class="grid-3">
+          {list.map((job) => <JobCard job={job} />)}
+        </div>
+      ) : (
+        <div class="empty">
+          <h3>Is category me abhi koi update nahi hai</h3>
+          <p>Nayi notification aate hi yahan publish hogi. Daily alerts subscribe kar lein.</p>
+          <div style="max-width:420px;margin:18px auto 0;text-align:left">
+            <SubscribeForm compact source={`category-${meta.slug}`} />
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>

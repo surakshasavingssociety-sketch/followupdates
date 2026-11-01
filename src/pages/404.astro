@@ -1,0 +1,41 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { jobs } from "../lib/jobs";
+
+const latest = jobs.slice(0, 4);
+---
+
+<BaseLayout title="Page not found" description="Ye page nahi mila. Latest updates dekhein." noindex>
+  <section class="section" style="min-height:52vh">
+    <div class="container" style="max-width:760px">
+      <div class="panel" style="text-align:center;padding:48px 26px">
+        <div style="font-size:4rem;font-weight:800;letter-spacing:-.06em;color:var(--brand);line-height:1">404</div>
+        <h1 style="font-size:1.6rem;margin-top:8px">Ye page nahi mila</h1>
+        <p class="muted">
+          Ho sakta hai link purana ho, post hata di gayi ho, ya URL me typo ho. Neeche se latest updates dekhein.
+        </p>
+        <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:18px">
+          <a class="btn btn-primary" href="/">Home</a>
+          <a class="btn btn-outline" href="/jobs/">All updates</a>
+          <a class="btn btn-outline" href="/category/latest-jobs/">Latest jobs</a>
+        </div>
+      </div>
+
+      {latest.length > 0 && (
+        <div class="mt-3">
+          <h2 style="font-size:1.2rem;margin-bottom:12px">Latest updates</h2>
+          <div class="grid-2">
+            {latest.map((job) => (
+              <a class="job-card" href={`/jobs/${job.slug}/`} style="text-decoration:none">
+                <span class="badge badge-blue" style="align-self:flex-start">{job.category}</span>
+                <h3 style="margin-top:10px">{job.title}</h3>
+                <div class="job-org">🏛 {job.organization}</div>
+                <span class="link-arrow">View details →</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>

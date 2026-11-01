@@ -1,0 +1,276 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import JobCard from "../components/JobCard.astro";
+import ExamCard from "../components/ExamCard.astro";
+import CategoryCard from "../components/CategoryCard.astro";
+import SubscribeForm from "../components/SubscribeForm.astro";
+import { CATEGORY_META, SITE } from "../lib/constants";
+import { examDatabase, getExam } from "../lib/exams";
+import { categoryCounts, jobs } from "../lib/jobs";
+
+const counts = categoryCounts();
+const latest = jobs.slice(0, 6);
+const results = jobs.filter((job) => job.category === "Results").slice(0, 3);
+const admitCards = jobs.filter((job) => job.category === "Admit Card").slice(0, 3);
+const examDates = jobs.filter((job) => job.category === "Exam Date").slice(0, 3);
+const demoCount = jobs.filter((job) => job.demo).length;
+
+const featuredExamIds = ["ssc-cgl", "upsc-cse", "ibps-po", "rrb-ntpc", "neet-ug", "ctet"];
+const featuredExams = featuredExamIds
+  .map((id) => getExam(id))
+  .filter((exam): exam is NonNullable<typeof exam> => Boolean(exam));
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "FollowExam — Government exam updates",
+  description: SITE.description,
+  url: SITE.url,
+};
+---
+
+<BaseLayout schema={schema}>
+  {demoCount > 0 && (
+    <div class="notice-bar">
+      <div class="container">
+        <strong>Demo</strong>
+        <span>
+          Ye {demoCount} listings sample hain, sirf design test ke liye. Launch se pehle inhe delete karein aur official
+          notifications se replace karein.
+        </span>
+      </div>
+    </div>
+  )}
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">Daily government exam updates</div>
+        <h1>
+          Sarkari exam ki har update.<br />
+          <span>Ek clear feed.</span>
+        </h1>
+        <p>
+          Jobs, results, admit cards, answer keys, exam dates, admissions aur scholarships — official sources se
+          verify karke, roz ek jagah.
+        </p>
+
+        <form class="hero-search" action="/jobs/" method="get" role="search">
+          <label class="sr-only" for="hero-search-input">Search jobs and exams</label>
+          <input
+            id="hero-search-input"
+            type="search"
+            name="q"
+            placeholder="SSC, UPSC, result, admit card..."
+            autocomplete="off"
+          />
+          <button class="btn btn-accent" type="submit">Search</button>
+        </form>
+
+        <div class="hero-trust">
+          <span>✓ Official source links</span>
+          <span>✓ Daily automated updates</span>
+          <span>✓ Free email alerts</span>
+        </div>
+      </div>
+
+      <aside class="hero-card" aria-label="FollowExam at a glance">
+        <h2>Live coverage</h2>
+        <div class="hero-stat"><span>Published updates</span><strong>{jobs.length}</strong></div>
+        <div class="hero-stat"><span>Exam cycles</span><strong>{examDatabase.counts.total}</strong></div>
+        <div class="hero-stat"><span>States & UTs</span><strong>{examDatabase.counts.states}</strong></div>
+        <div class="hero-stat"><span>Cost</span><strong>Free</strong></div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Explore by category</h2>
+          <p>Jo chahiye, seedha wahan jayein.</p>
+        </div>
+        <a class="link-arrow" href="/jobs/">All updates →</a>
+      </div>
+      <div class="grid-4">
+        {Object.entries(CATEGORY_META).map(([label, meta]) => (
+          <CategoryCard
+            label={meta.label}
+            slug={meta.slug}
+            description={meta.description}
+            icon={meta.icon}
+            count={counts[label] || 0}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Exam database & cycles</h2>
+          <p>
+            {examDatabase.counts.total} exams · {examDatabase.counts.central} central · {examDatabase.counts.state} state/UT.
+            Notification, exam aur result ka typical window ek jagah.
+          </p>
+        </div>
+        <a class="link-arrow" href="/exams/">All exams →</a>
+      </div>
+      <div class="grid-3">
+        {featuredExams.map((exam) => <ExamCard exam={exam} />)}
+      </div>
+      <div class="grid-3" style="margin-top:18px">
+        <a class="panel" href="/states/">
+          <span class="badge badge-blue">📍 State-wise</span>
+          <h3 style="margin-top:10px">36 states & UTs</h3>
+          <p class="muted small" style="margin:0">
+            PSC, police constable, SI, TET aur board exam cycles — apne state ka page kholiye.
+          </p>
+        </a>
+        <a class="panel" href="/calendar/">
+          <span class="badge badge-violet">📅 Calendar</span>
+          <h3 style="margin-top:10px">12-month exam calendar</h3>
+          <p class="muted small" style="margin:0">
+            Kis mahine kaunsi notification, exam aur result expected hai — month-wise view.
+          </p>
+        </a>
+        <a class="panel" href="/jobs/">
+          <span class="badge badge-green">🔎 Filters</span>
+          <h3 style="margin-top:10px">Search by exam & state</h3>
+          <p class="muted small" style="margin:0">
+            Latest updates ko exam, state, category aur qualification se filter karein.
+          </p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Latest updates</h2>
+          <p>Fresh jobs aur notifications, newest first.</p>
+        </div>
+        <a class="link-arrow" href="/category/latest-jobs/">Latest jobs →</a>
+      </div>
+      {latest.length ? (
+        <div class="grid-3">
+          {latest.map((job) => <JobCard job={job} />)}
+        </div>
+      ) : (
+        <div class="empty">
+          <h3>Abhi koi update nahi hai</h3>
+          <p>Daily automation chalne ke baad latest jobs yahan dikhengi.</p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  {(results.length > 0 || admitCards.length > 0) && (
+    <section class="section-tight">
+      <div class="container grid-2">
+        {results.length > 0 && (
+          <div>
+            <div class="section-head">
+              <div>
+                <h2>Results</h2>
+                <p>Final result aur merit list updates.</p>
+              </div>
+              <a class="link-arrow" href="/category/results/">View all →</a>
+            </div>
+            <div style="display:grid;gap:12px">
+              {results.map((job) => <JobCard job={job} />)}
+            </div>
+          </div>
+        )}
+        {admitCards.length > 0 && (
+          <div>
+            <div class="section-head">
+              <div>
+                <h2>Admit cards</h2>
+                <p>Hall ticket aur exam city updates.</p>
+              </div>
+              <a class="link-arrow" href="/category/admit-card/">View all →</a>
+            </div>
+            <div style="display:grid;gap:12px">
+              {admitCards.map((job) => <JobCard job={job} />)}
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+
+  {examDates.length > 0 && (
+    <section class="section-tight">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Exam dates & schedules</h2>
+            <p>Date sheets aur exam calendars.</p>
+          </div>
+          <a class="link-arrow" href="/category/exam-date/">View all →</a>
+        </div>
+        <div class="grid-3">
+          {examDates.map((job) => <JobCard job={job} />)}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section">
+    <div class="container">
+      <div class="cta">
+        <div>
+          <h2>Roz ki updates, seedha inbox me</h2>
+          <p>
+            Ek daily digest — sirf important jobs, results aur exam dates. Free, no spam. Aap kabhi bhi unsubscribe kar
+            sakte hain.
+          </p>
+        </div>
+        <div style="min-width:min(100%,360px)">
+          <SubscribeForm source="home-cta" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>How FollowExam works</h2>
+          <p>Automation + human review = clean, useful updates.</p>
+        </div>
+      </div>
+      <div class="grid-3">
+        <div class="panel">
+          <span class="badge badge-blue">01</span>
+          <h3 style="margin-top:10px">Discover</h3>
+          <p class="muted small">
+            Official portals, RSS feeds aur government notifications se nayi updates automatically detect hoti hain.
+          </p>
+        </div>
+        <div class="panel">
+          <span class="badge badge-amber">02</span>
+          <h3 style="margin-top:10px">Verify</h3>
+          <p class="muted small">
+            Har entry admin review queue me jati hai. Dates, links aur eligibility check hone ke baad hi publish hoti
+            hai.
+          </p>
+        </div>
+        <div class="panel">
+          <span class="badge badge-green">03</span>
+          <h3 style="margin-top:10px">Notify</h3>
+          <p class="muted small">
+            Publish hote hi Telegram aur email subscribers ko ek-ek karke alert jata hai — bina bulk spam ke.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

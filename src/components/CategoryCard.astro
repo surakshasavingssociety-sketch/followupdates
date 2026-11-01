@@ -1,0 +1,18 @@
+---
+type Props = {
+  label: string;
+  slug: string;
+  description: string;
+  icon: string;
+  count: number;
+};
+
+const { label, slug, description, icon, count } = Astro.props;
+---
+
+<a class="category-card" href={`/category/${slug}/`}>
+  <span class="category-icon" aria-hidden="true">{icon}</span>
+  <strong>{label}</strong>
+  <span>{description}</span>
+  <span class="badge badge-blue" style="align-self:flex-start;margin-top:4px">{count} updates</span>
+</a>

@@ -1,0 +1,24 @@
+---
+import type { Exam } from "../lib/types";
+import { PHASES, PHASE_META, monthLabel } from "../lib/exams";
+
+type Props = { exam: Exam };
+
+const { exam } = Astro.props;
+const currentMonth = new Date().getMonth() + 1;
+---
+
+<div class="cycle-timeline">
+  {PHASES.map((phase) => {
+    const meta = PHASE_META[phase];
+    const active = exam.cycle[phase].includes(currentMonth);
+    return (
+      <div class:list={["cycle-step", { active }]}>
+        <span class:list={["badge", `badge-${meta.tone}`]}>{meta.short}</span>
+        <strong>{monthLabel(exam.cycle[phase])}</strong>
+        <span class="cycle-note">{meta.label}</span>
+        {active ? <span class="cycle-now">Is mahine</span> : null}
+      </div>
+    );
+  })}
+</div>

@@ -1,0 +1,68 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    function validEmail(value) {
+      return value is string && value.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$') && value.size() < 200;
+    }
+
+    // Published jobs: everyone can read. Only admins can write.
+    match /jobs/{jobId} {
+      allow read: if resource.data.status == 'published';
+      allow read: if isAdmin();
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Review queue: admins only.
+    match /pending/{itemId} {
+      allow read, write: if isAdmin();
+    }
+
+    // Admin allow-list: a user can read only their own doc, admins manage it.
+    match /admins/{uid} {
+      allow get: if isSignedIn() && request.auth.uid == uid;
+      allow read, write: if isAdmin();
+    }
+
+    // Newsletter subscribers.
+    // Public create/update is allowed so the subscribe form works without login.
+    // No public reads, so the list cannot be scraped.
+    match /subscribers/{subscriberId} {
+      allow create, update: if
+        validEmail(request.resource.data.email) &&
+        request.resource.data.active is bool;
+      allow read, delete: if isAdmin();
+    }
+
+    // User profile.
+    match /users/{uid} {
+      allow read, write: if isSignedIn() && request.auth.uid == uid;
+      allow read: if isAdmin();
+
+      // Saved jobs subcollection.
+      match /saved/{jobId} {
+        allow read, write: if isSignedIn() && request.auth.uid == uid;
+      }
+    }
+
+    // Contact/feedback messages (optional collection).
+    match /messages/{messageId} {
+      allow create: if true;
+      allow read, delete: if isAdmin();
+    }
+
+    // Everything else is closed.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

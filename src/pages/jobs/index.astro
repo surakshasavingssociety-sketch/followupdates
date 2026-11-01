@@ -1,0 +1,304 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import JobCard from "../../components/JobCard.astro";
+import { CATEGORY_META } from "../../lib/constants";
+import { centralExams, examStreams } from "../../lib/exams";
+import { jobs, qualifications } from "../../lib/jobs";
+import { states as stateRecords } from "../../lib/states";
+
+const initial = jobs.slice(0, 12);
+const central = centralExams();
+const examGroups = examStreams
+  .map((stream) => ({ stream, exams: central.filter((exam) => exam.stream === stream.id) }))
+  .filter((group) => group.exams.length > 0);
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "All government exam updates",
+  url: `${Astro.site || "https://followupdates.web.app"}/jobs/`,
+};
+---
+
+<BaseLayout
+  title="All Government Jobs, Results & Exam Updates"
+  description="Search and filter latest government jobs, results, admit cards, answer keys, exam dates, admissions and scholarships."
+  schema={schema}
+>
+  <section class="section-tight" style="padding-top:30px">
+    <div class="container">
+      <div class="section-head" style="margin-bottom:14px">
+        <div>
+          <h1 style="font-size:clamp(1.7rem,3.4vw,2.4rem)">All updates</h1>
+          <p>Search karein, filter lagayein, aur apne liye relevant exam updates dhoondein.</p>
+        </div>
+        <span class="badge badge-blue">{jobs.length} published</span>
+      </div>
+
+      <form class="filter-panel" id="job-filter-form" role="search">
+        <div class="filter-row">
+          <div class="field">
+            <label for="filter-q">Search</label>
+            <input
+              class="input"
+              id="filter-q"
+              name="q"
+              type="search"
+              placeholder="Post, organization, exam..."
+              autocomplete="off"
+            />
+          </div>
+          <div class="field">
+            <label for="filter-category">Category</label>
+            <select class="select" id="filter-category" name="category">
+              <option value="">All categories</option>
+              {Object.values(CATEGORY_META).map((meta) => (
+                <option value={meta.label}>{meta.label}</option>
+              ))}
+            </select>
+          </div>
+          <div class="field">
+            <label for="filter-state">State</label>
+            <select class="select" id="filter-state" name="state">
+              <option value="">All India</option>
+              {stateRecords.map((state) => <option value={state.name}>{state.name}</option>)}
+            </select>
+          </div>
+          <div class="field">
+            <label for="filter-exam">Exam</label>
+            <select class="select" id="filter-exam" name="exam">
+              <option value="">All exams</option>
+              {examGroups.map((group) => (
+                <optgroup label={`${group.stream.icon} ${group.stream.name}`}>
+                  {group.exams.map((exam) => <option value={exam.id}>{exam.name}</option>)}
+                </optgroup>
+              ))}
+            </select>
+          </div>
+          <div class="field">
+            <label for="filter-qualification">Qualification</label>
+            <select class="select" id="filter-qualification" name="qualification">
+              <option value="">Any qualification</option>
+              {qualifications().map((qualification) => (
+                <option value={qualification}>{qualification}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        <div class="filter-foot">
+          <div class="chips" id="quick-chips">
+            <button class="chip" type="button" data-category="Latest Jobs" aria-pressed="false">Latest Jobs</button>
+            <button class="chip" type="button" data-category="Results" aria-pressed="false">Results</button>
+            <button class="chip" type="button" data-category="Admit Card" aria-pressed="false">Admit Card</button>
+            <button class="chip" type="button" data-category="Exam Date" aria-pressed="false">Exam Date</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span class="result-count" id="result-count">{jobs.length} results</span>
+            <button class="btn btn-outline btn-sm" type="button" id="clear-filters">Clear</button>
+          </div>
+        </div>
+      </form>
+
+      <h2 class="sr-only">Search results</h2>
+      <div id="job-results" class="grid-3" aria-live="polite">
+        {initial.map((job) => <JobCard job={job} />)}
+      </div>
+
+      <div class="text-center mt-3">
+        <button class="btn btn-outline" type="button" id="load-more" hidden>Load more</button>
+      </div>
+
+      <noscript>
+        <p class="muted mt-2">Search aur filters ke liye JavaScript on karein. Saari jobs upar list hain.</p>
+      </noscript>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  import Fuse from "fuse.js";
+
+  type Job = {
+    id: string;
+    slug: string;
+    title: string;
+    organization: string;
+    category: string;
+    state: string;
+    qualification: string[];
+    vacancies?: number | null;
+    postDate: string;
+    applyEnd?: string | null;
+    examId?: string | null;
+    examName?: string | null;
+    demo?: boolean;
+  };
+
+  const categoryMeta: Record<string, { tone: string; label: string }> = {
+    "Latest Jobs": { tone: "blue", label: "Latest Jobs" },
+    Results: { tone: "green", label: "Results" },
+    "Admit Card": { tone: "amber", label: "Admit Card" },
+    "Answer Key": { tone: "violet", label: "Answer Key" },
+    "Exam Date": { tone: "red", label: "Exam Date" },
+    Admission: { tone: "blue", label: "Admission" },
+    Syllabus: { tone: "violet", label: "Syllabus" },
+    Scholarship: { tone: "green", label: "Scholarship" },
+  };
+
+  const form = document.querySelector<HTMLFormElement>("#job-filter-form");
+  const resultsEl = document.querySelector<HTMLElement>("#job-results");
+  const countEl = document.querySelector<HTMLElement>("#result-count");
+  const loadMore = document.querySelector<HTMLButtonElement>("#load-more");
+  const clearButton = document.querySelector<HTMLButtonElement>("#clear-filters");
+  const chips = [...document.querySelectorAll<HTMLButtonElement>("[data-category]")];
+
+  const params = new URLSearchParams(window.location.search);
+  const qInput = document.querySelector<HTMLInputElement>("#filter-q");
+  const categorySelect = document.querySelector<HTMLSelectElement>("#filter-category");
+  const stateSelect = document.querySelector<HTMLSelectElement>("#filter-state");
+  const examSelect = document.querySelector<HTMLSelectElement>("#filter-exam");
+  const qualificationSelect = document.querySelector<HTMLSelectElement>("#filter-qualification");
+
+  if (qInput && params.get("q")) qInput.value = params.get("q") || "";
+  if (categorySelect && params.get("category")) categorySelect.value = params.get("category") || "";
+  if (stateSelect && params.get("state")) stateSelect.value = params.get("state") || "";
+  if (examSelect && params.get("exam")) examSelect.value = params.get("exam") || "";
+
+  let allJobs: Job[] = [];
+  let filtered: Job[] = [];
+  let visible = 12;
+  let fuse: Fuse<Job> | null = null;
+
+  function escapeHtml(value: string) {
+    return value
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function fmtDate(value?: string | null) {
+    if (!value) return "—";
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return "—";
+    return new Intl.DateTimeFormat("en-IN", { day: "2-digit", month: "short" }).format(date);
+  }
+
+  function daysLeft(value?: string | null) {
+    if (!value) return null;
+    const end = new Date(value);
+    if (Number.isNaN(end.getTime())) return null;
+    return Math.ceil((end.getTime() - Date.now()) / 86400000);
+  }
+
+  function card(job: Job) {
+    const meta = categoryMeta[job.category] || { tone: "blue", label: job.category };
+    const left = daysLeft(job.applyEnd);
+    const quals = (job.qualification || []).slice(0, 2).join(", ");
+    return `<article class="job-card">
+      <div class="job-card-top">
+        <span class="badge badge-${meta.tone}">${escapeHtml(meta.label)}</span>
+        <span class="badge badge-muted">${escapeHtml(job.state || "All India")}</span>
+      </div>
+      <h3><a href="/jobs/${encodeURIComponent(job.slug)}/">${escapeHtml(job.title)}</a></h3>
+      <div class="job-org"><span aria-hidden="true">🏛</span>${escapeHtml(job.organization)}</div>
+      <div class="job-meta">
+        ${job.vacancies ? `<span>👥 ${job.vacancies.toLocaleString("en-IN")} posts</span>` : ""}
+        ${quals ? `<span>🎓 ${escapeHtml(quals)}</span>` : ""}
+        ${job.examName ? `<span>🎯 ${escapeHtml(job.examName)}</span>` : ""}
+        <span>📅 ${fmtDate(job.postDate)}</span>
+      </div>
+      <div class="card-foot">
+        <a class="link-arrow" href="/jobs/${encodeURIComponent(job.slug)}/">View details →</a>
+        <span style="display:flex;gap:6px;align-items:center">
+          ${job.demo ? '<span class="badge badge-amber">Sample</span>' : ""}
+          ${left !== null && left >= 0 ? `<span class="deadline ${left > 7 ? "ok" : ""}">${left === 0 ? "Last day" : `${left}d left`}</span>` : ""}
+        </span>
+      </div>
+    </article>`;
+  }
+
+  function render() {
+    if (!resultsEl) return;
+    const page = filtered.slice(0, visible);
+    resultsEl.innerHTML = page.length
+      ? page.map(card).join("")
+      : `<div class="empty" style="grid-column:1/-1"><h3>Koi result nahi mila</h3><p>Search term badlein ya filters clear karein.</p></div>`;
+    if (countEl) countEl.textContent = `${filtered.length} result${filtered.length === 1 ? "" : "s"}`;
+    if (loadMore) loadMore.hidden = visible >= filtered.length;
+  }
+
+  function applyFilters() {
+    const q = qInput?.value.trim() || "";
+    const category = categorySelect?.value || "";
+    const state = stateSelect?.value || "";
+    const exam = examSelect?.value || "";
+    const qualification = qualificationSelect?.value || "";
+
+    let list = allJobs;
+    if (q && fuse) list = fuse.search(q).map((result) => result.item);
+    if (category) list = list.filter((job) => job.category === category);
+    if (state) list = list.filter((job) => job.state === state);
+    if (exam) list = list.filter((job) => job.examId === exam);
+    if (qualification) list = list.filter((job) => (job.qualification || []).includes(qualification));
+
+    filtered = list;
+    visible = 12;
+    chips.forEach((chip) => chip.setAttribute("aria-pressed", String(chip.dataset.category === category)));
+    render();
+  }
+
+  async function init() {
+    try {
+      const response = await fetch("/jobs.json");
+      allJobs = await response.json();
+      fuse = new Fuse(allJobs, {
+        keys: ["title", "organization", "state", "qualification", "category", "examName"],
+        threshold: 0.35,
+        ignoreLocation: true,
+      });
+      applyFilters();
+    } catch {
+      if (countEl) countEl.textContent = "Search load nahi hua";
+    }
+  }
+
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    applyFilters();
+    const url = new URL(window.location.href);
+    if (qInput?.value) url.searchParams.set("q", qInput.value); else url.searchParams.delete("q");
+    if (categorySelect?.value) url.searchParams.set("category", categorySelect.value); else url.searchParams.delete("category");
+    if (stateSelect?.value) url.searchParams.set("state", stateSelect.value); else url.searchParams.delete("state");
+    if (examSelect?.value) url.searchParams.set("exam", examSelect.value); else url.searchParams.delete("exam");
+    window.history.replaceState({}, "", url);
+  });
+
+  [qInput, categorySelect, stateSelect, examSelect, qualificationSelect].forEach((element) => {
+    element?.addEventListener("input", applyFilters);
+    element?.addEventListener("change", applyFilters);
+  });
+
+  chips.forEach((chip) => {
+    chip.addEventListener("click", () => {
+      if (!categorySelect) return;
+      categorySelect.value = categorySelect.value === chip.dataset.category ? "" : chip.dataset.category || "";
+      applyFilters();
+    });
+  });
+
+  clearButton?.addEventListener("click", () => {
+    form?.reset();
+    if (qInput) qInput.value = "";
+    applyFilters();
+    window.history.replaceState({}, "", window.location.pathname);
+  });
+
+  loadMore?.addEventListener("click", () => {
+    visible += 12;
+    render();
+  });
+
+  init();
+</script>

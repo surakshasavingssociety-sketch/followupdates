@@ -1,0 +1,326 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import JobCard from "../../components/JobCard.astro";
+import SubscribeForm from "../../components/SubscribeForm.astro";
+import { CATEGORY_META, SITE } from "../../lib/constants";
+import { getExam, monthLabel, nextPhaseLabel } from "../../lib/exams";
+import { formatDate, getJob, jobs } from "../../lib/jobs";
+import type { Job } from "../../lib/types";
+
+export function getStaticPaths() {
+  return jobs.map((job) => ({
+    params: { slug: job.slug },
+    props: { job },
+  }));
+}
+
+type Props = { job: Job };
+const { job } = Astro.props;
+
+const meta = CATEGORY_META[job.category] || { label: job.category, tone: "blue", slug: "latest-jobs" };
+const exam = job.examId ? getExam(job.examId) : undefined;
+const related = jobs
+  .filter((item) => item.id !== job.id && (item.category === job.category || item.state === job.state))
+  .slice(0, 3);
+
+const feeRows = [
+  ["General / OBC", job.fee?.general ?? job.fee?.obc],
+  ["SC / ST", job.fee?.scSt],
+  ["Female", job.fee?.female],
+].filter(([, value]) => value !== undefined && value !== null);
+
+const officialHost = (() => {
+  try {
+    return new URL(job.officialUrl).hostname.replace(/^www\./, "");
+  } catch {
+    return "official website";
+  }
+})();
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "JobPosting",
+  title: job.title,
+  description: job.summary,
+  datePosted: job.postDate,
+  ...(job.applyEnd ? { validThrough: `${job.applyEnd}T23:59:59+05:30` } : {}),
+  hiringOrganization: {
+    "@type": "Organization",
+    name: job.organization,
+    sameAs: job.officialUrl,
+  },
+  jobLocation: {
+    "@type": "Place",
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "IN",
+      addressRegion: job.state === "All India" ? "India" : job.state,
+    },
+  },
+  ...(job.vacancies ? { totalJobOpenings: job.vacancies } : {}),
+  ...(job.salary ? { baseSalary: { "@type": "MonetaryAmount", currency: "INR", value: job.salary } } : {}),
+  directApply: false,
+  url: `${SITE.url}/jobs/${job.slug}/`,
+};
+---
+
+<BaseLayout
+  title={job.title}
+  description={`${job.organization} — ${job.summary.slice(0, 150)}`}
+  type="article"
+  schema={schema}
+>
+  <div class="container breadcrumb">
+    <a href="/">Home</a>
+    <span>/</span>
+    <a href="/jobs/">All updates</a>
+    <span>/</span>
+    <a href={`/category/${meta.slug}/`}>{meta.label}</a>
+  </div>
+
+  <div class="container detail-layout">
+    <article class="panel detail-header">
+      {job.demo && (
+        <div class="demo-warning">
+          <strong>Sample listing:</strong> Ye entry sirf design aur automation test ke liye hai. Real application se pehle
+          official notification verify karein.
+        </div>
+      )}
+
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <span class:list={["badge", `badge-${meta.tone}`]}>{meta.label}</span>
+        <span class="badge badge-muted">{job.state || "All India"}</span>
+        {job.vacancies ? <span class="badge badge-blue">{job.vacancies.toLocaleString("en-IN")} posts</span> : null}
+      </div>
+
+      <h1>{job.title}</h1>
+      <div class="detail-sub">
+        <span>🏛 {job.organization}</span>
+        <span>📅 Published {formatDate(job.postDate)}</span>
+        <span>🔗 Source: {job.sourceName}</span>
+      </div>
+
+      <p class="detail-summary">{job.summary}</p>
+
+      <div class="key-grid">
+        <div class="key-item">
+          <small>Application starts</small>
+          <strong>{formatDate(job.applyStart)}</strong>
+        </div>
+        <div class="key-item">
+          <small>Last date to apply</small>
+          <strong style={job.applyEnd ? "color:var(--red)" : ""}>{formatDate(job.applyEnd)}</strong>
+        </div>
+        <div class="key-item">
+          <small>Exam date</small>
+          <strong>{formatDate(job.examDate)}</strong>
+        </div>
+        <div class="key-item">
+          <small>Qualification</small>
+          <strong>{job.qualification?.join(", ") || "See notification"}</strong>
+        </div>
+        <div class="key-item">
+          <small>Age limit</small>
+          <strong>
+            {job.age?.min || job.age?.max
+              ? `${job.age?.min ?? "—"} – ${job.age?.max ?? "—"} years`
+              : "See notification"}
+          </strong>
+        </div>
+        <div class="key-item">
+          <small>Salary / pay scale</small>
+          <strong>{job.salary || "See notification"}</strong>
+        </div>
+      </div>
+
+      <section class="detail-section">
+        <h2>Important dates</h2>
+        <div class="table-wrap">
+          <table>
+            <tbody>
+              <tr><th>Notification / update</th><td>{formatDate(job.postDate)}</td></tr>
+              <tr><th>Application start</th><td>{formatDate(job.applyStart)}</td></tr>
+              <tr><th>Last date to apply</th><td>{formatDate(job.applyEnd)}</td></tr>
+              <tr><th>Exam date</th><td>{formatDate(job.examDate)}</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {feeRows.length > 0 && (
+        <section class="detail-section">
+          <h2>Application fee</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Category</th><th>Fee</th></tr>
+              </thead>
+              <tbody>
+                {feeRows.map(([label, value]) => (
+                  <tr>
+                    <td>{label}</td>
+                    <td>{value === 0 ? "No fee" : `₹${Number(value).toLocaleString("en-IN")}`}</td>
+                  </tr>
+                ))}
+                {job.fee?.paymentMode && (
+                  <tr><td>Payment mode</td><td>{job.fee.paymentMode}</td></tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+
+      <section class="detail-section">
+        <h2>Eligibility & selection</h2>
+        <p>
+          <strong>Qualification:</strong> {job.qualification?.join(", ") || "Official notification me di gayi qualification dekhein."}
+        </p>
+        <p>
+          <strong>Age limit:</strong>{" "}
+          {job.age?.min || job.age?.max
+            ? `${job.age?.min ?? "—"} se ${job.age?.max ?? "—"} years`
+            : "Notification ke according"}{" "}
+          {job.age?.note ? `— ${job.age.note}` : ""}
+        </p>
+        <p>
+          <strong>Selection process:</strong> Official notification me diye gaye stages (written exam, interview,
+          skill test, document verification) follow karein. FollowExam kisi bhi stage ka conduct nahi karta.
+        </p>
+      </section>
+
+      <section class="detail-section">
+        <h2>How to apply / check update</h2>
+        <ol>
+          <li>Neeche diye official link par jayein.</li>
+          <li>Latest notification ya result PDF open karein.</li>
+          <li>Eligibility, dates aur fee carefully check karein.</li>
+          <li>Apply online karein ya result/admit card download karein.</li>
+          <li>Application form aur payment receipt ka print/screenshot rakhein.</li>
+        </ol>
+      </section>
+
+      {related.length > 0 && (
+        <section class="detail-section">
+          <h2>Related updates</h2>
+          <div class="grid-3">
+            {related.map((item) => <JobCard job={item} />)}
+          </div>
+        </section>
+      )}
+    </article>
+
+    <aside>
+      {exam ? (
+        <div class="sidebar-card">
+          <h3>{exam.name} cycle</h3>
+          <p>Is update ka exam aur uska typical schedule.</p>
+          <div class="facts">
+            <div><span>Next phase</span><strong>{nextPhaseLabel(exam)}</strong></div>
+            <div><span>Notification</span><strong>{monthLabel(exam.cycle.notification)}</strong></div>
+            <div><span>Exam</span><strong>{monthLabel(exam.cycle.exam)}</strong></div>
+            <div><span>Result</span><strong>{monthLabel(exam.cycle.result)}</strong></div>
+          </div>
+          <div class="sidebar-actions" style="margin-top:12px">
+            <a class="btn btn-outline" href={`/exams/${exam.slug}/`}>Full exam page →</a>
+          </div>
+        </div>
+      ) : null}
+
+      <div class="sidebar-card">
+        <h3>Official links</h3>
+        <p>Apply ya verify karne ke liye sirf official website use karein.</p>
+        <div class="sidebar-actions">
+          <a class="btn btn-primary" href={job.officialUrl} target="_blank" rel="noopener nofollow">
+            Official website ↗
+          </a>
+          {job.notificationUrl && job.notificationUrl !== job.officialUrl && (
+            <a class="btn btn-outline" href={job.notificationUrl} target="_blank" rel="noopener nofollow">
+              Notification / PDF ↗
+            </a>
+          )}
+          <button
+            class="btn btn-outline"
+            type="button"
+            data-save-job
+            data-job-id={job.id}
+            data-job-title={job.title}
+          >
+            ☆ Save this update
+          </button>
+          <button class="btn btn-ghost" type="button" data-share-job>Share</button>
+        </div>
+        <p class="small muted" style="margin:12px 0 0">
+          Source host: {officialHost}
+        </p>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>Quick facts</h3>
+        <div class="facts">
+          <div><span>Category</span><strong>{meta.label}</strong></div>
+          <div><span>State</span><strong>{job.state}</strong></div>
+          <div><span>Vacancies</span><strong>{job.vacancies ? job.vacancies.toLocaleString("en-IN") : "—"}</strong></div>
+          <div><span>Last date</span><strong>{formatDate(job.applyEnd)}</strong></div>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>Daily alerts</h3>
+        <p>Nayi update aate hi email par paayein.</p>
+        <SubscribeForm compact source={`job-${job.slug}`} />
+      </div>
+    </aside>
+  </div>
+</BaseLayout>
+
+<script>
+  import { isJobSaved, toggleJobSaved, watchUser } from "../../lib/saved";
+  import type { User } from "firebase/auth";
+
+  let currentUser: User | null = null;
+  const saveButton = document.querySelector<HTMLButtonElement>("[data-save-job]");
+  const shareButton = document.querySelector<HTMLButtonElement>("[data-share-job]");
+  const jobId = saveButton?.dataset.jobId || "";
+
+  watchUser(async (user) => {
+    currentUser = user;
+    if (!saveButton || !jobId) return;
+    const saved = await isJobSaved(jobId, user);
+    paint(saved);
+  });
+
+  function paint(saved: boolean) {
+    if (!saveButton) return;
+    saveButton.textContent = saved ? "★ Saved" : "☆ Save this update";
+    saveButton.classList.toggle("btn-primary", saved);
+    saveButton.classList.toggle("btn-outline", !saved);
+  }
+
+  saveButton?.addEventListener("click", async () => {
+    if (!jobId) return;
+    saveButton.disabled = true;
+    try {
+      const saved = await toggleJobSaved(jobId, currentUser);
+      paint(saved);
+    } catch (error) {
+      alert(error instanceof Error ? error.message : "Save nahi ho paya.");
+    } finally {
+      saveButton.disabled = false;
+    }
+  });
+
+  shareButton?.addEventListener("click", async () => {
+    const data = { title: document.title, url: window.location.href };
+    try {
+      if (navigator.share) await navigator.share(data);
+      else {
+        await navigator.clipboard.writeText(window.location.href);
+        shareButton.textContent = "Link copied!";
+        setTimeout(() => (shareButton.textContent = "Share"), 1800);
+      }
+    } catch {
+      /* user cancelled */
+    }
+  });
+</script>

@@ -1,0 +1,97 @@
+name: Daily update pipeline
+
+on:
+  schedule:
+    # 02:00 UTC = 07:30 IST, daily
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-pipeline
+  cancel-in-progress: false
+
+env:
+  FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+  FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+  SITE_URL: ${{ secrets.SITE_URL }}
+  SMTP_HOST: ${{ secrets.SMTP_HOST }}
+  SMTP_PORT: ${{ secrets.SMTP_PORT }}
+  SMTP_SECURE: ${{ secrets.SMTP_SECURE }}
+  SMTP_USER: ${{ secrets.SMTP_USER }}
+  SMTP_PASS: ${{ secrets.SMTP_PASS }}
+  MAIL_FROM: ${{ secrets.MAIL_FROM }}
+  EMAIL_DELAY_MS: ${{ secrets.EMAIL_DELAY_MS }}
+  MAX_EMAILS_PER_RUN: ${{ secrets.MAX_EMAILS_PER_RUN }}
+  NOTIFY_LOOKBACK_DAYS: ${{ secrets.NOTIFY_LOOKBACK_DAYS }}
+  TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+  TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+  EXAM_QUERIES_PER_RUN: ${{ vars.EXAM_QUERIES_PER_RUN }}
+  STATE_QUERIES_PER_RUN: ${{ vars.STATE_QUERIES_PER_RUN }}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Discover new notifications
+        run: npm run ingest
+
+      - name: Push discovery queue to Firestore
+        if: env.FIREBASE_SERVICE_ACCOUNT != ''
+        run: npm run sync
+
+      - name: Pull approved jobs from Firestore
+        if: env.FIREBASE_SERVICE_ACCOUNT != ''
+        run: npm run pull
+
+      - name: Validate data
+        run: npm run validate
+
+      - name: Build site
+        run: npm run build
+
+      - name: Check internal links
+        run: npm run linkcheck
+
+      - name: Authenticate to Google Cloud
+        if: env.FIREBASE_SERVICE_ACCOUNT != ''
+        id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+
+      - name: Deploy to Firebase Hosting
+        if: env.FIREBASE_SERVICE_ACCOUNT != ''
+        run: npx --yes firebase-tools@latest deploy --only hosting --project "$FIREBASE_PROJECT_ID" --non-interactive
+
+      - name: Send Telegram + email alerts
+        if: env.FIREBASE_SERVICE_ACCOUNT != ''
+        run: npm run notify
+
+      - name: Commit data changes
+        run: |
+          git config user.name "followexam-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add data/
+          if git diff --staged --quiet; then
+            echo "No data changes."
+          else
+            git commit -m "chore(data): daily update $(date -u +%Y-%m-%d)"
+            git push
+          fi

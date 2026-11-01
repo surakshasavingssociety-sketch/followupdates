@@ -1,0 +1,34 @@
+---
+import type { StateInfo } from "../lib/types";
+import { examsByState, nextPhaseLabel } from "../lib/exams";
+
+type Props = { state: StateInfo };
+
+const { state } = Astro.props;
+const exams = examsByState(state.id);
+const pscExam = exams.find((exam) => exam.id.endsWith("-psc"));
+const policeExam = exams.find((exam) => exam.id.includes("-police-constable"));
+---
+
+<article class="state-card">
+  <div class="job-card-top">
+    <span class="badge badge-blue">{state.type === "ut" ? "Union Territory" : "State"}</span>
+    <span class="badge badge-muted">{state.region}</span>
+  </div>
+
+  <h3><a href={`/states/${state.id}/`}>{state.name}</a></h3>
+  <p class="state-meta">Capital: {state.capital} · {exams.length} tracked exams</p>
+
+  <div class="state-bodies">
+    {state.psc ? <span><strong>{state.psc[1]}</strong> PSC</span> : <span class="muted">No dedicated PSC</span>}
+    {state.board ? <span><strong>{state.board[1]}</strong> Board</span> : null}
+    {state.police ? <span><strong>{state.police[1]}</strong> Police</span> : null}
+  </div>
+
+  {pscExam ? (
+    <div class="job-meta">
+      <span>📢 {nextPhaseLabel(pscExam)}</span>
+      {policeExam ? <span>👮 Police cycle</span> : null}
+    </div>
+  ) : null}
+</article>

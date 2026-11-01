@@ -1,0 +1,175 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ExamCard from "../../components/ExamCard.astro";
+import JobCard from "../../components/JobCard.astro";
+import SubscribeForm from "../../components/SubscribeForm.astro";
+import { SITE } from "../../lib/constants";
+import { examsByState, monthLabel } from "../../lib/exams";
+import { jobs } from "../../lib/jobs";
+import { getState, states } from "../../lib/states";
+import type { StateInfo } from "../../lib/types";
+
+export function getStaticPaths() {
+  return states.map((state) => ({ params: { slug: state.id }, props: { state } }));
+}
+
+type Props = { state: StateInfo };
+const { state } = Astro.props;
+
+const stateExams = examsByState(state.id);
+const stateJobs = jobs.filter((job) => job.state === state.name || job.stateId === state.id).slice(0, 6);
+const bodies = [
+  { label: "State portal", value: state.portal },
+  state.psc ? { label: "Public Service Commission", value: state.psc[2] } : null,
+  state.police ? { label: "Police / recruitment board", value: state.police[2] } : null,
+  state.board ? { label: "School education board", value: state.board[2] } : null,
+].filter(Boolean) as Array<{ label: string; value: string }>;
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: `${state.name} government exams and jobs`,
+    description: `${state.name} PSC, police, TET and board exam cycles with official links.`,
+    url: `${SITE.url}/states/${state.id}/`,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE.url}/` },
+      { "@type": "ListItem", position: 2, name: "States", item: `${SITE.url}/states/` },
+      { "@type": "ListItem", position: 3, name: state.name, item: `${SITE.url}/states/${state.id}/` },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title={`${state.name} Government Jobs & Exams — PSC, Police, TET, Board`}
+  description={`${state.name} government exam coverage: ${state.psc ? state.psc[0] : "state recruitment"}, police, TET and board exams with indicative cycles and official links.`}
+  schema={schema}
+>
+  <div class="container breadcrumb">
+    <a href="/">Home</a>
+    <span>/</span>
+    <a href="/states/">States</a>
+    <span>/</span>
+    <span>{state.name}</span>
+  </div>
+
+  <div class="container detail-layout">
+    <article class="panel detail-header">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <span class="badge badge-blue">{state.type === "ut" ? "Union Territory" : "State"}</span>
+        <span class="badge badge-muted">{state.region}</span>
+        <span class="badge badge-violet">{stateExams.length} exam cycles</span>
+      </div>
+
+      <h1>{state.name} government exams</h1>
+      <div class="detail-sub">
+        <span>🏙 Capital: {state.capital}</span>
+        <span>📍 {state.type === "ut" ? "Union Territory" : "State"}</span>
+        {state.psc ? <span>🏛 {state.psc[1]}</span> : null}
+      </div>
+
+      <p class="detail-summary">
+        {state.name} ke PSC, police, teacher eligibility aur school board exams ka ek overview. Neeche har exam ka
+        typical notification, exam aur result window diya gaya hai, saath me official portal links.
+      </p>
+
+      <section class="detail-section">
+        <h2>Official portals</h2>
+        <div class="table-wrap">
+          <table>
+            <tbody>
+              {bodies.map((body) => (
+                <tr>
+                  <th>{body.label}</th>
+                  <td><a href={body.value} target="_blank" rel="noopener nofollow">{body.value}</a></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="small muted" style="margin-top:10px">
+          Government portals kabhi-kabhi domain badalte hain. Agar link kaam na kare to state ke official portal se
+          department dhoondein.
+        </p>
+      </section>
+
+      <section class="detail-section">
+        <h2>Exam cycle overview</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Exam</th><th>Notification</th><th>Exam</th><th>Result</th></tr>
+            </thead>
+            <tbody>
+              {stateExams.map((exam) => (
+                <tr>
+                  <td><a href={`/exams/${exam.slug}/`}>{exam.name}</a></td>
+                  <td>{monthLabel(exam.cycle.notification)}</td>
+                  <td>{monthLabel(exam.cycle.exam)}</td>
+                  <td>{monthLabel(exam.cycle.result)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="small muted" style="margin-top:10px">
+          Months indicative hain. Exact dates official notification se confirm karein.
+        </p>
+      </section>
+
+      <section class="detail-section">
+        <h2>{state.name} ke exams</h2>
+        <div class="grid-3">
+          {stateExams.map((exam) => <ExamCard exam={exam} />)}
+        </div>
+      </section>
+
+      <section class="detail-section">
+        <h2>{state.name} ki latest updates</h2>
+        {stateJobs.length > 0 ? (
+          <div class="grid-3">
+            {stateJobs.map((job) => <JobCard job={job} />)}
+          </div>
+        ) : (
+          <p class="muted">
+            Is state ki latest updates abhi ingest queue me hain. Daily automation chalne ke baad yahan jobs, admit cards
+            aur results dikhne lagenge.
+          </p>
+        )}
+        <a class="link-arrow" href={`/jobs/?state=${encodeURIComponent(state.name)}`}>All {state.name} updates →</a>
+      </section>
+    </article>
+
+    <aside>
+      <div class="sidebar-card">
+        <h3>Quick facts</h3>
+        <div class="facts">
+          <div><span>Type</span><strong>{state.type === "ut" ? "Union Territory" : "State"}</strong></div>
+          <div><span>Capital</span><strong>{state.capital}</strong></div>
+          <div><span>Region</span><strong>{state.region}</strong></div>
+          <div><span>Exam cycles</span><strong>{stateExams.length}</strong></div>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>Key bodies</h3>
+        <div class="facts">
+          {state.psc ? <div><span>PSC</span><strong>{state.psc[1]}</strong></div> : null}
+          {state.police ? <div><span>Police</span><strong>{state.police[1]}</strong></div> : null}
+          {state.board ? <div><span>Board</span><strong>{state.board[1]}</strong></div> : null}
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>{state.name} alerts</h3>
+        <p>Is state ki jobs, admit cards aur results email par paayein.</p>
+        <SubscribeForm compact source={`state-${state.id}`} />
+      </div>
+    </aside>
+  </div>
+</BaseLayout>

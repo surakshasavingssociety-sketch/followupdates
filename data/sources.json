@@ -1,0 +1,92 @@
+{
+  "googleNews": [
+    {
+      "name": "SSC",
+      "query": "recruitment OR notification OR admit card OR result site:ssc.gov.in",
+      "category": "Latest Jobs",
+      "maxItems": 12
+    },
+    {
+      "name": "UPSC",
+      "query": "recruitment OR notification OR result OR admit card site:upsc.gov.in",
+      "category": "Latest Jobs",
+      "maxItems": 12
+    },
+    {
+      "name": "IBPS",
+      "query": "recruitment OR notification OR result OR admit card site:ibps.in",
+      "category": "Latest Jobs",
+      "maxItems": 12
+    },
+    {
+      "name": "NTA",
+      "query": "exam OR notification OR result OR answer key site:nta.ac.in",
+      "category": "Exam Date",
+      "maxItems": 12
+    },
+    {
+      "name": "CBSE",
+      "query": "exam OR date sheet OR result OR notification site:cbse.gov.in",
+      "category": "Exam Date",
+      "maxItems": 12
+    },
+    {
+      "name": "Government results",
+      "query": "government exam result site:gov.in",
+      "category": "Results",
+      "maxItems": 15
+    },
+    {
+      "name": "Government admit cards",
+      "query": "admit card recruitment site:gov.in",
+      "category": "Admit Card",
+      "maxItems": 15
+    },
+    {
+      "name": "State government jobs",
+      "query": "recruitment notification site:gov.in",
+      "category": "Latest Jobs",
+      "maxItems": 20
+    }
+  ],
+  "rss": [
+    {
+      "name": "PIB",
+      "url": "https://www.pib.gov.in/RssMain.aspx?ModId=6&Lang=1",
+      "category": "Latest Jobs",
+      "maxItems": 15,
+      "includeKeywords": [
+        "recruit",
+        "vacanc",
+        "exam",
+        "result",
+        "admit card",
+        "admission",
+        "scholarship",
+        "notification"
+      ]
+    }
+  ],
+  "html": [
+    {
+      "name": "UPSC",
+      "url": "https://upsc.gov.in/whats-new",
+      "baseUrl": "https://upsc.gov.in",
+      "itemSelector": ".views-row",
+      "linkSelector": "a",
+      "titleSelector": "a",
+      "category": "Latest Jobs",
+      "maxItems": 15
+    },
+    {
+      "name": "NTA",
+      "url": "https://nta.ac.in/",
+      "baseUrl": "https://nta.ac.in",
+      "itemSelector": "p",
+      "linkSelector": "a.orange-text",
+      "titleSelector": "content",
+      "category": "Exam Date",
+      "maxItems": 15
+    }
+  ]
+}

@@ -1,0 +1,166 @@
+---
+type Props = {
+  compact?: boolean;
+  source?: string;
+};
+
+const { compact = false, source = "website" } = Astro.props;
+---
+
+<form class:list={["subscribe-form", { compact }]} data-subscribe-form data-source={source}>
+  <div class="subscribe-row">
+    <label class="sr-only" for={`subscriber-email-${source}`}>Email address</label>
+    <input
+      class="input"
+      id={`subscriber-email-${source}`}
+      type="email"
+      name="email"
+      placeholder="aapka@email.com"
+      autocomplete="email"
+      required
+    />
+    {!compact && (
+      <label class="sr-only" for={`subscriber-name-${source}`}>Name</label>
+    )}
+    {!compact && (
+      <input
+        class="input"
+        id={`subscriber-name-${source}`}
+        type="text"
+        name="name"
+        placeholder="Aapka naam (optional)"
+        autocomplete="name"
+      />
+    )}
+    <button class="btn btn-primary" type="submit">Subscribe</button>
+  </div>
+  <input class="hidden" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" />
+  <p class="form-message" data-subscribe-message role="status"></p>
+  <p class="subscribe-note">Daily digest. No spam. Unsubscribe anytime.</p>
+</form>
+
+<style>
+  .subscribe-form {
+    margin-top: 10px;
+  }
+
+  .subscribe-row {
+    display: flex;
+    gap: 8px;
+  }
+
+  .subscribe-row .input {
+    min-width: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+  }
+
+  .subscribe-row .input::placeholder {
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .subscribe-note {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.7rem;
+    margin: 6px 0 0;
+  }
+
+  .subscribe-form.compact {
+    margin: 0;
+  }
+
+  .subscribe-form.compact .subscribe-row {
+    flex-direction: column;
+  }
+
+  .subscribe-form.compact .input {
+    background: #fff;
+    border-color: var(--line);
+    color: var(--ink);
+  }
+
+  .subscribe-form.compact .input::placeholder {
+    color: var(--muted);
+  }
+
+  .subscribe-form.compact .subscribe-note {
+    color: var(--muted);
+  }
+
+  :global(.site-footer) .subscribe-note,
+  :global(.site-footer) .subscribe-form.compact .subscribe-note {
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  @media (max-width: 560px) {
+    .subscribe-row {
+      flex-direction: column;
+    }
+  }
+</style>
+
+<script>
+  import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+  import { firebaseConfigured, getFirebaseDb } from "../lib/firebase";
+
+  document.querySelectorAll<HTMLFormElement>("[data-subscribe-form]").forEach((form) => {
+    const message = form.querySelector<HTMLElement>("[data-subscribe-message]");
+    const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const email = String(data.get("email") || "").trim().toLowerCase();
+      const name = String(data.get("name") || "").trim();
+      const company = String(data.get("company") || "").trim();
+
+      if (company) return;
+      if (!email || !email.includes("@")) {
+        show("Sahi email address daalein.", "error");
+        return;
+      }
+
+      if (!firebaseConfigured) {
+        show("Alerts abhi setup nahi hui hain. Firebase config add karne ke baad subscribe kaam karega.", "info");
+        return;
+      }
+
+      const db = getFirebaseDb();
+      if (!db) {
+        show("Firebase initialize nahi ho paya.", "error");
+        return;
+      }
+
+      if (submit) submit.disabled = true;
+      show("Subscribe ho raha hai...", "info");
+
+      try {
+        await setDoc(
+          doc(db, "subscribers", email.replace(/[^a-z0-9@._+-]/g, "_")),
+          {
+            email,
+            name,
+            active: true,
+            source: form.dataset.source || "website",
+            createdAt: serverTimestamp(),
+            updatedAt: serverTimestamp(),
+          },
+          { merge: true },
+        );
+        form.reset();
+        show("Ho gaya! Daily exam updates aapke email par aayengi.", "success");
+      } catch (error) {
+        show(`Subscribe nahi hua: ${error instanceof Error ? error.message : "unknown error"}`, "error");
+      } finally {
+        if (submit) submit.disabled = false;
+      }
+    });
+
+    function show(text: string, type: "error" | "success" | "info") {
+      if (!message) return;
+      message.textContent = text;
+      message.className = `form-message show ${type}`;
+    }
+  });
+</script>

@@ -1,0 +1,594 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { CATEGORY_META } from "../../lib/constants";
+---
+
+<BaseLayout title="Admin review" description="FollowExam admin review queue." noindex>
+  <section class="admin-shell">
+    <div class="container">
+      <div id="admin-loading" class="panel">
+        <p class="muted">Admin panel load ho raha hai…</p>
+      </div>
+
+      <div id="admin-config" class="panel hidden">
+        <h1 style="font-size:1.4rem">Firebase setup required</h1>
+        <p>
+          Admin panel aur alerts ke liye Firebase project configure karein. <code>.env.example</code> ko
+          <code>.env</code> me copy karein aur <code>PUBLIC_FIREBASE_*</code> values bharein.
+        </p>
+        <p class="small muted">Local demo ke liye site bina Firebase ke bhi chalegi; sirf admin/login features disabled rahenge.</p>
+      </div>
+
+      <div id="admin-login" class="form-card hidden">
+        <h1>Admin login</h1>
+        <p class="muted small">Sirf authorized admin hi review queue access kar sakte hain.</p>
+        <div class="form-message" data-login-message role="status"></div>
+        <form id="login-form" class="form-grid">
+          <div class="field">
+            <label for="login-email">Email</label>
+            <input class="input" id="login-email" type="email" autocomplete="email" required />
+          </div>
+          <div class="field">
+            <label for="login-password">Password</label>
+            <input class="input" id="login-password" type="password" autocomplete="current-password" required />
+          </div>
+          <button class="btn btn-primary" type="submit">Sign in</button>
+          <button class="btn btn-outline" type="button" id="google-login">Continue with Google</button>
+        </form>
+      </div>
+
+      <div id="admin-denied" class="form-card hidden">
+        <h1>Access nahi hai</h1>
+        <p>
+          Aapka account authenticated hai, lekin admin list me nahi hai. Firestore me
+          <code>admins/&lt;your-uid&gt;</code> document create karein.
+        </p>
+        <button class="btn btn-outline" type="button" id="denied-signout">Sign out</button>
+      </div>
+
+      <div id="admin-panel" class="hidden">
+        <div class="admin-head">
+          <div>
+            <div class="eyebrow" style="background:var(--brand-soft);color:var(--brand);border-color:transparent">
+              Admin workspace
+            </div>
+            <h1 style="font-size:clamp(1.6rem,3vw,2.2rem);margin:6px 0 0">Review queue</h1>
+            <p class="muted small" style="margin:4px 0 0">
+              Scraped entries ko verify karein, edit karein, phir publish karein.
+            </p>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <span class="small muted" id="admin-email"></span>
+            <button class="btn btn-outline btn-sm" type="button" id="admin-signout">Sign out</button>
+          </div>
+        </div>
+
+        <div class="admin-tabs" role="tablist">
+          <button type="button" role="tab" aria-selected="true" data-tab="pending">Pending <span id="pending-count"></span></button>
+          <button type="button" role="tab" aria-selected="false" data-tab="published">Published</button>
+          <button type="button" role="tab" aria-selected="false" data-tab="add">Add manually</button>
+        </div>
+
+        <div class="form-message" id="admin-message" role="status"></div>
+
+        <section id="tab-pending">
+          <div class="filter-panel" style="padding:12px">
+            <div class="filter-row" style="grid-template-columns:1.6fr 1fr">
+              <div class="field">
+                <label for="pending-search">Filter pending</label>
+                <input class="input" id="pending-search" placeholder="Title, organization, source…" />
+              </div>
+              <div class="field">
+                <label for="pending-category">Category</label>
+                <select class="select" id="pending-category">
+                  <option value="">All</option>
+                  {Object.keys(CATEGORY_META).map((category) => <option value={category}>{category}</option>)}
+                </select>
+              </div>
+            </div>
+          </div>
+          <div id="pending-list" class="admin-list"></div>
+        </section>
+
+        <section id="tab-published" class="hidden">
+          <div id="published-list" class="admin-list"></div>
+        </section>
+
+        <section id="tab-add" class="hidden">
+          <div class="panel">
+            <h2 style="font-size:1.2rem">Add a job manually</h2>
+            <p class="muted small">Auto-discovery se miss hui update yahan se add karein.</p>
+            <form id="add-job-form" class="admin-edit">
+              <div class="field full">
+                <label for="add-title">Title *</label>
+                <input class="input" id="add-title" name="title" required />
+              </div>
+              <div class="field">
+                <label for="add-org">Organization *</label>
+                <input class="input" id="add-org" name="organization" required />
+              </div>
+              <div class="field">
+                <label for="add-category">Category *</label>
+                <select class="select" id="add-category" name="category" required>
+                  {Object.keys(CATEGORY_META).map((category) => <option value={category}>{category}</option>)}
+                </select>
+              </div>
+              <div class="field">
+                <label for="add-state">State</label>
+                <input class="input" id="add-state" name="state" value="All India" />
+              </div>
+              <div class="field">
+                <label for="add-qual">Qualification (comma separated)</label>
+                <input class="input" id="add-qual" name="qualification" placeholder="Graduate, 12th" />
+              </div>
+              <div class="field">
+                <label for="add-vacancies">Vacancies</label>
+                <input class="input" id="add-vacancies" name="vacancies" type="number" min="0" />
+              </div>
+              <div class="field">
+                <label for="add-post-date">Post date *</label>
+                <input class="input" id="add-post-date" name="postDate" type="date" required />
+              </div>
+              <div class="field">
+                <label for="add-apply-start">Apply start</label>
+                <input class="input" id="add-apply-start" name="applyStart" type="date" />
+              </div>
+              <div class="field">
+                <label for="add-apply-end">Last date</label>
+                <input class="input" id="add-apply-end" name="applyEnd" type="date" />
+              </div>
+              <div class="field">
+                <label for="add-exam-date">Exam date</label>
+                <input class="input" id="add-exam-date" name="examDate" type="date" />
+              </div>
+              <div class="field">
+                <label for="add-official-url">Official URL *</label>
+                <input class="input" id="add-official-url" name="officialUrl" type="url" required />
+              </div>
+              <div class="field full">
+                <label for="add-summary">Summary *</label>
+                <textarea class="textarea" id="add-summary" name="summary" required></textarea>
+              </div>
+              <div class="field full">
+                <button class="btn btn-primary" type="submit">Publish manually</button>
+              </div>
+            </form>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  import {
+    GoogleAuthProvider,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+    signInWithPopup,
+    signOut,
+    type User,
+  } from "firebase/auth";
+  import {
+    collection,
+    deleteDoc,
+    doc,
+    getDoc,
+    getDocs,
+    limit,
+    orderBy,
+    query,
+    setDoc,
+    where,
+  } from "firebase/firestore";
+  import { firebaseConfigured, getFirebaseAuth, getFirebaseDb } from "../../lib/firebase";
+
+  type PendingJob = Record<string, any>;
+
+  const loading = document.querySelector<HTMLElement>("#admin-loading");
+  const configPanel = document.querySelector<HTMLElement>("#admin-config");
+  const loginPanel = document.querySelector<HTMLElement>("#admin-login");
+  const deniedPanel = document.querySelector<HTMLElement>("#admin-denied");
+  const adminPanel = document.querySelector<HTMLElement>("#admin-panel");
+  const loginForm = document.querySelector<HTMLFormElement>("#login-form");
+  const loginMessage = document.querySelector<HTMLElement>("[data-login-message]");
+  const adminMessage = document.querySelector<HTMLElement>("#admin-message");
+  const pendingList = document.querySelector<HTMLElement>("#pending-list");
+  const publishedList = document.querySelector<HTMLElement>("#published-list");
+  const pendingCount = document.querySelector<HTMLElement>("#pending-count");
+  const adminEmail = document.querySelector<HTMLElement>("#admin-email");
+  const pendingSearch = document.querySelector<HTMLInputElement>("#pending-search");
+  const pendingCategory = document.querySelector<HTMLSelectElement>("#pending-category");
+  const addForm = document.querySelector<HTMLFormElement>("#add-job-form");
+
+  let db: ReturnType<typeof getFirebaseDb> = null;
+  let currentUser: User | null = null;
+  let pending: PendingJob[] = [];
+  let published: PendingJob[] = [];
+  let activeTab = "pending";
+
+  const CATEGORIES = ["Latest Jobs", "Results", "Admit Card", "Answer Key", "Exam Date", "Admission", "Syllabus", "Scholarship"];
+
+  function showPanel(panel: HTMLElement | null) {
+    [loading, configPanel, loginPanel, deniedPanel, adminPanel].forEach((item) => item?.classList.add("hidden"));
+    panel?.classList.remove("hidden");
+  }
+
+  function showMessage(element: HTMLElement | null, text: string, type: "error" | "success" | "info" = "info") {
+    if (!element) return;
+    element.textContent = text;
+    element.className = `form-message show ${type}`;
+    if (type === "success") setTimeout(() => element.classList.remove("show"), 3500);
+  }
+
+  function esc(value: unknown) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function slugify(value: string) {
+    return value
+      .toLowerCase()
+      .replace(/&/g, " and ")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .slice(0, 90);
+  }
+
+  function inputValue(value: unknown, type = "text") {
+    if (!value) return "";
+    if (type === "date") return String(value).slice(0, 10);
+    return esc(value);
+  }
+
+  function renderPending() {
+    if (!pendingList) return;
+    const search = (pendingSearch?.value || "").toLowerCase();
+    const category = pendingCategory?.value || "";
+    const filtered = pending.filter((job) => {
+      const haystack = `${job.title} ${job.organization} ${job.sourceName}`.toLowerCase();
+      return (!search || haystack.includes(search)) && (!category || job.category === category);
+    });
+
+    if (pendingCount) pendingCount.textContent = pending.length ? `(${pending.length})` : "";
+
+    if (!filtered.length) {
+      pendingList.innerHTML = `<div class="empty"><h3>Queue clear hai</h3><p>Nayi scraped entries aane par yahan dikhengi.</p></div>`;
+      return;
+    }
+
+    pendingList.innerHTML = filtered
+      .map(
+        (job) => `
+      <article class="admin-item" data-id="${esc(job.id)}">
+        <div class="admin-item-head">
+          <div>
+            <h3>${esc(job.title)}</h3>
+            <div class="admin-item-meta">
+              ${esc(job.organization)} · ${esc(job.category)} · ${esc(job.state || "All India")} · ${esc(job.sourceName || "source")}
+            </div>
+          </div>
+          <span class="badge badge-amber">Pending</span>
+        </div>
+        <div class="admin-actions">
+          <a class="btn btn-outline btn-sm" href="${esc(job.discoveryUrl || job.officialUrl)}" target="_blank" rel="noopener">Open source ↗</a>
+          <button class="btn btn-primary btn-sm" type="button" data-action="approve">Approve</button>
+          <button class="btn btn-danger btn-sm" type="button" data-action="reject">Reject</button>
+          <button class="btn btn-ghost btn-sm" type="button" data-action="toggle-edit">Edit fields</button>
+        </div>
+        <div class="admin-edit hidden" data-edit>
+          <div class="field full"><label>Title</label><input class="input" data-field="title" value="${inputValue(job.title)}" /></div>
+          <div class="field"><label>Organization</label><input class="input" data-field="organization" value="${inputValue(job.organization)}" /></div>
+          <div class="field"><label>Category</label><select class="select" data-field="category">${CATEGORIES.map((category) => `<option ${category === job.category ? "selected" : ""}>${category}</option>`).join("")}</select></div>
+          <div class="field"><label>State</label><input class="input" data-field="state" value="${inputValue(job.state)}" /></div>
+          <div class="field"><label>Qualification (comma separated)</label><input class="input" data-field="qualification" value="${inputValue((job.qualification || []).join(", "))}" /></div>
+          <div class="field"><label>Vacancies</label><input class="input" type="number" min="0" data-field="vacancies" value="${inputValue(job.vacancies)}" /></div>
+          <div class="field"><label>Post date</label><input class="input" type="date" data-field="postDate" value="${inputValue(job.postDate, "date")}" /></div>
+          <div class="field"><label>Apply start</label><input class="input" type="date" data-field="applyStart" value="${inputValue(job.applyStart, "date")}" /></div>
+          <div class="field"><label>Last date</label><input class="input" type="date" data-field="applyEnd" value="${inputValue(job.applyEnd, "date")}" /></div>
+          <div class="field"><label>Exam date</label><input class="input" type="date" data-field="examDate" value="${inputValue(job.examDate, "date")}" /></div>
+          <div class="field"><label>Salary</label><input class="input" data-field="salary" value="${inputValue(job.salary)}" /></div>
+          <div class="field"><label>Official URL</label><input class="input" type="url" data-field="officialUrl" value="${inputValue(job.officialUrl)}" /></div>
+          <div class="field full"><label>Summary</label><textarea class="textarea" data-field="summary">${esc(job.summary)}</textarea></div>
+        </div>
+      </article>`,
+      )
+      .join("");
+  }
+
+  async function loadPending() {
+    if (!db) return;
+    try {
+      const snapshot = await getDocs(
+        query(collection(db, "pending"), where("status", "==", "pending"), orderBy("discoveredAt", "desc"), limit(200)),
+      );
+      pending = snapshot.docs.map((item) => ({ id: item.id, ...item.data() }));
+    } catch {
+      const snapshot = await getDocs(query(collection(db, "pending"), orderBy("discoveredAt", "desc"), limit(300)));
+      pending = snapshot.docs
+        .map((item) => ({ id: item.id, ...item.data() }))
+        .filter((item) => item.status !== "approved" && item.status !== "rejected")
+        .slice(0, 200);
+    }
+    renderPending();
+  }
+
+  async function loadPublished() {
+    if (!db || !publishedList) return;
+    try {
+      const snapshot = await getDocs(query(collection(db, "jobs"), orderBy("postDate", "desc"), limit(100)));
+      published = snapshot.docs.map((item) => ({ id: item.id, ...item.data() }));
+    } catch {
+      const snapshot = await getDocs(query(collection(db, "jobs"), limit(100)));
+      published = snapshot.docs.map((item) => ({ id: item.id, ...item.data() }));
+    }
+
+    publishedList.innerHTML = published.length
+      ? published
+          .map(
+            (job) => `
+        <article class="admin-item">
+          <div class="admin-item-head">
+            <div>
+              <h3><a href="/jobs/${esc(job.slug || job.id)}/" target="_blank">${esc(job.title)}</a></h3>
+              <div class="admin-item-meta">${esc(job.organization)} · ${esc(job.category)} · ${esc(job.postDate || "")}</div>
+            </div>
+            <span class="badge badge-green">Published</span>
+          </div>
+          <div class="admin-actions">
+            <a class="btn btn-outline btn-sm" href="/jobs/${esc(job.slug || job.id)}/" target="_blank">View ↗</a>
+            <button class="btn btn-danger btn-sm" type="button" data-action="unpublish" data-id="${esc(job.id)}">Unpublish</button>
+          </div>
+        </article>`,
+          )
+          .join("")
+      : `<div class="empty"><h3>Abhi kuch publish nahi hua</h3><p>Pending queue se pehla update approve karein.</p></div>`;
+  }
+
+  function readFields(container: HTMLElement) {
+    const values: Record<string, any> = {};
+    container.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>("[data-field]").forEach((element) => {
+      const key = element.dataset.field;
+      if (!key) return;
+      values[key] = element.value.trim();
+    });
+    return values;
+  }
+
+  function normalize(values: Record<string, any>) {
+    return {
+      ...values,
+      qualification: String(values.qualification || "")
+        .split(",")
+        .map((item) => item.trim())
+        .filter(Boolean),
+      vacancies: values.vacancies ? Number(values.vacancies) : null,
+    };
+  }
+
+  async function approve(item: HTMLElement) {
+    if (!db) return;
+    const id = item.dataset.id;
+    if (!id) return;
+    const original = pending.find((job) => job.id === id);
+    if (!original) return;
+    const edit = item.querySelector<HTMLElement>("[data-edit]");
+    const values = edit ? normalize(readFields(edit)) : {};
+    const title = values.title || original.title;
+    if (!title || !original.officialUrl) {
+      showMessage(adminMessage, "Title aur official URL zaroori hain.", "error");
+      return;
+    }
+
+    const now = new Date().toISOString();
+    const approved = {
+      ...original,
+      ...values,
+      id,
+      slug: original.slug || slugify(title),
+      title,
+      status: "published",
+      demo: false,
+      approvedAt: now,
+      updatedAt: now,
+      notified: false,
+      notifiedAt: null,
+    };
+
+    await setDoc(doc(db, "jobs", id), approved, { merge: true });
+    // Keep a reviewed copy in the queue instead of deleting it, so the daily
+    // sync never resurrects an already-handled entry.
+    await setDoc(
+      doc(db, "pending", id),
+      { status: "approved", approvedAt: now, updatedAt: now },
+      { merge: true },
+    );
+    pending = pending.filter((job) => job.id !== id);
+    renderPending();
+    showMessage(adminMessage, "Approved. Agli build me site par publish hoga.", "success");
+  }
+
+  async function reject(item: HTMLElement) {
+    if (!db) return;
+    const id = item.dataset.id;
+    if (!id) return;
+    if (!confirm("Is entry ko reject karna hai?")) return;
+    const now = new Date().toISOString();
+    await setDoc(
+      doc(db, "pending", id),
+      { status: "rejected", reviewedAt: now, updatedAt: now },
+      { merge: true },
+    );
+    pending = pending.filter((job) => job.id !== id);
+    renderPending();
+    showMessage(adminMessage, "Entry rejected.", "info");
+  }
+
+  async function unpublish(id: string) {
+    if (!db) return;
+    if (!confirm("Is job ko unpublish karna hai? Ye site se hat jayegi.")) return;
+    await deleteDoc(doc(db, "jobs", id));
+    published = published.filter((job) => job.id !== id);
+    await loadPublished();
+    showMessage(adminMessage, "Job unpublish ho gayi.", "info");
+  }
+
+  function switchTab(tab: string) {
+    activeTab = tab;
+    document.querySelectorAll<HTMLButtonElement>("[data-tab]").forEach((button) => {
+      button.setAttribute("aria-selected", String(button.dataset.tab === tab));
+    });
+    document.querySelector<HTMLElement>("#tab-pending")?.classList.toggle("hidden", tab !== "pending");
+    document.querySelector<HTMLElement>("#tab-published")?.classList.toggle("hidden", tab !== "published");
+    document.querySelector<HTMLElement>("#tab-add")?.classList.toggle("hidden", tab !== "add");
+    if (tab === "published") loadPublished();
+  }
+
+  async function boot(user: User) {
+    currentUser = user;
+    if (adminEmail) adminEmail.textContent = user.email || "";
+    if (!db) {
+      showPanel(configPanel);
+      return;
+    }
+
+    try {
+      const adminDoc = await getDoc(doc(db, "admins", user.uid));
+      if (!adminDoc.exists()) {
+        showPanel(deniedPanel);
+        return;
+      }
+      showPanel(adminPanel);
+      await loadPending();
+    } catch (error) {
+      showPanel(deniedPanel);
+      console.error(error);
+    }
+  }
+
+  if (!firebaseConfigured) {
+    showPanel(configPanel);
+  } else {
+    const auth = getFirebaseAuth();
+    db = getFirebaseDb();
+
+    if (!auth || !db) {
+      showPanel(configPanel);
+    } else {
+      onAuthStateChanged(auth, (user) => {
+        if (user) boot(user);
+        else showPanel(loginPanel);
+      });
+
+      loginForm?.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const email = document.querySelector<HTMLInputElement>("#login-email")?.value.trim() || "";
+        const password = document.querySelector<HTMLInputElement>("#login-password")?.value || "";
+        try {
+          showMessage(loginMessage, "Signing in…", "info");
+          await signInWithEmailAndPassword(auth, email, password);
+        } catch (error) {
+          showMessage(loginMessage, error instanceof Error ? error.message : "Login failed", "error");
+        }
+      });
+
+      document.querySelector("#google-login")?.addEventListener("click", async () => {
+        try {
+          await signInWithPopup(auth, new GoogleAuthProvider());
+        } catch (error) {
+          showMessage(loginMessage, error instanceof Error ? error.message : "Google login failed", "error");
+        }
+      });
+
+      document.querySelector("#admin-signout")?.addEventListener("click", () => signOut(auth));
+      document.querySelector("#denied-signout")?.addEventListener("click", () => signOut(auth));
+    }
+  }
+
+  pendingSearch?.addEventListener("input", renderPending);
+  pendingCategory?.addEventListener("change", renderPending);
+  document.querySelectorAll<HTMLButtonElement>("[data-tab]").forEach((button) => {
+    button.addEventListener("click", () => switchTab(button.dataset.tab || "pending"));
+  });
+
+  pendingList?.addEventListener("click", async (event) => {
+    const target = (event.target as HTMLElement).closest<HTMLElement>("[data-action]");
+    if (!target) return;
+    const item = target.closest<HTMLElement>(".admin-item");
+    if (!item) return;
+    const action = target.dataset.action;
+    if (action === "toggle-edit") {
+      item.querySelector("[data-edit]")?.classList.toggle("hidden");
+    } else if (action === "approve") {
+      target.setAttribute("disabled", "true");
+      try {
+        await approve(item);
+      } catch (error) {
+        showMessage(adminMessage, error instanceof Error ? error.message : "Approve failed", "error");
+      } finally {
+        target.removeAttribute("disabled");
+      }
+    } else if (action === "reject") {
+      try {
+        await reject(item);
+      } catch (error) {
+        showMessage(adminMessage, error instanceof Error ? error.message : "Reject failed", "error");
+      }
+    }
+  });
+
+  publishedList?.addEventListener("click", async (event) => {
+    const target = (event.target as HTMLElement).closest<HTMLElement>("[data-action='unpublish']");
+    if (!target) return;
+    const id = target.dataset.id;
+    if (id) await unpublish(id);
+  });
+
+  addForm?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!db) return;
+    const data = new FormData(addForm);
+    const title = String(data.get("title") || "").trim();
+    const id = `manual-${Date.now().toString(36)}`;
+    const now = new Date().toISOString();
+    try {
+      await setDoc(doc(db, "jobs", id), {
+        id,
+        slug: slugify(title),
+        title,
+        organization: String(data.get("organization") || "").trim(),
+        category: String(data.get("category") || "Latest Jobs"),
+        state: String(data.get("state") || "All India").trim(),
+        qualification: String(data.get("qualification") || "")
+          .split(",")
+          .map((item) => item.trim())
+          .filter(Boolean),
+        vacancies: data.get("vacancies") ? Number(data.get("vacancies")) : null,
+        postDate: String(data.get("postDate") || now.slice(0, 10)),
+        applyStart: String(data.get("applyStart") || "") || null,
+        applyEnd: String(data.get("applyEnd") || "") || null,
+        examDate: String(data.get("examDate") || "") || null,
+        fee: {},
+        age: {},
+        salary: "",
+        summary: String(data.get("summary") || "").trim(),
+        officialUrl: String(data.get("officialUrl") || "").trim(),
+        notificationUrl: String(data.get("officialUrl") || "").trim(),
+        sourceName: "Manual entry",
+        status: "published",
+        demo: false,
+        createdAt: now,
+        updatedAt: now,
+        notified: false,
+      });
+      addForm.reset();
+      showMessage(adminMessage, "Job publish ho gayi. Site build ke baad visible hogi.", "success");
+    } catch (error) {
+      showMessage(adminMessage, error instanceof Error ? error.message : "Save failed", "error");
+    }
+  });
+</script>
