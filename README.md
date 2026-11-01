@@ -199,16 +199,18 @@ Official sources ──► ingest.mjs ──► data/pending.json ──► Fire
 
 ## 7. GitHub setup
 
-1. Repo banayein aur code push karein:
+1. Repo already ban chuka hai aur `main` push ho chuka hai:
+   **https://github.com/surakshasavingssociety-sketch/followexam**
+
+   Naye clone par kaam karna ho to:
    ```bash
-   git init
-   git add .
-   git commit -m "feat: FollowExam v1"
-   git branch -M main
-   git remote add origin https://github.com/<user>/<repo>.git
-   git push -u origin main
+   git clone https://github.com/surakshasavingssociety-sketch/followexam.git
    ```
 2. **Settings → Secrets and variables → Actions**
+
+   > ✅ Ye already set ho chuke hain (Firebase public config, project id, site URL, SMTP defaults, query counts).
+   > ⛔ Abhi khali hain: `FIREBASE_SERVICE_ACCOUNT`, `SMTP_USER`, `SMTP_PASS`, `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, `PUBLIC_TELEGRAM_URL`.
+   > Inke bina site build/deploy chalta hai, par real data pull + alerts band rahenge.
 
    **Secrets** (private):
 
@@ -216,7 +218,7 @@ Official sources ──► ingest.mjs ──► data/pending.json ──► Fire
    |---|---|
    | `FIREBASE_SERVICE_ACCOUNT` | Service account JSON (ek line) |
    | `FIREBASE_PROJECT_ID` | `followupdates` |
-   | `SITE_URL` | `https://<project>.web.app` |
+   | `SITE_URL` | `https://followupdates.web.app` |
    | `SMTP_HOST` | `smtp.gmail.com` |
    | `SMTP_PORT` | `465` |
    | `SMTP_SECURE` | `true` |
@@ -225,11 +227,11 @@ Official sources ──► ingest.mjs ──► data/pending.json ──► Fire
    | `MAIL_FROM` | `FollowExam <yourgmail@gmail.com>` |
    | `EMAIL_DELAY_MS` | `1500` |
    | `MAX_EMAILS_PER_RUN` | `350` |
-| `NOTIFY_LOOKBACK_DAYS` | `7` |
+   | `NOTIFY_LOOKBACK_DAYS` | `7` |
    | `TELEGRAM_BOT_TOKEN` | BotFather token |
    | `TELEGRAM_CHAT_ID` | channel/group chat id |
 
-   **Variables** (public): `PUBLIC_SITE_URL`, `PUBLIC_CONTACT_EMAIL`, `PUBLIC_TELEGRAM_URL`, aur saare `PUBLIC_FIREBASE_*`.
+   **Variables** (public): `PUBLIC_SITE_URL`, `PUBLIC_CONTACT_EMAIL`, `PUBLIC_TELEGRAM_URL`, saare `PUBLIC_FIREBASE_*`, plus `EXAM_QUERIES_PER_RUN` (`8`) aur `STATE_QUERIES_PER_RUN` (`6`).
 
 3. **Actions** tab → `Daily update pipeline` → **Run workflow** se pehla manual run karein.
 4. Cron: daily **02:00 UTC (07:30 IST)**. Time badalna ho to `.github/workflows/daily.yml` me cron edit karein.
