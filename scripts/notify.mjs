@@ -63,20 +63,20 @@ function emailHtml(subscriber, jobs) {
   <div style="max-width:640px;margin:0 auto;padding:24px 16px">
     <div style="background:#0b4f9c;color:#fff;padding:22px 24px;border-radius:14px 14px 0 0">
       <div style="font-size:13px;opacity:.85;letter-spacing:.08em;text-transform:uppercase">FollowExam Daily Alert</div>
-      <h1 style="margin:8px 0 0;font-size:23px">Aaj ki nayi exam updates</h1>
+      <h1 style="margin:8px 0 0;font-size:23px">Today's exam updates</h1>
     </div>
     <div style="background:#fff;padding:8px 24px 24px;border-radius:0 0 14px 14px">
-      <p style="color:#556070">Namaste ${escapeHtml(subscriber.name || "Student")},</p>
-      <p style="color:#556070">Ye ${jobs.length} nayi update${jobs.length > 1 ? "s" : ""} aapke liye hain:</p>
+      <p style="color:#556070">Hello ${escapeHtml(subscriber.name || "Student")},</p>
+      <p style="color:#556070">You have ${jobs.length} new update${jobs.length > 1 ? "s" : ""}:</p>
       <table width="100%" cellpadding="0" cellspacing="0">${rows}</table>
       <p style="margin:24px 0 8px">
         <a href="${SITE_URL}/jobs/" style="display:inline-block;background:#f59e0b;color:#14243b;padding:11px 18px;border-radius:9px;text-decoration:none;font-weight:700">
-          Sabhi jobs dekhein
+          View all jobs
         </a>
       </p>
       <p style="font-size:12px;color:#7a8798;line-height:1.6;margin-top:26px">
-        FollowExam kisi bhi government department se affiliated nahi hai. Apply karne se pehle official notification zaroor verify karein.
-        Alerts band karne ke liye is email ka reply karein.
+        FollowExam is not affiliated with any government department. Always verify the official notification before applying.
+        To stop alerts, reply to this email.
       </p>
     </div>
   </div>
@@ -85,13 +85,13 @@ function emailHtml(subscriber, jobs) {
 
 function emailText(subscriber, jobs) {
   return [
-    `Namaste ${subscriber.name || "Student"},`,
+    `Hello ${subscriber.name || "Student"},`,
     "",
-    `${jobs.length} nayi exam updates:`,
+    `${jobs.length} new exam updates:`,
     ...jobs.map((job) => `- ${job.title}\n  ${jobUrl(job)}`),
     "",
-    "Apply karne se pehle official notification verify karein.",
-    "Alerts band karne ke liye is email ka reply karein.",
+    "Always verify the official notification before applying.",
+    "To stop alerts, reply to this email.",
   ].join("\n");
 }
 
@@ -103,7 +103,7 @@ function telegramText(job) {
     `📌 ${escapeHtml(job.category)} · ${escapeHtml(job.state || "All India")}`,
     job.applyEnd ? `🗓 Last date: ${escapeHtml(job.applyEnd)}` : "",
     "",
-    `<a href="${jobUrl(job)}">Details dekhein</a>`,
+    `<a href="${jobUrl(job)}">View details</a>`,
   ]
     .filter(Boolean)
     .join("\n");
@@ -181,7 +181,7 @@ async function sendEmails(db, subscribers, allJobs) {
     const subject =
       jobs.length === 1
         ? `FollowExam: ${jobs[0].title.slice(0, 90)}`
-        : `FollowExam: ${jobs.length} nayi exam updates`;
+        : `FollowExam: ${jobs.length} new exam updates`;
 
     try {
       await transporter.sendMail({

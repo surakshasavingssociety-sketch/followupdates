@@ -277,16 +277,16 @@ export function isNoise(title = "") {
 
 export function makeSummary({ title, organization, category }) {
   const map = {
-    "Latest Jobs": "ke liye nayi recruitment update publish hui hai",
-    Results: "ka result update publish hua hai",
-    "Admit Card": "ka admit card update publish hua hai",
-    "Answer Key": "ki answer key update publish hui hai",
-    "Exam Date": "ki exam date/schedule update publish hui hai",
-    Admission: "ki admission update publish hui hai",
-    Syllabus: "ka syllabus update publish hua hai",
-    Scholarship: "ki scholarship update publish hui hai",
+    "Latest Jobs": "has published a new recruitment notification",
+    Results: "has published a result update",
+    "Admit Card": "has published an admit card update",
+    "Answer Key": "has published an answer key update",
+    "Exam Date": "has published an exam date or schedule update",
+    Admission: "has published an admission update",
+    Syllabus: "has published a syllabus update",
+    Scholarship: "has published a scholarship update",
   };
-  return `${organization} ${map[category] || "ki nayi update publish hui hai"}. Apply ya verification se pehle official notification zaroor check karein. FollowExam sirf verified source ka link aur structured summary deta hai.`;
+  return `${organization} ${map[category] || "has published a new update"}. Verify the official notification before applying or relying on the details. FollowExam links to the official source and provides a structured summary only.`;
 }
 
 export function sleep(ms) {
