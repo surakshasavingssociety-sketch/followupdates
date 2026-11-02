@@ -1,12 +1,29 @@
 {
-  "runAt": "2026-10-31T03:42:24.534Z",
-  "newItems": 19,
-  "totalPending": 104,
+  "runAt": "2026-11-02T03:31:50.932Z",
+  "newItems": 74,
+  "totalPending": 178,
   "cycleQueries": [
-    "Exam cycle: SSC CHSL (result)"
+    "Exam cycle: JEE Main (notification)",
+    "Exam cycle: KVS Recruitment (notification)",
+    "Exam cycle: LIC Assistant (exam)",
+    "Exam cycle: NEET PG (notification)",
+    "Exam cycle: NIACL AO (exam)",
+    "Exam cycle: NVS Recruitment (exam)",
+    "Exam cycle: RBI Assistant (exam)",
+    "Exam cycle: RRB ALP (exam)"
   ],
   "stateQueries": [
-    "State: Mizoram"
+    "State: Odisha",
+    "State: Punjab",
+    "State: Rajasthan",
+    "State: Sikkim",
+    "State: Tamil Nadu",
+    "State: Telangana"
   ],
-  "errors": []
+  "errors": [
+    {
+      "source": "HTML: UPSC",
+      "error": "fetch failed"
+    }
+  ]
 }
