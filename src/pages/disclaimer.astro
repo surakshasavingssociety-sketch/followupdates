@@ -2,12 +2,13 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { SITE } from "../lib/constants";
 
-const updated = "30 October 2026";
+const updated = "1 November 2026";
 ---
 
 <BaseLayout
   title="Disclaimer"
-  description="FollowExam disclaimer — ye site kisi government department se affiliated nahi hai. Apply se pehle official notification verify karein."
+  description="FollowExam is not affiliated with any government department. Verify the official notification before applying."
+  gated={false}
 >
   <section class="section-tight" style="padding-top:34px">
     <div class="container">
@@ -20,60 +21,58 @@ const updated = "30 October 2026";
         <p class="small muted">Last updated: {updated}</p>
 
         <div class="demo-warning" style="margin-bottom:20px">
-          <strong>Zaroori:</strong> FollowExam ek independent information portal hai. Ye kisi bhi government department,
-          commission, board ya recruitment agency se affiliated, endorsed ya authorized nahi hai.
+          <strong>Important:</strong> FollowExam is an independent information portal. It is not affiliated, endorsed or
+          authorised by any government department, commission, board or recruitment agency.
         </div>
 
-        <h2>Information ki accuracy</h2>
+        <h2>Accuracy of information</h2>
         <p>
-          Hum koshish karte hain ki har update official source se verify karke publish ho. Fir bhi dates, vacancy
-          count, fee, eligibility aur links me galti ho sakti hai, ya official notification baad me change ho sakti
-          hai. Isliye apply, payment ya download karne se pehle <strong>hamesha official website par verify karein</strong>.
+          We aim to publish every update from an official source. Even so, dates, vacancy counts, fees, eligibility and
+          links can contain errors, or the official notification can change later. Always
+          <strong>verify on the official website</strong> before you apply, pay a fee or download a document.
         </p>
 
-        <h2>Koi guarantee nahi</h2>
+        <h2>No guarantee</h2>
         <p>
-          FollowExam par di gayi information "as is" aur "as available" basis par hai. Hum kisi bhi job, admission,
-          result, rank ya selection ki guarantee nahi dete. Kisi bhi decision ka poora responsibility user ka hai.
+          Information on FollowExam is provided "as is" and "as available". We do not guarantee any job, admission,
+          result, rank or selection. Every decision you take is your own responsibility.
         </p>
 
         <h2>Official links</h2>
         <p>
-          Har post me official website ya notification PDF ka link diya jata hai. Apply, fee payment, admit card
-          download ya result check sirf official portal par hi karein. FollowExam kisi bhi payment ya application ko
-          process nahi karta.
+          Every post includes a link to the official website or notification PDF. Apply, pay fees, download admit cards
+          and check results only on the official portal. FollowExam does not process any payment or application.
         </p>
 
         <h2>Third-party content</h2>
         <p>
-          Site par kuch links external websites par le jaate hain. Un websites ke content, availability ya security ke
-          liye FollowExam responsible nahi hai. Unke apne terms aur privacy policies apply honge.
+          Some links take you to external websites. FollowExam is not responsible for their content, availability or
+          security. Their own terms and privacy policies apply.
         </p>
 
-        <h2>Copyright aur removal</h2>
+        <h2>Copyright and removal</h2>
         <p>
-          Hum doosri websites ka copyrighted content copy nahi karte. Hamare posts original summaries aur official
-          source links par based hote hain. Agar aapko lagta hai ki kisi entry me aapka copyrighted material use hua
-          hai, to <a href={`mailto:${SITE.email}`}>{SITE.email}</a> par likhein — valid request par hum content remove
-          ya correct kar denge.
+          We do not copy copyrighted content from other websites. Our posts contain original summaries and links to
+          official sources. If you believe an entry uses your copyrighted material, write to
+          <a href={`mailto:${SITE.email}`}>{SITE.email}</a> and we will remove or correct it after a valid request.
         </p>
 
-        <h2>External links policy</h2>
+        <h2>External link policy</h2>
         <p>
-          Sirf official government domains, public notification feeds aur verified recruitment portals ko prefer kiya
-          jata hai. Kisi bhi third-party paid service ya coaching material ko promote nahi kiya jata.
+          We prefer official government domains, public notification feeds and verified recruitment portals. We do not
+          promote third-party paid services or coaching material.
         </p>
 
         <h2>Liability</h2>
         <p>
-          FollowExam ya uske operators kisi bhi direct, indirect, incidental ya consequential loss ke liye liable nahi
-          hain jo is site ki information use karne se ho. Ye disclaimer Indian law ke under maximum permitted extent tak
-          apply hota hai.
+          FollowExam and its operators are not liable for any direct, indirect, incidental or consequential loss arising
+          from the use of this site or its information. This disclaimer applies to the maximum extent permitted under
+          Indian law.
         </p>
 
         <h2>Contact</h2>
         <p>
-          Disclaimer ya content se judi kisi bhi baat ke liye: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+          For any question about this disclaimer or our content: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
         </p>
       </article>
     </div>

@@ -15,6 +15,7 @@ const meta = CATEGORY_META[job.category] || {
 };
 const left = daysLeft(job.applyEnd);
 const newJob = isNew(job.postDate);
+const notificationUrl = job.notificationUrl || job.officialUrl;
 ---
 
 <article class:list={["job-card", { compact }]}>
@@ -44,10 +45,12 @@ const newJob = isNew(job.postDate);
   </div>
 
   <div class="card-foot">
-    <a class="link-arrow" href={`/jobs/${job.slug}/`}>View details →</a>
+    <span style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+      <a class="link-arrow" href={`/jobs/${job.slug}/`}>View details →</a>
+      <a class="link-arrow" href={notificationUrl} target="_blank" rel="noopener nofollow">Notification ↗</a>
+    </span>
     <span style="display:flex;gap:6px;align-items:center">
       {newJob && <span class="badge badge-green">New</span>}
-      {job.demo && <span class="badge badge-amber">Sample</span>}
       {left !== null && left >= 0 && (
         <span class:list={["deadline", { ok: left > 7 }]}>
           {left === 0 ? "Last day" : `${left}d left`}

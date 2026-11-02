@@ -1,0 +1,3323 @@
+{
+  "version": 1,
+  "updated": "2026-11-02",
+  "note": "Scheme details are indicative summaries. Amounts, income limits and deadlines change every year — always confirm on the official portal.",
+  "counts": {
+    "total": 54,
+    "central": 18,
+    "state": 36,
+    "states": 36
+  },
+  "scholarships": [
+    {
+      "id": "state-andaman-and-nicobar-islands",
+      "slug": "andaman-and-nicobar-islands-state-scholarship",
+      "name": "A&N Islands Post-Matric Scholarship",
+      "provider": "Andaman and Nicobar Islands Government",
+      "scope": "state",
+      "stateId": "andaman-and-nicobar-islands",
+      "stateName": "Andaman and Nicobar Islands",
+      "level": [
+        "Class 11–12",
+        "Undergraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee reimbursement and maintenance allowance",
+      "summary": "A&N Islands Post-Matric Scholarship is the flagship scholarship programme of the Andaman and Nicobar Islands government for students studying in Andaman and Nicobar Islands.",
+      "eligibility": [
+        "Domicile of Andaman and Nicobar Islands",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee reimbursement and maintenance allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Andaman and Nicobar Islands scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://www.andaman.gov.in/",
+      "officialUrl": "https://www.andaman.gov.in/",
+      "tags": [
+        "Andaman and Nicobar Islands",
+        "Islands"
+      ]
+    },
+    {
+      "id": "pragati-aicte-girls",
+      "slug": "aicte-pragati-scholarship-for-girls",
+      "name": "AICTE Pragati Scholarship for Girls",
+      "provider": "All India Council for Technical Education",
+      "scope": "central",
+      "stateId": null,
+      "stateName": null,
+      "level": [
+        "Diploma",
+        "Undergraduate"
+      ],
+      "categories": [
+        "Girls"
+      ],
+      "amount": "₹50,000 per year",
+      "summary": "Scholarship for girl students admitted to AICTE-approved technical diploma or degree programmes.",
+      "eligibility": [
+        "Girl student admitted to the first year of an AICTE-approved course",
+        "Family income below ₹8 lakh per year",
+        "Maximum two girls per family"
+      ],
+      "benefits": [
+        "₹50,000 per year"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Apply on the National Scholarship Portal under the AICTE scheme",
+        "Upload admission proof, income certificate and bank details",
+        "Institute verifies the application",
+        "Amount is transferred directly to the student"
+      ],
+      "cycleMonths": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "Usually October to December",
+      "portalUrl": "https://scholarships.gov.in/",
+      "officialUrl": "https://www.aicte-india.org/",
+      "tags": [
+        "All India Council for Technical Education",
+        "Girls"
+      ]
+    },
+    {
+      "id": "saksham-aicte",
+      "slug": "aicte-saksham-scholarship-for-students-with-disabilities",
+      "name": "AICTE Saksham Scholarship for Students with Disabilities",
+      "provider": "All India Council for Technical Education",
+      "scope": "central",
+      "stateId": null,
+      "stateName": null,
+      "level": [
+        "Diploma",
+        "Undergraduate"
+      ],
+      "categories": [
+        "PwD"
+      ],
+      "amount": "₹50,000 per year",
+      "summary": "Scholarship for students with disabilities pursuing AICTE-approved technical diploma or degree programmes.",
+      "eligibility": [
+        "Disability of 40% or more, certified by a competent authority",
+        "Admitted to an AICTE-approved institution",
+        "Family income below ₹8 lakh per year"
+      ],
+      "benefits": [
+        "₹50,000 per year"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Apply on NSP under the AICTE Saksham scheme",
+        "Upload disability certificate, admission proof and income certificate",
+        "Institute verifies and forwards the application",
+        "Amount is credited through DBT"
+      ],
+      "cycleMonths": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "Usually October to December",
+      "portalUrl": "https://scholarships.gov.in/",
+      "officialUrl": "https://www.aicte-india.org/",
+      "tags": [
+        "All India Council for Technical Education",
+        "PwD"
+      ]
+    },
+    {
+      "id": "state-arunachal-pradesh",
+      "slug": "arunachal-pradesh-state-scholarship",
+      "name": "Arunachal Pradesh Scholarship Scheme",
+      "provider": "Arunachal Pradesh Government",
+      "scope": "state",
+      "stateId": "arunachal-pradesh",
+      "stateName": "Arunachal Pradesh",
+      "level": [
+        "Class 9–12",
+        "Undergraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "State scholarship for SC/ST and meritorious students",
+      "summary": "Arunachal Pradesh Scholarship Scheme is the flagship scholarship programme of the Arunachal Pradesh government for students studying in Arunachal Pradesh.",
+      "eligibility": [
+        "Domicile of Arunachal Pradesh",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "State scholarship for SC/ST and meritorious students",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Arunachal Pradesh scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://arunachalpradesh.gov.in/",
+      "officialUrl": "https://arunachalpradesh.gov.in/",
+      "tags": [
+        "Arunachal Pradesh",
+        "North East"
+      ]
+    },
+    {
+      "id": "state-assam",
+      "slug": "assam-state-scholarship",
+      "name": "Assam Post-Matric Scholarship",
+      "provider": "Assam Government",
+      "scope": "state",
+      "stateId": "assam",
+      "stateName": "Assam",
+      "level": [
+        "Class 11–12",
+        "Undergraduate",
+        "Postgraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee reimbursement and maintenance allowance",
+      "summary": "Assam Post-Matric Scholarship is the flagship scholarship programme of the Assam government for students studying in Assam.",
+      "eligibility": [
+        "Domicile of Assam",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee reimbursement and maintenance allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Assam scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://scholarships.assam.gov.in/",
+      "officialUrl": "https://scholarships.assam.gov.in/",
+      "tags": [
+        "Assam",
+        "North East"
+      ]
+    },
+    {
+      "id": "begum-hazrat-mahal",
+      "slug": "begum-hazrat-mahal-national-scholarship-for-minority-girls",
+      "name": "Begum Hazrat Mahal National Scholarship for Minority Girls",
+      "provider": "Maulana Azad Education Foundation",
+      "scope": "central",
+      "stateId": null,
+      "stateName": null,
+      "level": [
+        "Class 9–12"
+      ],
+      "categories": [
+        "Minority",
+        "Girls"
+      ],
+      "amount": "Up to ₹6,000 per year",
+      "summary": "Scholarship for girl students from minority communities studying in Classes 9 to 12.",
+      "eligibility": [
+        "Girl student from a notified minority community",
+        "Studying in Class 9 to 12",
+        "Minimum 50% marks in the previous class",
+        "Family income below ₹2 lakh per year"
+      ],
+      "benefits": [
+        "Up to ₹6,000 per year"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Register on the MAEF scholarship portal",
+        "Upload marksheet, income certificate and community certificate",
+        "School verifies the application",
+        "Amount is transferred to the student's bank account"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "deadlineText": "Usually September to November",
+      "portalUrl": "https://maef.nic.in/",
+      "officialUrl": "https://www.minorityaffairs.gov.in/",
+      "tags": [
+        "Maulana Azad Education Foundation",
+        "Minority",
+        "Girls"
+      ]
+    },
+    {
+      "id": "state-bihar",
+      "slug": "bihar-state-scholarship",
+      "name": "Bihar Post-Matric Scholarship",
+      "provider": "Bihar Government",
+      "scope": "state",
+      "stateId": "bihar",
+      "stateName": "Bihar",
+      "level": [
+        "Class 11–12",
+        "Undergraduate",
+        "Postgraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee reimbursement and maintenance allowance",
+      "summary": "Bihar Post-Matric Scholarship is the flagship scholarship programme of the Bihar government for students studying in Bihar.",
+      "eligibility": [
+        "Domicile of Bihar",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee reimbursement and maintenance allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Bihar scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://pmsonline.bih.nic.in/",
+      "officialUrl": "https://pmsonline.bih.nic.in/",
+      "tags": [
+        "Bihar",
+        "East"
+      ]
+    },
+    {
+      "id": "csss-central-sector",
+      "slug": "central-sector-scheme-of-scholarship-for-college-and-university-students",
+      "name": "Central Sector Scheme of Scholarship for College and University Students",
+      "provider": "Ministry of Education",
+      "scope": "central",
+      "stateId": null,
+      "stateName": null,
+      "level": [
+        "Undergraduate",
+        "Postgraduate"
+      ],
+      "categories": [
+        "General",
+        "SC",
+        "ST",
+        "OBC",
+        "Minority"
+      ],
+      "amount": "₹12,000 per year for UG, ₹20,000 per year for PG",
+      "summary": "Merit scholarship for students in the top 20 percentile of their Class 12 board examination who are pursuing a regular degree.",
+      "eligibility": [
+        "Above the 80th percentile in the Class 12 board examination",
+        "Family income below ₹4.5 lakh per year",
+        "Pursuing a regular undergraduate or postgraduate course"
+      ],
+      "benefits": [
+        "₹12,000 per year for UG, ₹20,000 per year for PG"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Apply on the National Scholarship Portal after Class 12 results",
+        "Upload board marksheet, income certificate and bank details",
+        "Institution verifies the enrolment",
+        "Renewal requires passing each year with minimum marks"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "deadlineText": "Usually October to November",
+      "portalUrl": "https://scholarships.gov.in/",
+      "officialUrl": "https://www.education.gov.in/",
+      "tags": [
+        "Ministry of Education",
+        "General",
+        "SC",
+        "ST"
+      ]
+    },
+    {
+      "id": "state-chandigarh",
+      "slug": "chandigarh-state-scholarship",
+      "name": "Chandigarh Post-Matric Scholarship",
+      "provider": "Chandigarh Government",
+      "scope": "state",
+      "stateId": "chandigarh",
+      "stateName": "Chandigarh",
+      "level": [
+        "Class 11–12",
+        "Undergraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee reimbursement and maintenance allowance",
+      "summary": "Chandigarh Post-Matric Scholarship is the flagship scholarship programme of the Chandigarh government for students studying in Chandigarh.",
+      "eligibility": [
+        "Domicile of Chandigarh",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee reimbursement and maintenance allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Chandigarh scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://chandigarh.gov.in/",
+      "officialUrl": "https://chandigarh.gov.in/",
+      "tags": [
+        "Chandigarh",
+        "North"
+      ]
+    },
+    {
+      "id": "state-chhattisgarh",
+      "slug": "chhattisgarh-state-scholarship",
+      "name": "Chhattisgarh Post-Matric Scholarship",
+      "provider": "Chhattisgarh Government",
+      "scope": "state",
+      "stateId": "chhattisgarh",
+      "stateName": "Chhattisgarh",
+      "level": [
+        "Class 11–12",
+        "Undergraduate",
+        "Postgraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee reimbursement and maintenance allowance",
+      "summary": "Chhattisgarh Post-Matric Scholarship is the flagship scholarship programme of the Chhattisgarh government for students studying in Chhattisgarh.",
+      "eligibility": [
+        "Domicile of Chhattisgarh",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee reimbursement and maintenance allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Chhattisgarh scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://postmatric.cgstate.gov.in/",
+      "officialUrl": "https://postmatric.cgstate.gov.in/",
+      "tags": [
+        "Chhattisgarh",
+        "Central"
+      ]
+    },
+    {
+      "id": "state-delhi",
+      "slug": "delhi-state-scholarship",
+      "name": "Delhi Post-Matric Scholarship",
+      "provider": "Delhi Government",
+      "scope": "state",
+      "stateId": "delhi",
+      "stateName": "Delhi",
+      "level": [
+        "Class 11–12",
+        "Undergraduate",
+        "Postgraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee reimbursement and maintenance allowance",
+      "summary": "Delhi Post-Matric Scholarship is the flagship scholarship programme of the Delhi government for students studying in Delhi.",
+      "eligibility": [
+        "Domicile of Delhi",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee reimbursement and maintenance allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Delhi scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://edistrict.delhigovt.nic.in/",
+      "officialUrl": "https://edistrict.delhigovt.nic.in/",
+      "tags": [
+        "Delhi",
+        "North"
+      ]
+    },
+    {
+      "id": "state-dadra-and-nagar-haveli-and-daman-and-diu",
+      "slug": "dadra-and-nagar-haveli-and-daman-and-diu-state-scholarship",
+      "name": "DNH & DD Scholarship Scheme",
+      "provider": "Dadra and Nagar Haveli and Daman and Diu Government",
+      "scope": "state",
+      "stateId": "dadra-and-nagar-haveli-and-daman-and-diu",
+      "stateName": "Dadra and Nagar Haveli and Daman and Diu",
+      "level": [
+        "Class 11–12",
+        "Undergraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee reimbursement and maintenance allowance",
+      "summary": "DNH & DD Scholarship Scheme is the flagship scholarship programme of the Dadra and Nagar Haveli and Daman and Diu government for students studying in Dadra and Nagar Haveli and Daman and Diu.",
+      "eligibility": [
+        "Domicile of Dadra and Nagar Haveli and Daman and Diu",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee reimbursement and maintenance allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Dadra and Nagar Haveli and Daman and Diu scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://ddd.gov.in/",
+      "officialUrl": "https://ddd.gov.in/",
+      "tags": [
+        "Dadra and Nagar Haveli and Daman and Diu",
+        "West"
+      ]
+    },
+    {
+      "id": "state-goa",
+      "slug": "goa-state-scholarship",
+      "name": "Goa Scholarship Scheme",
+      "provider": "Goa Government",
+      "scope": "state",
+      "stateId": "goa",
+      "stateName": "Goa",
+      "level": [
+        "Class 11–12",
+        "Undergraduate",
+        "Postgraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Tuition support and maintenance allowance",
+      "summary": "Goa Scholarship Scheme is the flagship scholarship programme of the Goa government for students studying in Goa.",
+      "eligibility": [
+        "Domicile of Goa",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Tuition support and maintenance allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Goa scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://scholarships.goa.gov.in/",
+      "officialUrl": "https://scholarships.goa.gov.in/",
+      "tags": [
+        "Goa",
+        "West"
+      ]
+    },
+    {
+      "id": "state-gujarat",
+      "slug": "gujarat-state-scholarship",
+      "name": "Gujarat Digital Scholarship",
+      "provider": "Gujarat Government",
+      "scope": "state",
+      "stateId": "gujarat",
+      "stateName": "Gujarat",
+      "level": [
+        "Class 11–12",
+        "Undergraduate",
+        "Postgraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee assistance for SC/ST/OBC and EWS students",
+      "summary": "Gujarat Digital Scholarship is the flagship scholarship programme of the Gujarat government for students studying in Gujarat.",
+      "eligibility": [
+        "Domicile of Gujarat",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee assistance for SC/ST/OBC and EWS students",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Gujarat scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://www.digitalgujarat.gov.in/",
+      "officialUrl": "https://www.digitalgujarat.gov.in/",
+      "tags": [
+        "Gujarat",
+        "West"
+      ]
+    },
+    {
+      "id": "state-haryana",
+      "slug": "haryana-state-scholarship",
+      "name": "Haryana Higher Education Scholarship",
+      "provider": "Haryana Government",
+      "scope": "state",
+      "stateId": "haryana",
+      "stateName": "Haryana",
+      "level": [
+        "Undergraduate",
+        "Postgraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Tuition fee and maintenance support",
+      "summary": "Haryana Higher Education Scholarship is the flagship scholarship programme of the Haryana government for students studying in Haryana.",
+      "eligibility": [
+        "Domicile of Haryana",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Tuition fee and maintenance support",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Haryana scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://harchhatravratti.highereduhry.ac.in/",
+      "officialUrl": "https://harchhatravratti.highereduhry.ac.in/",
+      "tags": [
+        "Haryana",
+        "North"
+      ]
+    },
+    {
+      "id": "state-himachal-pradesh",
+      "slug": "himachal-pradesh-state-scholarship",
+      "name": "HP ePass Scholarship",
+      "provider": "Himachal Pradesh Government",
+      "scope": "state",
+      "stateId": "himachal-pradesh",
+      "stateName": "Himachal Pradesh",
+      "level": [
+        "Class 11–12",
+        "Undergraduate",
+        "Postgraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee reimbursement and maintenance allowance",
+      "summary": "HP ePass Scholarship is the flagship scholarship programme of the Himachal Pradesh government for students studying in Himachal Pradesh.",
+      "eligibility": [
+        "Domicile of Himachal Pradesh",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee reimbursement and maintenance allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Himachal Pradesh scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://hpepass.cgg.gov.in/",
+      "officialUrl": "https://hpepass.cgg.gov.in/",
+      "tags": [
+        "Himachal Pradesh",
+        "North"
+      ]
+    },
+    {
+      "id": "inspire-she",
+      "slug": "inspire-scholarship-for-higher-education-she",
+      "name": "INSPIRE Scholarship for Higher Education (SHE)",
+      "provider": "Department of Science and Technology",
+      "scope": "central",
+      "stateId": null,
+      "stateName": null,
+      "level": [
+        "Undergraduate",
+        "Postgraduate"
+      ],
+      "categories": [
+        "General",
+        "SC",
+        "ST",
+        "OBC"
+      ],
+      "amount": "₹80,000 per year for five years",
+      "summary": "Scholarship for top performers in Class 12 science who choose a career in basic and natural sciences.",
+      "eligibility": [
+        "Top 1% in the Class 12 board examination, or a top rank in JEE Main / NEET",
+        "Pursuing BSc, BS or integrated MSc in natural or basic sciences",
+        "Age between 17 and 22 years"
+      ],
+      "benefits": [
+        "₹80,000 per year for five years"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Apply through the online INSPIRE portal when the call opens",
+        "Upload Class 12 marksheet and admission proof",
+        "Shortlisting is based on board and entrance exam performance",
+        "Scholarship continues with annual progress reports"
+      ],
+      "cycleMonths": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "deadlineText": "Usually July to September",
+      "portalUrl": "https://www.online-inspire.gov.in/",
+      "officialUrl": "https://www.dst.gov.in/",
+      "tags": [
+        "Department of Science and Technology",
+        "General",
+        "SC",
+        "ST"
+      ]
+    },
+    {
+      "id": "state-jammu-and-kashmir",
+      "slug": "jammu-and-kashmir-state-scholarship",
+      "name": "J&K Post-Matric Scholarship",
+      "provider": "Jammu and Kashmir Government",
+      "scope": "state",
+      "stateId": "jammu-and-kashmir",
+      "stateName": "Jammu and Kashmir",
+      "level": [
+        "Class 11–12",
+        "Undergraduate",
+        "Postgraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee reimbursement and maintenance allowance",
+      "summary": "J&K Post-Matric Scholarship is the flagship scholarship programme of the Jammu and Kashmir government for students studying in Jammu and Kashmir.",
+      "eligibility": [
+        "Domicile of Jammu and Kashmir",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee reimbursement and maintenance allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Jammu and Kashmir scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://jk.gov.in/",
+      "officialUrl": "https://jk.gov.in/",
+      "tags": [
+        "Jammu and Kashmir",
+        "North"
+      ]
+    },
+    {
+      "id": "state-andhra-pradesh",
+      "slug": "andhra-pradesh-state-scholarship",
+      "name": "Jagananna Vidya Deevena & Vasathi Deevena",
+      "provider": "Andhra Pradesh Government",
+      "scope": "state",
+      "stateId": "andhra-pradesh",
+      "stateName": "Andhra Pradesh",
+      "level": [
+        "Undergraduate",
+        "Diploma"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Full fee reimbursement plus hostel allowance",
+      "summary": "Jagananna Vidya Deevena & Vasathi Deevena is the flagship scholarship programme of the Andhra Pradesh government for students studying in Andhra Pradesh.",
+      "eligibility": [
+        "Domicile of Andhra Pradesh",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Full fee reimbursement plus hostel allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Andhra Pradesh scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://jnanabhumi.ap.gov.in/",
+      "officialUrl": "https://jnanabhumi.ap.gov.in/",
+      "tags": [
+        "Andhra Pradesh",
+        "South"
+      ]
+    },
+    {
+      "id": "state-jharkhand",
+      "slug": "jharkhand-state-scholarship",
+      "name": "Jharkhand e-Kalyan Post-Matric Scholarship",
+      "provider": "Jharkhand Government",
+      "scope": "state",
+      "stateId": "jharkhand",
+      "stateName": "Jharkhand",
+      "level": [
+        "Class 11–12",
+        "Undergraduate",
+        "Postgraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee reimbursement and maintenance allowance",
+      "summary": "Jharkhand e-Kalyan Post-Matric Scholarship is the flagship scholarship programme of the Jharkhand government for students studying in Jharkhand.",
+      "eligibility": [
+        "Domicile of Jharkhand",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee reimbursement and maintenance allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Jharkhand scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://ejharkhand.gov.in/",
+      "officialUrl": "https://ejharkhand.gov.in/",
+      "tags": [
+        "Jharkhand",
+        "East"
+      ]
+    },
+    {
+      "id": "state-karnataka",
+      "slug": "karnataka-state-scholarship",
+      "name": "Karnataka State Scholarship Portal (SSP)",
+      "provider": "Karnataka Government",
+      "scope": "state",
+      "stateId": "karnataka",
+      "stateName": "Karnataka",
+      "level": [
+        "Class 11–12",
+        "Undergraduate",
+        "Postgraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee reimbursement and maintenance allowance",
+      "summary": "Karnataka State Scholarship Portal (SSP) is the flagship scholarship programme of the Karnataka government for students studying in Karnataka.",
+      "eligibility": [
+        "Domicile of Karnataka",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee reimbursement and maintenance allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Karnataka scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://ssp.postmatric.karnataka.gov.in/",
+      "officialUrl": "https://ssp.postmatric.karnataka.gov.in/",
+      "tags": [
+        "Karnataka",
+        "South"
+      ]
+    },
+    {
+      "id": "state-kerala",
+      "slug": "kerala-state-scholarship",
+      "name": "Kerala DCE Scholarship",
+      "provider": "Kerala Government",
+      "scope": "state",
+      "stateId": "kerala",
+      "stateName": "Kerala",
+      "level": [
+        "Class 11–12",
+        "Undergraduate",
+        "Postgraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee support and lump-sum grant",
+      "summary": "Kerala DCE Scholarship is the flagship scholarship programme of the Kerala government for students studying in Kerala.",
+      "eligibility": [
+        "Domicile of Kerala",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee support and lump-sum grant",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Kerala scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://www.dcescholarship.kerala.gov.in/",
+      "officialUrl": "https://www.dcescholarship.kerala.gov.in/",
+      "tags": [
+        "Kerala",
+        "South"
+      ]
+    },
+    {
+      "id": "state-ladakh",
+      "slug": "ladakh-state-scholarship",
+      "name": "Ladakh Post-Matric Scholarship",
+      "provider": "Ladakh Government",
+      "scope": "state",
+      "stateId": "ladakh",
+      "stateName": "Ladakh",
+      "level": [
+        "Class 11–12",
+        "Undergraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee reimbursement and maintenance allowance",
+      "summary": "Ladakh Post-Matric Scholarship is the flagship scholarship programme of the Ladakh government for students studying in Ladakh.",
+      "eligibility": [
+        "Domicile of Ladakh",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee reimbursement and maintenance allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Ladakh scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://ladakh.gov.in/",
+      "officialUrl": "https://ladakh.gov.in/",
+      "tags": [
+        "Ladakh",
+        "North"
+      ]
+    },
+    {
+      "id": "state-lakshadweep",
+      "slug": "lakshadweep-state-scholarship",
+      "name": "Lakshadweep Scholarship Scheme",
+      "provider": "Lakshadweep Government",
+      "scope": "state",
+      "stateId": "lakshadweep",
+      "stateName": "Lakshadweep",
+      "level": [
+        "Class 11–12",
+        "Undergraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee reimbursement and maintenance allowance",
+      "summary": "Lakshadweep Scholarship Scheme is the flagship scholarship programme of the Lakshadweep government for students studying in Lakshadweep.",
+      "eligibility": [
+        "Domicile of Lakshadweep",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee reimbursement and maintenance allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Lakshadweep scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://lakshadweep.gov.in/",
+      "officialUrl": "https://lakshadweep.gov.in/",
+      "tags": [
+        "Lakshadweep",
+        "Islands"
+      ]
+    },
+    {
+      "id": "state-maharashtra",
+      "slug": "maharashtra-state-scholarship",
+      "name": "MahaDBT Scholarship",
+      "provider": "Maharashtra Government",
+      "scope": "state",
+      "stateId": "maharashtra",
+      "stateName": "Maharashtra",
+      "level": [
+        "Class 11–12",
+        "Undergraduate",
+        "Postgraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee reimbursement and maintenance allowance",
+      "summary": "MahaDBT Scholarship is the flagship scholarship programme of the Maharashtra government for students studying in Maharashtra.",
+      "eligibility": [
+        "Domicile of Maharashtra",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee reimbursement and maintenance allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Maharashtra scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://mahadbt.maharashtra.gov.in/",
+      "officialUrl": "https://mahadbt.maharashtra.gov.in/",
+      "tags": [
+        "Maharashtra",
+        "West"
+      ]
+    },
+    {
+      "id": "state-manipur",
+      "slug": "manipur-state-scholarship",
+      "name": "Manipur Post-Matric Scholarship",
+      "provider": "Manipur Government",
+      "scope": "state",
+      "stateId": "manipur",
+      "stateName": "Manipur",
+      "level": [
+        "Class 11–12",
+        "Undergraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee reimbursement and maintenance allowance",
+      "summary": "Manipur Post-Matric Scholarship is the flagship scholarship programme of the Manipur government for students studying in Manipur.",
+      "eligibility": [
+        "Domicile of Manipur",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee reimbursement and maintenance allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Manipur scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://manipur.gov.in/",
+      "officialUrl": "https://manipur.gov.in/",
+      "tags": [
+        "Manipur",
+        "North East"
+      ]
+    },
+    {
+      "id": "maulana-azad-fellowship",
+      "slug": "maulana-azad-national-fellowship-for-minority-students",
+      "name": "Maulana Azad National Fellowship for Minority Students",
+      "provider": "Ministry of Minority Affairs",
+      "scope": "central",
+      "stateId": null,
+      "stateName": null,
+      "level": [
+        "Research (MPhil/PhD)"
+      ],
+      "categories": [
+        "Minority"
+      ],
+      "amount": "Fellowship and contingency grant as per UGC rates",
+      "summary": "Fellowship for students from minority communities pursuing MPhil or PhD.",
+      "eligibility": [
+        "Student from a notified minority community",
+        "Registered for MPhil or PhD",
+        "Qualified UGC-NET or CSIR-NET",
+        "Family income within the prescribed limit"
+      ],
+      "benefits": [
+        "Fellowship and contingency grant as per UGC rates"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Apply through the UGC portal during the fellowship window",
+        "Upload community certificate, NET scorecard and university registration",
+        "Merit-based selection",
+        "Fellowship is disbursed through the university"
+      ],
+      "cycleMonths": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "deadlineText": "Usually aligned with the UGC-NET cycle",
+      "portalUrl": "https://www.ugc.gov.in/",
+      "officialUrl": "https://www.minorityaffairs.gov.in/",
+      "tags": [
+        "Ministry of Minority Affairs",
+        "Minority"
+      ]
+    },
+    {
+      "id": "state-meghalaya",
+      "slug": "meghalaya-state-scholarship",
+      "name": "Meghalaya Post-Matric Scholarship",
+      "provider": "Meghalaya Government",
+      "scope": "state",
+      "stateId": "meghalaya",
+      "stateName": "Meghalaya",
+      "level": [
+        "Class 11–12",
+        "Undergraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee reimbursement and maintenance allowance",
+      "summary": "Meghalaya Post-Matric Scholarship is the flagship scholarship programme of the Meghalaya government for students studying in Meghalaya.",
+      "eligibility": [
+        "Domicile of Meghalaya",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee reimbursement and maintenance allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Meghalaya scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://meghalaya.gov.in/",
+      "officialUrl": "https://meghalaya.gov.in/",
+      "tags": [
+        "Meghalaya",
+        "North East"
+      ]
+    },
+    {
+      "id": "state-mizoram",
+      "slug": "mizoram-state-scholarship",
+      "name": "Mizoram Post-Matric Scholarship",
+      "provider": "Mizoram Government",
+      "scope": "state",
+      "stateId": "mizoram",
+      "stateName": "Mizoram",
+      "level": [
+        "Class 11–12",
+        "Undergraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee reimbursement and maintenance allowance",
+      "summary": "Mizoram Post-Matric Scholarship is the flagship scholarship programme of the Mizoram government for students studying in Mizoram.",
+      "eligibility": [
+        "Domicile of Mizoram",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee reimbursement and maintenance allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Mizoram scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://mizoram.gov.in/",
+      "officialUrl": "https://mizoram.gov.in/",
+      "tags": [
+        "Mizoram",
+        "North East"
+      ]
+    },
+    {
+      "id": "state-madhya-pradesh",
+      "slug": "madhya-pradesh-state-scholarship",
+      "name": "MP Post-Matric Scholarship",
+      "provider": "Madhya Pradesh Government",
+      "scope": "state",
+      "stateId": "madhya-pradesh",
+      "stateName": "Madhya Pradesh",
+      "level": [
+        "Class 11–12",
+        "Undergraduate",
+        "Postgraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee reimbursement and maintenance allowance",
+      "summary": "MP Post-Matric Scholarship is the flagship scholarship programme of the Madhya Pradesh government for students studying in Madhya Pradesh.",
+      "eligibility": [
+        "Domicile of Madhya Pradesh",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee reimbursement and maintenance allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Madhya Pradesh scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://scholarshipportal.mp.nic.in/",
+      "officialUrl": "https://scholarshipportal.mp.nic.in/",
+      "tags": [
+        "Madhya Pradesh",
+        "Central"
+      ]
+    },
+    {
+      "id": "state-nagaland",
+      "slug": "nagaland-state-scholarship",
+      "name": "Nagaland Post-Matric Scholarship",
+      "provider": "Nagaland Government",
+      "scope": "state",
+      "stateId": "nagaland",
+      "stateName": "Nagaland",
+      "level": [
+        "Class 11–12",
+        "Undergraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee reimbursement and maintenance allowance",
+      "summary": "Nagaland Post-Matric Scholarship is the flagship scholarship programme of the Nagaland government for students studying in Nagaland.",
+      "eligibility": [
+        "Domicile of Nagaland",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee reimbursement and maintenance allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Nagaland scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://nagaland.gov.in/",
+      "officialUrl": "https://nagaland.gov.in/",
+      "tags": [
+        "Nagaland",
+        "North East"
+      ]
+    },
+    {
+      "id": "national-fellowship-sc",
+      "slug": "national-fellowship-for-sc-students",
+      "name": "National Fellowship for SC Students",
+      "provider": "Ministry of Social Justice and Empowerment",
+      "scope": "central",
+      "stateId": null,
+      "stateName": null,
+      "level": [
+        "Research (MPhil/PhD)"
+      ],
+      "categories": [
+        "SC"
+      ],
+      "amount": "Fellowship and contingency grant as per UGC rates",
+      "summary": "Fellowship for SC students pursuing MPhil or PhD in a recognised university.",
+      "eligibility": [
+        "Scheduled Caste candidate",
+        "Registered for MPhil or PhD",
+        "Qualified UGC-NET or CSIR-NET",
+        "Not receiving any other fellowship"
+      ],
+      "benefits": [
+        "Fellowship and contingency grant as per UGC rates"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Apply through the UGC fellowship portal when the call opens",
+        "Upload caste certificate, NET scorecard and registration proof",
+        "Selection is based on merit and available slots",
+        "Fellowship is released through the university"
+      ],
+      "cycleMonths": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "deadlineText": "Usually aligned with the UGC-NET cycle",
+      "portalUrl": "https://www.ugc.gov.in/",
+      "officialUrl": "https://socialjustice.gov.in/",
+      "tags": [
+        "Ministry of Social Justice and Empowerment",
+        "SC"
+      ]
+    },
+    {
+      "id": "nmms",
+      "slug": "national-means-cum-merit-scholarship-nmms",
+      "name": "National Means-cum-Merit Scholarship (NMMS)",
+      "provider": "Ministry of Education",
+      "scope": "central",
+      "stateId": null,
+      "stateName": null,
+      "level": [
+        "Class 9–12"
+      ],
+      "categories": [
+        "General",
+        "SC",
+        "ST",
+        "OBC"
+      ],
+      "amount": "₹12,000 per year",
+      "summary": "Scholarship for meritorious students from low-income families to continue secondary education after Class 8.",
+      "eligibility": [
+        "Studying in Class 8 and promoted to Class 9",
+        "Family income below the prescribed limit",
+        "Qualify the state-level NMMS examination"
+      ],
+      "benefits": [
+        "₹12,000 per year"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Apply through the state education department when the NMMS notification opens",
+        "Appear for the mental ability and scholastic aptitude test",
+        "Selected students apply on NSP",
+        "Renewal depends on marks and attendance"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "deadlineText": "State examination usually between August and November",
+      "portalUrl": "https://scholarships.gov.in/",
+      "officialUrl": "https://www.education.gov.in/",
+      "tags": [
+        "Ministry of Education",
+        "General",
+        "SC",
+        "ST"
+      ]
+    },
+    {
+      "id": "nsp-national-scholarship-portal",
+      "slug": "national-scholarship-portal-nsp",
+      "name": "National Scholarship Portal (NSP)",
+      "provider": "Ministry of Electronics and Information Technology",
+      "scope": "central",
+      "stateId": null,
+      "stateName": null,
+      "level": [
+        "Class 1–12",
+        "Undergraduate",
+        "Postgraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General",
+        "Girls",
+        "PwD"
+      ],
+      "amount": "Varies by scheme",
+      "summary": "Single window for most centrally sponsored and state scholarship schemes. Students register once and apply to every scheme they are eligible for.",
+      "eligibility": [
+        "Indian citizen studying in a recognised institution",
+        "Family income within the limit set by the individual scheme",
+        "Aadhaar-linked bank account in the student's own name"
+      ],
+      "benefits": [
+        "Varies by scheme"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Register on the National Scholarship Portal with Aadhaar and mobile number",
+        "Complete the student profile and upload documents",
+        "Select every scheme you are eligible for and submit",
+        "Track institute verification and disbursal status in the dashboard"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "deadlineText": "Most schemes close between October and December",
+      "portalUrl": "https://scholarships.gov.in/",
+      "officialUrl": "https://scholarships.gov.in/",
+      "tags": [
+        "Ministry of Electronics and Information Technology",
+        "SC",
+        "ST",
+        "OBC"
+      ]
+    },
+    {
+      "id": "state-odisha",
+      "slug": "odisha-state-scholarship",
+      "name": "Odisha State Scholarship Portal",
+      "provider": "Odisha Government",
+      "scope": "state",
+      "stateId": "odisha",
+      "stateName": "Odisha",
+      "level": [
+        "Class 11–12",
+        "Undergraduate",
+        "Postgraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee reimbursement and maintenance allowance",
+      "summary": "Odisha State Scholarship Portal is the flagship scholarship programme of the Odisha government for students studying in Odisha.",
+      "eligibility": [
+        "Domicile of Odisha",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee reimbursement and maintenance allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Odisha scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://scholarship.odisha.gov.in/",
+      "officialUrl": "https://scholarship.odisha.gov.in/",
+      "tags": [
+        "Odisha",
+        "East"
+      ]
+    },
+    {
+      "id": "padho-pardesh",
+      "slug": "padho-pardesh-interest-subsidy-for-minority-students",
+      "name": "Padho Pardesh Interest Subsidy for Minority Students",
+      "provider": "Ministry of Minority Affairs",
+      "scope": "central",
+      "stateId": null,
+      "stateName": null,
+      "level": [
+        "Postgraduate"
+      ],
+      "categories": [
+        "Minority"
+      ],
+      "amount": "Interest subsidy on education loans for overseas study",
+      "summary": "Interest subsidy on education loans taken for postgraduate studies abroad by students from minority communities.",
+      "eligibility": [
+        "Student from a notified minority community",
+        "Admitted to a postgraduate course abroad",
+        "Education loan from a scheduled bank",
+        "Family income below ₹6 lakh per year"
+      ],
+      "benefits": [
+        "Interest subsidy on education loans for overseas study"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Apply through the bank that sanctioned the education loan",
+        "Submit community and income certificates",
+        "Ministry approves the subsidy for the loan tenure",
+        "Interest is credited to the loan account"
+      ],
+      "cycleMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "Open through the year, processed with the loan",
+      "portalUrl": "https://www.minorityaffairs.gov.in/",
+      "officialUrl": "https://www.minorityaffairs.gov.in/",
+      "tags": [
+        "Ministry of Minority Affairs",
+        "Minority"
+      ]
+    },
+    {
+      "id": "pm-yasasvi",
+      "slug": "pm-young-achievers-scholarship-award-scheme-pm-yasasvi",
+      "name": "PM Young Achievers Scholarship Award Scheme (PM YASASVI)",
+      "provider": "Ministry of Social Justice and Empowerment",
+      "scope": "central",
+      "stateId": null,
+      "stateName": null,
+      "level": [
+        "Class 9",
+        "Class 11"
+      ],
+      "categories": [
+        "OBC",
+        "EBC",
+        "DNT"
+      ],
+      "amount": "Annual scholarship up to ₹1,25,000 for top-ranked students",
+      "summary": "Merit-based scholarship for OBC, EBC and DNT students entering Class 9 and Class 11 in top schools, awarded through an entrance test.",
+      "eligibility": [
+        "OBC, EBC or DNT student",
+        "Studying in Class 9 or Class 11",
+        "Family income below ₹2.5 lakh per year",
+        "Qualify the YASASVI entrance test"
+      ],
+      "benefits": [
+        "Annual scholarship up to ₹1,25,000 for top-ranked students"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Register for the YASASVI entrance test on the NTA portal",
+        "Appear for the test at the allotted centre",
+        "Shortlisted students apply on NSP with documents",
+        "Scholarship continues subject to academic performance"
+      ],
+      "cycleMonths": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "deadlineText": "Entrance test registration usually June to August",
+      "portalUrl": "https://yet.nta.ac.in/",
+      "officialUrl": "https://socialjustice.gov.in/",
+      "tags": [
+        "Ministry of Social Justice and Empowerment",
+        "OBC",
+        "EBC",
+        "DNT"
+      ]
+    },
+    {
+      "id": "post-matric-minority",
+      "slug": "post-matric-scholarship-for-minority-students",
+      "name": "Post-Matric Scholarship for Minority Students",
+      "provider": "Ministry of Minority Affairs",
+      "scope": "central",
+      "stateId": null,
+      "stateName": null,
+      "level": [
+        "Class 11–12",
+        "Undergraduate",
+        "Postgraduate"
+      ],
+      "categories": [
+        "Minority"
+      ],
+      "amount": "Course fee reimbursement and maintenance allowance",
+      "summary": "Support for students from minority communities pursuing education after Class 10.",
+      "eligibility": [
+        "Student from a notified minority community",
+        "Passed Class 10 and enrolled in a post-matric course",
+        "Family income below ₹2 lakh per year",
+        "Minimum 50% marks in the previous examination"
+      ],
+      "benefits": [
+        "Course fee reimbursement and maintenance allowance"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Apply on the National Scholarship Portal",
+        "Upload community certificate, income certificate and marksheets",
+        "Institution verification followed by state approval",
+        "Amount is credited via DBT"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "deadlineText": "Usually October to November",
+      "portalUrl": "https://scholarships.gov.in/",
+      "officialUrl": "https://www.minorityaffairs.gov.in/",
+      "tags": [
+        "Ministry of Minority Affairs",
+        "Minority"
+      ]
+    },
+    {
+      "id": "post-matric-obc",
+      "slug": "post-matric-scholarship-for-obc-students",
+      "name": "Post-Matric Scholarship for OBC Students",
+      "provider": "Ministry of Social Justice and Empowerment",
+      "scope": "central",
+      "stateId": null,
+      "stateName": null,
+      "level": [
+        "Class 11–12",
+        "Undergraduate",
+        "Postgraduate"
+      ],
+      "categories": [
+        "OBC"
+      ],
+      "amount": "Fee reimbursement and maintenance allowance",
+      "summary": "Financial support for OBC students continuing education after Class 10 in recognised institutions.",
+      "eligibility": [
+        "OBC student who has completed Class 10",
+        "Enrolled in a recognised post-matric course",
+        "Family income below the scheme ceiling"
+      ],
+      "benefits": [
+        "Fee reimbursement and maintenance allowance"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Apply on the National Scholarship Portal",
+        "Attach OBC certificate and income certificate",
+        "Institution and state verify the application",
+        "Amount is credited via direct benefit transfer"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "deadlineText": "Usually October to November",
+      "portalUrl": "https://scholarships.gov.in/",
+      "officialUrl": "https://socialjustice.gov.in/",
+      "tags": [
+        "Ministry of Social Justice and Empowerment",
+        "OBC"
+      ]
+    },
+    {
+      "id": "post-matric-sc",
+      "slug": "post-matric-scholarship-for-sc-students",
+      "name": "Post-Matric Scholarship for SC Students",
+      "provider": "Ministry of Social Justice and Empowerment",
+      "scope": "central",
+      "stateId": null,
+      "stateName": null,
+      "level": [
+        "Class 11–12",
+        "Undergraduate",
+        "Postgraduate",
+        "Diploma"
+      ],
+      "categories": [
+        "SC"
+      ],
+      "amount": "Maintenance allowance, non-refundable fees and study tour charges",
+      "summary": "The largest centrally sponsored scholarship for SC students pursuing education after Class 10, covering fees and monthly maintenance.",
+      "eligibility": [
+        "Scheduled Caste student who has passed Class 10",
+        "Enrolled in a recognised post-matric course",
+        "Family income within the prescribed limit"
+      ],
+      "benefits": [
+        "Maintenance allowance, non-refundable fees and study tour charges"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Register on NSP and select the Post-Matric SC scheme",
+        "Upload caste, income and institution certificates",
+        "Institution verifies, then the state department approves",
+        "Scholarship is disbursed through DBT"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-wise, generally August to December",
+      "portalUrl": "https://scholarships.gov.in/",
+      "officialUrl": "https://socialjustice.gov.in/",
+      "tags": [
+        "Ministry of Social Justice and Empowerment",
+        "SC"
+      ]
+    },
+    {
+      "id": "post-matric-disabilities",
+      "slug": "post-matric-scholarship-for-students-with-disabilities",
+      "name": "Post-Matric Scholarship for Students with Disabilities",
+      "provider": "Department of Empowerment of Persons with Disabilities",
+      "scope": "central",
+      "stateId": null,
+      "stateName": null,
+      "level": [
+        "Class 11–12",
+        "Undergraduate",
+        "Postgraduate"
+      ],
+      "categories": [
+        "PwD"
+      ],
+      "amount": "Maintenance allowance, book grant and fee reimbursement",
+      "summary": "Scholarship for students with disabilities studying after Class 10, including readers' allowance for visually impaired students.",
+      "eligibility": [
+        "Disability of 40% or more",
+        "Studying in Class 11 or above in a recognised institution",
+        "Family income within the prescribed limit"
+      ],
+      "benefits": [
+        "Maintenance allowance, book grant and fee reimbursement"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Apply on the National Scholarship Portal",
+        "Upload disability certificate, income certificate and admission proof",
+        "Institution verifies the enrolment",
+        "Amount is credited to the student's bank account"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "deadlineText": "Usually October to November",
+      "portalUrl": "https://scholarships.gov.in/",
+      "officialUrl": "https://disabilityaffairs.gov.in/",
+      "tags": [
+        "Department of Empowerment of Persons with Disabilities",
+        "PwD"
+      ]
+    },
+    {
+      "id": "pre-matric-obc-ebc",
+      "slug": "pre-matric-scholarship-for-obc-ebc-students",
+      "name": "Pre-Matric Scholarship for OBC/EBC Students",
+      "provider": "Ministry of Social Justice and Empowerment",
+      "scope": "central",
+      "stateId": null,
+      "stateName": null,
+      "level": [
+        "Class 1–10"
+      ],
+      "categories": [
+        "OBC",
+        "EBC"
+      ],
+      "amount": "Annual ad-hoc grant and maintenance allowance",
+      "summary": "School-level support for OBC and EBC students to reduce dropout rates before Class 10.",
+      "eligibility": [
+        "OBC or EBC student in a recognised school",
+        "Family income within the scheme limit",
+        "Regular attendance in the current academic year"
+      ],
+      "benefits": [
+        "Annual ad-hoc grant and maintenance allowance"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Register on NSP",
+        "Fill the school and bank details",
+        "Submit caste and income certificates",
+        "School verification completes the application"
+      ],
+      "cycleMonths": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "deadlineText": "Usually September to October",
+      "portalUrl": "https://scholarships.gov.in/",
+      "officialUrl": "https://socialjustice.gov.in/",
+      "tags": [
+        "Ministry of Social Justice and Empowerment",
+        "OBC",
+        "EBC"
+      ]
+    },
+    {
+      "id": "pre-matric-sc-st",
+      "slug": "pre-matric-scholarship-for-sc-st-students",
+      "name": "Pre-Matric Scholarship for SC/ST Students",
+      "provider": "Ministry of Social Justice and Empowerment",
+      "scope": "central",
+      "stateId": null,
+      "stateName": null,
+      "level": [
+        "Class 9–10"
+      ],
+      "categories": [
+        "SC",
+        "ST"
+      ],
+      "amount": "Monthly maintenance allowance plus books and stationery grant",
+      "summary": "Support for SC and ST students studying in Classes 9 and 10 so that they continue school instead of dropping out.",
+      "eligibility": [
+        "Student belongs to a Scheduled Caste or Scheduled Tribe",
+        "Studying in Class 9 or 10 in a recognised school",
+        "Family income within the scheme ceiling"
+      ],
+      "benefits": [
+        "Monthly maintenance allowance plus books and stationery grant"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Apply through the National Scholarship Portal",
+        "Upload caste certificate, income certificate and bank details",
+        "School verifies the application online",
+        "Amount is credited directly to the student's bank account"
+      ],
+      "cycleMonths": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "deadlineText": "Usually closes in October",
+      "portalUrl": "https://scholarships.gov.in/",
+      "officialUrl": "https://socialjustice.gov.in/",
+      "tags": [
+        "Ministry of Social Justice and Empowerment",
+        "SC",
+        "ST"
+      ]
+    },
+    {
+      "id": "state-puducherry",
+      "slug": "puducherry-state-scholarship",
+      "name": "Puducherry Post-Matric Scholarship",
+      "provider": "Puducherry Government",
+      "scope": "state",
+      "stateId": "puducherry",
+      "stateName": "Puducherry",
+      "level": [
+        "Class 11–12",
+        "Undergraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee reimbursement and maintenance allowance",
+      "summary": "Puducherry Post-Matric Scholarship is the flagship scholarship programme of the Puducherry government for students studying in Puducherry.",
+      "eligibility": [
+        "Domicile of Puducherry",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee reimbursement and maintenance allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Puducherry scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://www.py.gov.in/",
+      "officialUrl": "https://www.py.gov.in/",
+      "tags": [
+        "Puducherry",
+        "South"
+      ]
+    },
+    {
+      "id": "state-punjab",
+      "slug": "punjab-state-scholarship",
+      "name": "Punjab Post-Matric Scholarship",
+      "provider": "Punjab Government",
+      "scope": "state",
+      "stateId": "punjab",
+      "stateName": "Punjab",
+      "level": [
+        "Class 11–12",
+        "Undergraduate",
+        "Postgraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee reimbursement and maintenance allowance",
+      "summary": "Punjab Post-Matric Scholarship is the flagship scholarship programme of the Punjab government for students studying in Punjab.",
+      "eligibility": [
+        "Domicile of Punjab",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee reimbursement and maintenance allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Punjab scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://punjabscholarships.gov.in/",
+      "officialUrl": "https://punjabscholarships.gov.in/",
+      "tags": [
+        "Punjab",
+        "North"
+      ]
+    },
+    {
+      "id": "state-rajasthan",
+      "slug": "rajasthan-state-scholarship",
+      "name": "Rajasthan Social Justice Scholarship",
+      "provider": "Rajasthan Government",
+      "scope": "state",
+      "stateId": "rajasthan",
+      "stateName": "Rajasthan",
+      "level": [
+        "Class 11–12",
+        "Undergraduate",
+        "Postgraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee reimbursement and maintenance allowance",
+      "summary": "Rajasthan Social Justice Scholarship is the flagship scholarship programme of the Rajasthan government for students studying in Rajasthan.",
+      "eligibility": [
+        "Domicile of Rajasthan",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee reimbursement and maintenance allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Rajasthan scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://sje.rajasthan.gov.in/",
+      "officialUrl": "https://sje.rajasthan.gov.in/",
+      "tags": [
+        "Rajasthan",
+        "North"
+      ]
+    },
+    {
+      "id": "state-sikkim",
+      "slug": "sikkim-state-scholarship",
+      "name": "Sikkim Post-Matric Scholarship",
+      "provider": "Sikkim Government",
+      "scope": "state",
+      "stateId": "sikkim",
+      "stateName": "Sikkim",
+      "level": [
+        "Class 11–12",
+        "Undergraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee reimbursement and maintenance allowance",
+      "summary": "Sikkim Post-Matric Scholarship is the flagship scholarship programme of the Sikkim government for students studying in Sikkim.",
+      "eligibility": [
+        "Domicile of Sikkim",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee reimbursement and maintenance allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Sikkim scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://sikkim.gov.in/",
+      "officialUrl": "https://sikkim.gov.in/",
+      "tags": [
+        "Sikkim",
+        "North East"
+      ]
+    },
+    {
+      "id": "state-tamil-nadu",
+      "slug": "tamil-nadu-state-scholarship",
+      "name": "Tamil Nadu Post-Matric Scholarship",
+      "provider": "Tamil Nadu Government",
+      "scope": "state",
+      "stateId": "tamil-nadu",
+      "stateName": "Tamil Nadu",
+      "level": [
+        "Class 11–12",
+        "Undergraduate",
+        "Postgraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee reimbursement and maintenance allowance",
+      "summary": "Tamil Nadu Post-Matric Scholarship is the flagship scholarship programme of the Tamil Nadu government for students studying in Tamil Nadu.",
+      "eligibility": [
+        "Domicile of Tamil Nadu",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee reimbursement and maintenance allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Tamil Nadu scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://www.tn.gov.in/",
+      "officialUrl": "https://www.tn.gov.in/",
+      "tags": [
+        "Tamil Nadu",
+        "South"
+      ]
+    },
+    {
+      "id": "state-telangana",
+      "slug": "telangana-state-scholarship",
+      "name": "Telangana ePASS Post-Matric Scholarship",
+      "provider": "Telangana Government",
+      "scope": "state",
+      "stateId": "telangana",
+      "stateName": "Telangana",
+      "level": [
+        "Class 11–12",
+        "Undergraduate",
+        "Postgraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee reimbursement and maintenance allowance",
+      "summary": "Telangana ePASS Post-Matric Scholarship is the flagship scholarship programme of the Telangana government for students studying in Telangana.",
+      "eligibility": [
+        "Domicile of Telangana",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee reimbursement and maintenance allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Telangana scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://telanganaepass.cgg.gov.in/",
+      "officialUrl": "https://telanganaepass.cgg.gov.in/",
+      "tags": [
+        "Telangana",
+        "South"
+      ]
+    },
+    {
+      "id": "top-class-sc",
+      "slug": "top-class-education-scheme-for-sc-students",
+      "name": "Top Class Education Scheme for SC Students",
+      "provider": "Ministry of Social Justice and Empowerment",
+      "scope": "central",
+      "stateId": null,
+      "stateName": null,
+      "level": [
+        "Undergraduate",
+        "Postgraduate"
+      ],
+      "categories": [
+        "SC"
+      ],
+      "amount": "Full tuition fee plus living expenses at notified institutions",
+      "summary": "Covers the full cost of study at India's top institutions for SC students who secure admission there.",
+      "eligibility": [
+        "Scheduled Caste student admitted to a notified premier institution",
+        "Family income below ₹8 lakh per year",
+        "Not receiving any other scholarship for the same course"
+      ],
+      "benefits": [
+        "Full tuition fee plus living expenses at notified institutions"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Apply on the National Scholarship Portal",
+        "Upload admission letter, caste certificate and income certificate",
+        "Institution verifies and recommends",
+        "Fee is released directly to the institution"
+      ],
+      "cycleMonths": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "deadlineText": "Usually August to October",
+      "portalUrl": "https://scholarships.gov.in/",
+      "officialUrl": "https://socialjustice.gov.in/",
+      "tags": [
+        "Ministry of Social Justice and Empowerment",
+        "SC"
+      ]
+    },
+    {
+      "id": "state-tripura",
+      "slug": "tripura-state-scholarship",
+      "name": "Tripura Post-Matric Scholarship",
+      "provider": "Tripura Government",
+      "scope": "state",
+      "stateId": "tripura",
+      "stateName": "Tripura",
+      "level": [
+        "Class 11–12",
+        "Undergraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee reimbursement and maintenance allowance",
+      "summary": "Tripura Post-Matric Scholarship is the flagship scholarship programme of the Tripura government for students studying in Tripura.",
+      "eligibility": [
+        "Domicile of Tripura",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee reimbursement and maintenance allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Tripura scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://tripura.gov.in/",
+      "officialUrl": "https://tripura.gov.in/",
+      "tags": [
+        "Tripura",
+        "North East"
+      ]
+    },
+    {
+      "id": "state-uttar-pradesh",
+      "slug": "uttar-pradesh-state-scholarship",
+      "name": "UP Scholarship (Pre & Post Matric)",
+      "provider": "Uttar Pradesh Government",
+      "scope": "state",
+      "stateId": "uttar-pradesh",
+      "stateName": "Uttar Pradesh",
+      "level": [
+        "Class 9–12",
+        "Undergraduate",
+        "Postgraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee reimbursement and maintenance allowance",
+      "summary": "UP Scholarship (Pre & Post Matric) is the flagship scholarship programme of the Uttar Pradesh government for students studying in Uttar Pradesh.",
+      "eligibility": [
+        "Domicile of Uttar Pradesh",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee reimbursement and maintenance allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Uttar Pradesh scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://scholarship.up.gov.in/",
+      "officialUrl": "https://scholarship.up.gov.in/",
+      "tags": [
+        "Uttar Pradesh",
+        "North"
+      ]
+    },
+    {
+      "id": "state-uttarakhand",
+      "slug": "uttarakhand-state-scholarship",
+      "name": "Uttarakhand Scholarship",
+      "provider": "Uttarakhand Government",
+      "scope": "state",
+      "stateId": "uttarakhand",
+      "stateName": "Uttarakhand",
+      "level": [
+        "Class 9–12",
+        "Undergraduate",
+        "Postgraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Fee reimbursement and maintenance allowance",
+      "summary": "Uttarakhand Scholarship is the flagship scholarship programme of the Uttarakhand government for students studying in Uttarakhand.",
+      "eligibility": [
+        "Domicile of Uttarakhand",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Fee reimbursement and maintenance allowance",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official Uttarakhand scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://scholarship.uk.gov.in/",
+      "officialUrl": "https://scholarship.uk.gov.in/",
+      "tags": [
+        "Uttarakhand",
+        "North"
+      ]
+    },
+    {
+      "id": "state-west-bengal",
+      "slug": "west-bengal-state-scholarship",
+      "name": "West Bengal SVMCM Scholarship",
+      "provider": "West Bengal Government",
+      "scope": "state",
+      "stateId": "west-bengal",
+      "stateName": "West Bengal",
+      "level": [
+        "Class 11–12",
+        "Undergraduate",
+        "Postgraduate"
+      ],
+      "categories": [
+        "SC",
+        "ST",
+        "OBC",
+        "EBC",
+        "Minority",
+        "General"
+      ],
+      "amount": "Monthly stipend and one-time grant",
+      "summary": "West Bengal SVMCM Scholarship is the flagship scholarship programme of the West Bengal government for students studying in West Bengal.",
+      "eligibility": [
+        "Domicile of West Bengal",
+        "Studying in a recognised institution",
+        "Family income within the state scheme limit",
+        "Category certificate where applicable"
+      ],
+      "benefits": [
+        "Monthly stipend and one-time grant",
+        "Direct benefit transfer to the student's bank account"
+      ],
+      "documents": [
+        "Aadhaar card",
+        "Bank passbook (account in the student's name)",
+        "Previous year marksheet",
+        "Income certificate",
+        "Caste / category certificate (if applicable)",
+        "Bonafide certificate from the institution",
+        "Passport-size photograph"
+      ],
+      "process": [
+        "Open the official West Bengal scholarship portal",
+        "Register with Aadhaar and mobile number",
+        "Complete the student and institution details",
+        "Upload documents and submit before the deadline",
+        "Track verification and disbursal status online"
+      ],
+      "cycleMonths": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "deadlineText": "State-specific, generally August to December",
+      "portalUrl": "https://svmcm.wb.gov.in/",
+      "officialUrl": "https://svmcm.wb.gov.in/",
+      "tags": [
+        "West Bengal",
+        "East"
+      ]
+    }
+  ]
+}

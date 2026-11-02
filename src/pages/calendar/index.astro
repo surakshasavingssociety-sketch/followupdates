@@ -51,23 +51,21 @@ const schema = [
   <section class="section-tight" style="padding-top:30px">
     <div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="/">Home</a><span aria-hidden="true">/</span><span>Exam calendar</span>
+        <a href="/">Dashboard</a><span aria-hidden="true">/</span><span>Exam calendar</span>
       </nav>
 
       <div class="section-head" style="margin-bottom:14px">
         <div>
           <h1 style="font-size:clamp(1.8rem,3.6vw,2.5rem)">Exam calendar</h1>
-          <p>
-            Agle 12 months ke typical notification, exam aur result windows. Central aur state exams dono cover.
-          </p>
+          <p>Typical notification, exam and result windows for the next 12 months, covering central and state exams.</p>
         </div>
         <a class="btn btn-outline btn-sm" href="/exams/">Exam database</a>
       </div>
 
       <div class="notice-bar" style="margin-bottom:18px">
         <div class="container" style="padding:0">
-          <strong>Indicative only:</strong> Ye calendar historical patterns par based hai. Official dates notification,
-          admit card aur exam authority ke calendar se confirm karein.
+          <strong>Indicative only:</strong> this calendar is based on historical patterns. Confirm official dates on
+          the notification, admit card and the exam authority's calendar.
         </div>
       </div>
 
@@ -97,7 +95,7 @@ const schema = [
                   {monthName(item.month)} {item.year}
                   {index === 0 ? <span class="badge badge-blue" style="margin-left:8px">This month</span> : null}
                 </h2>
-                <p>Notification, exam aur result windows ek nazar me.</p>
+                <p>Notification, exam and result windows at a glance.</p>
               </div>
             </div>
 
@@ -120,7 +118,7 @@ const schema = [
                       ))}
                     </ul>
                   ) : (
-                    <p class="muted small">Is phase me koi tracked exam nahi.</p>
+                    <p class="muted small">No tracked exam in this phase.</p>
                   )}
                   {block.total > block.entries.length ? (
                     <a class="link-arrow" href="/exams/">+{block.total - block.entries.length} more exams →</a>
@@ -135,18 +133,17 @@ const schema = [
       <section class="panel" style="margin-top:24px">
         <div class="section-head" style="margin-bottom:10px">
           <div>
-            <h2 style="font-size:1.35rem">Notification timing ka logic</h2>
-            <p>Is calendar ko kaise use karein.</p>
+            <h2 style="font-size:1.35rem">How to use this calendar</h2>
+            <p>Plan around the windows instead of waiting for the last date.</p>
           </div>
         </div>
         <p>
-          Har exam ke liye hum notification/apply, exam aur result ke typical months store karte hain. Jab kisi exam ka
-          notification window paas aata hai, ingestion pipeline us exam ke naam se targeted search chalata hai. Isse
-          official notification, apply date, admit card aur result jaldi pakde jaate hain.
+          Each exam lists the months when its notification, exam and result usually appear. Use the month you are in to
+          see what is coming up, then open the exam page for eligibility and the official link.
         </p>
         <p class="muted" style="margin:0">
-          Is page ko bookmark karein aur apne target exam ka month pehle se note kar lein. Exact date ke liye official
-          website hamesha final source hai.
+          Bookmark this page and note your target exam's month in advance. The official website is always the final
+          source for the exact date.
         </p>
       </section>
     </div>

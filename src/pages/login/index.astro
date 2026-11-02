@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import LoginPanel from "../../components/LoginPanel.astro";
+---
+
+<BaseLayout
+  title="Sign in or create your account"
+  description="Sign in to FollowExam with Google, email or your mobile number to access government job notifications, scholarships, institutions and your career roadmap."
+  noindex
+  gated={false}
+>
+  <div class="container auth-page">
+    <LoginPanel redirectOnSignIn={true} />
+  </div>
+</BaseLayout>
+
+<script>
+  import { watchAuth } from "../../lib/auth";
+
+  watchAuth((user) => {
+    if (!user) return;
+    const params = new URLSearchParams(window.location.search);
+    const next = params.get("next") || "/";
+    const safe = next.startsWith("/") && !next.startsWith("//") ? next : "/";
+    window.location.replace(safe);
+  });
+</script>

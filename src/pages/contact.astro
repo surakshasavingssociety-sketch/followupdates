@@ -5,7 +5,8 @@ import { SITE } from "../lib/constants";
 
 <BaseLayout
   title="Contact FollowExam"
-  description="FollowExam se contact karein — correction request, nayi notification, partnership ya feedback ke liye."
+  description="Contact FollowExam for a correction, a new notification, a copyright request or feedback."
+  gated={false}
 >
   <section class="section-tight" style="padding-top:34px">
     <div class="container">
@@ -17,8 +18,8 @@ import { SITE } from "../lib/constants";
         <article class="prose">
           <h1>Contact us</h1>
           <p>
-            Correction, nayi notification, copyright request ya feedback — sabke liye neeche diye email par likhein.
-            Hum usually 1–2 working days me reply karte hain.
+            For a correction, a new notification, a copyright request or feedback, write to the email below. We usually
+            reply within one or two working days.
           </p>
 
           <h2>Email</h2>
@@ -26,42 +27,42 @@ import { SITE } from "../lib/constants";
             <a href={`mailto:${SITE.email}`} style="font-weight:700;font-size:1.05rem">{SITE.email}</a>
           </p>
 
-          <h2>Kis cheez ke liye likhein</h2>
+          <h2>What to write about</h2>
           <ul>
-            <li><strong>Correction:</strong> kisi post me galat date, fee, vacancy ya link ho to post ka URL bhejein.</li>
-            <li><strong>Nayi notification:</strong> official source ka link aur short details bhejein.</li>
-            <li><strong>Copyright / removal:</strong> apna role, organization aur affected URL likhein.</li>
-            <li><strong>Alerts:</strong> email unsubscribe ya Telegram issue ke liye apna registered email bhejein.</li>
+            <li><strong>Correction:</strong> if a date, fee, vacancy count or link is wrong, send the post URL.</li>
+            <li><strong>New notification:</strong> send the official source link and a short note.</li>
+            <li><strong>Copyright / removal:</strong> include your role, organisation and the affected URL.</li>
+            <li><strong>Alerts:</strong> for an unsubscribe or Telegram issue, send your registered email address.</li>
           </ul>
 
           <h2>Important</h2>
           <p class="small muted">
-            FollowExam kisi government recruitment ka part nahi hai. Application, fee payment, admit card ya result se
-            judi problem ke liye sirf official department se contact karein.
+            FollowExam is not part of any government recruitment process. For a problem with an application, fee
+            payment, admit card or result, contact the official department only.
           </p>
         </article>
 
         <div class="panel">
           <h2 style="font-size:1.2rem">Quick message</h2>
           <p class="muted small">
-            Form submit karne par aapka email app khulega, jisme message pre-filled hoga. Isse aap apne hi email
-            account se message bhej sakte hain.
+            Submitting this form opens your email app with the message already filled in, so you can send it from your
+            own email account.
           </p>
 
           <form id="contact-form" class="form-grid">
             <div class="field">
-              <label for="contact-name">Aapka naam</label>
+              <label for="contact-name">Your name</label>
               <input class="input" id="contact-name" name="name" autocomplete="name" required />
             </div>
             <div class="field">
-              <label for="contact-email">Aapka email</label>
+              <label for="contact-email">Your email</label>
               <input class="input" id="contact-email" name="email" type="email" autocomplete="email" required />
             </div>
             <div class="field">
               <label for="contact-topic">Topic</label>
               <select class="select" id="contact-topic" name="topic">
                 <option>Correction request</option>
-                <option>Nayi notification</option>
+                <option>New notification</option>
                 <option>Copyright / removal</option>
                 <option>Alert / unsubscribe</option>
                 <option>Other</option>
@@ -78,7 +79,7 @@ import { SITE } from "../lib/constants";
 
           <div style="border-top:1px solid var(--line);margin-top:18px;padding-top:14px">
             <p class="small muted" style="margin:0">
-              Ya seedha email karein:
+              Or email directly:
               <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
             </p>
           </div>
@@ -105,7 +106,7 @@ import { SITE } from "../lib/constants";
 
     window.location.href = `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     if (status) {
-      status.textContent = "Email app khul raha hai. Agar na khule, to upar diye email par seedha likhein.";
+      status.textContent = "Your email app is opening. If it does not, write to the email address above.";
       status.className = "form-message show info";
     }
   });

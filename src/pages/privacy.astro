@@ -2,12 +2,13 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { SITE } from "../lib/constants";
 
-const updated = "30 October 2026";
+const updated = "1 November 2026";
 ---
 
 <BaseLayout
   title="Privacy Policy"
-  description="FollowExam privacy policy — kaunsa data collect hota hai, kaise use hota hai, aur aapke rights kya hain."
+  description="FollowExam privacy policy — what data we collect, how it is used and the rights you have over it."
+  gated={false}
 >
   <section class="section-tight" style="padding-top:34px">
     <div class="container">
@@ -20,85 +21,85 @@ const updated = "30 October 2026";
         <p class="small muted">Last updated: {updated}</p>
 
         <p>
-          FollowExam aapki privacy ko respect karta hai. Ye policy batati hai ki hum kaunsa data collect karte hain,
-          kyun collect karte hain, aur aap us data ko kaise control kar sakte hain.
+          FollowExam respects your privacy. This policy explains what data we collect, why we collect it and how you
+          can control it.
         </p>
 
-        <h2>1. Hum kaunsa data collect karte hain</h2>
+        <h2>1. Data we collect</h2>
         <ul>
-          <li><strong>Email address aur naam</strong> — jab aap daily alerts ke liye subscribe karte hain.</li>
-          <li><strong>Account data</strong> — agar aap login karte hain (email, display name, saved jobs).</li>
-          <li><strong>Technical data</strong> — browser type, device type, approximate location aur page visits (analytics ke through).</li>
-          <li><strong>Messages</strong> — jo aap contact form ya email ke through bhejte hain.</li>
+          <li><strong>Account data</strong> — your name, email address or phone number, and the sign-in provider you use.</li>
+          <li><strong>Profile data</strong> — your state, education level, stream, date of birth, career goal, interests and alert preference.</li>
+          <li><strong>Saved updates</strong> — the notifications you bookmark inside your account.</li>
+          <li><strong>Technical data</strong> — browser type, device type, approximate location and page visits.</li>
+          <li><strong>Messages</strong> — anything you send through the contact form or email.</li>
         </ul>
 
-        <h2>2. Data kaise use hota hai</h2>
+        <h2>2. How we use data</h2>
         <ul>
-          <li>Daily exam update emails bhejne ke liye.</li>
-          <li>Saved jobs aur personalized experience dene ke liye.</li>
-          <li>Site ki speed, content aur usability improve karne ke liye.</li>
-          <li>Spam, abuse aur security issues rokne ke liye.</li>
+          <li>To run your account and keep your profile available across devices.</li>
+          <li>To recommend exams, institutions and scholarships that match your profile.</li>
+          <li>To send the daily email digest if you turn alerts on.</li>
+          <li>To improve site speed, content and usability.</li>
+          <li>To prevent spam, abuse and security issues.</li>
         </ul>
 
-        <h2>3. Data kis ke saath share hota hai</h2>
+        <h2>3. Who we share data with</h2>
         <p>
-          Hum aapka personal data bechte nahi hain. Data sirf un service providers ke saath share hota hai jo site
-          chalane ke liye zaroori hain — jaise Firebase (Google), email delivery service aur hosting provider. Ye
-          providers apne privacy terms ke under data handle karte hain.
+          We do not sell your personal data. Data is shared only with the service providers needed to run the site, such
+          as Firebase (Google) for authentication, database and hosting, and an email delivery service for alerts. Those
+          providers handle data under their own privacy terms.
         </p>
 
-        <h2>4. Cookies aur local storage</h2>
+        <h2>4. Cookies and local storage</h2>
         <p>
-          Site login session, saved-jobs preferences aur basic analytics ke liye cookies/local storage use karti hai.
-          Aap browser settings se cookies block kar sakte hain, lekin kuch features phir kaam nahi karenge.
+          The site uses cookies and local storage for your login session, saved preferences and basic analytics. You can
+          block cookies in your browser settings, but some features will stop working.
         </p>
 
-        <h2>5. Email alerts aur unsubscribe</h2>
+        <h2>5. Email alerts and unsubscribe</h2>
         <p>
-          Har alert email me unsubscribe ka option hota hai. Aap kabhi bhi email reply karke ya apne account settings
-          se alerts band kar sakte hain. Unsubscribe request ke baad hum aapko marketing email nahi bhejte.
+          Every alert email includes an unsubscribe option. You can also turn alerts off from your profile at any time.
+          After an unsubscribe request we do not send marketing email.
         </p>
 
         <h2>6. Data retention</h2>
         <p>
-          Subscriber data tab tak rakha jata hai jab tak aap unsubscribe nahi karte. Account data account delete
-          request tak rakha jata hai. Contact messages reasonable time tak rakhe jate hain, phir delete kar diye jate
-          hain.
+          Account data is kept until you delete your profile or ask us to delete it. Contact messages are kept for a
+          reasonable period and then deleted.
         </p>
 
-        <h2>7. Bachchon ki privacy</h2>
+        <h2>7. Children's privacy</h2>
         <p>
-          FollowExam 13 saal se kam umar ke bachchon se jaan-boojh kar personal data collect nahi karta. Agar aapko
-          lagta hai ki kisi minor ka data aa gaya hai, to humein contact karein.
+          FollowExam does not knowingly collect personal data from children under 13. If you believe a minor's data has
+          been collected, contact us and we will remove it.
         </p>
 
-        <h2>8. Aapke rights</h2>
+        <h2>8. Your rights</h2>
         <ul>
-          <li>Apna data dekhne ki request.</li>
-          <li>Data correction ki request.</li>
-          <li>Data deletion ki request.</li>
-          <li>Alerts unsubscribe karne ka right.</li>
+          <li>Request a copy of your data.</li>
+          <li>Ask for a correction.</li>
+          <li>Delete your profile and saved updates from the profile page.</li>
+          <li>Turn email alerts off at any time.</li>
         </ul>
         <p>
-          In requests ke liye <a href={`mailto:${SITE.email}`}>{SITE.email}</a> par likhein.
+          For these requests write to <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
         </p>
 
         <h2>9. Third-party links</h2>
         <p>
-          Hamare posts me official government websites ke links hote hain. Un websites ki privacy policies alag hain —
-          unhe padhna aapki zimmedari hai. FollowExam un sites ke content ya data practices ke liye responsible nahi
-          hai.
+          Our posts link to official government websites. Those websites have their own privacy policies and you should
+          read them. FollowExam is not responsible for their content or data practices.
         </p>
 
         <h2>10. Policy updates</h2>
         <p>
-          Ye policy kabhi kabhi update ho sakti hai. Bade changes hone par hum site par notice denge. Latest version
-          hamesha is page par milega.
+          This policy may change from time to time. We will post a notice on the site for major changes. The latest
+          version is always on this page.
         </p>
 
         <h2>11. Contact</h2>
         <p>
-          Privacy se judi kisi bhi sawaal ke liye: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+          For any privacy question: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
         </p>
       </article>
     </div>

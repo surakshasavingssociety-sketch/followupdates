@@ -1,10 +1,10 @@
 {
   "version": 1,
-  "updated": "2026-11-01",
+  "updated": "2026-11-02",
   "note": "FollowExam exam database. Cycle months are indicative patterns, not official schedules. Always verify on the official website.",
   "counts": {
-    "total": 223,
-    "central": 65,
+    "total": 225,
+    "central": 67,
     "state": 158,
     "streams": 14,
     "states": 36
@@ -521,6 +521,64 @@
       ]
     },
     {
+      "id": "cat",
+      "name": "CAT",
+      "fullName": "Common Admission Test",
+      "stream": "entrance",
+      "body": "Indian Institutes of Management",
+      "bodyShort": "IIM",
+      "level": "Graduate",
+      "qualification": [
+        "Graduate"
+      ],
+      "age": "No age limit",
+      "officialUrl": "https://iimcat.ac.in/",
+      "frequency": "annual",
+      "aliases": [
+        "Common Admission Test",
+        "IIM CAT",
+        "MBA entrance"
+      ],
+      "cycle": {
+        "notification": [
+          7,
+          8
+        ],
+        "apply": [
+          8,
+          9
+        ],
+        "exam": [
+          11,
+          12
+        ],
+        "result": [
+          1
+        ]
+      },
+      "slug": "cat",
+      "scope": "central",
+      "stateId": null,
+      "stateName": null,
+      "region": "All India",
+      "streamName": "University & Entrance",
+      "streamIcon": "🎓",
+      "cycleNote": "Indicative window based on the exam's usual cycle. Confirm exact dates on the official website.",
+      "keywords": [
+        "CAT",
+        "IIM",
+        "Common Admission Test",
+        "IIM CAT",
+        "MBA entrance"
+      ],
+      "verified": false,
+      "searchTerms": [
+        "Common Admission Test",
+        "IIM CAT",
+        "MBA entrance"
+      ]
+    },
+    {
       "id": "cbse-board",
       "name": "CBSE Board Exams",
       "fullName": "CBSE Class 10 and Class 12 Board Examinations",
@@ -644,6 +702,65 @@
         "Common Law Admission Test",
         "CLAT UG",
         "CLAT PG"
+      ]
+    },
+    {
+      "id": "clat-ug",
+      "name": "CLAT UG",
+      "fullName": "Common Law Admission Test (Undergraduate)",
+      "stream": "judiciary",
+      "body": "Consortium of National Law Universities",
+      "bodyShort": "NLU Consortium",
+      "level": "Class 12",
+      "qualification": [
+        "Class 12"
+      ],
+      "age": "No upper age limit",
+      "officialUrl": "https://consortiumofnlus.ac.in/",
+      "frequency": "annual",
+      "aliases": [
+        "Common Law Admission Test",
+        "BA LLB entrance"
+      ],
+      "cycle": {
+        "notification": [
+          6,
+          7
+        ],
+        "apply": [
+          7,
+          8,
+          9,
+          10
+        ],
+        "exam": [
+          12
+        ],
+        "result": [
+          1,
+          12
+        ]
+      },
+      "slug": "clat-ug",
+      "scope": "central",
+      "stateId": null,
+      "stateName": null,
+      "region": "All India",
+      "streamName": "Law & Judiciary",
+      "streamIcon": "⚖",
+      "cycleNote": "Indicative window based on the exam's usual cycle. Confirm exact dates on the official website.",
+      "keywords": [
+        "CLAT UG",
+        "NLU Consortium",
+        "Common Law Admission Test",
+        "BA LLB entrance"
+      ],
+      "verified": false,
+      "searchTerms": [
+        "CLAT UG",
+        "Common Law Admission Test",
+        "NLU Consortium",
+        "BA LLB entrance"
       ]
     },
     {

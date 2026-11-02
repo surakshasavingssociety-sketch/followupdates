@@ -3,6 +3,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import StateCard from "../../components/StateCard.astro";
 import { SITE } from "../../lib/constants";
 import { examDatabase } from "../../lib/exams";
+import { institutionDatabase } from "../../lib/institutions";
+import { scholarshipDatabase } from "../../lib/scholarships";
 import { states, statesByRegion, unionTerritories } from "../../lib/states";
 
 const groups = statesByRegion();
@@ -11,8 +13,8 @@ const schema = [
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: "State-wise government exams and jobs",
-    description: "State PSC, police, TET and board exam coverage for all Indian states and union territories.",
+    name: "State-wise government exams, jobs and scholarships",
+    description: "State PSC, police, TET, board exams, universities and scholarship coverage for all Indian states and union territories.",
     url: `${SITE.url}/states/`,
   },
   {
@@ -27,14 +29,14 @@ const schema = [
 ---
 
 <BaseLayout
-  title="State-wise Government Jobs & Exams — All States and UTs"
-  description="Browse state PSC, police constable, SI, TET and board exam cycles for all 28 states and 8 union territories of India, with official portal links."
+  title="State-wise Government Jobs, Exams & Scholarships — All States and UTs"
+  description="Browse state PSC, police constable, SI, TET and board exam cycles, universities and scholarship schemes for all 28 states and 8 union territories of India, with official links."
   schema={schema}
 >
   <section class="section-tight" style="padding-top:30px">
     <div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="/">Home</a><span aria-hidden="true">/</span><span>States</span>
+        <a href="/">Dashboard</a><span aria-hidden="true">/</span><span>States</span>
       </nav>
 
       <div class="section-head" style="margin-bottom:14px">
@@ -42,16 +44,35 @@ const schema = [
           <h1 style="font-size:clamp(1.8rem,3.6vw,2.5rem)">State-wise coverage</h1>
           <p>
             {states.length} states/UTs · {states.length - unionTerritories.length} states · {unionTerritories.length} union territories.
-            Apne state ka PSC, police, TET aur board exam cycle dekhein.
+            Open your state to see its PSC, police, TET, board exams, universities and scholarship schemes.
           </p>
         </div>
         <a class="btn btn-outline btn-sm" href="/exams/">🏛 Central exams</a>
       </div>
 
+      <div class="dash-stats" style="margin-bottom:22px">
+        <div class="dash-stat">
+          <span>Exam cycles</span>
+          <strong>{examDatabase.counts.total}</strong>
+        </div>
+        <div class="dash-stat">
+          <span>Institutions</span>
+          <strong>{institutionDatabase.counts.total}</strong>
+        </div>
+        <div class="dash-stat">
+          <span>Scholarships</span>
+          <strong>{scholarshipDatabase.counts.total}</strong>
+        </div>
+        <div class="dash-stat">
+          <span>States and UTs</span>
+          <strong>{states.length}</strong>
+        </div>
+      </div>
+
       <div class="notice-bar" style="margin-bottom:22px">
         <div class="container" style="padding:0">
-          <strong>Note:</strong> State exam dates aur vacancy patterns badalte rehte hain. Har state ka official portal aur
-          conducting body link neeche diya gaya hai — apply se pehle wahan verify karein.
+          <strong>Note:</strong> state exam dates and vacancy patterns change often. Every state page links to the
+          official portal and conducting body — verify there before applying.
         </div>
       </div>
 
@@ -73,13 +94,15 @@ const schema = [
       <section class="panel" style="margin-top:10px">
         <div class="section-head" style="margin-bottom:10px">
           <div>
-            <h2 style="font-size:1.35rem">Exam database</h2>
-            <p>{examDatabase.counts.total} exams ke notification, exam aur result windows.</p>
+            <h2 style="font-size:1.35rem">Keep exploring</h2>
+            <p>Every state connects to exams, institutions and scholarships.</p>
           </div>
           <a class="btn btn-primary btn-sm" href="/calendar/">Open exam calendar</a>
         </div>
         <p class="muted" style="margin:0">
-          Central exams ke liye <a href="/exams/">exam database</a> dekhein. State exams ke liye upar apna state chuniye.
+          For central exams open the <a href="/exams/">exam database</a>, for universities open
+          <a href="/institutions/">institutions</a>, and for financial aid open
+          <a href="/scholarships/">scholarships</a>.
         </p>
       </section>
     </div>

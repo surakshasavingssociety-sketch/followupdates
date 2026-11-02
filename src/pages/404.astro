@@ -5,17 +5,23 @@ import { jobs } from "../lib/jobs";
 const latest = jobs.slice(0, 4);
 ---
 
-<BaseLayout title="Page not found" description="Ye page nahi mila. Latest updates dekhein." noindex>
+<BaseLayout
+  title="Page not found"
+  description="This page could not be found. Open the latest government job, result and exam updates instead."
+  noindex
+  gated={false}
+>
   <section class="section" style="min-height:52vh">
     <div class="container" style="max-width:760px">
       <div class="panel" style="text-align:center;padding:48px 26px">
         <div style="font-size:4rem;font-weight:800;letter-spacing:-.06em;color:var(--brand);line-height:1">404</div>
-        <h1 style="font-size:1.6rem;margin-top:8px">Ye page nahi mila</h1>
+        <h1 style="font-size:1.6rem;margin-top:8px">This page could not be found</h1>
         <p class="muted">
-          Ho sakta hai link purana ho, post hata di gayi ho, ya URL me typo ho. Neeche se latest updates dekhein.
+          The link may be old, the update may have been removed, or the address may contain a typo. Open the latest
+          updates below or use search.
         </p>
         <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:18px">
-          <a class="btn btn-primary" href="/">Home</a>
+          <a class="btn btn-primary" href="/">Dashboard</a>
           <a class="btn btn-outline" href="/jobs/">All updates</a>
           <a class="btn btn-outline" href="/category/latest-jobs/">Latest jobs</a>
         </div>

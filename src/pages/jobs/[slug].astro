@@ -4,7 +4,7 @@ import JobCard from "../../components/JobCard.astro";
 import SubscribeForm from "../../components/SubscribeForm.astro";
 import { CATEGORY_META, SITE } from "../../lib/constants";
 import { getExam, monthLabel, nextPhaseLabel } from "../../lib/exams";
-import { formatDate, getJob, jobs } from "../../lib/jobs";
+import { formatDate, jobs } from "../../lib/jobs";
 import type { Job } from "../../lib/types";
 
 export function getStaticPaths() {
@@ -28,6 +28,24 @@ const feeRows = [
   ["SC / ST", job.fee?.scSt],
   ["Female", job.fee?.female],
 ].filter(([, value]) => value !== undefined && value !== null);
+
+const importantDates =
+  job.importantDates && job.importantDates.length
+    ? job.importantDates
+    : [
+        { label: "Notification published", date: job.postDate },
+        { label: "Application starts", date: job.applyStart },
+        { label: "Last date to apply", date: job.applyEnd },
+        { label: "Exam date", date: job.examDate },
+      ].filter((row) => row.date);
+
+const officialLinks =
+  job.officialLinks && job.officialLinks.length
+    ? job.officialLinks
+    : [
+        { label: "Official notification", url: job.notificationUrl },
+        { label: "Official website", url: job.officialUrl },
+      ];
 
 const officialHost = (() => {
   try {
@@ -71,7 +89,7 @@ const schema = {
   schema={schema}
 >
   <div class="container breadcrumb">
-    <a href="/">Home</a>
+    <a href="/">Dashboard</a>
     <span>/</span>
     <a href="/jobs/">All updates</a>
     <span>/</span>
@@ -82,8 +100,8 @@ const schema = {
     <article class="panel detail-header">
       {job.demo && (
         <div class="demo-warning">
-          <strong>Sample listing:</strong> Ye entry sirf design aur automation test ke liye hai. Real application se pehle
-          official notification verify karein.
+          <strong>Sample listing:</strong> this entry shows the format of a fully analysed notification. Confirm every
+          detail on the official notification before applying.
         </div>
       )}
 
@@ -101,6 +119,16 @@ const schema = {
       </div>
 
       <p class="detail-summary">{job.summary}</p>
+
+      <div class="notification-cta">
+        <a class="btn btn-primary" href={job.notificationUrl} target="_blank" rel="noopener nofollow">
+          Open official notification ↗
+        </a>
+        <p>
+          Every post on FollowExam carries the official notification link. Read the original PDF or notice before you
+          apply, pay a fee or download a document.
+        </p>
+      </div>
 
       <div class="key-grid">
         <div class="key-item">
@@ -133,19 +161,116 @@ const schema = {
         </div>
       </div>
 
+      {job.highlights?.length ? (
+        <section class="detail-section">
+          <h2>What the notification says</h2>
+          <ul class="highlight-list">
+            {job.highlights.map((item) => <li>{item}</li>)}
+          </ul>
+        </section>
+      ) : null}
+
+      {importantDates.length ? (
+        <section class="detail-section">
+          <h2>Important dates</h2>
+          <div class="table-wrap">
+            <table class="date-table">
+              <thead>
+                <tr><th>Event</th><th>Date</th></tr>
+              </thead>
+              <tbody>
+                {importantDates.map((row) => (
+                  <tr>
+                    <td>
+                      {row.label}
+                      {row.note ? <div class="small muted">{row.note}</div> : null}
+                    </td>
+                    <td>{row.date ? formatDate(row.date) : "To be announced"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      ) : null}
+
+      {job.posts?.length ? (
+        <section class="detail-section">
+          <h2>Posts and vacancies</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Post</th><th>Vacancies</th><th>Qualification</th></tr>
+              </thead>
+              <tbody>
+                {job.posts.map((post) => (
+                  <tr>
+                    <td>
+                      {post.name}
+                      {post.note ? <div class="small muted">{post.note}</div> : null}
+                    </td>
+                    <td>{post.vacancies ? post.vacancies.toLocaleString("en-IN") : "—"}</td>
+                    <td>{post.qualification || "See notification"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      ) : null}
+
       <section class="detail-section">
-        <h2>Important dates</h2>
-        <div class="table-wrap">
-          <table>
-            <tbody>
-              <tr><th>Notification / update</th><td>{formatDate(job.postDate)}</td></tr>
-              <tr><th>Application start</th><td>{formatDate(job.applyStart)}</td></tr>
-              <tr><th>Last date to apply</th><td>{formatDate(job.applyEnd)}</td></tr>
-              <tr><th>Exam date</th><td>{formatDate(job.examDate)}</td></tr>
-            </tbody>
-          </table>
-        </div>
+        <h2>Eligibility</h2>
+        {job.eligibility?.length ? (
+          <ul class="check-list">
+            {job.eligibility.map((item) => <li>{item}</li>)}
+          </ul>
+        ) : (
+          <p class="muted">
+            Qualification: {job.qualification?.join(", ") || "as stated in the official notification"}. Age limit:{" "}
+            {job.age?.min || job.age?.max
+              ? `${job.age?.min ?? "—"} to ${job.age?.max ?? "—"} years${job.age?.note ? ` — ${job.age.note}` : ""}`
+              : "as stated in the official notification"}.
+          </p>
+        )}
       </section>
+
+      {job.selectionProcess?.length ? (
+        <section class="detail-section">
+          <h2>Selection process</h2>
+          <ol class="step-list">
+            {job.selectionProcess.map((step) => <li>{step}</li>)}
+          </ol>
+        </section>
+      ) : null}
+
+      {job.howToApply?.length ? (
+        <section class="detail-section">
+          <h2>How to apply</h2>
+          <ol class="step-list">
+            {job.howToApply.map((step) => <li>{step}</li>)}
+          </ol>
+        </section>
+      ) : (
+        <section class="detail-section">
+          <h2>How to apply</h2>
+          <ol class="step-list">
+            <li>Open the official notification link on this page.</li>
+            <li>Read the eligibility, dates and fee carefully.</li>
+            <li>Complete the online form on the official portal.</li>
+            <li>Save the application receipt and payment confirmation.</li>
+          </ol>
+        </section>
+      )}
+
+      {job.documents?.length ? (
+        <section class="detail-section">
+          <h2>Documents to keep ready</h2>
+          <ul class="check-list">
+            {job.documents.map((item) => <li>{item}</li>)}
+          </ul>
+        </section>
+      ) : null}
 
       {feeRows.length > 0 && (
         <section class="detail-section">
@@ -172,32 +297,21 @@ const schema = {
       )}
 
       <section class="detail-section">
-        <h2>Eligibility & selection</h2>
-        <p>
-          <strong>Qualification:</strong> {job.qualification?.join(", ") || "Official notification me di gayi qualification dekhein."}
+        <h2>Official links</h2>
+        <ul class="link-list">
+          {officialLinks.map((link) => (
+            <li>
+              <a href={link.url} target="_blank" rel="noopener nofollow">
+                <span>{link.label}</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p class="small muted" style="margin-top:10px">
+          Source host: {officialHost}. FollowExam does not accept applications, fees or documents on behalf of any
+          department.
         </p>
-        <p>
-          <strong>Age limit:</strong>{" "}
-          {job.age?.min || job.age?.max
-            ? `${job.age?.min ?? "—"} se ${job.age?.max ?? "—"} years`
-            : "Notification ke according"}{" "}
-          {job.age?.note ? `— ${job.age.note}` : ""}
-        </p>
-        <p>
-          <strong>Selection process:</strong> Official notification me diye gaye stages (written exam, interview,
-          skill test, document verification) follow karein. FollowExam kisi bhi stage ka conduct nahi karta.
-        </p>
-      </section>
-
-      <section class="detail-section">
-        <h2>How to apply / check update</h2>
-        <ol>
-          <li>Neeche diye official link par jayein.</li>
-          <li>Latest notification ya result PDF open karein.</li>
-          <li>Eligibility, dates aur fee carefully check karein.</li>
-          <li>Apply online karein ya result/admit card download karein.</li>
-          <li>Application form aur payment receipt ka print/screenshot rakhein.</li>
-        </ol>
       </section>
 
       {related.length > 0 && (
@@ -211,10 +325,33 @@ const schema = {
     </article>
 
     <aside>
+      <div class="sidebar-card">
+        <h3>Official notification</h3>
+        <p>The original notice is the final source for every detail on this page.</p>
+        <div class="sidebar-actions">
+          <a class="btn btn-primary" href={job.notificationUrl} target="_blank" rel="noopener nofollow">
+            Open notification ↗
+          </a>
+          <a class="btn btn-outline" href={job.officialUrl} target="_blank" rel="noopener nofollow">
+            Official website ↗
+          </a>
+          <button
+            class="btn btn-outline"
+            type="button"
+            data-save-job
+            data-job-id={job.id}
+            data-job-title={job.title}
+          >
+            ☆ Save this update
+          </button>
+          <button class="btn btn-ghost" type="button" data-share-job>Share</button>
+        </div>
+      </div>
+
       {exam ? (
         <div class="sidebar-card">
           <h3>{exam.name} cycle</h3>
-          <p>Is update ka exam aur uska typical schedule.</p>
+          <p>The exam linked to this update and its usual schedule.</p>
           <div class="facts">
             <div><span>Next phase</span><strong>{nextPhaseLabel(exam)}</strong></div>
             <div><span>Notification</span><strong>{monthLabel(exam.cycle.notification)}</strong></div>
@@ -228,34 +365,6 @@ const schema = {
       ) : null}
 
       <div class="sidebar-card">
-        <h3>Official links</h3>
-        <p>Apply ya verify karne ke liye sirf official website use karein.</p>
-        <div class="sidebar-actions">
-          <a class="btn btn-primary" href={job.officialUrl} target="_blank" rel="noopener nofollow">
-            Official website ↗
-          </a>
-          {job.notificationUrl && job.notificationUrl !== job.officialUrl && (
-            <a class="btn btn-outline" href={job.notificationUrl} target="_blank" rel="noopener nofollow">
-              Notification / PDF ↗
-            </a>
-          )}
-          <button
-            class="btn btn-outline"
-            type="button"
-            data-save-job
-            data-job-id={job.id}
-            data-job-title={job.title}
-          >
-            ☆ Save this update
-          </button>
-          <button class="btn btn-ghost" type="button" data-share-job>Share</button>
-        </div>
-        <p class="small muted" style="margin:12px 0 0">
-          Source host: {officialHost}
-        </p>
-      </div>
-
-      <div class="sidebar-card">
         <h3>Quick facts</h3>
         <div class="facts">
           <div><span>Category</span><strong>{meta.label}</strong></div>
@@ -267,7 +376,7 @@ const schema = {
 
       <div class="sidebar-card">
         <h3>Daily alerts</h3>
-        <p>Nayi update aate hi email par paayein.</p>
+        <p>Get matching updates in your inbox once a day.</p>
         <SubscribeForm compact source={`job-${job.slug}`} />
       </div>
     </aside>
@@ -304,7 +413,7 @@ const schema = {
       const saved = await toggleJobSaved(jobId, currentUser);
       paint(saved);
     } catch (error) {
-      alert(error instanceof Error ? error.message : "Save nahi ho paya.");
+      alert(error instanceof Error ? error.message : "Could not save this update.");
     } finally {
       saveButton.disabled = false;
     }

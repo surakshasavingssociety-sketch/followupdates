@@ -1,0 +1,33 @@
+---
+import type { Scholarship } from "../lib/types";
+
+type Props = { scholarship: Scholarship };
+
+const { scholarship } = Astro.props;
+const scopeLabel = scholarship.scope === "central" ? "Central scheme" : scholarship.stateName || "State scheme";
+---
+
+<article class="scholarship-card">
+  <div class="job-card-top">
+    <span class:list={["badge", scholarship.scope === "central" ? "badge-green" : "badge-blue"]}>{scopeLabel}</span>
+    <span class="badge badge-muted">{scholarship.level[0]}</span>
+  </div>
+
+  <h3><a href={`/scholarships/${scholarship.slug}/`}>{scholarship.name}</a></h3>
+  <div class="job-org">
+    <span aria-hidden="true">🏛</span>
+    {scholarship.provider}
+  </div>
+
+  <p class="small muted" style="margin:8px 0 0">{scholarship.amount}</p>
+
+  <div class="job-meta">
+    {scholarship.level.slice(0, 2).map((level) => <span>🎓 {level}</span>)}
+    <span>🗓️ {scholarship.deadlineText}</span>
+  </div>
+
+  <div class="card-foot">
+    <a class="link-arrow" href={`/scholarships/${scholarship.slug}/`}>View scheme →</a>
+    <a class="link-arrow" href={scholarship.portalUrl} target="_blank" rel="noopener nofollow">Official portal ↗</a>
+  </div>
+</article>

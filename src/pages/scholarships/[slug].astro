@@ -1,0 +1,255 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ScholarshipCard from "../../components/ScholarshipCard.astro";
+import SubscribeForm from "../../components/SubscribeForm.astro";
+import { SITE } from "../../lib/constants";
+import { monthLabel } from "../../lib/exams";
+import { getScholarship, scholarships } from "../../lib/scholarships";
+import { getState } from "../../lib/states";
+import type { Scholarship } from "../../lib/types";
+
+export function getStaticPaths() {
+  return scholarships.map((scholarship) => ({
+    params: { slug: scholarship.slug },
+    props: { scholarship },
+  }));
+}
+
+type Props = { scholarship: Scholarship };
+const { scholarship } = Astro.props;
+
+const stateInfo = scholarship.stateId ? getState(scholarship.stateId) : undefined;
+const scopeLabel = scholarship.scope === "central" ? "Central scheme" : scholarship.stateName || "State scheme";
+
+const related = scholarships
+  .filter(
+    (item) =>
+      item.id !== scholarship.id &&
+      (item.scope === scholarship.scope || item.stateId === scholarship.stateId),
+  )
+  .slice(0, 3);
+
+const officialLinks = [
+  { label: "Official application portal", url: scholarship.portalUrl },
+  { label: "Official scheme page", url: scholarship.officialUrl },
+].filter((link, index, all) => all.findIndex((item) => item.url === link.url) === index);
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: scholarship.name,
+    description: scholarship.summary,
+    url: `${SITE.url}/scholarships/${scholarship.slug}/`,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE.url}/` },
+      { "@type": "ListItem", position: 2, name: "Scholarships", item: `${SITE.url}/scholarships/` },
+      { "@type": "ListItem", position: 3, name: scholarship.name, item: `${SITE.url}/scholarships/${scholarship.slug}/` },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title={`${scholarship.name} — Eligibility, Benefits & Application`}
+  description={`${scholarship.name} by ${scholarship.provider}. ${scholarship.amount}. Check eligibility, benefits, documents and the official application portal.`}
+  type="article"
+  schema={schema}
+>
+  <div class="container breadcrumb">
+    <a href="/">Dashboard</a>
+    <span>/</span>
+    <a href="/scholarships/">Scholarships</a>
+    <span>/</span>
+    {stateInfo ? <a href={`/states/${stateInfo.id}/`}>{stateInfo.name}</a> : <span>Central</span>}
+  </div>
+
+  <div class="container detail-layout">
+    <article class="panel detail-header">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <span class:list={["badge", scholarship.scope === "central" ? "badge-green" : "badge-blue"]}>{scopeLabel}</span>
+        <span class="badge badge-muted">{scholarship.level[0]}</span>
+        {scholarship.categories.length ? (
+          <span class="badge badge-violet">{scholarship.categories.slice(0, 3).join(" · ")}</span>
+        ) : null}
+      </div>
+
+      <h1>{scholarship.name}</h1>
+      <div class="detail-sub">
+        <span>🏛 {scholarship.provider}</span>
+        <span>🗓️ {scholarship.deadlineText}</span>
+        <span>💰 {scholarship.amount}</span>
+      </div>
+
+      <p class="detail-summary">{scholarship.summary}</p>
+
+      <div class="notification-cta">
+        <a class="btn btn-primary" href={scholarship.portalUrl} target="_blank" rel="noopener nofollow">
+          Open official application portal ↗
+        </a>
+        <p>
+          Apply only on the official portal. Read the current scheme guidelines for income limits, deadlines and
+          document requirements before submitting the form.
+        </p>
+      </div>
+
+      <div class="key-grid">
+        <div class="key-item">
+          <small>Provider</small>
+          <strong>{scholarship.provider}</strong>
+        </div>
+        <div class="key-item">
+          <small>Scope</small>
+          <strong>{scopeLabel}</strong>
+        </div>
+        <div class="key-item">
+          <small>Amount / benefit</small>
+          <strong>{scholarship.amount}</strong>
+        </div>
+        <div class="key-item">
+          <small>Education level</small>
+          <strong>{scholarship.level.join(", ")}</strong>
+        </div>
+        <div class="key-item">
+          <small>Categories</small>
+          <strong>{scholarship.categories.join(", ") || "As per scheme guidelines"}</strong>
+        </div>
+        <div class="key-item">
+          <small>Application window</small>
+          <strong>{scholarship.deadlineText}</strong>
+        </div>
+      </div>
+
+      {scholarship.eligibility.length ? (
+        <section class="detail-section">
+          <h2>Eligibility</h2>
+          <ul class="check-list">
+            {scholarship.eligibility.map((item) => <li>{item}</li>)}
+          </ul>
+        </section>
+      ) : null}
+
+      {scholarship.benefits.length ? (
+        <section class="detail-section">
+          <h2>Benefits</h2>
+          <ul class="highlight-list">
+            {scholarship.benefits.map((item) => <li>{item}</li>)}
+          </ul>
+        </section>
+      ) : null}
+
+      {scholarship.documents.length ? (
+        <section class="detail-section">
+          <h2>Documents to keep ready</h2>
+          <ul class="check-list">
+            {scholarship.documents.map((item) => <li>{item}</li>)}
+          </ul>
+        </section>
+      ) : null}
+
+      {scholarship.process.length ? (
+        <section class="detail-section">
+          <h2>How to apply</h2>
+          <ol class="step-list">
+            {scholarship.process.map((step) => <li>{step}</li>)}
+          </ol>
+        </section>
+      ) : null}
+
+      <section class="detail-section">
+        <h2>Application window</h2>
+        <div class="table-wrap">
+          <table class="date-table">
+            <tbody>
+              <tr>
+                <th>Typical opening months</th>
+                <td>{monthLabel(scholarship.cycleMonths)}</td>
+              </tr>
+              <tr>
+                <th>Deadline</th>
+                <td>{scholarship.deadlineText}</td>
+              </tr>
+              <tr>
+                <th>Mode</th>
+                <td>Online through the official scholarship portal</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small muted" style="margin-top:10px">
+          The months above are the usual window. The exact dates for the current year are published on the official
+          portal.
+        </p>
+      </section>
+
+      <section class="detail-section">
+        <h2>Official links</h2>
+        <ul class="link-list">
+          {officialLinks.map((link) => (
+            <li>
+              <a href={link.url} target="_blank" rel="noopener nofollow">
+                <span>{link.label}</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p class="small muted" style="margin-top:10px">
+          FollowExam does not accept scholarship applications or payments on behalf of any department.
+        </p>
+      </section>
+
+      {related.length ? (
+        <section class="detail-section">
+          <h2>Related schemes</h2>
+          <div class="grid-3">
+            {related.map((item) => <ScholarshipCard scholarship={item} />)}
+          </div>
+        </section>
+      ) : null}
+    </article>
+
+    <aside>
+      <div class="sidebar-card">
+        <h3>Apply on the official portal</h3>
+        <p>Keep your documents ready and submit the form before the deadline.</p>
+        <div class="sidebar-actions">
+          <a class="btn btn-primary" href={scholarship.portalUrl} target="_blank" rel="noopener nofollow">
+            Application portal ↗
+          </a>
+          <a class="btn btn-outline" href="/scholarships/">All scholarships</a>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>Quick facts</h3>
+        <div class="facts">
+          <div><span>Scope</span><strong>{scopeLabel}</strong></div>
+          <div><span>Level</span><strong>{scholarship.level.join(", ")}</strong></div>
+          <div><span>Categories</span><strong>{scholarship.categories.join(", ") || "All eligible"}</strong></div>
+          <div><span>Deadline</span><strong>{scholarship.deadlineText}</strong></div>
+        </div>
+      </div>
+
+      {stateInfo ? (
+        <div class="sidebar-card">
+          <h3>{stateInfo.name}</h3>
+          <p>See every exam, institution and scholarship tracked for this state.</p>
+          <div class="sidebar-actions">
+            <a class="btn btn-outline" href={`/states/${stateInfo.id}/`}>Open state page →</a>
+          </div>
+        </div>
+      ) : null}
+
+      <div class="sidebar-card">
+        <h3>Scholarship alerts</h3>
+        <p>Get new scholarship openings and deadlines by email.</p>
+        <SubscribeForm compact source={`scholarship-${scholarship.slug}`} />
+      </div>
+    </aside>
+  </div>
+</BaseLayout>

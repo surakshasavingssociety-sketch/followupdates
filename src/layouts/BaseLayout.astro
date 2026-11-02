@@ -1,6 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import AuthGate from "../components/AuthGate.astro";
 import { SITE } from "../lib/constants";
 import "../styles/global.css";
 
@@ -11,6 +12,8 @@ type Props = {
   noindex?: boolean;
   type?: "website" | "article";
   schema?: Record<string, unknown> | Record<string, unknown>[];
+  /** Set to false for the login screen and the legal pages. */
+  gated?: boolean;
 };
 
 const {
@@ -20,6 +23,7 @@ const {
   noindex = false,
   type = "website",
   schema,
+  gated = true,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, SITE.url).toString();
@@ -53,7 +57,12 @@ const allSchema = [websiteSchema, ...(Array.isArray(schema) ? schema : schema ? 
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     {!noindex && <meta name="robots" content="index, follow, max-image-preview:large" />}
     <meta name="theme-color" content="#0b4f9c" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content={SITE.name} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="alternate" type="application/rss+xml" title={`${SITE.name} updates`} href="/feed.xml" />
 
@@ -78,8 +87,19 @@ const allSchema = [websiteSchema, ...(Array.isArray(schema) ? schema : schema ? 
     <a class="skip-link" href="#main">Skip to content</a>
     <Header />
     <main id="main">
-      <slot />
+      <AuthGate gated={gated}>
+        <slot />
+      </AuthGate>
     </main>
     <Footer />
+    <script>
+      if ("serviceWorker" in navigator && import.meta.env.PROD) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("/sw.js").catch(() => {
+            /* The app still works online without the service worker. */
+          });
+        });
+      }
+    </script>
   </body>
 </html>

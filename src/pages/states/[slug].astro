@@ -1,11 +1,15 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ExamCard from "../../components/ExamCard.astro";
+import InstitutionCard from "../../components/InstitutionCard.astro";
 import JobCard from "../../components/JobCard.astro";
+import ScholarshipCard from "../../components/ScholarshipCard.astro";
 import SubscribeForm from "../../components/SubscribeForm.astro";
 import { SITE } from "../../lib/constants";
 import { examsByState, monthLabel } from "../../lib/exams";
+import { institutionsByState } from "../../lib/institutions";
 import { jobs } from "../../lib/jobs";
+import { scholarshipsByState } from "../../lib/scholarships";
 import { getState, states } from "../../lib/states";
 import type { StateInfo } from "../../lib/types";
 
@@ -18,6 +22,8 @@ const { state } = Astro.props;
 
 const stateExams = examsByState(state.id);
 const stateJobs = jobs.filter((job) => job.state === state.name || job.stateId === state.id).slice(0, 6);
+const stateInstitutions = institutionsByState(state.id).slice(0, 6);
+const stateScholarships = scholarshipsByState(state.id).slice(0, 6);
 const bodies = [
   { label: "State portal", value: state.portal },
   state.psc ? { label: "Public Service Commission", value: state.psc[2] } : null,
@@ -29,8 +35,8 @@ const schema = [
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: `${state.name} government exams and jobs`,
-    description: `${state.name} PSC, police, TET and board exam cycles with official links.`,
+    name: `${state.name} government exams, jobs and scholarships`,
+    description: `${state.name} PSC, police, TET and board exam cycles, universities and scholarship schemes with official links.`,
     url: `${SITE.url}/states/${state.id}/`,
   },
   {
@@ -46,12 +52,12 @@ const schema = [
 ---
 
 <BaseLayout
-  title={`${state.name} Government Jobs & Exams — PSC, Police, TET, Board`}
-  description={`${state.name} government exam coverage: ${state.psc ? state.psc[0] : "state recruitment"}, police, TET and board exams with indicative cycles and official links.`}
+  title={`${state.name} Government Jobs, Exams & Scholarships — PSC, Police, TET, Board`}
+  description={`${state.name} government exam coverage: ${state.psc ? state.psc[0] : "state recruitment"}, police, TET and board exams with typical cycles, universities and scholarship schemes.`}
   schema={schema}
 >
   <div class="container breadcrumb">
-    <a href="/">Home</a>
+    <a href="/">Dashboard</a>
     <span>/</span>
     <a href="/states/">States</a>
     <span>/</span>
@@ -74,8 +80,8 @@ const schema = [
       </div>
 
       <p class="detail-summary">
-        {state.name} ke PSC, police, teacher eligibility aur school board exams ka ek overview. Neeche har exam ka
-        typical notification, exam aur result window diya gaya hai, saath me official portal links.
+        An overview of {state.name}'s PSC, police, teacher eligibility and school board exams, plus universities and
+        scholarship schemes in the state. Each exam shows its typical notification, exam and result window.
       </p>
 
       <section class="detail-section">
@@ -93,56 +99,80 @@ const schema = [
           </table>
         </div>
         <p class="small muted" style="margin-top:10px">
-          Government portals kabhi-kabhi domain badalte hain. Agar link kaam na kare to state ke official portal se
-          department dhoondein.
+          Government portals occasionally change domains. If a link does not open, search for the department from the
+          state's official portal.
         </p>
       </section>
 
-      <section class="detail-section">
-        <h2>Exam cycle overview</h2>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr><th>Exam</th><th>Notification</th><th>Exam</th><th>Result</th></tr>
-            </thead>
-            <tbody>
-              {stateExams.map((exam) => (
-                <tr>
-                  <td><a href={`/exams/${exam.slug}/`}>{exam.name}</a></td>
-                  <td>{monthLabel(exam.cycle.notification)}</td>
-                  <td>{monthLabel(exam.cycle.exam)}</td>
-                  <td>{monthLabel(exam.cycle.result)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <p class="small muted" style="margin-top:10px">
-          Months indicative hain. Exact dates official notification se confirm karein.
-        </p>
-      </section>
+      {stateExams.length ? (
+        <section class="detail-section">
+          <h2>Exam cycle overview</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Exam</th><th>Notification</th><th>Exam</th><th>Result</th></tr>
+              </thead>
+              <tbody>
+                {stateExams.map((exam) => (
+                  <tr>
+                    <td><a href={`/exams/${exam.slug}/`}>{exam.name}</a></td>
+                    <td>{monthLabel(exam.cycle.notification)}</td>
+                    <td>{monthLabel(exam.cycle.exam)}</td>
+                    <td>{monthLabel(exam.cycle.result)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p class="small muted" style="margin-top:10px">
+            Months are indicative. Confirm exact dates in the official notification.
+          </p>
+        </section>
+      ) : null}
+
+      {stateExams.length ? (
+        <section class="detail-section">
+          <h2>{state.name} exams</h2>
+          <div class="grid-3">
+            {stateExams.map((exam) => <ExamCard exam={exam} />)}
+          </div>
+        </section>
+      ) : null}
 
       <section class="detail-section">
-        <h2>{state.name} ke exams</h2>
-        <div class="grid-3">
-          {stateExams.map((exam) => <ExamCard exam={exam} />)}
-        </div>
-      </section>
-
-      <section class="detail-section">
-        <h2>{state.name} ki latest updates</h2>
+        <h2>Latest {state.name} updates</h2>
         {stateJobs.length > 0 ? (
           <div class="grid-3">
             {stateJobs.map((job) => <JobCard job={job} />)}
           </div>
         ) : (
           <p class="muted">
-            Is state ki latest updates abhi ingest queue me hain. Daily automation chalne ke baad yahan jobs, admit cards
-            aur results dikhne lagenge.
+            No analysed notification from {state.name} is published right now. New official updates appear here as
+            soon as they are verified.
           </p>
         )}
         <a class="link-arrow" href={`/jobs/?state=${encodeURIComponent(state.name)}`}>All {state.name} updates →</a>
       </section>
+
+      {stateInstitutions.length ? (
+        <section class="detail-section">
+          <h2>Institutions in {state.name}</h2>
+          <div class="grid-3">
+            {stateInstitutions.map((institution) => <InstitutionCard institution={institution} />)}
+          </div>
+          <a class="link-arrow" href="/institutions/">All institutions →</a>
+        </section>
+      ) : null}
+
+      {stateScholarships.length ? (
+        <section class="detail-section">
+          <h2>Scholarships in {state.name}</h2>
+          <div class="grid-3">
+            {stateScholarships.map((scholarship) => <ScholarshipCard scholarship={scholarship} />)}
+          </div>
+          <a class="link-arrow" href="/scholarships/">All scholarships →</a>
+        </section>
+      ) : null}
     </article>
 
     <aside>
@@ -167,7 +197,7 @@ const schema = [
 
       <div class="sidebar-card">
         <h3>{state.name} alerts</h3>
-        <p>Is state ki jobs, admit cards aur results email par paayein.</p>
+        <p>Get {state.name} jobs, admit cards and results by email.</p>
         <SubscribeForm compact source={`state-${state.id}`} />
       </div>
     </aside>

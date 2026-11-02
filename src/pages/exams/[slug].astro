@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CycleTimeline from "../../components/CycleTimeline.astro";
 import ExamCard from "../../components/ExamCard.astro";
+import InstitutionCard from "../../components/InstitutionCard.astro";
 import JobCard from "../../components/JobCard.astro";
 import SubscribeForm from "../../components/SubscribeForm.astro";
 import { SITE } from "../../lib/constants";
@@ -14,6 +15,7 @@ import {
   PHASE_META,
   PHASES,
 } from "../../lib/exams";
+import { institutionsByExam } from "../../lib/institutions";
 import { jobs } from "../../lib/jobs";
 import { getState } from "../../lib/states";
 import type { Exam } from "../../lib/types";
@@ -33,8 +35,10 @@ const relatedJobs = jobs
   .filter((job) => job.examId === exam.id || (job.examName && job.examName === exam.name))
   .slice(0, 3);
 
+const relatedInstitutions = institutionsByExam(exam.id).slice(0, 6);
+
 const relatedExams = exams
-  .filter((item) => item.id !== exam.id && (item.stream === exam.stream || (exam.stateId && item.stateId === exam.stateId)))
+  .filter((item) => item.id !== exam.id && (item.stream === exam.stream || (item.stateId && item.stateId === exam.stateId)))
   .slice(0, 6);
 
 const schema = [
@@ -42,7 +46,7 @@ const schema = [
     "@context": "https://schema.org",
     "@type": "WebPage",
     name: `${exam.name} — notification, exam and result cycle`,
-    description: `${exam.fullName}. ${exam.body}. Indicative cycle: notification ${monthLabel(exam.cycle.notification)}, exam ${monthLabel(exam.cycle.exam)}, result ${monthLabel(exam.cycle.result)}.`,
+    description: `${exam.fullName}. ${exam.body}. Typical cycle: notification ${monthLabel(exam.cycle.notification)}, exam ${monthLabel(exam.cycle.exam)}, result ${monthLabel(exam.cycle.result)}.`,
     url: `${SITE.url}/exams/${exam.slug}/`,
   },
   {
@@ -58,13 +62,13 @@ const schema = [
 ---
 
 <BaseLayout
-  title={`${exam.name} 2026-27 — Notification, Exam Date & Result Cycle`}
-  description={`${exam.fullName} by ${exam.body}. Check eligibility, official link and the typical notification, exam and result months. Indicative cycle only — verify on the official website.`}
+  title={`${exam.name} — Notification, Exam Date & Result Cycle`}
+  description={`${exam.fullName} by ${exam.body}. Check eligibility, official link and the typical notification, exam and result months. Verify the official schedule before applying.`}
   type="article"
   schema={schema}
 >
   <div class="container breadcrumb">
-    <a href="/">Home</a>
+    <a href="/">Dashboard</a>
     <span>/</span>
     <a href="/exams/">Exams</a>
     <span>/</span>
@@ -87,8 +91,8 @@ const schema = [
       </div>
 
       <p class="detail-summary">
-        {exam.fullName}. {exam.body} dwara conduct kiya jata hai. Neeche is exam ka typical cycle, eligibility
-        aur official link diya gaya hai. FollowExam khud koi exam conduct nahi karta.
+        {exam.fullName}, conducted by {exam.body}. Below are the typical cycle, eligibility snapshot and the official
+        link for notifications and results.
       </p>
 
       <div class="key-grid">
@@ -138,17 +142,17 @@ const schema = [
           </table>
         </div>
         <p class="small muted" style="margin-top:10px">
-          Age relaxation, category-wise eligibility aur educational requirements official notification me diye jate hain.
-          Ye table sirf quick reference hai.
+          Age relaxation, category-wise eligibility and educational requirements are set out in the official
+          notification. This table is a quick reference only.
         </p>
       </section>
 
       <section class="detail-section">
-        <h2>Important dates kaise kaam karte hain</h2>
+        <h2>How the phases work</h2>
         <div class="table-wrap">
           <table>
             <thead>
-              <tr><th>Phase</th><th>Typical months</th><th>Kya hota hai</th></tr>
+              <tr><th>Phase</th><th>Typical months</th><th>What happens</th></tr>
             </thead>
             <tbody>
               {PHASES.map((phase) => (
@@ -162,51 +166,61 @@ const schema = [
           </table>
         </div>
         <p>
-          Ye windows pichhle cycles ke pattern par based hain. Har saal dates badal sakti hain, isliye notification
-          release hone par official website par exact dates confirm karein.
+          These windows are based on past cycles. Dates change every year, so confirm the exact schedule when the
+          notification is released.
         </p>
       </section>
 
       <section class="detail-section">
-        <h2>Apply / check update — step by step</h2>
-        <ol>
-          <li>Official website kholiye aur latest notification ya advertisement download karein.</li>
-          <li>Qualification, age, category relaxation aur fee apne documents se match karein.</li>
-          <li>Registration karke application form bharein aur required documents upload karein.</li>
-          <li>Fee payment ke baad confirmation page aur receipt save karein.</li>
-          <li>Admit card, exam date aur result updates ke liye is page aur official portal dono check karte rahein.</li>
+        <h2>Apply or check an update — step by step</h2>
+        <ol class="step-list">
+          <li>Open the official website and download the latest notification or advertisement.</li>
+          <li>Match the qualification, age, category relaxation and fee with your documents.</li>
+          <li>Register, fill the application form and upload the required documents.</li>
+          <li>Save the confirmation page and payment receipt after paying the fee.</li>
+          <li>Track admit card, exam date and result updates on the official portal.</li>
         </ol>
       </section>
 
       <section class="detail-section">
         <h2>FAQs</h2>
         <details>
-          <summary>{exam.name} ka notification kab aata hai?</summary>
+          <summary>When is the {exam.name} notification released?</summary>
           <p>
-            Historically notification {monthLabel(exam.cycle.notification)} ke aas-paas aata hai. Ye indicative window hai;
-            official announcement kabhi bhi aa sakta hai.
+            Historically the notification appears around {monthLabel(exam.cycle.notification)}. This is an indicative
+            window; the official announcement can come at any time.
           </p>
         </details>
         <details>
-          <summary>{exam.name} exam kab hota hai?</summary>
+          <summary>When is the {exam.name} exam held?</summary>
           <p>
-            Typical exam window {monthLabel(exam.cycle.exam)} hai. Exact exam date admit card aur official calendar se confirm karein.
+            The typical exam window is {monthLabel(exam.cycle.exam)}. Confirm the exact date on the admit card and the
+            official calendar.
           </p>
         </details>
         <details>
-          <summary>Result kab declare hota hai?</summary>
+          <summary>When is the result declared?</summary>
           <p>
-            Result usually {monthLabel(exam.cycle.result)} ke around aata hai. Answer key aur final result ke liye official
-            website follow karein.
+            Results usually arrive around {monthLabel(exam.cycle.result)}. Follow the official website for the answer
+            key and final result.
           </p>
         </details>
       </section>
 
       {relatedJobs.length > 0 && (
         <section class="detail-section">
-          <h2>{exam.name} ki latest updates</h2>
+          <h2>Latest {exam.name} updates</h2>
           <div class="grid-3">
             {relatedJobs.map((job) => <JobCard job={job} />)}
+          </div>
+        </section>
+      )}
+
+      {relatedInstitutions.length > 0 && (
+        <section class="detail-section">
+          <h2>Institutions that accept this exam</h2>
+          <div class="grid-3">
+            {relatedInstitutions.map((institution) => <InstitutionCard institution={institution} />)}
           </div>
         </section>
       )}
@@ -224,7 +238,7 @@ const schema = [
     <aside>
       <div class="sidebar-card">
         <h3>Official links</h3>
-        <p>Notification, application aur result ke liye sirf official website use karein.</p>
+        <p>Use the official website for the notification, application and result.</p>
         <div class="sidebar-actions">
           <a class="btn btn-primary" href={exam.officialUrl} target="_blank" rel="noopener nofollow">
             Official website ↗
@@ -251,7 +265,7 @@ const schema = [
 
       <div class="sidebar-card">
         <h3>Daily alerts</h3>
-        <p>{exam.name} aur baaki government exam updates email par paayein.</p>
+        <p>Get {exam.name} and other government exam updates by email.</p>
         <SubscribeForm compact source={`exam-${exam.slug}`} />
       </div>
     </aside>

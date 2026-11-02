@@ -17,7 +17,7 @@ const currentMonth = new Date().getMonth() + 1;
         <span class:list={["badge", `badge-${meta.tone}`]}>{meta.short}</span>
         <strong>{monthLabel(exam.cycle[phase])}</strong>
         <span class="cycle-note">{meta.label}</span>
-        {active ? <span class="cycle-now">Is mahine</span> : null}
+        {active ? <span class="cycle-now">This month</span> : null}
       </div>
     );
   })}

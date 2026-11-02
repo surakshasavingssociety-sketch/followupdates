@@ -1,0 +1,211 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import InstitutionCard from "../../components/InstitutionCard.astro";
+import { INSTITUTION_TYPE_LABELS, SITE } from "../../lib/constants";
+import { institutionDatabase, institutions } from "../../lib/institutions";
+
+const types = institutionDatabase.types.filter((type) => (institutionDatabase.counts.byType[type.id] || 0) > 0);
+const states = [...new Map(institutions.map((item) => [item.stateId, item.stateName])).entries()]
+  .map(([id, name]) => ({ id, name }))
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+const groups = types
+  .map((type) => ({
+    type,
+    items: institutions.filter((item) => item.type === type.id),
+  }))
+  .filter((group) => group.items.length > 0);
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Government institutes and universities in India",
+    description:
+      "IITs, NITs, IIITs, AIIMS, IIMs, National Law Universities, central universities and state universities with admission portals and accepted exams.",
+    url: `${SITE.url}/institutions/`,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE.url}/` },
+      { "@type": "ListItem", position: 2, name: "Institutions", item: `${SITE.url}/institutions/` },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Institutions — IITs, NITs, AIIMS, IIMs, NLUs & Universities"
+  description="Browse Indian government institutes and universities: IITs, NITs, IIITs, AIIMS, IIMs, National Law Universities, central universities and state universities, with official admission portals."
+  schema={schema}
+>
+  <section class="section-tight" style="padding-top:30px">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Dashboard</a><span aria-hidden="true">/</span><span>Institutions</span>
+      </nav>
+
+      <div class="section-head" style="margin-bottom:14px">
+        <div>
+          <h1 style="font-size:clamp(1.8rem,3.6vw,2.5rem)">Institutions</h1>
+          <p>
+            {institutionDatabase.counts.total} government institutes and universities across{" "}
+            {institutionDatabase.counts.states} states and union territories, with the exams they accept and their
+            official admission portals.
+          </p>
+        </div>
+        <a class="btn btn-outline btn-sm" href="/exams/">🏛 Exam database</a>
+      </div>
+
+      <div class="dash-stats" style="margin-bottom:22px">
+        <div class="dash-stat">
+          <span>Institutions</span>
+          <strong>{institutionDatabase.counts.total}</strong>
+        </div>
+        <div class="dash-stat">
+          <span>Categories</span>
+          <strong>{types.length}</strong>
+        </div>
+        <div class="dash-stat">
+          <span>States and UTs</span>
+          <strong>{institutionDatabase.counts.states}</strong>
+        </div>
+        <div class="dash-stat">
+          <span>Scholarships</span>
+          <strong><a href="/scholarships/" style="color:inherit">View →</a></strong>
+        </div>
+      </div>
+
+      <div class="notice-bar" style="margin-bottom:20px">
+        <div class="container" style="padding:0">
+          <strong>Note:</strong> admission portals and exam requirements are updated every cycle. Confirm the current
+          process on the institute's official website before applying.
+        </div>
+      </div>
+
+      <form class="filter-panel" role="search" onsubmit="return false">
+        <div class="filter-row" style="grid-template-columns:1.6fr 1fr">
+          <div class="field">
+            <label for="institution-search">Search institutions</label>
+            <input
+              class="input"
+              id="institution-search"
+              type="search"
+              placeholder="IIT Bombay, AIIMS Delhi, NLU…"
+              autocomplete="off"
+            />
+          </div>
+          <div class="field">
+            <label for="institution-state">State / UT</label>
+            <select class="select" id="institution-state">
+              <option value="">All states</option>
+              {states.map((state) => <option value={state.name}>{state.name}</option>)}
+            </select>
+          </div>
+        </div>
+        <div class="filter-foot">
+          <div class="chips">
+            {groups.map((group) => (
+              <a class="chip" href={`#type-${group.type.id}`}>{INSTITUTION_TYPE_LABELS[group.type.id] || group.type.typeName}</a>
+            ))}
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span class="result-count" id="institution-count">{institutions.length} institutions</span>
+            <button class="btn btn-outline btn-sm" type="button" id="clear-institution-filters">Clear</button>
+          </div>
+        </div>
+      </form>
+
+      {groups.map((group) => (
+        <section data-institution-group id={`type-${group.type.id}`} style="margin-top:30px">
+          <div class="section-head" style="margin-bottom:14px">
+            <div>
+              <h2 style="font-size:clamp(1.3rem,2.4vw,1.7rem)">
+                {INSTITUTION_TYPE_LABELS[group.type.id] || group.type.typeName}
+              </h2>
+              <p>{group.type.typeName} — {group.items.length} listed.</p>
+            </div>
+            <span class="badge badge-muted">{group.items.length}</span>
+          </div>
+          <div class="grid-3">
+            {group.items.map((institution) => (
+              <div
+                data-institution-item
+                data-state={institution.stateName}
+                data-search={`${institution.name} ${institution.shortName} ${institution.city} ${institution.stateName} ${institution.streams.join(" ")}`.toLowerCase()}
+              >
+                <InstitutionCard institution={institution} />
+              </div>
+            ))}
+          </div>
+        </section>
+      ))}
+
+      <div class="empty" id="institution-empty" hidden>
+        <h3>No institution matches these filters</h3>
+        <p>Try another name or clear the state filter.</p>
+      </div>
+
+      <section class="panel" style="margin-top:28px">
+        <div class="section-head" style="margin-bottom:10px">
+          <div>
+            <h2 style="font-size:1.35rem">Choosing an institution</h2>
+            <p>Match the course, the entrance exam and your state quota.</p>
+          </div>
+          <a class="btn btn-primary btn-sm" href="/career/">Open career planner</a>
+        </div>
+        <ol class="step-list">
+          <li>Decide the course and stream you want before shortlisting institutes.</li>
+          <li>Check which entrance exam the institute accepts for that course.</li>
+          <li>Note the counselling authority: JoSAA, MCC, CSAB, state CET or the university itself.</li>
+          <li>Keep documents ready for verification and check the fee and scholarship options.</li>
+        </ol>
+      </section>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const search = document.querySelector<HTMLInputElement>("#institution-search");
+  const state = document.querySelector<HTMLSelectElement>("#institution-state");
+  const items = [...document.querySelectorAll<HTMLElement>("[data-institution-item]")];
+  const groups = [...document.querySelectorAll<HTMLElement>("[data-institution-group]")];
+  const empty = document.querySelector<HTMLElement>("#institution-empty");
+  const count = document.querySelector<HTMLElement>("#institution-count");
+  const clear = document.querySelector<HTMLButtonElement>("#clear-institution-filters");
+
+  function apply() {
+    const query = (search?.value || "").trim().toLowerCase();
+    const chosenState = state?.value || "";
+    let visible = 0;
+
+    items.forEach((item) => {
+      const matchSearch = !query || (item.dataset.search || "").includes(query);
+      const matchState = !chosenState || item.dataset.state === chosenState;
+      const match = matchSearch && matchState;
+      item.hidden = !match;
+      if (match) visible += 1;
+    });
+
+    groups.forEach((group) => {
+      const anyVisible = [...group.querySelectorAll<HTMLElement>("[data-institution-item]")].some(
+        (item) => !item.hidden,
+      );
+      group.hidden = !anyVisible;
+    });
+
+    if (empty) empty.hidden = visible > 0;
+    if (count) count.textContent = `${visible} institution${visible === 1 ? "" : "s"}`;
+  }
+
+  search?.addEventListener("input", apply);
+  state?.addEventListener("change", apply);
+
+  clear?.addEventListener("click", () => {
+    if (search) search.value = "";
+    if (state) state.value = "";
+    apply();
+  });
+</script>

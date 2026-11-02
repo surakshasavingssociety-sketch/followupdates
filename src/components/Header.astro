@@ -11,7 +11,7 @@ const isActive = (href: string) => (href === "/" ? path === "/" : path.startsWit
       <span class="brand-mark" aria-hidden="true">FE</span>
       <span>
         {SITE.name}
-        <small>Exam alerts, simplified</small>
+        <small>Every exam. One account.</small>
       </span>
     </a>
 
@@ -24,14 +24,13 @@ const isActive = (href: string) => (href === "/" ? path === "/" : path.startsWit
     </nav>
 
     <div class="header-actions">
-      <a class="btn btn-outline btn-sm" href="/account/">Saved</a>
-      {SITE.telegram ? (
-        <a class="btn btn-primary btn-sm" href={SITE.telegram} target="_blank" rel="noopener">
-          Join Telegram
-        </a>
-      ) : (
-        <a class="btn btn-primary btn-sm" href="/#alerts">Get alerts</a>
-      )}
+      <button class="btn btn-ghost btn-sm hidden" type="button" id="install-app">Install app</button>
+      <a class="btn btn-outline btn-sm hidden" href="/profile/" id="header-profile">
+        <span class="avatar avatar-sm" id="header-avatar" aria-hidden="true">FE</span>
+        <span id="header-name">My profile</span>
+      </a>
+      <a class="btn btn-primary btn-sm" href="/login/" id="header-signin">Sign in</a>
+      <button class="btn btn-ghost btn-sm hidden" type="button" id="header-signout">Sign out</button>
       <button class="menu-toggle" type="button" aria-controls="primary-nav" aria-expanded="false">
         <span class="sr-only">Menu</span>
         <span aria-hidden="true">☰</span>
@@ -41,10 +40,66 @@ const isActive = (href: string) => (href === "/" ? path === "/" : path.startsWit
 </header>
 
 <script>
+  import { signOutUser, watchAuth } from "../lib/auth";
+
   const toggle = document.querySelector<HTMLButtonElement>(".menu-toggle");
   const nav = document.querySelector<HTMLElement>("#primary-nav");
   toggle?.addEventListener("click", () => {
     const open = nav?.classList.toggle("open");
     toggle.setAttribute("aria-expanded", String(Boolean(open)));
   });
+
+  const profileLink = document.querySelector<HTMLElement>("#header-profile");
+  const nameEl = document.querySelector<HTMLElement>("#header-name");
+  const avatar = document.querySelector<HTMLElement>("#header-avatar");
+  const signIn = document.querySelector<HTMLElement>("#header-signin");
+  const signOut = document.querySelector<HTMLElement>("#header-signout");
+
+  function initials(name: string) {
+    return (
+      name
+        .split(/\s+/)
+        .filter(Boolean)
+        .slice(0, 2)
+        .map((part) => part[0]?.toUpperCase() || "")
+        .join("") || "FE"
+    );
+  }
+
+  watchAuth((user) => {
+    if (user) {
+      const label = user.displayName || user.email?.split("@")[0] || "My profile";
+      if (nameEl) nameEl.textContent = label;
+      if (avatar) avatar.textContent = initials(label);
+      profileLink?.classList.remove("hidden");
+      signIn?.classList.add("hidden");
+      signOut?.classList.remove("hidden");
+    } else {
+      profileLink?.classList.add("hidden");
+      signIn?.classList.remove("hidden");
+      signOut?.classList.add("hidden");
+    }
+  });
+
+  signOut?.addEventListener("click", async () => {
+    await signOutUser();
+    window.location.href = "/login/";
+  });
+
+  /* PWA install prompt */
+  const installButton = document.querySelector<HTMLButtonElement>("#install-app");
+  let deferredPrompt: any = null;
+  window.addEventListener("beforeinstallprompt", (event) => {
+    event.preventDefault();
+    deferredPrompt = event;
+    installButton?.classList.remove("hidden");
+  });
+  installButton?.addEventListener("click", async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    await deferredPrompt.userChoice;
+    deferredPrompt = null;
+    installButton.classList.add("hidden");
+  });
+  window.addEventListener("appinstalled", () => installButton?.classList.add("hidden"));
 </script>

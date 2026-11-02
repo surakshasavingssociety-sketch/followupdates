@@ -4,7 +4,6 @@ import ExamCard from "../../components/ExamCard.astro";
 import { SITE } from "../../lib/constants";
 import { centralExams, examDatabase, examStreams, examsByStream, stateExams } from "../../lib/exams";
 
-const central = centralExams();
 const stateList = stateExams();
 const stateStream = examStreams.find((stream) => stream.id === "state");
 const groups = examStreams
@@ -37,13 +36,13 @@ const schema = [
 
 <BaseLayout
   title="Government Exam Database — Cycles, Eligibility & Official Links"
-  description="Browse SSC, UPSC, Railways, Banking, Teaching, Defence, Medical, Engineering, Law and state government exams with indicative notification, exam and result cycles."
+  description="Browse SSC, UPSC, Railways, Banking, Teaching, Defence, Medical, Engineering, Law and state government exams with notification, exam and result windows."
   schema={schema}
 >
   <section class="section-tight" style="padding-top:30px">
     <div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="/">Home</a><span aria-hidden="true">/</span><span>Exams</span>
+        <a href="/">Dashboard</a><span aria-hidden="true">/</span><span>Exams</span>
       </nav>
 
       <div class="section-head" style="margin-bottom:14px">
@@ -51,7 +50,7 @@ const schema = [
           <h1 style="font-size:clamp(1.8rem,3.6vw,2.5rem)">Exam database</h1>
           <p>
             {examDatabase.counts.total} exams tracked · {examDatabase.counts.central} central · {examDatabase.counts.state} state/UT.
-            Har exam ka typical notification, exam aur result window ek jagah.
+            Notification, exam and result windows for each exam in one place.
           </p>
         </div>
         <a class="btn btn-outline btn-sm" href="/calendar/">📅 Exam calendar</a>
@@ -59,14 +58,15 @@ const schema = [
 
       <div class="notice-bar" style="margin-bottom:18px">
         <div class="container" style="padding:0">
-          <strong>Note:</strong> Months indicative patterns hain, official schedule nahi. Apply se pehle exam ki official website par dates zaroor check karein.
+          <strong>Note:</strong> the months shown are typical patterns, not official schedules. Always confirm dates on
+          the exam's official website before applying.
         </div>
       </div>
 
       <form class="filter-panel" role="search" onsubmit="return false">
         <div class="filter-row" style="grid-template-columns:1fr auto">
           <div class="field">
-            <label for="exam-search">Exam dhoondein</label>
+            <label for="exam-search">Search exams</label>
             <input
               class="input"
               id="exam-search"
@@ -105,20 +105,21 @@ const schema = [
       </div>
 
       <div class="empty" id="exam-empty" hidden>
-        <h3>Koi exam nahi mila</h3>
-        <p>Doosra naam try karein, jaise SSC, UPSC, NEET, BPSC ya GATE.</p>
+        <h3>No exam found</h3>
+        <p>Try another name, such as SSC, UPSC, NEET, BPSC or GATE.</p>
       </div>
 
       <section class="panel mt-3" style="margin-top:28px">
         <div class="section-head" style="margin-bottom:10px">
           <div>
             <h2 style="font-size:1.35rem">📍 State-wise exams</h2>
-            <p>{examDatabase.counts.states} states aur union territories ke PSC, police, TET aur board exams.</p>
+            <p>{examDatabase.counts.states} states and union territories with PSC, police, TET and board exams.</p>
           </div>
           <a class="btn btn-primary btn-sm" href="/states/">Browse states</a>
         </div>
         <p class="muted" style="margin:0">
-          {stateList.length} state-level exam cycles tracked. Apne state ka page kholkar PSC, police constable, SI, TET aur board exam windows dekhein.
+          {stateList.length} state-level exam cycles tracked. Open your state page to see PSC, police constable, SI, TET
+          and board exam windows.
         </p>
       </section>
     </div>

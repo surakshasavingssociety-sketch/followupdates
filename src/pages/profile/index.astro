@@ -1,0 +1,360 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { SITE } from "../../lib/constants";
+import { CAREER_GOALS, EDUCATION_LEVELS } from "../../lib/profile";
+import { states } from "../../lib/states";
+
+const streams = ["Science (PCM)", "Science (PCB)", "Science (PCMB)", "Commerce", "Arts / Humanities", "Engineering", "Medical", "Other"];
+const interestOptions = [
+  "Engineering",
+  "Medical",
+  "Civil Services",
+  "Defence",
+  "Banking",
+  "Teaching",
+  "Law",
+  "Management",
+  "Railways",
+  "Research",
+  "Sports",
+  "Arts and design",
+];
+---
+
+<BaseLayout
+  title="My profile"
+  description="Maintain your education level, state, career goal and interests to get personalised exam, scholarship and institution recommendations."
+  noindex
+>
+  <section class="section-tight" style="padding-top:30px">
+    <div class="container">
+      <div class="breadcrumb" style="padding:0 0 14px">
+        <a href="/">Dashboard</a><span>/</span><span>My profile</span>
+      </div>
+
+      <div class="section-head" style="margin-bottom:18px">
+        <div>
+          <div class="eyebrow">Your account</div>
+          <h1 style="font-size:clamp(1.8rem,3.6vw,2.5rem)">My profile</h1>
+          <p>
+            This is the information FollowExam uses to recommend exams, scholarships, institutions and a career
+            roadmap. You can change it at any time.
+          </p>
+        </div>
+        <span class="badge badge-blue" id="profile-completion">Profile 0% complete</span>
+      </div>
+
+      <div class="profile-layout">
+        <div class="panel">
+          <form id="profile-form" class="form-grid">
+            <div class="field full">
+              <label for="profile-name">Full name *</label>
+              <input class="input" id="profile-name" name="name" autocomplete="name" required />
+            </div>
+
+            <div class="field">
+              <label for="profile-email">Email</label>
+              <input class="input" id="profile-email" name="email" type="email" autocomplete="email" readonly />
+            </div>
+
+            <div class="field">
+              <label for="profile-phone">Mobile number</label>
+              <input class="input" id="profile-phone" name="phone" type="tel" autocomplete="tel" placeholder="+91XXXXXXXXXX" />
+            </div>
+
+            <div class="field">
+              <label for="profile-state">State / UT</label>
+              <select class="select" id="profile-state" name="stateId">
+                <option value="">Select your state</option>
+                {states.map((state) => (
+                  <option value={state.id}>{state.name}</option>
+                ))}
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="profile-level">Current education level</label>
+              <select class="select" id="profile-level" name="educationLevel">
+                <option value="">Select your level</option>
+                {EDUCATION_LEVELS.map((level) => (
+                  <option value={level}>{level}</option>
+                ))}
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="profile-stream">Stream / subject</label>
+              <select class="select" id="profile-stream" name="stream">
+                <option value="">Select your stream</option>
+                {streams.map((stream) => (
+                  <option value={stream}>{stream}</option>
+                ))}
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="profile-dob">Date of birth</label>
+              <input class="input" id="profile-dob" name="dateOfBirth" type="date" autocomplete="bday" />
+            </div>
+
+            <div class="field">
+              <label for="profile-goal">Career goal</label>
+              <select class="select" id="profile-goal" name="careerGoal">
+                <option value="">Select a goal</option>
+                {CAREER_GOALS.map((goal) => (
+                  <option value={goal}>{goal}</option>
+                ))}
+              </select>
+            </div>
+
+            <div class="field full">
+              <label>Interests</label>
+              <div class="check-grid">
+                {interestOptions.map((interest) => (
+                  <label class="check-item">
+                    <input type="checkbox" name="interests" value={interest} />
+                    <span>{interest}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <div class="field full">
+              <label class="check-item" style="display:inline-flex">
+                <input type="checkbox" id="profile-alerts" name="emailAlerts" />
+                <span>Send me a daily email digest of updates that match my profile</span>
+              </label>
+            </div>
+
+            <div class="field full" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+              <button class="btn btn-primary" type="submit" id="profile-save">Save profile</button>
+              <a class="btn btn-outline" href="/career/">View career roadmap</a>
+              <span class="form-message" id="profile-message" role="status"></span>
+            </div>
+          </form>
+        </div>
+
+        <aside>
+          <div class="sidebar-card">
+            <h3>Signed in as</h3>
+            <div class="account-user" style="margin-bottom:10px">
+              <span class="avatar" id="profile-avatar" aria-hidden="true">FE</span>
+              <div>
+                <strong id="profile-display-name">Student</strong>
+                <div class="small muted" id="profile-provider">—</div>
+              </div>
+            </div>
+            <div class="facts">
+              <div><span>Email</span><strong id="profile-account-email">—</strong></div>
+              <div><span>Phone</span><strong id="profile-account-phone">—</strong></div>
+              <div><span>User ID</span><strong id="profile-uid" style="word-break:break-all">—</strong></div>
+            </div>
+            <div class="sidebar-actions" style="margin-top:12px">
+              <a class="btn btn-outline" href="/account/">Saved updates</a>
+              <button class="btn btn-ghost" type="button" id="profile-signout">Sign out</button>
+              <button class="btn btn-danger" type="button" id="profile-delete">Delete my profile data</button>
+            </div>
+            <p class="small muted" style="margin:10px 0 0">
+              Deleting profile data removes your education details and saved updates. You can create the profile again
+              after signing in.
+            </p>
+          </div>
+
+          <div class="sidebar-card">
+            <h3>Why this matters</h3>
+            <p class="small">
+              Your class level decides which exams you can apply for. Your state decides which PSC, police, board and
+              scholarship schemes appear first. Your goal decides the roadmap order.
+            </p>
+            <p class="small muted" style="margin:0">
+              Everything is stored in your own account and is never sold or shared. Read the
+              <a href="/privacy/">privacy policy</a>.
+            </p>
+          </div>
+
+          <div class="sidebar-card">
+            <h3>Need help?</h3>
+            <p class="small muted">Write to <a href={`mailto:${SITE.email}`}>{SITE.email}</a> and we will respond within two working days.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  import { signOutUser, watchAuth } from "../../lib/auth";
+  import { CAREER_PATHS, loadProfile, saveProfile } from "../../lib/profile";
+  import { getFirebaseDb } from "../../lib/firebase";
+  import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
+  import type { User } from "firebase/auth";
+  import type { UserProfile } from "../../lib/types";
+
+  const form = document.querySelector<HTMLFormElement>("#profile-form");
+  const message = document.querySelector<HTMLElement>("#profile-message");
+  const completionBadge = document.querySelector<HTMLElement>("#profile-completion");
+  let currentUser: User | null = null;
+
+  function show(text: string, type: "error" | "success" | "info" = "info") {
+    if (!message) return;
+    message.textContent = text;
+    message.className = `form-message show ${type}`;
+  }
+
+  function initials(name: string) {
+    return (
+      name
+        .split(/\s+/)
+        .filter(Boolean)
+        .slice(0, 2)
+        .map((part) => part[0]?.toUpperCase() || "")
+        .join("") || "FE"
+    );
+  }
+
+  function setText(id: string, value: string) {
+    const element = document.querySelector<HTMLElement>(id);
+    if (element) element.textContent = value;
+  }
+
+  function completion(profile: Partial<UserProfile>) {
+    const fields = [
+      profile.name,
+      profile.stateId,
+      profile.educationLevel,
+      profile.careerGoal,
+      profile.stream,
+      profile.dateOfBirth,
+    ];
+    const filled = fields.filter((value) => Boolean(value && String(value).trim())).length;
+    return Math.round((filled / fields.length) * 100);
+  }
+
+  function fill(profile: UserProfile | null, user: User) {
+    const name = profile?.name || user.displayName || user.email?.split("@")[0] || "";
+    const nameInput = document.querySelector<HTMLInputElement>("#profile-name");
+    if (nameInput) nameInput.value = name;
+
+    const emailInput = document.querySelector<HTMLInputElement>("#profile-email");
+    if (emailInput) emailInput.value = profile?.email || user.email || "";
+
+    const phoneInput = document.querySelector<HTMLInputElement>("#profile-phone");
+    if (phoneInput) phoneInput.value = profile?.phone || user.phoneNumber || "";
+
+    const setSelect = (id: string, value?: string) => {
+      const element = document.querySelector<HTMLSelectElement>(id);
+      if (element) element.value = value || "";
+    };
+    setSelect("#profile-state", profile?.stateId);
+    setSelect("#profile-level", profile?.educationLevel);
+    setSelect("#profile-stream", profile?.stream);
+    setSelect("#profile-goal", profile?.careerGoal);
+
+    const dob = document.querySelector<HTMLInputElement>("#profile-dob");
+    if (dob) dob.value = profile?.dateOfBirth || "";
+
+    const interests = new Set(profile?.interests || []);
+    document.querySelectorAll<HTMLInputElement>('input[name="interests"]').forEach((input) => {
+      input.checked = interests.has(input.value);
+    });
+
+    const alerts = document.querySelector<HTMLInputElement>("#profile-alerts");
+    if (alerts) alerts.checked = profile?.emailAlerts !== false;
+
+    setText("#profile-avatar", initials(name));
+    setText("#profile-display-name", name || "Student");
+    setText("#profile-account-email", user.email || profile?.email || "—");
+    setText("#profile-account-phone", user.phoneNumber || profile?.phone || "—");
+    setText("#profile-uid", user.uid);
+    setText(
+      "#profile-provider",
+      user.providerData.map((provider) => provider.providerId.replace(".com", "")).join(", ") || "Email",
+    );
+
+    const percent = completion(profile || {});
+    if (completionBadge) {
+      completionBadge.textContent = `Profile ${percent}% complete`;
+      completionBadge.className = `badge ${percent >= 80 ? "badge-green" : percent >= 40 ? "badge-amber" : "badge-blue"}`;
+    }
+  }
+
+  watchAuth(async (user) => {
+    currentUser = user;
+    if (!user) {
+      fill(null, { uid: "", providerData: [] } as unknown as User);
+      return;
+    }
+    const profile = await loadProfile(user);
+    fill(profile, user);
+    if (profile?.careerGoal && CAREER_PATHS[profile.careerGoal]) {
+      show(`Roadmap ready for ${profile.careerGoal}.`, "info");
+    }
+  });
+
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!currentUser) {
+      show("Sign in first to save your profile.", "error");
+      return;
+    }
+
+    const data = new FormData(form);
+    const stateId = String(data.get("stateId") || "");
+    const stateName =
+      document.querySelector<HTMLSelectElement>("#profile-state")?.selectedOptions[0]?.textContent || "";
+    const interests = [...form.querySelectorAll<HTMLInputElement>('input[name="interests"]:checked')].map(
+      (input) => input.value,
+    );
+
+    const button = document.querySelector<HTMLButtonElement>("#profile-save");
+    if (button) button.disabled = true;
+    show("Saving…", "info");
+
+    try {
+      await saveProfile(currentUser, {
+        name: String(data.get("name") || "").trim(),
+        email: String(data.get("email") || "").trim(),
+        phone: String(data.get("phone") || "").trim(),
+        stateId,
+        stateName: stateId ? stateName : "",
+        educationLevel: String(data.get("educationLevel") || "") as UserProfile["educationLevel"],
+        stream: String(data.get("stream") || ""),
+        dateOfBirth: String(data.get("dateOfBirth") || ""),
+        careerGoal: String(data.get("careerGoal") || "") as UserProfile["careerGoal"],
+        interests,
+        emailAlerts: Boolean(data.get("emailAlerts")),
+      });
+      const refreshed = await loadProfile(currentUser);
+      fill(refreshed, currentUser);
+      show("Profile saved. Recommendations update immediately.", "success");
+    } catch (error) {
+      show(error instanceof Error ? error.message : "Could not save the profile.", "error");
+    } finally {
+      if (button) button.disabled = false;
+    }
+  });
+
+  document.querySelector("#profile-signout")?.addEventListener("click", async () => {
+    await signOutUser();
+    window.location.href = "/login/";
+  });
+
+  document.querySelector("#profile-delete")?.addEventListener("click", async () => {
+    if (!currentUser) return;
+    if (!confirm("Delete your profile details and saved updates? This cannot be undone.")) return;
+    const db = getFirebaseDb();
+    if (!db) {
+      show("Could not connect to the database.", "error");
+      return;
+    }
+    try {
+      const saved = await getDocs(collection(db, "users", currentUser.uid, "saved"));
+      await Promise.all(saved.docs.map((item) => deleteDoc(item.ref)));
+      await deleteDoc(doc(db, "users", currentUser.uid));
+      form?.reset();
+      show("Profile data deleted. You can create it again from this page.", "success");
+    } catch (error) {
+      show(error instanceof Error ? error.message : "Could not delete the profile data.", "error");
+    }
+  });
+</script>

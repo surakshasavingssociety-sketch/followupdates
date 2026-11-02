@@ -14,44 +14,48 @@ const categories = Object.values(CATEGORY_META);
           <span class="brand-mark" aria-hidden="true">FE</span>
           <span>
             {SITE.name}
-            <small style="color:rgba(255,255,255,.5)">Exam alerts, simplified</small>
+            <small style="color:rgba(255,255,255,.5)">Every exam. One account.</small>
           </span>
         </a>
         <p style="margin-top:14px;max-width:320px">
-          Government jobs, results, admit cards, answer keys, exam dates, admissions aur scholarships — ek hi jagah,
-          roz update.
+          Government jobs, results, admit cards, exam dates, admissions, scholarships and career guidance — all inside
+          one free account.
         </p>
         <p class="footer-disclaimer">
-          FollowExam kisi bhi government department, board ya commission se affiliated nahi hai. Official notification
-          aur apply link hamesha source website par verify karein.
+          FollowExam is an independent information portal. We are not affiliated with any government department, board
+          or commission. Always verify the official notification before applying.
         </p>
       </div>
 
       <div>
         <h2>Explore</h2>
         <a href="/jobs/">All updates</a>
+        <a href="/scholarships/">Scholarships</a>
+        <a href="/institutions/">Institutions</a>
         <a href="/exams/">Exam database</a>
         <a href="/states/">State-wise exams</a>
         <a href="/calendar/">Exam calendar</a>
-        <a href="/category/results/">Results</a>
-        <a href="/category/admit-card/">Admit card</a>
       </div>
 
       <div>
-        <h2>Categories</h2>
-        {categories.slice(0, 6).map((category) => (
+        <h2>Your account</h2>
+        <a href="/profile/">My profile</a>
+        <a href="/career/">Career roadmap</a>
+        <a href="/account/">Saved updates</a>
+        <a href="/login/">Sign in</a>
+        {categories.slice(0, 3).map((category) => (
           <a href={`/category/${category.slug}/`}>{category.label}</a>
         ))}
       </div>
 
       <div id="alerts">
         <h2>Daily email alerts</h2>
-        <p style="margin-bottom:8px">Ek email, roz ki important updates. Free.</p>
+        <p style="margin-bottom:8px">One email a day with the updates that match your profile. Free.</p>
         <SubscribeForm compact source="footer" />
         {SITE.telegram && (
           <p style="margin-top:12px">
             <a href={SITE.telegram} target="_blank" rel="noopener" style="color:#ffc45c;font-weight:700">
-              Telegram par join karein →
+              Join us on Telegram →
             </a>
           </p>
         )}

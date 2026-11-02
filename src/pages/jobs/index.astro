@@ -21,7 +21,7 @@ const schema = {
 
 <BaseLayout
   title="All Government Jobs, Results & Exam Updates"
-  description="Search and filter latest government jobs, results, admit cards, answer keys, exam dates, admissions and scholarships."
+  description="Search every analysed government notification: jobs, results, admit cards, answer keys, exam dates, admissions and scholarships, each with the official link."
   schema={schema}
 >
   <section class="section-tight" style="padding-top:30px">
@@ -29,7 +29,7 @@ const schema = {
       <div class="section-head" style="margin-bottom:14px">
         <div>
           <h1 style="font-size:clamp(1.7rem,3.4vw,2.4rem)">All updates</h1>
-          <p>Search karein, filter lagayein, aur apne liye relevant exam updates dhoondein.</p>
+          <p>Search, filter and open the notifications that matter to you.</p>
         </div>
         <span class="badge badge-blue">{jobs.length} published</span>
       </div>
@@ -43,7 +43,7 @@ const schema = {
               id="filter-q"
               name="q"
               type="search"
-              placeholder="Post, organization, exam..."
+              placeholder="Post, organisation, exam..."
               autocomplete="off"
             />
           </div>
@@ -109,7 +109,7 @@ const schema = {
       </div>
 
       <noscript>
-        <p class="muted mt-2">Search aur filters ke liye JavaScript on karein. Saari jobs upar list hain.</p>
+        <p class="muted mt-2">Turn on JavaScript to use search and filters. Every published update is listed above.</p>
       </noscript>
     </div>
   </section>
@@ -131,7 +131,8 @@ const schema = {
     applyEnd?: string | null;
     examId?: string | null;
     examName?: string | null;
-    demo?: boolean;
+    officialUrl: string;
+    notificationUrl?: string;
   };
 
   const categoryMeta: Record<string, { tone: string; label: string }> = {
@@ -196,6 +197,7 @@ const schema = {
     const meta = categoryMeta[job.category] || { tone: "blue", label: job.category };
     const left = daysLeft(job.applyEnd);
     const quals = (job.qualification || []).slice(0, 2).join(", ");
+    const notification = job.notificationUrl || job.officialUrl;
     return `<article class="job-card">
       <div class="job-card-top">
         <span class="badge badge-${meta.tone}">${escapeHtml(meta.label)}</span>
@@ -210,9 +212,11 @@ const schema = {
         <span>📅 ${fmtDate(job.postDate)}</span>
       </div>
       <div class="card-foot">
-        <a class="link-arrow" href="/jobs/${encodeURIComponent(job.slug)}/">View details →</a>
+        <span style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+          <a class="link-arrow" href="/jobs/${encodeURIComponent(job.slug)}/">View details →</a>
+          <a class="link-arrow" href="${escapeHtml(notification)}" target="_blank" rel="noopener nofollow">Notification ↗</a>
+        </span>
         <span style="display:flex;gap:6px;align-items:center">
-          ${job.demo ? '<span class="badge badge-amber">Sample</span>' : ""}
           ${left !== null && left >= 0 ? `<span class="deadline ${left > 7 ? "ok" : ""}">${left === 0 ? "Last day" : `${left}d left`}</span>` : ""}
         </span>
       </div>
@@ -224,7 +228,7 @@ const schema = {
     const page = filtered.slice(0, visible);
     resultsEl.innerHTML = page.length
       ? page.map(card).join("")
-      : `<div class="empty" style="grid-column:1/-1"><h3>Koi result nahi mila</h3><p>Search term badlein ya filters clear karein.</p></div>`;
+      : `<div class="empty" style="grid-column:1/-1"><h3>No matching updates</h3><p>Try a different search term or clear the filters.</p></div>`;
     if (countEl) countEl.textContent = `${filtered.length} result${filtered.length === 1 ? "" : "s"}`;
     if (loadMore) loadMore.hidden = visible >= filtered.length;
   }
@@ -260,7 +264,7 @@ const schema = {
       });
       applyFilters();
     } catch {
-      if (countEl) countEl.textContent = "Search load nahi hua";
+      if (countEl) countEl.textContent = "Search could not load";
     }
   }
 

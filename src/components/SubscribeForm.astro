@@ -15,20 +15,18 @@ const { compact = false, source = "website" } = Astro.props;
       id={`subscriber-email-${source}`}
       type="email"
       name="email"
-      placeholder="aapka@email.com"
+      placeholder="you@example.com"
       autocomplete="email"
       required
     />
-    {!compact && (
-      <label class="sr-only" for={`subscriber-name-${source}`}>Name</label>
-    )}
+    {!compact && <label class="sr-only" for={`subscriber-name-${source}`}>Name</label>}
     {!compact && (
       <input
         class="input"
         id={`subscriber-name-${source}`}
         type="text"
         name="name"
-        placeholder="Aapka naam (optional)"
+        placeholder="Your name (optional)"
         autocomplete="name"
       />
     )}
@@ -36,7 +34,7 @@ const { compact = false, source = "website" } = Astro.props;
   </div>
   <input class="hidden" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" />
   <p class="form-message" data-subscribe-message role="status"></p>
-  <p class="subscribe-note">Daily digest. No spam. Unsubscribe anytime.</p>
+  <p class="subscribe-note">One daily digest. No spam. Unsubscribe anytime.</p>
 </form>
 
 <style>
@@ -117,23 +115,23 @@ const { compact = false, source = "website" } = Astro.props;
 
       if (company) return;
       if (!email || !email.includes("@")) {
-        show("Sahi email address daalein.", "error");
+        show("Enter a valid email address.", "error");
         return;
       }
 
       if (!firebaseConfigured) {
-        show("Alerts abhi setup nahi hui hain. Firebase config add karne ke baad subscribe kaam karega.", "info");
+        show("Email alerts are not configured on this deployment yet.", "info");
         return;
       }
 
       const db = getFirebaseDb();
       if (!db) {
-        show("Firebase initialize nahi ho paya.", "error");
+        show("Could not connect to the alert service.", "error");
         return;
       }
 
       if (submit) submit.disabled = true;
-      show("Subscribe ho raha hai...", "info");
+      show("Subscribing…", "info");
 
       try {
         await setDoc(
@@ -149,9 +147,9 @@ const { compact = false, source = "website" } = Astro.props;
           { merge: true },
         );
         form.reset();
-        show("Ho gaya! Daily exam updates aapke email par aayengi.", "success");
+        show("You are subscribed. Daily updates will arrive in your inbox.", "success");
       } catch (error) {
-        show(`Subscribe nahi hua: ${error instanceof Error ? error.message : "unknown error"}`, "error");
+        show(`Subscription failed: ${error instanceof Error ? error.message : "unknown error"}`, "error");
       } finally {
         if (submit) submit.disabled = false;
       }

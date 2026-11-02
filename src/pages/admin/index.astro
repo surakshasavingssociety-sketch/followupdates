@@ -3,25 +3,27 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { CATEGORY_META } from "../../lib/constants";
 ---
 
-<BaseLayout title="Admin review" description="FollowExam admin review queue." noindex>
+<BaseLayout title="Admin review" description="FollowExam admin review queue." noindex gated={false}>
   <section class="admin-shell">
     <div class="container">
       <div id="admin-loading" class="panel">
-        <p class="muted">Admin panel load ho raha hai…</p>
+        <p class="muted">Loading the admin workspace…</p>
       </div>
 
       <div id="admin-config" class="panel hidden">
         <h1 style="font-size:1.4rem">Firebase setup required</h1>
         <p>
-          Admin panel aur alerts ke liye Firebase project configure karein. <code>.env.example</code> ko
-          <code>.env</code> me copy karein aur <code>PUBLIC_FIREBASE_*</code> values bharein.
+          Configure the Firebase project to use the admin queue and alerts. Copy <code>.env.example</code> to
+          <code>.env</code> and fill in the <code>PUBLIC_FIREBASE_*</code> values.
         </p>
-        <p class="small muted">Local demo ke liye site bina Firebase ke bhi chalegi; sirf admin/login features disabled rahenge.</p>
+        <p class="small muted">
+          The public site still builds without Firebase; only the admin and sign-in features stay disabled.
+        </p>
       </div>
 
       <div id="admin-login" class="form-card hidden">
-        <h1>Admin login</h1>
-        <p class="muted small">Sirf authorized admin hi review queue access kar sakte hain.</p>
+        <h1>Admin sign in</h1>
+        <p class="muted small">Only authorised administrators can open the review queue.</p>
         <div class="form-message" data-login-message role="status"></div>
         <form id="login-form" class="form-grid">
           <div class="field">
@@ -38,10 +40,10 @@ import { CATEGORY_META } from "../../lib/constants";
       </div>
 
       <div id="admin-denied" class="form-card hidden">
-        <h1>Access nahi hai</h1>
+        <h1>Access denied</h1>
         <p>
-          Aapka account authenticated hai, lekin admin list me nahi hai. Firestore me
-          <code>admins/&lt;your-uid&gt;</code> document create karein.
+          Your account is signed in but is not on the admin list. Create the Firestore document
+          <code>admins/&lt;your-uid&gt;</code> to grant access.
         </p>
         <button class="btn btn-outline" type="button" id="denied-signout">Sign out</button>
       </div>
@@ -54,7 +56,7 @@ import { CATEGORY_META } from "../../lib/constants";
             </div>
             <h1 style="font-size:clamp(1.6rem,3vw,2.2rem);margin:6px 0 0">Review queue</h1>
             <p class="muted small" style="margin:4px 0 0">
-              Scraped entries ko verify karein, edit karein, phir publish karein.
+              Verify the discovered entries, add the analysed details and official notification link, then publish.
             </p>
           </div>
           <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
@@ -76,7 +78,7 @@ import { CATEGORY_META } from "../../lib/constants";
             <div class="filter-row" style="grid-template-columns:1.6fr 1fr">
               <div class="field">
                 <label for="pending-search">Filter pending</label>
-                <input class="input" id="pending-search" placeholder="Title, organization, source…" />
+                <input class="input" id="pending-search" placeholder="Title, organisation, source…" />
               </div>
               <div class="field">
                 <label for="pending-category">Category</label>
@@ -96,15 +98,15 @@ import { CATEGORY_META } from "../../lib/constants";
 
         <section id="tab-add" class="hidden">
           <div class="panel">
-            <h2 style="font-size:1.2rem">Add a job manually</h2>
-            <p class="muted small">Auto-discovery se miss hui update yahan se add karein.</p>
+            <h2 style="font-size:1.2rem">Add an update manually</h2>
+            <p class="muted small">Use this when automatic discovery misses an official notification.</p>
             <form id="add-job-form" class="admin-edit">
               <div class="field full">
                 <label for="add-title">Title *</label>
                 <input class="input" id="add-title" name="title" required />
               </div>
               <div class="field">
-                <label for="add-org">Organization *</label>
+                <label for="add-org">Organisation *</label>
                 <input class="input" id="add-org" name="organization" required />
               </div>
               <div class="field">
@@ -119,7 +121,7 @@ import { CATEGORY_META } from "../../lib/constants";
               </div>
               <div class="field">
                 <label for="add-qual">Qualification (comma separated)</label>
-                <input class="input" id="add-qual" name="qualification" placeholder="Graduate, 12th" />
+                <input class="input" id="add-qual" name="qualification" placeholder="Graduate, Class 12" />
               </div>
               <div class="field">
                 <label for="add-vacancies">Vacancies</label>
@@ -130,7 +132,7 @@ import { CATEGORY_META } from "../../lib/constants";
                 <input class="input" id="add-post-date" name="postDate" type="date" required />
               </div>
               <div class="field">
-                <label for="add-apply-start">Apply start</label>
+                <label for="add-apply-start">Application starts</label>
                 <input class="input" id="add-apply-start" name="applyStart" type="date" />
               </div>
               <div class="field">
@@ -142,15 +144,47 @@ import { CATEGORY_META } from "../../lib/constants";
                 <input class="input" id="add-exam-date" name="examDate" type="date" />
               </div>
               <div class="field">
-                <label for="add-official-url">Official URL *</label>
+                <label for="add-official-url">Official website *</label>
                 <input class="input" id="add-official-url" name="officialUrl" type="url" required />
+              </div>
+              <div class="field">
+                <label for="add-notification-url">Official notification link *</label>
+                <input
+                  class="input"
+                  id="add-notification-url"
+                  name="notificationUrl"
+                  type="url"
+                  placeholder="https://…/notification.pdf"
+                  required
+                />
               </div>
               <div class="field full">
                 <label for="add-summary">Summary *</label>
                 <textarea class="textarea" id="add-summary" name="summary" required></textarea>
               </div>
               <div class="field full">
-                <button class="btn btn-primary" type="submit">Publish manually</button>
+                <label for="add-highlights">Key points (one per line)</label>
+                <textarea
+                  class="textarea"
+                  id="add-highlights"
+                  name="highlights"
+                  placeholder="Total vacancies and posts&#10;Reservation and age relaxation&#10;Selection stages"
+                ></textarea>
+              </div>
+              <div class="field full">
+                <label for="add-eligibility">Eligibility (one per line)</label>
+                <textarea class="textarea" id="add-eligibility" name="eligibility"></textarea>
+              </div>
+              <div class="field full">
+                <label for="add-how-to-apply">How to apply (one step per line)</label>
+                <textarea class="textarea" id="add-how-to-apply" name="howToApply"></textarea>
+              </div>
+              <div class="field full">
+                <label for="add-documents">Documents to keep ready (one per line)</label>
+                <textarea class="textarea" id="add-documents" name="documents"></textarea>
+              </div>
+              <div class="field full">
+                <button class="btn btn-primary" type="submit">Publish update</button>
               </div>
             </form>
           </div>
@@ -257,7 +291,7 @@ import { CATEGORY_META } from "../../lib/constants";
     if (pendingCount) pendingCount.textContent = pending.length ? `(${pending.length})` : "";
 
     if (!filtered.length) {
-      pendingList.innerHTML = `<div class="empty"><h3>Queue clear hai</h3><p>Nayi scraped entries aane par yahan dikhengi.</p></div>`;
+      pendingList.innerHTML = `<div class="empty"><h3>Queue is clear</h3><p>New discovered entries appear here for review.</p></div>`;
       return;
     }
 
@@ -275,24 +309,25 @@ import { CATEGORY_META } from "../../lib/constants";
           <span class="badge badge-amber">Pending</span>
         </div>
         <div class="admin-actions">
-          <a class="btn btn-outline btn-sm" href="${esc(job.discoveryUrl || job.officialUrl)}" target="_blank" rel="noopener">Open source ↗</a>
+          <a class="btn btn-outline btn-sm" href="${esc(job.discoveryUrl || job.notificationUrl || job.officialUrl)}" target="_blank" rel="noopener">Open source ↗</a>
           <button class="btn btn-primary btn-sm" type="button" data-action="approve">Approve</button>
           <button class="btn btn-danger btn-sm" type="button" data-action="reject">Reject</button>
           <button class="btn btn-ghost btn-sm" type="button" data-action="toggle-edit">Edit fields</button>
         </div>
         <div class="admin-edit hidden" data-edit>
           <div class="field full"><label>Title</label><input class="input" data-field="title" value="${inputValue(job.title)}" /></div>
-          <div class="field"><label>Organization</label><input class="input" data-field="organization" value="${inputValue(job.organization)}" /></div>
+          <div class="field"><label>Organisation</label><input class="input" data-field="organization" value="${inputValue(job.organization)}" /></div>
           <div class="field"><label>Category</label><select class="select" data-field="category">${CATEGORIES.map((category) => `<option ${category === job.category ? "selected" : ""}>${category}</option>`).join("")}</select></div>
           <div class="field"><label>State</label><input class="input" data-field="state" value="${inputValue(job.state)}" /></div>
           <div class="field"><label>Qualification (comma separated)</label><input class="input" data-field="qualification" value="${inputValue((job.qualification || []).join(", "))}" /></div>
           <div class="field"><label>Vacancies</label><input class="input" type="number" min="0" data-field="vacancies" value="${inputValue(job.vacancies)}" /></div>
           <div class="field"><label>Post date</label><input class="input" type="date" data-field="postDate" value="${inputValue(job.postDate, "date")}" /></div>
-          <div class="field"><label>Apply start</label><input class="input" type="date" data-field="applyStart" value="${inputValue(job.applyStart, "date")}" /></div>
+          <div class="field"><label>Application starts</label><input class="input" type="date" data-field="applyStart" value="${inputValue(job.applyStart, "date")}" /></div>
           <div class="field"><label>Last date</label><input class="input" type="date" data-field="applyEnd" value="${inputValue(job.applyEnd, "date")}" /></div>
           <div class="field"><label>Exam date</label><input class="input" type="date" data-field="examDate" value="${inputValue(job.examDate, "date")}" /></div>
           <div class="field"><label>Salary</label><input class="input" data-field="salary" value="${inputValue(job.salary)}" /></div>
-          <div class="field"><label>Official URL</label><input class="input" type="url" data-field="officialUrl" value="${inputValue(job.officialUrl)}" /></div>
+          <div class="field"><label>Official website</label><input class="input" type="url" data-field="officialUrl" value="${inputValue(job.officialUrl)}" /></div>
+          <div class="field"><label>Official notification link</label><input class="input" type="url" data-field="notificationUrl" value="${inputValue(job.notificationUrl)}" /></div>
           <div class="field full"><label>Summary</label><textarea class="textarea" data-field="summary">${esc(job.summary)}</textarea></div>
         </div>
       </article>`,
@@ -341,12 +376,13 @@ import { CATEGORY_META } from "../../lib/constants";
           </div>
           <div class="admin-actions">
             <a class="btn btn-outline btn-sm" href="/jobs/${esc(job.slug || job.id)}/" target="_blank">View ↗</a>
+            <a class="btn btn-outline btn-sm" href="${esc(job.notificationUrl || job.officialUrl)}" target="_blank" rel="noopener">Notification ↗</a>
             <button class="btn btn-danger btn-sm" type="button" data-action="unpublish" data-id="${esc(job.id)}">Unpublish</button>
           </div>
         </article>`,
           )
           .join("")
-      : `<div class="empty"><h3>Abhi kuch publish nahi hua</h3><p>Pending queue se pehla update approve karein.</p></div>`;
+      : `<div class="empty"><h3>Nothing published yet</h3><p>Approve the first entry from the pending queue.</p></div>`;
   }
 
   function readFields(container: HTMLElement) {
@@ -379,8 +415,9 @@ import { CATEGORY_META } from "../../lib/constants";
     const edit = item.querySelector<HTMLElement>("[data-edit]");
     const values = edit ? normalize(readFields(edit)) : {};
     const title = values.title || original.title;
-    if (!title || !original.officialUrl) {
-      showMessage(adminMessage, "Title aur official URL zaroori hain.", "error");
+    const notificationUrl = values.notificationUrl || original.notificationUrl || original.officialUrl;
+    if (!title || !original.officialUrl || !notificationUrl) {
+      showMessage(adminMessage, "A title, an official website and an official notification link are required.", "error");
       return;
     }
 
@@ -391,6 +428,7 @@ import { CATEGORY_META } from "../../lib/constants";
       id,
       slug: original.slug || slugify(title),
       title,
+      notificationUrl,
       status: "published",
       demo: false,
       approvedAt: now,
@@ -409,14 +447,14 @@ import { CATEGORY_META } from "../../lib/constants";
     );
     pending = pending.filter((job) => job.id !== id);
     renderPending();
-    showMessage(adminMessage, "Approved. Agli build me site par publish hoga.", "success");
+    showMessage(adminMessage, "Approved. The update goes live with the next site build.", "success");
   }
 
   async function reject(item: HTMLElement) {
     if (!db) return;
     const id = item.dataset.id;
     if (!id) return;
-    if (!confirm("Is entry ko reject karna hai?")) return;
+    if (!confirm("Reject this entry?")) return;
     const now = new Date().toISOString();
     await setDoc(
       doc(db, "pending", id),
@@ -430,11 +468,11 @@ import { CATEGORY_META } from "../../lib/constants";
 
   async function unpublish(id: string) {
     if (!db) return;
-    if (!confirm("Is job ko unpublish karna hai? Ye site se hat jayegi.")) return;
+    if (!confirm("Unpublish this update? It will be removed from the site.")) return;
     await deleteDoc(doc(db, "jobs", id));
     published = published.filter((job) => job.id !== id);
     await loadPublished();
-    showMessage(adminMessage, "Job unpublish ho gayi.", "info");
+    showMessage(adminMessage, "Update unpublished.", "info");
   }
 
   function switchTab(tab: string) {
@@ -492,7 +530,7 @@ import { CATEGORY_META } from "../../lib/constants";
           showMessage(loginMessage, "Signing in…", "info");
           await signInWithEmailAndPassword(auth, email, password);
         } catch (error) {
-          showMessage(loginMessage, error instanceof Error ? error.message : "Login failed", "error");
+          showMessage(loginMessage, error instanceof Error ? error.message : "Sign-in failed.", "error");
         }
       });
 
@@ -500,7 +538,7 @@ import { CATEGORY_META } from "../../lib/constants";
         try {
           await signInWithPopup(auth, new GoogleAuthProvider());
         } catch (error) {
-          showMessage(loginMessage, error instanceof Error ? error.message : "Google login failed", "error");
+          showMessage(loginMessage, error instanceof Error ? error.message : "Google sign-in failed.", "error");
         }
       });
 
@@ -528,7 +566,7 @@ import { CATEGORY_META } from "../../lib/constants";
       try {
         await approve(item);
       } catch (error) {
-        showMessage(adminMessage, error instanceof Error ? error.message : "Approve failed", "error");
+        showMessage(adminMessage, error instanceof Error ? error.message : "Approval failed.", "error");
       } finally {
         target.removeAttribute("disabled");
       }
@@ -536,7 +574,7 @@ import { CATEGORY_META } from "../../lib/constants";
       try {
         await reject(item);
       } catch (error) {
-        showMessage(adminMessage, error instanceof Error ? error.message : "Reject failed", "error");
+        showMessage(adminMessage, error instanceof Error ? error.message : "Rejection failed.", "error");
       }
     }
   });
@@ -553,6 +591,16 @@ import { CATEGORY_META } from "../../lib/constants";
     if (!db) return;
     const data = new FormData(addForm);
     const title = String(data.get("title") || "").trim();
+    const notificationUrl = String(data.get("notificationUrl") || "").trim();
+    if (!notificationUrl) {
+      showMessage(adminMessage, "Add the official notification link before publishing.", "error");
+      return;
+    }
+    const lines = (key: string) =>
+      String(data.get(key) || "")
+        .split("\n")
+        .map((item) => item.trim())
+        .filter(Boolean);
     const id = `manual-${Date.now().toString(36)}`;
     const now = new Date().toISOString();
     try {
@@ -576,8 +624,12 @@ import { CATEGORY_META } from "../../lib/constants";
         age: {},
         salary: "",
         summary: String(data.get("summary") || "").trim(),
+        highlights: lines("highlights"),
+        eligibility: lines("eligibility"),
+        howToApply: lines("howToApply"),
+        documents: lines("documents"),
         officialUrl: String(data.get("officialUrl") || "").trim(),
-        notificationUrl: String(data.get("officialUrl") || "").trim(),
+        notificationUrl,
         sourceName: "Manual entry",
         status: "published",
         demo: false,
@@ -586,9 +638,9 @@ import { CATEGORY_META } from "../../lib/constants";
         notified: false,
       });
       addForm.reset();
-      showMessage(adminMessage, "Job publish ho gayi. Site build ke baad visible hogi.", "success");
+      showMessage(adminMessage, "Update published. It appears on the site after the next build.", "success");
     } catch (error) {
-      showMessage(adminMessage, error instanceof Error ? error.message : "Save failed", "error");
+      showMessage(adminMessage, error instanceof Error ? error.message : "Save failed.", "error");
     }
   });
 </script>

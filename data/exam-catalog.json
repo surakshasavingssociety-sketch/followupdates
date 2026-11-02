@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-31",
+  "updated": "2026-11-01",
   "note": "Central exam reference catalog for FollowExam. Names, conducting bodies and official links are factual. Cycle months are INDICATIVE patterns based on how these exams have historically run; they are not official schedules. Always verify dates on the official website before applying. No text or images are copied from any third-party site.",
   "streams": [
     {
@@ -97,12 +97,34 @@
       "body": "Staff Selection Commission",
       "bodyShort": "SSC",
       "level": "Graduate",
-      "qualification": ["Graduate"],
+      "qualification": [
+        "Graduate"
+      ],
       "age": "18-32 years",
       "officialUrl": "https://ssc.gov.in/",
       "frequency": "annual",
-      "aliases": ["CGL", "Combined Graduate Level"],
-      "cycle": { "notification": [4, 5], "apply": [4, 6], "exam": [9, 10], "result": [11, 12] }
+      "aliases": [
+        "CGL",
+        "Combined Graduate Level"
+      ],
+      "cycle": {
+        "notification": [
+          4,
+          5
+        ],
+        "apply": [
+          4,
+          6
+        ],
+        "exam": [
+          9,
+          10
+        ],
+        "result": [
+          11,
+          12
+        ]
+      }
     },
     {
       "id": "ssc-chsl",
@@ -112,12 +134,36 @@
       "body": "Staff Selection Commission",
       "bodyShort": "SSC",
       "level": "12th",
-      "qualification": ["12th"],
+      "qualification": [
+        "12th"
+      ],
       "age": "18-27 years",
       "officialUrl": "https://ssc.gov.in/",
       "frequency": "annual",
-      "aliases": ["CHSL", "Combined Higher Secondary Level", "LDC", "DEO"],
-      "cycle": { "notification": [2, 3], "apply": [2, 4], "exam": [7, 8], "result": [10, 11] }
+      "aliases": [
+        "CHSL",
+        "Combined Higher Secondary Level",
+        "LDC",
+        "DEO"
+      ],
+      "cycle": {
+        "notification": [
+          2,
+          3
+        ],
+        "apply": [
+          2,
+          4
+        ],
+        "exam": [
+          7,
+          8
+        ],
+        "result": [
+          10,
+          11
+        ]
+      }
     },
     {
       "id": "ssc-mts",
@@ -127,12 +173,35 @@
       "body": "Staff Selection Commission",
       "bodyShort": "SSC",
       "level": "10th",
-      "qualification": ["10th"],
+      "qualification": [
+        "10th"
+      ],
       "age": "18-27 years",
       "officialUrl": "https://ssc.gov.in/",
       "frequency": "annual",
-      "aliases": ["MTS", "Multi Tasking Staff", "Havaldar"],
-      "cycle": { "notification": [6, 7], "apply": [6, 8], "exam": [10, 11], "result": [1, 2] }
+      "aliases": [
+        "MTS",
+        "Multi Tasking Staff",
+        "Havaldar"
+      ],
+      "cycle": {
+        "notification": [
+          6,
+          7
+        ],
+        "apply": [
+          6,
+          8
+        ],
+        "exam": [
+          10,
+          11
+        ],
+        "result": [
+          1,
+          2
+        ]
+      }
     },
     {
       "id": "ssc-gd",
@@ -142,12 +211,35 @@
       "body": "Staff Selection Commission",
       "bodyShort": "SSC",
       "level": "10th",
-      "qualification": ["10th"],
+      "qualification": [
+        "10th"
+      ],
       "age": "18-23 years",
       "officialUrl": "https://ssc.gov.in/",
       "frequency": "annual",
-      "aliases": ["GD Constable", "General Duty", "CAPF Constable"],
-      "cycle": { "notification": [11, 12], "apply": [11, 1], "exam": [2, 3], "result": [5, 6] }
+      "aliases": [
+        "GD Constable",
+        "General Duty",
+        "CAPF Constable"
+      ],
+      "cycle": {
+        "notification": [
+          11,
+          12
+        ],
+        "apply": [
+          11,
+          1
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          5,
+          6
+        ]
+      }
     },
     {
       "id": "ssc-steno",
@@ -157,12 +249,34 @@
       "body": "Staff Selection Commission",
       "bodyShort": "SSC",
       "level": "12th",
-      "qualification": ["12th"],
+      "qualification": [
+        "12th"
+      ],
       "age": "18-30 years",
       "officialUrl": "https://ssc.gov.in/",
       "frequency": "annual",
-      "aliases": ["Stenographer", "Steno"],
-      "cycle": { "notification": [7, 8], "apply": [7, 9], "exam": [11, 12], "result": [2, 3] }
+      "aliases": [
+        "Stenographer",
+        "Steno"
+      ],
+      "cycle": {
+        "notification": [
+          7,
+          8
+        ],
+        "apply": [
+          7,
+          9
+        ],
+        "exam": [
+          11,
+          12
+        ],
+        "result": [
+          2,
+          3
+        ]
+      }
     },
     {
       "id": "ssc-je",
@@ -172,12 +286,36 @@
       "body": "Staff Selection Commission",
       "bodyShort": "SSC",
       "level": "Diploma / Degree",
-      "qualification": ["Diploma", "Engineering"],
+      "qualification": [
+        "Diploma",
+        "Engineering"
+      ],
       "age": "18-32 years",
       "officialUrl": "https://ssc.gov.in/",
       "frequency": "annual",
-      "aliases": ["Junior Engineer", "JE Civil", "JE Mechanical"],
-      "cycle": { "notification": [6, 7], "apply": [6, 8], "exam": [10, 11], "result": [1, 2] }
+      "aliases": [
+        "Junior Engineer",
+        "JE Civil",
+        "JE Mechanical"
+      ],
+      "cycle": {
+        "notification": [
+          6,
+          7
+        ],
+        "apply": [
+          6,
+          8
+        ],
+        "exam": [
+          10,
+          11
+        ],
+        "result": [
+          1,
+          2
+        ]
+      }
     },
     {
       "id": "ssc-cpo",
@@ -187,12 +325,35 @@
       "body": "Staff Selection Commission",
       "bodyShort": "SSC",
       "level": "Graduate",
-      "qualification": ["Graduate"],
+      "qualification": [
+        "Graduate"
+      ],
       "age": "20-25 years",
       "officialUrl": "https://ssc.gov.in/",
       "frequency": "annual",
-      "aliases": ["CPO", "Sub Inspector Delhi Police", "CAPF SI"],
-      "cycle": { "notification": [5, 6], "apply": [5, 7], "exam": [9, 10], "result": [12, 1] }
+      "aliases": [
+        "CPO",
+        "Sub Inspector Delhi Police",
+        "CAPF SI"
+      ],
+      "cycle": {
+        "notification": [
+          5,
+          6
+        ],
+        "apply": [
+          5,
+          7
+        ],
+        "exam": [
+          9,
+          10
+        ],
+        "result": [
+          12,
+          1
+        ]
+      }
     },
     {
       "id": "ssc-selection-post",
@@ -202,12 +363,36 @@
       "body": "Staff Selection Commission",
       "bodyShort": "SSC",
       "level": "10th to Graduate",
-      "qualification": ["10th", "12th", "Graduate"],
+      "qualification": [
+        "10th",
+        "12th",
+        "Graduate"
+      ],
       "age": "18-30 years",
       "officialUrl": "https://ssc.gov.in/",
       "frequency": "annual",
-      "aliases": ["Selection Post", "Phase Selection Post"],
-      "cycle": { "notification": [2, 3], "apply": [2, 4], "exam": [6, 7], "result": [9, 10] }
+      "aliases": [
+        "Selection Post",
+        "Phase Selection Post"
+      ],
+      "cycle": {
+        "notification": [
+          2,
+          3
+        ],
+        "apply": [
+          2,
+          4
+        ],
+        "exam": [
+          6,
+          7
+        ],
+        "result": [
+          9,
+          10
+        ]
+      }
     },
     {
       "id": "upsc-cse",
@@ -217,12 +402,36 @@
       "body": "Union Public Service Commission",
       "bodyShort": "UPSC",
       "level": "Graduate",
-      "qualification": ["Graduate"],
+      "qualification": [
+        "Graduate"
+      ],
       "age": "21-32 years",
       "officialUrl": "https://upsc.gov.in/",
       "frequency": "annual",
-      "aliases": ["CSE", "IAS exam", "IPS exam", "Civil Services"],
-      "cycle": { "notification": [1, 2], "apply": [1, 3], "exam": [5, 6], "result": [4, 5] }
+      "aliases": [
+        "CSE",
+        "IAS exam",
+        "IPS exam",
+        "Civil Services"
+      ],
+      "cycle": {
+        "notification": [
+          1,
+          2
+        ],
+        "apply": [
+          1,
+          3
+        ],
+        "exam": [
+          5,
+          6
+        ],
+        "result": [
+          4,
+          5
+        ]
+      }
     },
     {
       "id": "upsc-ifs",
@@ -232,12 +441,34 @@
       "body": "Union Public Service Commission",
       "bodyShort": "UPSC",
       "level": "Graduate",
-      "qualification": ["Graduate"],
+      "qualification": [
+        "Graduate"
+      ],
       "age": "21-32 years",
       "officialUrl": "https://upsc.gov.in/",
       "frequency": "annual",
-      "aliases": ["IFS", "Indian Forest Service"],
-      "cycle": { "notification": [1, 2], "apply": [1, 3], "exam": [5, 6], "result": [11, 12] }
+      "aliases": [
+        "IFS",
+        "Indian Forest Service"
+      ],
+      "cycle": {
+        "notification": [
+          1,
+          2
+        ],
+        "apply": [
+          1,
+          3
+        ],
+        "exam": [
+          5,
+          6
+        ],
+        "result": [
+          11,
+          12
+        ]
+      }
     },
     {
       "id": "upsc-nda",
@@ -247,12 +478,35 @@
       "body": "Union Public Service Commission",
       "bodyShort": "UPSC",
       "level": "12th",
-      "qualification": ["12th"],
+      "qualification": [
+        "12th"
+      ],
       "age": "16.5-19.5 years",
       "officialUrl": "https://upsc.gov.in/",
       "frequency": "biannual",
-      "aliases": ["NDA", "National Defence Academy", "NA"],
-      "cycle": { "notification": [12, 5], "apply": [12, 6], "exam": [4, 9], "result": [6, 11] }
+      "aliases": [
+        "NDA",
+        "National Defence Academy",
+        "NA"
+      ],
+      "cycle": {
+        "notification": [
+          12,
+          5
+        ],
+        "apply": [
+          12,
+          6
+        ],
+        "exam": [
+          4,
+          9
+        ],
+        "result": [
+          6,
+          11
+        ]
+      }
     },
     {
       "id": "upsc-cds",
@@ -262,12 +516,36 @@
       "body": "Union Public Service Commission",
       "bodyShort": "UPSC",
       "level": "Graduate",
-      "qualification": ["Graduate"],
+      "qualification": [
+        "Graduate"
+      ],
       "age": "19-25 years",
       "officialUrl": "https://upsc.gov.in/",
       "frequency": "biannual",
-      "aliases": ["CDS", "Combined Defence Services", "IMA", "OTA"],
-      "cycle": { "notification": [12, 5], "apply": [12, 6], "exam": [4, 9], "result": [7, 12] }
+      "aliases": [
+        "CDS",
+        "Combined Defence Services",
+        "IMA",
+        "OTA"
+      ],
+      "cycle": {
+        "notification": [
+          12,
+          5
+        ],
+        "apply": [
+          12,
+          6
+        ],
+        "exam": [
+          4,
+          9
+        ],
+        "result": [
+          7,
+          12
+        ]
+      }
     },
     {
       "id": "upsc-cms",
@@ -277,12 +555,34 @@
       "body": "Union Public Service Commission",
       "bodyShort": "UPSC",
       "level": "MBBS",
-      "qualification": ["Medical"],
+      "qualification": [
+        "Medical"
+      ],
       "age": "21-32 years",
       "officialUrl": "https://upsc.gov.in/",
       "frequency": "annual",
-      "aliases": ["CMS", "Combined Medical Services"],
-      "cycle": { "notification": [3, 4], "apply": [3, 5], "exam": [7, 8], "result": [9, 10] }
+      "aliases": [
+        "CMS",
+        "Combined Medical Services"
+      ],
+      "cycle": {
+        "notification": [
+          3,
+          4
+        ],
+        "apply": [
+          3,
+          5
+        ],
+        "exam": [
+          7,
+          8
+        ],
+        "result": [
+          9,
+          10
+        ]
+      }
     },
     {
       "id": "upsc-ese",
@@ -292,12 +592,36 @@
       "body": "Union Public Service Commission",
       "bodyShort": "UPSC",
       "level": "Engineering",
-      "qualification": ["Engineering"],
+      "qualification": [
+        "Engineering"
+      ],
       "age": "21-30 years",
       "officialUrl": "https://upsc.gov.in/",
       "frequency": "annual",
-      "aliases": ["ESE", "IES", "Engineering Services", "Indian Engineering Service"],
-      "cycle": { "notification": [8, 9], "apply": [8, 10], "exam": [2, 6], "result": [11, 12] }
+      "aliases": [
+        "ESE",
+        "IES",
+        "Engineering Services",
+        "Indian Engineering Service"
+      ],
+      "cycle": {
+        "notification": [
+          8,
+          9
+        ],
+        "apply": [
+          8,
+          10
+        ],
+        "exam": [
+          2,
+          6
+        ],
+        "result": [
+          11,
+          12
+        ]
+      }
     },
     {
       "id": "upsc-capf",
@@ -307,12 +631,35 @@
       "body": "Union Public Service Commission",
       "bodyShort": "UPSC",
       "level": "Graduate",
-      "qualification": ["Graduate"],
+      "qualification": [
+        "Graduate"
+      ],
       "age": "20-25 years",
       "officialUrl": "https://upsc.gov.in/",
       "frequency": "annual",
-      "aliases": ["CAPF AC", "Assistant Commandant", "CAPF"],
-      "cycle": { "notification": [2, 3], "apply": [3, 4], "exam": [7, 8], "result": [10, 11] }
+      "aliases": [
+        "CAPF AC",
+        "Assistant Commandant",
+        "CAPF"
+      ],
+      "cycle": {
+        "notification": [
+          2,
+          3
+        ],
+        "apply": [
+          3,
+          4
+        ],
+        "exam": [
+          7,
+          8
+        ],
+        "result": [
+          10,
+          11
+        ]
+      }
     },
     {
       "id": "upsc-so",
@@ -322,12 +669,36 @@
       "body": "Union Public Service Commission",
       "bodyShort": "UPSC",
       "level": "Post Graduate",
-      "qualification": ["Post Graduate", "Engineering"],
+      "qualification": [
+        "Post Graduate",
+        "Engineering"
+      ],
       "age": "21-32 years",
       "officialUrl": "https://upsc.gov.in/",
       "frequency": "annual",
-      "aliases": ["Combined Geo-Scientist", "Geologist", "Specialists"],
-      "cycle": { "notification": [8, 9], "apply": [8, 10], "exam": [2, 3], "result": [7, 8] }
+      "aliases": [
+        "Combined Geo-Scientist",
+        "Geologist",
+        "Specialists"
+      ],
+      "cycle": {
+        "notification": [
+          8,
+          9
+        ],
+        "apply": [
+          8,
+          10
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          7,
+          8
+        ]
+      }
     },
     {
       "id": "rrb-ntpc",
@@ -337,12 +708,36 @@
       "body": "Railway Recruitment Board",
       "bodyShort": "RRB",
       "level": "12th / Graduate",
-      "qualification": ["12th", "Graduate"],
+      "qualification": [
+        "12th",
+        "Graduate"
+      ],
       "age": "18-33 years",
       "officialUrl": "https://www.rrbcdg.gov.in/",
       "frequency": "annual",
-      "aliases": ["NTPC", "Non Technical Popular Categories", "Railway NTPC"],
-      "cycle": { "notification": [11, 12], "apply": [12, 2], "exam": [4, 5], "result": [8, 9] }
+      "aliases": [
+        "NTPC",
+        "Non Technical Popular Categories",
+        "Railway NTPC"
+      ],
+      "cycle": {
+        "notification": [
+          11,
+          12
+        ],
+        "apply": [
+          12,
+          2
+        ],
+        "exam": [
+          4,
+          5
+        ],
+        "result": [
+          8,
+          9
+        ]
+      }
     },
     {
       "id": "rrb-group-d",
@@ -352,12 +747,35 @@
       "body": "Railway Recruitment Board",
       "bodyShort": "RRB",
       "level": "10th",
-      "qualification": ["10th"],
+      "qualification": [
+        "10th"
+      ],
       "age": "18-36 years",
       "officialUrl": "https://www.rrbcdg.gov.in/",
       "frequency": "irregular",
-      "aliases": ["Group D", "Railway Group D", "Level 1"],
-      "cycle": { "notification": [1, 2], "apply": [2, 3], "exam": [8, 9], "result": [12, 1] }
+      "aliases": [
+        "Group D",
+        "Railway Group D",
+        "Level 1"
+      ],
+      "cycle": {
+        "notification": [
+          1,
+          2
+        ],
+        "apply": [
+          2,
+          3
+        ],
+        "exam": [
+          8,
+          9
+        ],
+        "result": [
+          12,
+          1
+        ]
+      }
     },
     {
       "id": "rrb-alp",
@@ -367,12 +785,36 @@
       "body": "Railway Recruitment Board",
       "bodyShort": "RRB",
       "level": "10th / Diploma",
-      "qualification": ["10th", "Diploma"],
+      "qualification": [
+        "10th",
+        "Diploma"
+      ],
       "age": "18-30 years",
       "officialUrl": "https://www.rrbcdg.gov.in/",
       "frequency": "irregular",
-      "aliases": ["ALP", "Assistant Loco Pilot", "Technician"],
-      "cycle": { "notification": [6, 7], "apply": [7, 8], "exam": [11, 12], "result": [3, 4] }
+      "aliases": [
+        "ALP",
+        "Assistant Loco Pilot",
+        "Technician"
+      ],
+      "cycle": {
+        "notification": [
+          6,
+          7
+        ],
+        "apply": [
+          7,
+          8
+        ],
+        "exam": [
+          11,
+          12
+        ],
+        "result": [
+          3,
+          4
+        ]
+      }
     },
     {
       "id": "rrb-je",
@@ -382,12 +824,37 @@
       "body": "Railway Recruitment Board",
       "bodyShort": "RRB",
       "level": "Diploma / Degree",
-      "qualification": ["Diploma", "Engineering"],
+      "qualification": [
+        "Diploma",
+        "Engineering"
+      ],
       "age": "18-33 years",
       "officialUrl": "https://www.rrbcdg.gov.in/",
       "frequency": "irregular",
-      "aliases": ["Junior Engineer Railway", "RRB JE", "DMS", "CMA"],
-      "cycle": { "notification": [5, 6], "apply": [6, 7], "exam": [10, 11], "result": [2, 3] }
+      "aliases": [
+        "Junior Engineer Railway",
+        "RRB JE",
+        "DMS",
+        "CMA"
+      ],
+      "cycle": {
+        "notification": [
+          5,
+          6
+        ],
+        "apply": [
+          6,
+          7
+        ],
+        "exam": [
+          10,
+          11
+        ],
+        "result": [
+          2,
+          3
+        ]
+      }
     },
     {
       "id": "rpf-si",
@@ -397,12 +864,35 @@
       "body": "Railway Protection Force",
       "bodyShort": "RPF",
       "level": "Graduate",
-      "qualification": ["Graduate"],
+      "qualification": [
+        "Graduate"
+      ],
       "age": "20-25 years",
       "officialUrl": "https://rpf.indianrailways.gov.in/",
       "frequency": "irregular",
-      "aliases": ["RPF Sub Inspector", "RPF SI", "Railway Police"],
-      "cycle": { "notification": [3, 4], "apply": [4, 5], "exam": [9, 10], "result": [12, 1] }
+      "aliases": [
+        "RPF Sub Inspector",
+        "RPF SI",
+        "Railway Police"
+      ],
+      "cycle": {
+        "notification": [
+          3,
+          4
+        ],
+        "apply": [
+          4,
+          5
+        ],
+        "exam": [
+          9,
+          10
+        ],
+        "result": [
+          12,
+          1
+        ]
+      }
     },
     {
       "id": "ibps-po",
@@ -412,12 +902,36 @@
       "body": "Institute of Banking Personnel Selection",
       "bodyShort": "IBPS",
       "level": "Graduate",
-      "qualification": ["Graduate"],
+      "qualification": [
+        "Graduate"
+      ],
       "age": "20-30 years",
       "officialUrl": "https://www.ibps.in/",
       "frequency": "annual",
-      "aliases": ["PO", "Probationary Officer", "IBPS MT", "Management Trainee"],
-      "cycle": { "notification": [7, 8], "apply": [7, 9], "exam": [10, 11], "result": [1, 2] }
+      "aliases": [
+        "PO",
+        "Probationary Officer",
+        "IBPS MT",
+        "Management Trainee"
+      ],
+      "cycle": {
+        "notification": [
+          7,
+          8
+        ],
+        "apply": [
+          7,
+          9
+        ],
+        "exam": [
+          10,
+          11
+        ],
+        "result": [
+          1,
+          2
+        ]
+      }
     },
     {
       "id": "ibps-clerk",
@@ -427,12 +941,35 @@
       "body": "Institute of Banking Personnel Selection",
       "bodyShort": "IBPS",
       "level": "Graduate",
-      "qualification": ["Graduate"],
+      "qualification": [
+        "Graduate"
+      ],
       "age": "20-28 years",
       "officialUrl": "https://www.ibps.in/",
       "frequency": "annual",
-      "aliases": ["Clerk", "Clerical Cadre", "IBPS CRP Clerk"],
-      "cycle": { "notification": [6, 7], "apply": [7, 8], "exam": [11, 12], "result": [2, 3] }
+      "aliases": [
+        "Clerk",
+        "Clerical Cadre",
+        "IBPS CRP Clerk"
+      ],
+      "cycle": {
+        "notification": [
+          6,
+          7
+        ],
+        "apply": [
+          7,
+          8
+        ],
+        "exam": [
+          11,
+          12
+        ],
+        "result": [
+          2,
+          3
+        ]
+      }
     },
     {
       "id": "ibps-so",
@@ -442,12 +979,38 @@
       "body": "Institute of Banking Personnel Selection",
       "bodyShort": "IBPS",
       "level": "Graduate / Professional",
-      "qualification": ["Graduate", "Engineering", "Law"],
+      "qualification": [
+        "Graduate",
+        "Engineering",
+        "Law"
+      ],
       "age": "20-30 years",
       "officialUrl": "https://www.ibps.in/",
       "frequency": "annual",
-      "aliases": ["Specialist Officer", "IT Officer", "Agriculture Field Officer", "Rajbhasha Adhikari"],
-      "cycle": { "notification": [7, 8], "apply": [7, 9], "exam": [11, 12], "result": [2, 3] }
+      "aliases": [
+        "Specialist Officer",
+        "IT Officer",
+        "Agriculture Field Officer",
+        "Rajbhasha Adhikari"
+      ],
+      "cycle": {
+        "notification": [
+          7,
+          8
+        ],
+        "apply": [
+          7,
+          9
+        ],
+        "exam": [
+          11,
+          12
+        ],
+        "result": [
+          2,
+          3
+        ]
+      }
     },
     {
       "id": "sbi-po",
@@ -457,12 +1020,34 @@
       "body": "State Bank of India",
       "bodyShort": "SBI",
       "level": "Graduate",
-      "qualification": ["Graduate"],
+      "qualification": [
+        "Graduate"
+      ],
       "age": "21-30 years",
       "officialUrl": "https://sbi.co.in/web/careers",
       "frequency": "annual",
-      "aliases": ["SBI Probationary Officer", "SBI PO"],
-      "cycle": { "notification": [9, 10], "apply": [9, 11], "exam": [11, 12], "result": [2, 3] }
+      "aliases": [
+        "SBI Probationary Officer",
+        "SBI PO"
+      ],
+      "cycle": {
+        "notification": [
+          9,
+          10
+        ],
+        "apply": [
+          9,
+          11
+        ],
+        "exam": [
+          11,
+          12
+        ],
+        "result": [
+          2,
+          3
+        ]
+      }
     },
     {
       "id": "sbi-clerk",
@@ -472,12 +1057,34 @@
       "body": "State Bank of India",
       "bodyShort": "SBI",
       "level": "Graduate",
-      "qualification": ["Graduate"],
+      "qualification": [
+        "Graduate"
+      ],
       "age": "20-28 years",
       "officialUrl": "https://sbi.co.in/web/careers",
       "frequency": "annual",
-      "aliases": ["SBI Junior Associate", "SBI Clerk"],
-      "cycle": { "notification": [11, 12], "apply": [12, 1], "exam": [2, 3], "result": [5, 6] }
+      "aliases": [
+        "SBI Junior Associate",
+        "SBI Clerk"
+      ],
+      "cycle": {
+        "notification": [
+          11,
+          12
+        ],
+        "apply": [
+          12,
+          1
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          5,
+          6
+        ]
+      }
     },
     {
       "id": "rbi-grade-b",
@@ -487,12 +1094,36 @@
       "body": "Reserve Bank of India",
       "bodyShort": "RBI",
       "level": "Graduate / Post Graduate",
-      "qualification": ["Graduate", "Post Graduate"],
+      "qualification": [
+        "Graduate",
+        "Post Graduate"
+      ],
       "age": "21-30 years",
       "officialUrl": "https://www.rbi.org.in/",
       "frequency": "annual",
-      "aliases": ["RBI Grade B", "RBI Officer", "Grade B Officer"],
-      "cycle": { "notification": [4, 5], "apply": [5, 6], "exam": [7, 8], "result": [12, 1] }
+      "aliases": [
+        "RBI Grade B",
+        "RBI Officer",
+        "Grade B Officer"
+      ],
+      "cycle": {
+        "notification": [
+          4,
+          5
+        ],
+        "apply": [
+          5,
+          6
+        ],
+        "exam": [
+          7,
+          8
+        ],
+        "result": [
+          12,
+          1
+        ]
+      }
     },
     {
       "id": "rbi-assistant",
@@ -502,12 +1133,33 @@
       "body": "Reserve Bank of India",
       "bodyShort": "RBI",
       "level": "Graduate",
-      "qualification": ["Graduate"],
+      "qualification": [
+        "Graduate"
+      ],
       "age": "20-28 years",
       "officialUrl": "https://www.rbi.org.in/",
       "frequency": "irregular",
-      "aliases": ["RBI Assistant"],
-      "cycle": { "notification": [6, 7], "apply": [7, 8], "exam": [10, 11], "result": [1, 2] }
+      "aliases": [
+        "RBI Assistant"
+      ],
+      "cycle": {
+        "notification": [
+          6,
+          7
+        ],
+        "apply": [
+          7,
+          8
+        ],
+        "exam": [
+          10,
+          11
+        ],
+        "result": [
+          1,
+          2
+        ]
+      }
     },
     {
       "id": "sebi-grade-a",
@@ -517,12 +1169,36 @@
       "body": "Securities and Exchange Board of India",
       "bodyShort": "SEBI",
       "level": "Graduate / Post Graduate",
-      "qualification": ["Graduate", "Post Graduate", "Law"],
+      "qualification": [
+        "Graduate",
+        "Post Graduate",
+        "Law"
+      ],
       "age": "21-30 years",
       "officialUrl": "https://www.sebi.gov.in/",
       "frequency": "irregular",
-      "aliases": ["SEBI Grade A", "SEBI Officer"],
-      "cycle": { "notification": [5, 6], "apply": [6, 7], "exam": [8, 9], "result": [11, 12] }
+      "aliases": [
+        "SEBI Grade A",
+        "SEBI Officer"
+      ],
+      "cycle": {
+        "notification": [
+          5,
+          6
+        ],
+        "apply": [
+          6,
+          7
+        ],
+        "exam": [
+          8,
+          9
+        ],
+        "result": [
+          11,
+          12
+        ]
+      }
     },
     {
       "id": "nabard-grade-a",
@@ -532,12 +1208,35 @@
       "body": "National Bank for Agriculture and Rural Development",
       "bodyShort": "NABARD",
       "level": "Graduate / Post Graduate",
-      "qualification": ["Graduate", "Post Graduate"],
+      "qualification": [
+        "Graduate",
+        "Post Graduate"
+      ],
       "age": "21-30 years",
       "officialUrl": "https://www.nabard.org/",
       "frequency": "annual",
-      "aliases": ["NABARD Assistant Manager", "NABARD Grade A"],
-      "cycle": { "notification": [6, 7], "apply": [7, 8], "exam": [9, 10], "result": [12, 1] }
+      "aliases": [
+        "NABARD Assistant Manager",
+        "NABARD Grade A"
+      ],
+      "cycle": {
+        "notification": [
+          6,
+          7
+        ],
+        "apply": [
+          7,
+          8
+        ],
+        "exam": [
+          9,
+          10
+        ],
+        "result": [
+          12,
+          1
+        ]
+      }
     },
     {
       "id": "lic-aao",
@@ -547,12 +1246,35 @@
       "body": "Life Insurance Corporation of India",
       "bodyShort": "LIC",
       "level": "Graduate",
-      "qualification": ["Graduate"],
+      "qualification": [
+        "Graduate"
+      ],
       "age": "21-30 years",
       "officialUrl": "https://licindia.in/",
       "frequency": "irregular",
-      "aliases": ["AAO", "Assistant Administrative Officer", "LIC Officer"],
-      "cycle": { "notification": [12, 1], "apply": [1, 2], "exam": [5, 6], "result": [8, 9] }
+      "aliases": [
+        "AAO",
+        "Assistant Administrative Officer",
+        "LIC Officer"
+      ],
+      "cycle": {
+        "notification": [
+          12,
+          1
+        ],
+        "apply": [
+          1,
+          2
+        ],
+        "exam": [
+          5,
+          6
+        ],
+        "result": [
+          8,
+          9
+        ]
+      }
     },
     {
       "id": "lic-assistant",
@@ -562,12 +1284,34 @@
       "body": "Life Insurance Corporation of India",
       "bodyShort": "LIC",
       "level": "Graduate",
-      "qualification": ["Graduate"],
+      "qualification": [
+        "Graduate"
+      ],
       "age": "18-30 years",
       "officialUrl": "https://licindia.in/",
       "frequency": "irregular",
-      "aliases": ["LIC Assistant", "LIC ADO"],
-      "cycle": { "notification": [6, 7], "apply": [7, 8], "exam": [10, 11], "result": [1, 2] }
+      "aliases": [
+        "LIC Assistant",
+        "LIC ADO"
+      ],
+      "cycle": {
+        "notification": [
+          6,
+          7
+        ],
+        "apply": [
+          7,
+          8
+        ],
+        "exam": [
+          10,
+          11
+        ],
+        "result": [
+          1,
+          2
+        ]
+      }
     },
     {
       "id": "niacl-ao",
@@ -577,12 +1321,34 @@
       "body": "New India Assurance Company",
       "bodyShort": "NIACL",
       "level": "Graduate",
-      "qualification": ["Graduate"],
+      "qualification": [
+        "Graduate"
+      ],
       "age": "21-30 years",
       "officialUrl": "https://www.newindia.co.in/",
       "frequency": "irregular",
-      "aliases": ["NIACL Administrative Officer", "New India Assurance AO"],
-      "cycle": { "notification": [8, 9], "apply": [9, 10], "exam": [11, 12], "result": [1, 2] }
+      "aliases": [
+        "NIACL Administrative Officer",
+        "New India Assurance AO"
+      ],
+      "cycle": {
+        "notification": [
+          8,
+          9
+        ],
+        "apply": [
+          9,
+          10
+        ],
+        "exam": [
+          11,
+          12
+        ],
+        "result": [
+          1,
+          2
+        ]
+      }
     },
     {
       "id": "ctet",
@@ -592,12 +1358,36 @@
       "body": "Central Board of Secondary Education",
       "bodyShort": "CBSE",
       "level": "B.Ed / D.El.Ed",
-      "qualification": ["B.Ed", "Graduate"],
+      "qualification": [
+        "B.Ed",
+        "Graduate"
+      ],
       "age": "18+ years",
       "officialUrl": "https://ctet.nic.in/",
       "frequency": "biannual",
-      "aliases": ["Central Teacher Eligibility Test", "CTET Paper 1", "CTET Paper 2"],
-      "cycle": { "notification": [1, 7], "apply": [1, 8], "exam": [7, 12], "result": [9, 2] }
+      "aliases": [
+        "Central Teacher Eligibility Test",
+        "CTET Paper 1",
+        "CTET Paper 2"
+      ],
+      "cycle": {
+        "notification": [
+          1,
+          7
+        ],
+        "apply": [
+          1,
+          8
+        ],
+        "exam": [
+          7,
+          12
+        ],
+        "result": [
+          9,
+          2
+        ]
+      }
     },
     {
       "id": "ugc-net",
@@ -607,12 +1397,36 @@
       "body": "National Testing Agency",
       "bodyShort": "NTA",
       "level": "Post Graduate",
-      "qualification": ["Post Graduate"],
+      "qualification": [
+        "Post Graduate"
+      ],
       "age": "No upper limit for JRF (30 for JRF)",
       "officialUrl": "https://ugcnet.nta.ac.in/",
       "frequency": "biannual",
-      "aliases": ["NET", "UGC National Eligibility Test", "JRF", "Assistant Professor"],
-      "cycle": { "notification": [2, 8], "apply": [3, 9], "exam": [6, 12], "result": [8, 2] }
+      "aliases": [
+        "NET",
+        "UGC National Eligibility Test",
+        "JRF",
+        "Assistant Professor"
+      ],
+      "cycle": {
+        "notification": [
+          2,
+          8
+        ],
+        "apply": [
+          3,
+          9
+        ],
+        "exam": [
+          6,
+          12
+        ],
+        "result": [
+          8,
+          2
+        ]
+      }
     },
     {
       "id": "csir-net",
@@ -622,12 +1436,35 @@
       "body": "National Testing Agency",
       "bodyShort": "NTA",
       "level": "Post Graduate",
-      "qualification": ["Post Graduate"],
+      "qualification": [
+        "Post Graduate"
+      ],
       "age": "28 years for JRF",
       "officialUrl": "https://csirnet.nta.ac.in/",
       "frequency": "biannual",
-      "aliases": ["CSIR NET", "CSIR JRF", "Life Sciences NET"],
-      "cycle": { "notification": [2, 8], "apply": [3, 9], "exam": [6, 12], "result": [8, 2] }
+      "aliases": [
+        "CSIR NET",
+        "CSIR JRF",
+        "Life Sciences NET"
+      ],
+      "cycle": {
+        "notification": [
+          2,
+          8
+        ],
+        "apply": [
+          3,
+          9
+        ],
+        "exam": [
+          6,
+          12
+        ],
+        "result": [
+          8,
+          2
+        ]
+      }
     },
     {
       "id": "kvs-prt",
@@ -637,12 +1474,38 @@
       "body": "Kendriya Vidyalaya Sangathan",
       "bodyShort": "KVS",
       "level": "B.Ed / Post Graduate",
-      "qualification": ["Graduate", "B.Ed", "Post Graduate"],
+      "qualification": [
+        "Graduate",
+        "B.Ed",
+        "Post Graduate"
+      ],
       "age": "21-50 years",
       "officialUrl": "https://kvsangathan.nic.in/",
       "frequency": "irregular",
-      "aliases": ["KVS PRT", "KVS TGT", "KVS PGT", "Kendriya Vidyalaya Teacher"],
-      "cycle": { "notification": [10, 11], "apply": [11, 12], "exam": [2, 3], "result": [5, 6] }
+      "aliases": [
+        "KVS PRT",
+        "KVS TGT",
+        "KVS PGT",
+        "Kendriya Vidyalaya Teacher"
+      ],
+      "cycle": {
+        "notification": [
+          10,
+          11
+        ],
+        "apply": [
+          11,
+          12
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          5,
+          6
+        ]
+      }
     },
     {
       "id": "nvs-teacher",
@@ -652,12 +1515,37 @@
       "body": "Navodaya Vidyalaya Samiti",
       "bodyShort": "NVS",
       "level": "B.Ed / Post Graduate",
-      "qualification": ["Graduate", "B.Ed", "Post Graduate"],
+      "qualification": [
+        "Graduate",
+        "B.Ed",
+        "Post Graduate"
+      ],
       "age": "21-50 years",
       "officialUrl": "https://navodaya.gov.in/",
       "frequency": "irregular",
-      "aliases": ["NVS PGT", "NVS TGT", "Navodaya Teacher"],
-      "cycle": { "notification": [6, 7], "apply": [7, 8], "exam": [10, 11], "result": [1, 2] }
+      "aliases": [
+        "NVS PGT",
+        "NVS TGT",
+        "Navodaya Teacher"
+      ],
+      "cycle": {
+        "notification": [
+          6,
+          7
+        ],
+        "apply": [
+          7,
+          8
+        ],
+        "exam": [
+          10,
+          11
+        ],
+        "result": [
+          1,
+          2
+        ]
+      }
     },
     {
       "id": "nda-defence",
@@ -667,12 +1555,36 @@
       "body": "Indian Air Force",
       "bodyShort": "IAF",
       "level": "Graduate",
-      "qualification": ["Graduate", "Engineering"],
+      "qualification": [
+        "Graduate",
+        "Engineering"
+      ],
       "age": "20-26 years",
       "officialUrl": "https://afcat.cdac.in/",
       "frequency": "biannual",
-      "aliases": ["AFCAT", "Air Force Common Admission Test", "Flying Branch"],
-      "cycle": { "notification": [12, 5], "apply": [12, 6], "exam": [2, 8], "result": [4, 10] }
+      "aliases": [
+        "AFCAT",
+        "Air Force Common Admission Test",
+        "Flying Branch"
+      ],
+      "cycle": {
+        "notification": [
+          12,
+          5
+        ],
+        "apply": [
+          12,
+          6
+        ],
+        "exam": [
+          2,
+          8
+        ],
+        "result": [
+          4,
+          10
+        ]
+      }
     },
     {
       "id": "army-agniveer",
@@ -682,12 +1594,36 @@
       "body": "Indian Army",
       "bodyShort": "Indian Army",
       "level": "10th / 12th",
-      "qualification": ["10th", "12th"],
+      "qualification": [
+        "10th",
+        "12th"
+      ],
       "age": "17.5-21 years",
       "officialUrl": "https://joinindianarmy.nic.in/",
       "frequency": "annual",
-      "aliases": ["Agniveer", "Army Agniveer", "Agnipath"],
-      "cycle": { "notification": [2, 3], "apply": [3, 4], "exam": [4, 5], "result": [6, 7] }
+      "aliases": [
+        "Agniveer",
+        "Army Agniveer",
+        "Agnipath"
+      ],
+      "cycle": {
+        "notification": [
+          2,
+          3
+        ],
+        "apply": [
+          3,
+          4
+        ],
+        "exam": [
+          4,
+          5
+        ],
+        "result": [
+          6,
+          7
+        ]
+      }
     },
     {
       "id": "navy-agniveer",
@@ -697,12 +1633,36 @@
       "body": "Indian Navy",
       "bodyShort": "Indian Navy",
       "level": "10th / 12th",
-      "qualification": ["10th", "12th"],
+      "qualification": [
+        "10th",
+        "12th"
+      ],
       "age": "17.5-21 years",
       "officialUrl": "https://www.joinindiannavy.gov.in/",
       "frequency": "annual",
-      "aliases": ["Navy Agniveer", "Agniveer SSR", "Agniveer MR"],
-      "cycle": { "notification": [3, 4], "apply": [4, 5], "exam": [6, 7], "result": [9, 10] }
+      "aliases": [
+        "Navy Agniveer",
+        "Agniveer SSR",
+        "Agniveer MR"
+      ],
+      "cycle": {
+        "notification": [
+          3,
+          4
+        ],
+        "apply": [
+          4,
+          5
+        ],
+        "exam": [
+          6,
+          7
+        ],
+        "result": [
+          9,
+          10
+        ]
+      }
     },
     {
       "id": "airforce-agniveer",
@@ -712,12 +1672,35 @@
       "body": "Indian Air Force",
       "bodyShort": "IAF",
       "level": "10+2",
-      "qualification": ["12th"],
+      "qualification": [
+        "12th"
+      ],
       "age": "17.5-21 years",
       "officialUrl": "https://agnipathvayu.cdac.in/",
       "frequency": "annual",
-      "aliases": ["Agniveer Vayu", "Air Force Agniveer", "Agnipath Vayu"],
-      "cycle": { "notification": [12, 1], "apply": [1, 2], "exam": [3, 4], "result": [6, 7] }
+      "aliases": [
+        "Agniveer Vayu",
+        "Air Force Agniveer",
+        "Agnipath Vayu"
+      ],
+      "cycle": {
+        "notification": [
+          12,
+          1
+        ],
+        "apply": [
+          1,
+          2
+        ],
+        "exam": [
+          3,
+          4
+        ],
+        "result": [
+          6,
+          7
+        ]
+      }
     },
     {
       "id": "capf-constable",
@@ -727,12 +1710,37 @@
       "body": "Staff Selection Commission",
       "bodyShort": "SSC",
       "level": "10th / 12th",
-      "qualification": ["10th", "12th"],
+      "qualification": [
+        "10th",
+        "12th"
+      ],
       "age": "18-23 years",
       "officialUrl": "https://ssc.gov.in/",
       "frequency": "annual",
-      "aliases": ["CAPF Constable", "BSF Constable", "CRPF Constable", "CISF Constable"],
-      "cycle": { "notification": [11, 12], "apply": [11, 1], "exam": [2, 3], "result": [5, 6] }
+      "aliases": [
+        "CAPF Constable",
+        "BSF Constable",
+        "CRPF Constable",
+        "CISF Constable"
+      ],
+      "cycle": {
+        "notification": [
+          11,
+          12
+        ],
+        "apply": [
+          11,
+          1
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          5,
+          6
+        ]
+      }
     },
     {
       "id": "indian-coast-guard",
@@ -742,12 +1750,37 @@
       "body": "Indian Coast Guard",
       "bodyShort": "ICG",
       "level": "10th / 12th / Graduate",
-      "qualification": ["10th", "12th", "Graduate"],
+      "qualification": [
+        "10th",
+        "12th",
+        "Graduate"
+      ],
       "age": "18-27 years",
       "officialUrl": "https://joinindiancoastguard.cdac.in/",
       "frequency": "annual",
-      "aliases": ["Coast Guard Navik", "ICG AC", "Assistant Commandant Coast Guard"],
-      "cycle": { "notification": [1, 6], "apply": [2, 7], "exam": [4, 9], "result": [6, 11] }
+      "aliases": [
+        "Coast Guard Navik",
+        "ICG AC",
+        "Assistant Commandant Coast Guard"
+      ],
+      "cycle": {
+        "notification": [
+          1,
+          6
+        ],
+        "apply": [
+          2,
+          7
+        ],
+        "exam": [
+          4,
+          9
+        ],
+        "result": [
+          6,
+          11
+        ]
+      }
     },
     {
       "id": "neet-ug",
@@ -757,12 +1790,35 @@
       "body": "National Testing Agency",
       "bodyShort": "NTA",
       "level": "12th",
-      "qualification": ["12th"],
+      "qualification": [
+        "12th"
+      ],
       "age": "17+ years",
       "officialUrl": "https://neet.nta.nic.in/",
       "frequency": "annual",
-      "aliases": ["NEET", "NEET UG", "Medical Entrance"],
-      "cycle": { "notification": [1, 2], "apply": [2, 3], "exam": [5, 6], "result": [6, 7] }
+      "aliases": [
+        "NEET",
+        "NEET UG",
+        "Medical Entrance"
+      ],
+      "cycle": {
+        "notification": [
+          1,
+          2
+        ],
+        "apply": [
+          2,
+          3
+        ],
+        "exam": [
+          5,
+          6
+        ],
+        "result": [
+          6,
+          7
+        ]
+      }
     },
     {
       "id": "neet-pg",
@@ -772,12 +1828,35 @@
       "body": "National Board of Examinations in Medical Sciences",
       "bodyShort": "NBEMS",
       "level": "MBBS",
-      "qualification": ["Medical"],
+      "qualification": [
+        "Medical"
+      ],
       "age": "No upper limit",
       "officialUrl": "https://natboard.edu.in/",
       "frequency": "annual",
-      "aliases": ["NEET PG", "PG Medical Entrance", "MD MS Entrance"],
-      "cycle": { "notification": [10, 11], "apply": [11, 12], "exam": [1, 2], "result": [2, 3] }
+      "aliases": [
+        "NEET PG",
+        "PG Medical Entrance",
+        "MD MS Entrance"
+      ],
+      "cycle": {
+        "notification": [
+          10,
+          11
+        ],
+        "apply": [
+          11,
+          12
+        ],
+        "exam": [
+          1,
+          2
+        ],
+        "result": [
+          2,
+          3
+        ]
+      }
     },
     {
       "id": "ini-cet",
@@ -787,12 +1866,35 @@
       "body": "All India Institute of Medical Sciences",
       "bodyShort": "AIIMS",
       "level": "MBBS / BDS",
-      "qualification": ["Medical"],
+      "qualification": [
+        "Medical"
+      ],
       "age": "No upper limit",
       "officialUrl": "https://www.aiimsexams.ac.in/",
       "frequency": "biannual",
-      "aliases": ["INI CET", "AIIMS PG", "AIIMS Entrance"],
-      "cycle": { "notification": [3, 9], "apply": [4, 10], "exam": [5, 11], "result": [6, 12] }
+      "aliases": [
+        "INI CET",
+        "AIIMS PG",
+        "AIIMS Entrance"
+      ],
+      "cycle": {
+        "notification": [
+          3,
+          9
+        ],
+        "apply": [
+          4,
+          10
+        ],
+        "exam": [
+          5,
+          11
+        ],
+        "result": [
+          6,
+          12
+        ]
+      }
     },
     {
       "id": "aiims-nursing",
@@ -802,12 +1904,36 @@
       "body": "All India Institute of Medical Sciences",
       "bodyShort": "AIIMS",
       "level": "12th",
-      "qualification": ["12th", "Nursing"],
+      "qualification": [
+        "12th",
+        "Nursing"
+      ],
       "age": "17+ years",
       "officialUrl": "https://www.aiimsexams.ac.in/",
       "frequency": "annual",
-      "aliases": ["AIIMS BSc Nursing", "AIIMS Paramedical", "AIIMS Nursing Officer"],
-      "cycle": { "notification": [2, 3], "apply": [3, 4], "exam": [6, 7], "result": [8, 9] }
+      "aliases": [
+        "AIIMS BSc Nursing",
+        "AIIMS Paramedical",
+        "AIIMS Nursing Officer"
+      ],
+      "cycle": {
+        "notification": [
+          2,
+          3
+        ],
+        "apply": [
+          3,
+          4
+        ],
+        "exam": [
+          6,
+          7
+        ],
+        "result": [
+          8,
+          9
+        ]
+      }
     },
     {
       "id": "esic-nursing",
@@ -817,12 +1943,35 @@
       "body": "Employees State Insurance Corporation",
       "bodyShort": "ESIC",
       "level": "Nursing / Diploma",
-      "qualification": ["Nursing", "Diploma"],
+      "qualification": [
+        "Nursing",
+        "Diploma"
+      ],
       "age": "21-30 years",
       "officialUrl": "https://www.esic.gov.in/",
       "frequency": "irregular",
-      "aliases": ["ESIC Nursing Officer", "ESIC Paramedical"],
-      "cycle": { "notification": [5, 6], "apply": [6, 7], "exam": [9, 10], "result": [12, 1] }
+      "aliases": [
+        "ESIC Nursing Officer",
+        "ESIC Paramedical"
+      ],
+      "cycle": {
+        "notification": [
+          5,
+          6
+        ],
+        "apply": [
+          6,
+          7
+        ],
+        "exam": [
+          9,
+          10
+        ],
+        "result": [
+          12,
+          1
+        ]
+      }
     },
     {
       "id": "jee-main",
@@ -832,12 +1981,36 @@
       "body": "National Testing Agency",
       "bodyShort": "NTA",
       "level": "12th",
-      "qualification": ["12th"],
+      "qualification": [
+        "12th"
+      ],
       "age": "No upper limit",
       "officialUrl": "https://jeemain.nta.nic.in/",
       "frequency": "biannual",
-      "aliases": ["JEE Main", "JEE Mains", "NIT Entrance", "IIIT Entrance"],
-      "cycle": { "notification": [10, 11], "apply": [11, 12], "exam": [1, 4], "result": [2, 5] }
+      "aliases": [
+        "JEE Main",
+        "JEE Mains",
+        "NIT Entrance",
+        "IIIT Entrance"
+      ],
+      "cycle": {
+        "notification": [
+          10,
+          11
+        ],
+        "apply": [
+          11,
+          12
+        ],
+        "exam": [
+          1,
+          4
+        ],
+        "result": [
+          2,
+          5
+        ]
+      }
     },
     {
       "id": "jee-advanced",
@@ -847,12 +2020,35 @@
       "body": "Indian Institutes of Technology",
       "bodyShort": "IIT",
       "level": "12th",
-      "qualification": ["12th"],
+      "qualification": [
+        "12th"
+      ],
       "age": "25 years (relaxation available)",
       "officialUrl": "https://jeeadv.ac.in/",
       "frequency": "annual",
-      "aliases": ["JEE Advanced", "IIT JEE", "IIT Entrance"],
-      "cycle": { "notification": [3, 4], "apply": [4, 5], "exam": [5, 6], "result": [6, 7] }
+      "aliases": [
+        "JEE Advanced",
+        "IIT JEE",
+        "IIT Entrance"
+      ],
+      "cycle": {
+        "notification": [
+          3,
+          4
+        ],
+        "apply": [
+          4,
+          5
+        ],
+        "exam": [
+          5,
+          6
+        ],
+        "result": [
+          6,
+          7
+        ]
+      }
     },
     {
       "id": "gate",
@@ -862,12 +2058,37 @@
       "body": "Indian Institute of Science and IITs",
       "bodyShort": "IISc / IIT",
       "level": "Graduate",
-      "qualification": ["Graduate", "Engineering"],
+      "qualification": [
+        "Graduate",
+        "Engineering"
+      ],
       "age": "No upper limit",
       "officialUrl": "https://gate.iitk.ac.in/",
       "frequency": "annual",
-      "aliases": ["GATE", "Graduate Aptitude Test", "M.Tech Entrance", "PSU through GATE"],
-      "cycle": { "notification": [7, 8], "apply": [8, 10], "exam": [2, 3], "result": [3, 4] }
+      "aliases": [
+        "GATE",
+        "Graduate Aptitude Test",
+        "M.Tech Entrance",
+        "PSU through GATE"
+      ],
+      "cycle": {
+        "notification": [
+          7,
+          8
+        ],
+        "apply": [
+          8,
+          10
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          3,
+          4
+        ]
+      }
     },
     {
       "id": "isro-recruitment",
@@ -877,12 +2098,37 @@
       "body": "Indian Space Research Organisation",
       "bodyShort": "ISRO",
       "level": "Engineering / Post Graduate",
-      "qualification": ["Engineering", "Post Graduate"],
+      "qualification": [
+        "Engineering",
+        "Post Graduate"
+      ],
       "age": "18-35 years",
       "officialUrl": "https://www.isro.gov.in/",
       "frequency": "irregular",
-      "aliases": ["ISRO Scientist", "ISRO Engineer", "ICRB", "ISRO Technical Assistant"],
-      "cycle": { "notification": [2, 3], "apply": [3, 4], "exam": [6, 7], "result": [8, 9] }
+      "aliases": [
+        "ISRO Scientist",
+        "ISRO Engineer",
+        "ICRB",
+        "ISRO Technical Assistant"
+      ],
+      "cycle": {
+        "notification": [
+          2,
+          3
+        ],
+        "apply": [
+          3,
+          4
+        ],
+        "exam": [
+          6,
+          7
+        ],
+        "result": [
+          8,
+          9
+        ]
+      }
     },
     {
       "id": "drdo-recruitment",
@@ -892,12 +2138,36 @@
       "body": "Defence Research and Development Organisation",
       "bodyShort": "DRDO",
       "level": "Engineering / Post Graduate",
-      "qualification": ["Engineering", "Post Graduate"],
+      "qualification": [
+        "Engineering",
+        "Post Graduate"
+      ],
       "age": "18-35 years",
       "officialUrl": "https://drdo.gov.in/",
       "frequency": "irregular",
-      "aliases": ["DRDO Scientist", "DRDO CEPTAM", "DRDO Technical Assistant"],
-      "cycle": { "notification": [4, 5], "apply": [5, 6], "exam": [8, 9], "result": [11, 12] }
+      "aliases": [
+        "DRDO Scientist",
+        "DRDO CEPTAM",
+        "DRDO Technical Assistant"
+      ],
+      "cycle": {
+        "notification": [
+          4,
+          5
+        ],
+        "apply": [
+          5,
+          6
+        ],
+        "exam": [
+          8,
+          9
+        ],
+        "result": [
+          11,
+          12
+        ]
+      }
     },
     {
       "id": "barc-exam",
@@ -907,12 +2177,36 @@
       "body": "Bhabha Atomic Research Centre",
       "bodyShort": "BARC",
       "level": "Engineering / Post Graduate",
-      "qualification": ["Engineering", "Post Graduate"],
+      "qualification": [
+        "Engineering",
+        "Post Graduate"
+      ],
       "age": "26 years",
       "officialUrl": "https://barc.gov.in/",
       "frequency": "annual",
-      "aliases": ["BARC OCES", "BARC DGFS", "BARC Exam"],
-      "cycle": { "notification": [12, 1], "apply": [1, 2], "exam": [3, 4], "result": [5, 6] }
+      "aliases": [
+        "BARC OCES",
+        "BARC DGFS",
+        "BARC Exam"
+      ],
+      "cycle": {
+        "notification": [
+          12,
+          1
+        ],
+        "apply": [
+          1,
+          2
+        ],
+        "exam": [
+          3,
+          4
+        ],
+        "result": [
+          5,
+          6
+        ]
+      }
     },
     {
       "id": "clat",
@@ -922,12 +2216,36 @@
       "body": "Consortium of National Law Universities",
       "bodyShort": "CLAT",
       "level": "12th / Graduate",
-      "qualification": ["12th", "Graduate"],
+      "qualification": [
+        "12th",
+        "Graduate"
+      ],
       "age": "No upper limit",
       "officialUrl": "https://consortiumofnlus.ac.in/",
       "frequency": "annual",
-      "aliases": ["CLAT UG", "CLAT PG", "Common Law Admission Test"],
-      "cycle": { "notification": [7, 8], "apply": [8, 10], "exam": [12, 1], "result": [12, 1] }
+      "aliases": [
+        "CLAT UG",
+        "CLAT PG",
+        "Common Law Admission Test"
+      ],
+      "cycle": {
+        "notification": [
+          7,
+          8
+        ],
+        "apply": [
+          8,
+          10
+        ],
+        "exam": [
+          12,
+          1
+        ],
+        "result": [
+          12,
+          1
+        ]
+      }
     },
     {
       "id": "ailet",
@@ -937,12 +2255,35 @@
       "body": "National Law University Delhi",
       "bodyShort": "NLU Delhi",
       "level": "12th / Graduate",
-      "qualification": ["12th", "Graduate"],
+      "qualification": [
+        "12th",
+        "Graduate"
+      ],
       "age": "No upper limit",
       "officialUrl": "https://nationallawuniversitydelhi.in/",
       "frequency": "annual",
-      "aliases": ["AILET", "NLU Delhi Entrance"],
-      "cycle": { "notification": [8, 9], "apply": [9, 10], "exam": [12, 1], "result": [12, 1] }
+      "aliases": [
+        "AILET",
+        "NLU Delhi Entrance"
+      ],
+      "cycle": {
+        "notification": [
+          8,
+          9
+        ],
+        "apply": [
+          9,
+          10
+        ],
+        "exam": [
+          12,
+          1
+        ],
+        "result": [
+          12,
+          1
+        ]
+      }
     },
     {
       "id": "cuet-ug",
@@ -952,12 +2293,35 @@
       "body": "National Testing Agency",
       "bodyShort": "NTA",
       "level": "12th",
-      "qualification": ["12th"],
+      "qualification": [
+        "12th"
+      ],
       "age": "No upper limit",
       "officialUrl": "https://cuet.nta.nic.in/",
       "frequency": "annual",
-      "aliases": ["CUET", "CUET UG", "Central University Entrance"],
-      "cycle": { "notification": [1, 2], "apply": [2, 3], "exam": [5, 6], "result": [6, 7] }
+      "aliases": [
+        "CUET",
+        "CUET UG",
+        "Central University Entrance"
+      ],
+      "cycle": {
+        "notification": [
+          1,
+          2
+        ],
+        "apply": [
+          2,
+          3
+        ],
+        "exam": [
+          5,
+          6
+        ],
+        "result": [
+          6,
+          7
+        ]
+      }
     },
     {
       "id": "cuet-pg",
@@ -967,12 +2331,34 @@
       "body": "National Testing Agency",
       "bodyShort": "NTA",
       "level": "Graduate",
-      "qualification": ["Graduate"],
+      "qualification": [
+        "Graduate"
+      ],
       "age": "No upper limit",
       "officialUrl": "https://cuet.nta.nic.in/",
       "frequency": "annual",
-      "aliases": ["CUET PG", "PG Central University Entrance"],
-      "cycle": { "notification": [1, 2], "apply": [2, 3], "exam": [3, 4], "result": [5, 6] }
+      "aliases": [
+        "CUET PG",
+        "PG Central University Entrance"
+      ],
+      "cycle": {
+        "notification": [
+          1,
+          2
+        ],
+        "apply": [
+          2,
+          3
+        ],
+        "exam": [
+          3,
+          4
+        ],
+        "result": [
+          5,
+          6
+        ]
+      }
     },
     {
       "id": "cbse-board",
@@ -982,12 +2368,37 @@
       "body": "Central Board of Secondary Education",
       "bodyShort": "CBSE",
       "level": "10th / 12th",
-      "qualification": ["10th", "12th"],
+      "qualification": [
+        "10th",
+        "12th"
+      ],
       "age": "School students",
       "officialUrl": "https://cbse.gov.in/",
       "frequency": "annual",
-      "aliases": ["CBSE 10th", "CBSE 12th", "CBSE Board", "CBSE Date Sheet"],
-      "cycle": { "notification": [11, 12], "apply": [9, 10], "exam": [2, 3], "result": [5, 6] }
+      "aliases": [
+        "CBSE 10th",
+        "CBSE 12th",
+        "CBSE Board",
+        "CBSE Date Sheet"
+      ],
+      "cycle": {
+        "notification": [
+          11,
+          12
+        ],
+        "apply": [
+          9,
+          10
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          5,
+          6
+        ]
+      }
     },
     {
       "id": "icse-board",
@@ -997,12 +2408,38 @@
       "body": "Council for the Indian School Certificate Examinations",
       "bodyShort": "CISCE",
       "level": "10th / 12th",
-      "qualification": ["10th", "12th"],
+      "qualification": [
+        "10th",
+        "12th"
+      ],
       "age": "School students",
       "officialUrl": "https://cisce.org/",
       "frequency": "annual",
-      "aliases": ["ICSE", "ISC", "CISCE Board", "Class 10 ICSE", "Class 12 ISC"],
-      "cycle": { "notification": [10, 11], "apply": [9, 10], "exam": [2, 3], "result": [5, 6] }
+      "aliases": [
+        "ICSE",
+        "ISC",
+        "CISCE Board",
+        "Class 10 ICSE",
+        "Class 12 ISC"
+      ],
+      "cycle": {
+        "notification": [
+          10,
+          11
+        ],
+        "apply": [
+          9,
+          10
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          5,
+          6
+        ]
+      }
     },
     {
       "id": "nios-board",
@@ -1012,12 +2449,37 @@
       "body": "National Institute of Open Schooling",
       "bodyShort": "NIOS",
       "level": "10th / 12th",
-      "qualification": ["10th", "12th"],
+      "qualification": [
+        "10th",
+        "12th"
+      ],
       "age": "14+ years",
       "officialUrl": "https://nios.ac.in/",
       "frequency": "biannual",
-      "aliases": ["NIOS Board", "Open School", "NIOS 10th", "NIOS 12th"],
-      "cycle": { "notification": [1, 7], "apply": [2, 8], "exam": [4, 10], "result": [6, 12] }
+      "aliases": [
+        "NIOS Board",
+        "Open School",
+        "NIOS 10th",
+        "NIOS 12th"
+      ],
+      "cycle": {
+        "notification": [
+          1,
+          7
+        ],
+        "apply": [
+          2,
+          8
+        ],
+        "exam": [
+          4,
+          10
+        ],
+        "result": [
+          6,
+          12
+        ]
+      }
     },
     {
       "id": "csir-jrf",
@@ -1027,12 +2489,35 @@
       "body": "Council of Scientific and Industrial Research",
       "bodyShort": "CSIR",
       "level": "Post Graduate",
-      "qualification": ["Post Graduate"],
+      "qualification": [
+        "Post Graduate"
+      ],
       "age": "28 years",
       "officialUrl": "https://csirnet.nta.ac.in/",
       "frequency": "biannual",
-      "aliases": ["CSIR JRF", "CSIR Fellowship", "JRF Life Sciences"],
-      "cycle": { "notification": [2, 8], "apply": [3, 9], "exam": [6, 12], "result": [8, 2] }
+      "aliases": [
+        "CSIR JRF",
+        "CSIR Fellowship",
+        "JRF Life Sciences"
+      ],
+      "cycle": {
+        "notification": [
+          2,
+          8
+        ],
+        "apply": [
+          3,
+          9
+        ],
+        "exam": [
+          6,
+          12
+        ],
+        "result": [
+          8,
+          2
+        ]
+      }
     },
     {
       "id": "ssc-constable-delhi",
@@ -1042,12 +2527,35 @@
       "body": "Delhi Police",
       "bodyShort": "Delhi Police",
       "level": "10th / 12th",
-      "qualification": ["10th", "12th"],
+      "qualification": [
+        "10th",
+        "12th"
+      ],
       "age": "18-25 years",
       "officialUrl": "https://www.delhipolice.gov.in/",
       "frequency": "irregular",
-      "aliases": ["Delhi Police Constable", "DP Constable"],
-      "cycle": { "notification": [11, 12], "apply": [12, 1], "exam": [2, 3], "result": [6, 7] }
+      "aliases": [
+        "Delhi Police Constable",
+        "DP Constable"
+      ],
+      "cycle": {
+        "notification": [
+          11,
+          12
+        ],
+        "apply": [
+          12,
+          1
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          6,
+          7
+        ]
+      }
     },
     {
       "id": "ssc-si-delhi",
@@ -1057,12 +2565,110 @@
       "body": "Staff Selection Commission",
       "bodyShort": "SSC",
       "level": "Graduate",
-      "qualification": ["Graduate"],
+      "qualification": [
+        "Graduate"
+      ],
       "age": "20-25 years",
       "officialUrl": "https://ssc.gov.in/",
       "frequency": "annual",
-      "aliases": ["Delhi Police SI", "DP SI", "Sub Inspector Delhi Police"],
-      "cycle": { "notification": [5, 6], "apply": [5, 7], "exam": [9, 10], "result": [12, 1] }
+      "aliases": [
+        "Delhi Police SI",
+        "DP SI",
+        "Sub Inspector Delhi Police"
+      ],
+      "cycle": {
+        "notification": [
+          5,
+          6
+        ],
+        "apply": [
+          5,
+          7
+        ],
+        "exam": [
+          9,
+          10
+        ],
+        "result": [
+          12,
+          1
+        ]
+      }
+    },
+    {
+      "id": "cat",
+      "name": "CAT",
+      "fullName": "Common Admission Test",
+      "stream": "entrance",
+      "body": "Indian Institutes of Management",
+      "bodyShort": "IIM",
+      "level": "Graduate",
+      "qualification": [
+        "Graduate"
+      ],
+      "age": "No age limit",
+      "officialUrl": "https://iimcat.ac.in/",
+      "frequency": "annual",
+      "aliases": [
+        "Common Admission Test",
+        "IIM CAT",
+        "MBA entrance"
+      ],
+      "cycle": {
+        "notification": [
+          7,
+          8
+        ],
+        "apply": [
+          8,
+          9
+        ],
+        "exam": [
+          11,
+          12
+        ],
+        "result": [
+          1
+        ]
+      }
+    },
+    {
+      "id": "clat-ug",
+      "name": "CLAT UG",
+      "fullName": "Common Law Admission Test (Undergraduate)",
+      "stream": "judiciary",
+      "body": "Consortium of National Law Universities",
+      "bodyShort": "NLU Consortium",
+      "level": "Class 12",
+      "qualification": [
+        "Class 12"
+      ],
+      "age": "No upper age limit",
+      "officialUrl": "https://consortiumofnlus.ac.in/",
+      "frequency": "annual",
+      "aliases": [
+        "Common Law Admission Test",
+        "BA LLB entrance"
+      ],
+      "cycle": {
+        "notification": [
+          6,
+          7
+        ],
+        "apply": [
+          7,
+          8,
+          9,
+          10
+        ],
+        "exam": [
+          12
+        ],
+        "result": [
+          12,
+          1
+        ]
+      }
     }
   ]
 }

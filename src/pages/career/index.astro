@@ -1,0 +1,414 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { SITE } from "../../lib/constants";
+import { examDatabase } from "../../lib/exams";
+import { institutionDatabase } from "../../lib/institutions";
+import { CAREER_GOALS, CAREER_PATHS } from "../../lib/profile";
+import { scholarshipDatabase } from "../../lib/scholarships";
+
+const paths = CAREER_GOALS.map((goal) => CAREER_PATHS[goal]);
+const slug = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "Career planner for Indian students",
+    description:
+      "Pick a career goal and follow the class-by-class roadmap with the exams, institutions and scholarships that match it.",
+    url: `${SITE.url}/career/`,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE.url}/` },
+      { "@type": "ListItem", position: 2, name: "Career planner", item: `${SITE.url}/career/` },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Career Planner — Choose a Goal and Follow the Steps"
+  description="A step-by-step career planner for Indian students: pick engineering, medical, civil services, defence, banking, teaching, law, management, railways, state government or research, and see the exams, institutions and scholarships that match."
+  schema={schema}
+>
+  <section class="section-tight" style="padding-top:30px">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Dashboard</a><span aria-hidden="true">/</span><span>Career planner</span>
+      </nav>
+
+      <div class="career-hero" style="margin-top:16px">
+        <div class="panel">
+          <div class="eyebrow" style="background:var(--brand-soft);color:var(--brand);border-color:transparent">
+            Career planner
+          </div>
+          <h1 style="font-size:clamp(1.8rem,3.6vw,2.5rem);margin:10px 0 8px">
+            Pick a goal. Follow the steps.
+          </h1>
+          <p class="muted" style="max-width:640px">
+            A career is easier to reach when you know the order of the steps. Choose a goal below to see the class or
+            degree stage, the entrance exams, the institutions to target and the scholarships that can fund it.
+          </p>
+
+          <div class="goal-grid" style="margin-top:18px">
+            {paths.map((path) => (
+              <button
+                class="goal-card"
+                type="button"
+                data-goal={path.goal}
+                aria-pressed={path.goal === "Not decided" ? "true" : "false"}
+                style="text-align:left;cursor:pointer;font-family:inherit"
+              >
+                {path.title}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <aside>
+          <div class="sidebar-card" style="margin-top:0">
+            <h3>Your profile</h3>
+            <p>Recommendations use your class, state and career goal.</p>
+            <div class="facts">
+              <div><span>Education level</span><strong id="career-level">Not set</strong></div>
+              <div><span>State</span><strong id="career-state">Not set</strong></div>
+              <div><span>Career goal</span><strong id="career-goal">Not decided</strong></div>
+            </div>
+            <div class="sidebar-actions" style="margin-top:12px">
+              <a class="btn btn-primary btn-block" href="/profile/">Update profile</a>
+            </div>
+          </div>
+          <div class="sidebar-card">
+            <h3>Coverage</h3>
+            <div class="facts">
+              <div><span>Exam cycles</span><strong>{examDatabase.counts.total}</strong></div>
+              <div><span>Institutions</span><strong>{institutionDatabase.counts.total}</strong></div>
+              <div><span>Scholarships</span><strong>{scholarshipDatabase.counts.total}</strong></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <section style="margin-top:34px">
+        <div class="section-head" style="margin-bottom:14px">
+          <div>
+            <h2 style="font-size:clamp(1.4rem,2.6vw,1.9rem)" id="career-path-title">Still exploring</h2>
+            <p id="career-path-description">
+              Start with the exams open to your current class, then narrow down as you discover what fits.
+            </p>
+          </div>
+          <span class="badge badge-blue" id="career-path-badge">Not decided</span>
+        </div>
+
+        <div class="career-stages" id="career-stages">
+          {CAREER_PATHS["Not decided"].stages.map((stage) => (
+            <div class="career-stage">
+              <strong>{stage.label}</strong>
+              <span>{stage.detail}</span>
+            </div>
+          ))}
+        </div>
+
+        <div hidden id="career-path-data">
+          {paths.map((path) => (
+            <div
+              data-path={path.goal}
+              data-title={path.title}
+              data-description={path.description}
+              data-streams={path.streams.join(",")}
+              data-institution-types={path.institutionTypes.join(",")}
+            >
+              {path.stages.map((stage) => (
+                <div data-stage data-label={stage.label} data-detail={stage.detail}></div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section style="margin-top:34px">
+        <div class="section-head" style="margin-bottom:14px">
+          <div>
+            <h2 style="font-size:clamp(1.3rem,2.4vw,1.7rem)">Recommended exams</h2>
+            <p>Entrance and recruitment exams that match this goal and your current level.</p>
+          </div>
+          <a class="link-arrow" href="/exams/">All exams →</a>
+        </div>
+        <div class="grid-3" id="career-exams">
+          <div class="empty" style="grid-column:1/-1">
+            <h3>Set your profile to see matches</h3>
+            <p>Open your profile, add your education level and state, then come back to this page.</p>
+            <a class="btn btn-primary btn-sm" href="/profile/" style="margin-top:10px">Open profile</a>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-top:30px">
+        <div class="section-head" style="margin-bottom:14px">
+          <div>
+            <h2 style="font-size:clamp(1.3rem,2.4vw,1.7rem)">Institutions to target</h2>
+            <p>Institutes that accept the exams on this route.</p>
+          </div>
+          <a class="link-arrow" href="/institutions/">All institutions →</a>
+        </div>
+        <div class="grid-3" id="career-institutions"></div>
+      </section>
+
+      <section style="margin-top:30px">
+        <div class="section-head" style="margin-bottom:14px">
+          <div>
+            <h2 style="font-size:clamp(1.3rem,2.4vw,1.7rem)">Scholarships that can fund it</h2>
+            <p>Central schemes plus the schemes of your state.</p>
+          </div>
+          <a class="link-arrow" href="/scholarships/">All scholarships →</a>
+        </div>
+        <div class="grid-3" id="career-scholarships"></div>
+      </section>
+
+      <section style="margin-top:34px">
+        <div class="section-head" style="margin-bottom:14px">
+          <div>
+            <h2 style="font-size:clamp(1.3rem,2.4vw,1.7rem)">Every path at a glance</h2>
+            <p>Open a path to load its roadmap and recommendations.</p>
+          </div>
+        </div>
+        <div class="grid-3">
+          {paths.map((path) => (
+            <button
+              class="goal-card"
+              type="button"
+              data-goal={path.goal}
+              style="text-align:left;cursor:pointer;font-family:inherit;padding:16px"
+            >
+              <strong style="display:block;font-size:1rem;margin-bottom:6px">{path.title}</strong>
+              <span class="small muted" style="font-weight:400;display:block">{path.description}</span>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <section class="panel" style="margin-top:28px">
+        <div class="section-head" style="margin-bottom:10px">
+          <div>
+            <h2 style="font-size:1.35rem">How to use this planner</h2>
+            <p>Small, ordered steps beat a last-minute rush.</p>
+          </div>
+          <a class="btn btn-outline btn-sm" href="/calendar/">Exam calendar</a>
+        </div>
+        <ol class="step-list">
+          <li>Set your education level, stream and state in your profile.</li>
+          <li>Pick one goal from the grid above. You can change it any time.</li>
+          <li>Read the stages in order and note the exam that comes next.</li>
+          <li>Open the exam page for eligibility and the official link, then save it.</li>
+          <li>Check the scholarship list before every academic year.</li>
+        </ol>
+      </section>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  import { watchAuth } from "../../lib/auth";
+  import {
+    CAREER_PATHS,
+    loadProfile,
+    recommendedExams,
+    recommendedInstitutions,
+    recommendedScholarships,
+  } from "../../lib/profile";
+  import type { CareerGoal, Exam, Institution, Scholarship, UserProfile } from "../../lib/types";
+
+  const buttons = [...document.querySelectorAll<HTMLButtonElement>("[data-goal]")];
+  const pathData = [...document.querySelectorAll<HTMLElement>("[data-path]")];
+  const title = document.querySelector<HTMLElement>("#career-path-title");
+  const description = document.querySelector<HTMLElement>("#career-path-description");
+  const badge = document.querySelector<HTMLElement>("#career-path-badge");
+  const stages = document.querySelector<HTMLElement>("#career-stages");
+  const examsTarget = document.querySelector<HTMLElement>("#career-exams");
+  const institutionsTarget = document.querySelector<HTMLElement>("#career-institutions");
+  const scholarshipsTarget = document.querySelector<HTMLElement>("#career-scholarships");
+
+  let profile: UserProfile | null = null;
+  let selected: CareerGoal = "Not decided";
+  let examData: Exam[] = [];
+  let institutionData: Institution[] = [];
+  let scholarshipData: Scholarship[] = [];
+  let loaded = false;
+
+  function escapeHtml(value: string) {
+    return value
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function setText(selector: string, value: string) {
+    const element = document.querySelector<HTMLElement>(selector);
+    if (element) element.textContent = value;
+  }
+
+  function showPath(goal: CareerGoal) {
+    selected = goal;
+    const path = CAREER_PATHS[goal] || CAREER_PATHS["Not decided"];
+    const node = pathData.find((item) => item.dataset.path === goal) || pathData.find((item) => item.dataset.path === "Not decided");
+
+    if (title) title.textContent = path.title;
+    if (description) description.textContent = path.description;
+    if (badge) badge.textContent = goal;
+
+    if (stages && node) {
+      const rows = [...node.querySelectorAll<HTMLElement>("[data-stage]")];
+      stages.innerHTML = rows
+        .map(
+          (row) =>
+            `<div class="career-stage"><strong>${escapeHtml(row.dataset.label || "")}</strong><span>${escapeHtml(
+              row.dataset.detail || "",
+            )}</span></div>`,
+        )
+        .join("");
+    }
+
+    buttons.forEach((button) => {
+      button.setAttribute("aria-pressed", String(button.dataset.goal === goal));
+    });
+
+    const url = new URL(window.location.href);
+    if (goal === "Not decided") url.searchParams.delete("goal");
+    else url.searchParams.set("goal", goal);
+    window.history.replaceState({}, "", url);
+
+    renderRecommendations();
+  }
+
+  function examCard(exam: Exam) {
+    return `<article class="exam-card">
+      <div class="job-card-top">
+        <span class="badge badge-blue">${escapeHtml(exam.streamName)}</span>
+        <span class="badge badge-muted">${escapeHtml(exam.scope === "state" ? exam.stateName || "State" : "All India")}</span>
+      </div>
+      <h3><a href="/exams/${encodeURIComponent(exam.slug)}/">${escapeHtml(exam.name)}</a></h3>
+      <p class="exam-full">${escapeHtml(exam.fullName)}</p>
+      <div class="exam-facts"><span>🏛 ${escapeHtml(exam.bodyShort)}</span><span>🎓 ${escapeHtml(exam.level)}</span></div>
+      <div class="card-foot"><a class="link-arrow" href="/exams/${encodeURIComponent(exam.slug)}/">View exam →</a></div>
+    </article>`;
+  }
+
+  function institutionCard(institution: Institution) {
+    return `<article class="institution-card">
+      <div class="job-card-top">
+        <span class="badge badge-blue">${escapeHtml(institution.typeName)}</span>
+        <span class="badge badge-muted">${escapeHtml(institution.stateName)}</span>
+      </div>
+      <h3><a href="/institutions/${encodeURIComponent(institution.slug)}/">${escapeHtml(institution.shortName)}</a></h3>
+      <p class="exam-full">${escapeHtml(institution.name)}</p>
+      <div class="job-meta"><span>📍 ${escapeHtml(institution.city)}</span><span>🎓 ${escapeHtml(institution.level)}</span></div>
+      <div class="card-foot">
+        <a class="link-arrow" href="/institutions/${encodeURIComponent(institution.slug)}/">View institution →</a>
+      </div>
+    </article>`;
+  }
+
+  function scholarshipCard(scholarship: Scholarship) {
+    const scope = scholarship.scope === "central" ? "Central scheme" : scholarship.stateName || "State scheme";
+    return `<article class="scholarship-card">
+      <div class="job-card-top">
+        <span class="badge ${scholarship.scope === "central" ? "badge-green" : "badge-blue"}">${escapeHtml(scope)}</span>
+        <span class="badge badge-muted">${escapeHtml(scholarship.level[0] || "All levels")}</span>
+      </div>
+      <h3><a href="/scholarships/${encodeURIComponent(scholarship.slug)}/">${escapeHtml(scholarship.name)}</a></h3>
+      <div class="job-org"><span aria-hidden="true">🏛</span>${escapeHtml(scholarship.provider)}</div>
+      <p class="small muted" style="margin:8px 0 0">${escapeHtml(scholarship.amount)}</p>
+      <div class="card-foot">
+        <a class="link-arrow" href="/scholarships/${encodeURIComponent(scholarship.slug)}/">View scheme →</a>
+        <a class="link-arrow" href="${escapeHtml(scholarship.portalUrl)}" target="_blank" rel="noopener nofollow">Official portal ↗</a>
+      </div>
+    </article>`;
+  }
+
+  function effectiveProfile(): UserProfile {
+    if (profile) return { ...profile, careerGoal: selected };
+    return { uid: "guest", name: "", careerGoal: selected };
+  }
+
+  function renderRecommendations() {
+    if (!loaded) return;
+    const current = effectiveProfile();
+    const exams = recommendedExams(current, examData);
+    const institutions = recommendedInstitutions(current, institutionData);
+    const scholarships = recommendedScholarships(current, scholarshipData);
+
+    if (examsTarget) {
+      examsTarget.innerHTML = exams.length
+        ? exams.map(examCard).join("")
+        : `<div class="empty" style="grid-column:1/-1"><h3>No exam matches yet</h3><p>Update your education level in your profile to see more options.</p></div>`;
+    }
+
+    if (institutionsTarget) {
+      institutionsTarget.innerHTML = institutions.length
+        ? institutions.map(institutionCard).join("")
+        : `<div class="empty" style="grid-column:1/-1"><h3>No institution listed for this goal</h3><p>Browse the full institution list instead.</p></div>`;
+    }
+
+    if (scholarshipsTarget) {
+      scholarshipsTarget.innerHTML = scholarships.length
+        ? scholarships.map(scholarshipCard).join("")
+        : `<div class="empty" style="grid-column:1/-1"><h3>No scholarship matches yet</h3><p>Add your state to your profile to include state schemes.</p></div>`;
+    }
+  }
+
+  async function loadDatasets() {
+    if (loaded) return;
+    try {
+      const [examResponse, institutionResponse, scholarshipResponse] = await Promise.all([
+        fetch("/exams.json"),
+        fetch("/institutions.json"),
+        fetch("/scholarships.json"),
+      ]);
+      const examJson = await examResponse.json();
+      const institutionJson = await institutionResponse.json();
+      const scholarshipJson = await scholarshipResponse.json();
+      examData = examJson.exams || [];
+      institutionData = institutionJson.institutions || [];
+      scholarshipData = scholarshipJson.scholarships || [];
+      loaded = true;
+    } catch {
+      loaded = false;
+    }
+  }
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", async () => {
+      const goal = (button.dataset.goal || "Not decided") as CareerGoal;
+      showPath(goal);
+      await loadDatasets();
+      renderRecommendations();
+      const heading = document.querySelector<HTMLElement>("#career-path-title");
+      heading?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+
+  watchAuth(async (user) => {
+    if (!user) return;
+    profile = await loadProfile(user);
+
+    setText("#career-level", profile?.educationLevel || "Not set");
+    setText("#career-state", profile?.stateName || "Not set");
+    setText("#career-goal", profile?.careerGoal || "Not decided");
+
+    const fromUrl = new URL(window.location.href).searchParams.get("goal");
+    const fromUrlGoal =
+      fromUrl && (CAREER_PATHS as Record<string, unknown>)[fromUrl] ? (fromUrl as CareerGoal) : null;
+    const profileGoal =
+      profile?.careerGoal && CAREER_PATHS[profile.careerGoal] ? profile.careerGoal : "Not decided";
+    const initial: CareerGoal = fromUrlGoal || profileGoal;
+
+    showPath(initial);
+    await loadDatasets();
+    renderRecommendations();
+  });
+</script>

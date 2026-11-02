@@ -1,0 +1,267 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import InstitutionCard from "../../components/InstitutionCard.astro";
+import SubscribeForm from "../../components/SubscribeForm.astro";
+import { INSTITUTION_TYPE_LABELS, SITE } from "../../lib/constants";
+import { getExam } from "../../lib/exams";
+import { getInstitution, institutions } from "../../lib/institutions";
+import { getState } from "../../lib/states";
+import type { Institution } from "../../lib/types";
+
+export function getStaticPaths() {
+  return institutions.map((institution) => ({
+    params: { slug: institution.slug },
+    props: { institution },
+  }));
+}
+
+type Props = { institution: Institution };
+const { institution } = Astro.props;
+
+const stateInfo = getState(institution.stateId);
+const typeLabel = INSTITUTION_TYPE_LABELS[institution.type] || institution.typeName;
+const acceptedExams = institution.exams.map((id) => getExam(id)).filter(Boolean);
+const related = institutions
+  .filter(
+    (item) =>
+      item.id !== institution.id &&
+      (item.stateId === institution.stateId || item.type === institution.type),
+  )
+  .slice(0, 6);
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollegeOrUniversity",
+    name: institution.name,
+    alternateName: institution.shortName,
+    description: institution.summary,
+    url: `${SITE.url}/institutions/${institution.slug}/`,
+    sameAs: institution.website,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: institution.city,
+      addressRegion: institution.stateName,
+      addressCountry: "IN",
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE.url}/` },
+      { "@type": "ListItem", position: 2, name: "Institutions", item: `${SITE.url}/institutions/` },
+      { "@type": "ListItem", position: 3, name: institution.shortName, item: `${SITE.url}/institutions/${institution.slug}/` },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title={`${institution.name} — Courses, Admission & Accepted Exams`}
+  description={`${institution.name} (${institution.shortName}) in ${institution.city}, ${institution.stateName}. ${institution.level}. Admission portal, accepted entrance exams and official website.`}
+  type="article"
+  schema={schema}
+>
+  <div class="container breadcrumb">
+    <a href="/">Dashboard</a>
+    <span>/</span>
+    <a href="/institutions/">Institutions</a>
+    <span>/</span>
+    <a href={`/institutions/#type-${institution.type}`}>{typeLabel}</a>
+    <span>/</span>
+    <span>{institution.shortName}</span>
+  </div>
+
+  <div class="container detail-layout">
+    <article class="panel detail-header">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <span class="badge badge-blue">{typeLabel}</span>
+        <span class="badge badge-muted">{institution.stateName}</span>
+        <span class="badge badge-violet">{institution.city}</span>
+      </div>
+
+      <h1>{institution.name}</h1>
+      <div class="detail-sub">
+        <span>🏛 {institution.shortName}</span>
+        <span>📍 {institution.city}, {institution.stateName}</span>
+        <span>🎓 {institution.level}</span>
+      </div>
+
+      <p class="detail-summary">{institution.summary}</p>
+
+      <div class="notification-cta">
+        <a class="btn btn-primary" href={institution.admissionPortal} target="_blank" rel="noopener nofollow">
+          Open admission portal ↗
+        </a>
+        <p>
+          Admission dates, eligibility and seat matrix are published on the official portal. Confirm the current
+          process before you register or pay a fee.
+        </p>
+      </div>
+
+      <div class="key-grid">
+        <div class="key-item">
+          <small>Institute type</small>
+          <strong>{typeLabel}</strong>
+        </div>
+        <div class="key-item">
+          <small>City</small>
+          <strong>{institution.city}</strong>
+        </div>
+        <div class="key-item">
+          <small>State / UT</small>
+          <strong>{institution.stateName}</strong>
+        </div>
+        <div class="key-item">
+          <small>Region</small>
+          <strong>{institution.region}</strong>
+        </div>
+        <div class="key-item">
+          <small>Courses</small>
+          <strong>{institution.level}</strong>
+        </div>
+        <div class="key-item">
+          <small>Streams</small>
+          <strong>{institution.streams.join(", ")}</strong>
+        </div>
+      </div>
+
+      {acceptedExams.length ? (
+        <section class="detail-section">
+          <h2>Entrance exams accepted</h2>
+          <ul class="link-list">
+            {acceptedExams.map((exam) => (
+              <li>
+                <a href={`/exams/${exam!.slug}/`}>
+                  <span>{exam!.name} — {exam!.fullName}</span>
+                  <span aria-hidden="true">→</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      <section class="detail-section">
+        <h2>Admission routes</h2>
+        <div class="table-wrap">
+          <table>
+            <tbody>
+              <tr>
+                <th>Entrance exam</th>
+                <td>{acceptedExams.map((exam) => exam!.name).join(", ") || "Institute-level admission"}</td>
+              </tr>
+              <tr>
+                <th>Counselling</th>
+                <td>Centralised counselling for national institutes; the institute or state authority handles the rest.</td>
+              </tr>
+              <tr>
+                <th>Official website</th>
+                <td>
+                  <a href={institution.website} target="_blank" rel="noopener nofollow">{institution.website}</a>
+                </td>
+              </tr>
+              <tr>
+                <th>Admission portal</th>
+                <td>
+                  <a href={institution.admissionPortal} target="_blank" rel="noopener nofollow">
+                    {institution.admissionPortal}
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="detail-section">
+        <h2>How to apply</h2>
+        <ol class="step-list">
+          <li>Check the course, eligibility and accepted entrance exam on the official website.</li>
+          <li>Register for the entrance exam and appear for it on the scheduled date.</li>
+          <li>Complete the counselling registration for the relevant authority.</li>
+          <li>Fill your choices, lock the seat and pay the admission fee on the official portal.</li>
+          <li>Report for document verification with originals and keep the receipt.</li>
+        </ol>
+      </section>
+
+      <section class="detail-section">
+        <h2>Official links</h2>
+        <ul class="link-list">
+          <li>
+            <a href={institution.website} target="_blank" rel="noopener nofollow">
+              <span>Official website</span><span aria-hidden="true">↗</span>
+            </a>
+          </li>
+          <li>
+            <a href={institution.admissionPortal} target="_blank" rel="noopener nofollow">
+              <span>Admission portal</span><span aria-hidden="true">↗</span>
+            </a>
+          </li>
+          {stateInfo ? (
+            <li>
+              <a href={`/states/${stateInfo.id}/`}>
+                <span>{stateInfo.name} state page</span><span aria-hidden="true">→</span>
+              </a>
+            </li>
+          ) : null}
+        </ul>
+      </section>
+
+      {related.length ? (
+        <section class="detail-section">
+          <h2>Similar institutions</h2>
+          <div class="grid-3">
+            {related.map((item) => <InstitutionCard institution={item} />)}
+          </div>
+        </section>
+      ) : null}
+    </article>
+
+    <aside>
+      <div class="sidebar-card">
+        <h3>Official admission portal</h3>
+        <p>Apply, check the seat matrix and download the information brochure on the official portal.</p>
+        <div class="sidebar-actions">
+          <a class="btn btn-primary" href={institution.admissionPortal} target="_blank" rel="noopener nofollow">
+            Admission portal ↗
+          </a>
+          <a class="btn btn-outline" href={institution.website} target="_blank" rel="noopener nofollow">
+            Official website ↗
+          </a>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>Quick facts</h3>
+        <div class="facts">
+          <div><span>Type</span><strong>{typeLabel}</strong></div>
+          <div><span>City</span><strong>{institution.city}</strong></div>
+          <div><span>State</span><strong>{institution.stateName}</strong></div>
+          <div><span>Courses</span><strong>{institution.level}</strong></div>
+        </div>
+      </div>
+
+      {acceptedExams.length ? (
+        <div class="sidebar-card">
+          <h3>Exams to prepare</h3>
+          <div class="facts">
+            {acceptedExams.slice(0, 3).map((exam) => (
+              <div><span>{exam!.name}</span><strong>{exam!.level}</strong></div>
+            ))}
+          </div>
+          <div class="sidebar-actions" style="margin-top:12px">
+            <a class="btn btn-outline" href="/exams/">All exams →</a>
+          </div>
+        </div>
+      ) : null}
+
+      <div class="sidebar-card">
+        <h3>Admission alerts</h3>
+        <p>Get admission notifications and exam dates by email.</p>
+        <SubscribeForm compact source={`institution-${institution.slug}`} />
+      </div>
+    </aside>
+  </div>
+</BaseLayout>

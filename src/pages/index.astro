@@ -1,276 +1,384 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import LoginPanel from "../components/LoginPanel.astro";
 import JobCard from "../components/JobCard.astro";
 import ExamCard from "../components/ExamCard.astro";
-import CategoryCard from "../components/CategoryCard.astro";
-import SubscribeForm from "../components/SubscribeForm.astro";
-import { CATEGORY_META, SITE } from "../lib/constants";
+import ScholarshipCard from "../components/ScholarshipCard.astro";
+import InstitutionCard from "../components/InstitutionCard.astro";
+import { SITE } from "../lib/constants";
 import { examDatabase, getExam } from "../lib/exams";
-import { categoryCounts, jobs } from "../lib/jobs";
+import { institutionDatabase, institutions } from "../lib/institutions";
+import { jobs } from "../lib/jobs";
+import { centralScholarships, scholarshipDatabase } from "../lib/scholarships";
 
-const counts = categoryCounts();
 const latest = jobs.slice(0, 6);
-const results = jobs.filter((job) => job.category === "Results").slice(0, 3);
-const admitCards = jobs.filter((job) => job.category === "Admit Card").slice(0, 3);
-const examDates = jobs.filter((job) => job.category === "Exam Date").slice(0, 3);
-const demoCount = jobs.filter((job) => job.demo).length;
 
 const featuredExamIds = ["ssc-cgl", "upsc-cse", "ibps-po", "rrb-ntpc", "neet-ug", "ctet"];
 const featuredExams = featuredExamIds
   .map((id) => getExam(id))
   .filter((exam): exam is NonNullable<typeof exam> => Boolean(exam));
 
+const featuredScholarships = centralScholarships().slice(0, 4);
+const featuredInstitutions = institutions
+  .filter((institution) => ["iit", "nit", "aiims", "iim", "nlu"].includes(institution.type))
+  .slice(0, 6);
+
 const schema = {
   "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  name: "FollowExam — Government exam updates",
-  description: SITE.description,
+  "@type": "WebApplication",
+  name: SITE.name,
+  applicationCategory: "EducationalApplication",
+  operatingSystem: "Web, Android",
   url: SITE.url,
+  description: SITE.description,
+  offers: { "@type": "Offer", price: "0", priceCurrency: "INR" },
 };
 ---
 
-<BaseLayout schema={schema}>
-  {demoCount > 0 && (
-    <div class="notice-bar">
-      <div class="container">
-        <strong>Demo</strong>
-        <span>
-          Ye {demoCount} listings sample hain, sirf design test ke liye. Launch se pehle inhe delete karein aur official
-          notifications se replace karein.
-        </span>
-      </div>
-    </div>
-  )}
-
-  <section class="hero">
-    <div class="container hero-grid">
-      <div>
-        <div class="eyebrow">Daily government exam updates</div>
+<BaseLayout schema={schema} gated={false}>
+  <div class="container">
+    <!-- Signed-out view: the login screen is the home page. -->
+    <div id="home-auth" class="home-auth">
+      <div class="home-intro">
+        <div class="eyebrow">Free government exam and career portal</div>
         <h1>
-          Sarkari exam ki har update.<br />
-          <span>Ek clear feed.</span>
+          Every government exam.<br />
+          <span>One account.</span>
         </h1>
         <p>
-          Jobs, results, admit cards, answer keys, exam dates, admissions aur scholarships — official sources se
-          verify karke, roz ek jagah.
+          Sign in to follow official notifications for central and state recruitment, scholarships, universities and
+          entrance exams. Build a profile, get a career roadmap and never miss a deadline.
         </p>
-
-        <form class="hero-search" action="/jobs/" method="get" role="search">
-          <label class="sr-only" for="hero-search-input">Search jobs and exams</label>
-          <input
-            id="hero-search-input"
-            type="search"
-            name="q"
-            placeholder="SSC, UPSC, result, admit card..."
-            autocomplete="off"
-          />
-          <button class="btn btn-accent" type="submit">Search</button>
-        </form>
-
-        <div class="hero-trust">
-          <span>✓ Official source links</span>
-          <span>✓ Daily automated updates</span>
-          <span>✓ Free email alerts</span>
-        </div>
+        <ul class="home-points">
+          <li><strong>{jobs.length}</strong> analysed notifications with official links</li>
+          <li><strong>{examDatabase.counts.total}</strong> exam cycles across {examDatabase.counts.states} states and UTs</li>
+          <li><strong>{institutionDatabase.counts.total}</strong> IITs, NITs, IIITs, AIIMS, IIMs, NLUs and universities</li>
+          <li><strong>{scholarshipDatabase.counts.total}</strong> central and state scholarship schemes</li>
+        </ul>
+        <p class="small muted">
+          Already on a phone? Add FollowExam to your home screen from the browser menu, or install the Android app when
+          it is available on Google Play.
+        </p>
       </div>
 
-      <aside class="hero-card" aria-label="FollowExam at a glance">
-        <h2>Live coverage</h2>
-        <div class="hero-stat"><span>Published updates</span><strong>{jobs.length}</strong></div>
-        <div class="hero-stat"><span>Exam cycles</span><strong>{examDatabase.counts.total}</strong></div>
-        <div class="hero-stat"><span>States & UTs</span><strong>{examDatabase.counts.states}</strong></div>
-        <div class="hero-stat"><span>Cost</span><strong>Free</strong></div>
-      </aside>
+      <LoginPanel />
     </div>
-  </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="section-head">
+    <!-- Signed-in view: the dashboard. -->
+    <div id="home-dashboard" class="home-dashboard" hidden>
+      <section class="dash-head">
         <div>
-          <h2>Explore by category</h2>
-          <p>Jo chahiye, seedha wahan jayein.</p>
+          <div class="eyebrow">Your dashboard</div>
+          <h1>Welcome back, <span id="dash-name">student</span>.</h1>
+          <p class="muted" id="dash-subtitle">
+            Here are the latest official notifications, scholarships and institutions that match your profile.
+          </p>
         </div>
-        <a class="link-arrow" href="/jobs/">All updates →</a>
-      </div>
-      <div class="grid-4">
-        {Object.entries(CATEGORY_META).map(([label, meta]) => (
-          <CategoryCard
-            label={meta.label}
-            slug={meta.slug}
-            description={meta.description}
-            icon={meta.icon}
-            count={counts[label] || 0}
-          />
-        ))}
-      </div>
-    </div>
-  </section>
+        <div class="dash-head-actions">
+          <a class="btn btn-primary" href="/profile/">Edit profile</a>
+          <a class="btn btn-outline" href="/career/">Career roadmap</a>
+        </div>
+      </section>
 
-  <section class="section-tight">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <h2>Exam database & cycles</h2>
-          <p>
-            {examDatabase.counts.total} exams · {examDatabase.counts.central} central · {examDatabase.counts.state} state/UT.
-            Notification, exam aur result ka typical window ek jagah.
-          </p>
-        </div>
-        <a class="link-arrow" href="/exams/">All exams →</a>
-      </div>
-      <div class="grid-3">
-        {featuredExams.map((exam) => <ExamCard exam={exam} />)}
-      </div>
-      <div class="grid-3" style="margin-top:18px">
-        <a class="panel" href="/states/">
-          <span class="badge badge-blue">📍 State-wise</span>
-          <h3 style="margin-top:10px">36 states & UTs</h3>
-          <p class="muted small" style="margin:0">
-            PSC, police constable, SI, TET aur board exam cycles — apne state ka page kholiye.
-          </p>
+      <section class="dash-stats" aria-label="Coverage">
+        <a class="dash-stat" href="/jobs/">
+          <span>Analysed notifications</span>
+          <strong>{jobs.length}</strong>
         </a>
-        <a class="panel" href="/calendar/">
-          <span class="badge badge-violet">📅 Calendar</span>
-          <h3 style="margin-top:10px">12-month exam calendar</h3>
-          <p class="muted small" style="margin:0">
-            Kis mahine kaunsi notification, exam aur result expected hai — month-wise view.
-          </p>
+        <a class="dash-stat" href="/exams/">
+          <span>Exam cycles</span>
+          <strong>{examDatabase.counts.total}</strong>
         </a>
-        <a class="panel" href="/jobs/">
-          <span class="badge badge-green">🔎 Filters</span>
-          <h3 style="margin-top:10px">Search by exam & state</h3>
-          <p class="muted small" style="margin:0">
-            Latest updates ko exam, state, category aur qualification se filter karein.
-          </p>
+        <a class="dash-stat" href="/institutions/">
+          <span>Institutions</span>
+          <strong>{institutionDatabase.counts.total}</strong>
         </a>
-      </div>
-    </div>
-  </section>
+        <a class="dash-stat" href="/scholarships/">
+          <span>Scholarships</span>
+          <strong>{scholarshipDatabase.counts.total}</strong>
+        </a>
+      </section>
 
-  <section class="section-tight">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <h2>Latest updates</h2>
-          <p>Fresh jobs aur notifications, newest first.</p>
-        </div>
-        <a class="link-arrow" href="/category/latest-jobs/">Latest jobs →</a>
-      </div>
-      {latest.length ? (
-        <div class="grid-3">
-          {latest.map((job) => <JobCard job={job} />)}
-        </div>
-      ) : (
-        <div class="empty">
-          <h3>Abhi koi update nahi hai</h3>
-          <p>Daily automation chalne ke baad latest jobs yahan dikhengi.</p>
-        </div>
-      )}
-    </div>
-  </section>
-
-  {(results.length > 0 || admitCards.length > 0) && (
-    <section class="section-tight">
-      <div class="container grid-2">
-        {results.length > 0 && (
-          <div>
-            <div class="section-head">
-              <div>
-                <h2>Results</h2>
-                <p>Final result aur merit list updates.</p>
-              </div>
-              <a class="link-arrow" href="/category/results/">View all →</a>
+      <div class="dash-grid">
+        <section class="panel dash-panel">
+          <div class="section-head" style="margin-bottom:12px">
+            <div>
+              <h2>Your profile</h2>
+              <p>Keep this up to date so recommendations stay accurate.</p>
             </div>
-            <div style="display:grid;gap:12px">
-              {results.map((job) => <JobCard job={job} />)}
-            </div>
+            <a class="link-arrow" href="/profile/">Open →</a>
           </div>
-        )}
-        {admitCards.length > 0 && (
-          <div>
-            <div class="section-head">
-              <div>
-                <h2>Admit cards</h2>
-                <p>Hall ticket aur exam city updates.</p>
-              </div>
-              <a class="link-arrow" href="/category/admit-card/">View all →</a>
-            </div>
-            <div style="display:grid;gap:12px">
-              {admitCards.map((job) => <JobCard job={job} />)}
-            </div>
+          <div class="facts" id="dash-profile-facts">
+            <div><span>Education level</span><strong id="dash-level">Not set</strong></div>
+            <div><span>State</span><strong id="dash-state">Not set</strong></div>
+            <div><span>Career goal</span><strong id="dash-goal">Not decided</strong></div>
+            <div><span>Profile completion</span><strong id="dash-completion">0%</strong></div>
           </div>
-        )}
-      </div>
-    </section>
-  )}
+          <div class="progress" aria-hidden="true"><span id="dash-progress-bar" style="width:0%"></span></div>
+          <p class="small muted" style="margin:12px 0 0">
+            <a href="/career/">See the step-by-step roadmap for your goal →</a>
+          </p>
+        </section>
 
-  {examDates.length > 0 && (
-    <section class="section-tight">
-      <div class="container">
+        <section class="panel dash-panel dash-career">
+          <div class="section-head" style="margin-bottom:12px">
+            <div>
+              <h2>Career roadmap</h2>
+              <p id="dash-career-title">Explore the paths open to your current class.</p>
+            </div>
+            <a class="link-arrow" href="/career/">Full roadmap →</a>
+          </div>
+          <ol class="dash-stages" id="dash-stages">
+            <li><strong>Set your education level</strong><span>Open your profile and tell us which class or degree you are in.</span></li>
+            <li><strong>Pick a career goal</strong><span>Engineering, medical, civil services, defence, banking, law, teaching and more.</span></li>
+            <li><strong>Follow the milestones</strong><span>Each goal shows the exams, institutions and application steps in order.</span></li>
+          </ol>
+        </section>
+      </div>
+
+      <section class="section-tight">
         <div class="section-head">
           <div>
-            <h2>Exam dates & schedules</h2>
-            <p>Date sheets aur exam calendars.</p>
+            <h2>Recommended exams</h2>
+            <p>Based on your education level and career goal.</p>
           </div>
-          <a class="link-arrow" href="/category/exam-date/">View all →</a>
+          <a class="link-arrow" href="/exams/">All exams →</a>
         </div>
-        <div class="grid-3">
-          {examDates.map((job) => <JobCard job={job} />)}
+        <div class="grid-3" id="dash-exams">
+          {featuredExams.map((exam) => <ExamCard exam={exam} />)}
         </div>
-      </div>
-    </section>
-  )}
+      </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="cta">
-        <div>
-          <h2>Roz ki updates, seedha inbox me</h2>
-          <p>
-            Ek daily digest — sirf important jobs, results aur exam dates. Free, no spam. Aap kabhi bhi unsubscribe kar
-            sakte hain.
-          </p>
+      <section class="section-tight">
+        <div class="section-head">
+          <div>
+            <h2>Latest official updates</h2>
+            <p>Every post includes the official notification link and a full analysis.</p>
+          </div>
+          <a class="link-arrow" href="/jobs/">All updates →</a>
         </div>
-        <div style="min-width:min(100%,360px)">
-          <SubscribeForm source="home-cta" />
-        </div>
-      </div>
-    </div>
-  </section>
+        {latest.length ? (
+          <div class="grid-3">
+            {latest.map((job) => <JobCard job={job} />)}
+          </div>
+        ) : (
+          <div class="empty">
+            <h3>No published updates yet</h3>
+            <p>New notifications appear here as soon as they are analysed.</p>
+          </div>
+        )}
+      </section>
 
-  <section class="section-tight">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <h2>How FollowExam works</h2>
-          <p>Automation + human review = clean, useful updates.</p>
+      <section class="section-tight">
+        <div class="section-head">
+          <div>
+            <h2>Scholarships for you</h2>
+            <p>Central schemes plus the flagship programme of every state and UT.</p>
+          </div>
+          <a class="link-arrow" href="/scholarships/">All scholarships →</a>
         </div>
-      </div>
-      <div class="grid-3">
-        <div class="panel">
-          <span class="badge badge-blue">01</span>
-          <h3 style="margin-top:10px">Discover</h3>
-          <p class="muted small">
-            Official portals, RSS feeds aur government notifications se nayi updates automatically detect hoti hain.
-          </p>
+        <div class="grid-3" id="dash-scholarships">
+          {featuredScholarships.map((scholarship) => <ScholarshipCard scholarship={scholarship} />)}
         </div>
-        <div class="panel">
-          <span class="badge badge-amber">02</span>
-          <h3 style="margin-top:10px">Verify</h3>
-          <p class="muted small">
-            Har entry admin review queue me jati hai. Dates, links aur eligibility check hone ke baad hi publish hoti
-            hai.
-          </p>
+      </section>
+
+      <section class="section-tight">
+        <div class="section-head">
+          <div>
+            <h2>Institutions to target</h2>
+            <p>Admission routes, official portals and entrance exams.</p>
+          </div>
+          <a class="link-arrow" href="/institutions/">All institutions →</a>
         </div>
-        <div class="panel">
-          <span class="badge badge-green">03</span>
-          <h3 style="margin-top:10px">Notify</h3>
-          <p class="muted small">
-            Publish hote hi Telegram aur email subscribers ko ek-ek karke alert jata hai — bina bulk spam ke.
-          </p>
+        <div class="grid-3" id="dash-institutions">
+          {featuredInstitutions.map((institution) => <InstitutionCard institution={institution} />)}
         </div>
-      </div>
+      </section>
+
+      <section class="section-tight">
+        <div class="panel dash-links">
+          <a class="dash-link" href="/account/"><strong>Saved updates</strong><span>Everything you bookmarked.</span></a>
+          <a class="dash-link" href="/states/"><strong>Your state</strong><span>PSC, police, TET and board exams.</span></a>
+          <a class="dash-link" href="/calendar/"><strong>Exam calendar</strong><span>Notification, exam and result months.</span></a>
+          <a class="dash-link" href="/category/scholarship/"><strong>Scholarship updates</strong><span>New schemes and deadlines.</span></a>
+        </div>
+      </section>
     </div>
-  </section>
+  </div>
 </BaseLayout>
+
+<script>
+  import { watchAuth } from "../lib/auth";
+  import {
+    CAREER_PATHS,
+    loadProfile,
+    recommendedExams,
+    recommendedInstitutions,
+    recommendedScholarships,
+    type CareerPath,
+  } from "../lib/profile";
+  import type { Exam, Institution, Scholarship, UserProfile } from "../lib/types";
+
+  const authView = document.querySelector<HTMLElement>("#home-auth");
+  const dashboard = document.querySelector<HTMLElement>("#home-dashboard");
+  const nameEl = document.querySelector<HTMLElement>("#dash-name");
+
+  function setText(id: string, value: string) {
+    const element = document.querySelector<HTMLElement>(id);
+    if (element) element.textContent = value;
+  }
+
+  function initials(name: string) {
+    return (
+      name
+        .split(/\s+/)
+        .filter(Boolean)
+        .slice(0, 2)
+        .map((part) => part[0]?.toUpperCase() || "")
+        .join("") || "FE"
+    );
+  }
+
+  function escapeHtml(value: string) {
+    return value
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function completion(profile: UserProfile | null) {
+    const fields = [
+      profile?.name,
+      profile?.stateId,
+      profile?.educationLevel,
+      profile?.careerGoal,
+      profile?.stream,
+      profile?.dateOfBirth,
+    ];
+    const filled = fields.filter((value) => Boolean(value && String(value).trim())).length;
+    return Math.round((filled / fields.length) * 100);
+  }
+
+  function renderStages(path: CareerPath | undefined) {
+    const list = document.querySelector<HTMLElement>("#dash-stages");
+    if (!list || !path) return;
+    list.innerHTML = path.stages
+      .map(
+        (stage) =>
+          `<li><strong>${escapeHtml(stage.label)}</strong><span>${escapeHtml(stage.detail)}</span></li>`,
+      )
+      .join("");
+  }
+
+  function examCard(exam: Exam) {
+    return `<article class="exam-card">
+      <div class="job-card-top">
+        <span class="badge badge-blue">${escapeHtml(exam.streamName)}</span>
+        <span class="badge badge-muted">${escapeHtml(exam.scope === "state" ? exam.stateName || "State" : "All India")}</span>
+      </div>
+      <h3><a href="/exams/${encodeURIComponent(exam.slug)}/">${escapeHtml(exam.name)}</a></h3>
+      <p class="exam-full">${escapeHtml(exam.fullName)}</p>
+      <div class="exam-facts"><span>🏛 ${escapeHtml(exam.bodyShort)}</span><span>🎓 ${escapeHtml(exam.level)}</span></div>
+    </article>`;
+  }
+
+  function scholarshipCard(scholarship: Scholarship) {
+    const scope = scholarship.scope === "central" ? "Central scheme" : scholarship.stateName || "State scheme";
+    return `<article class="scholarship-card">
+      <div class="job-card-top">
+        <span class="badge ${scholarship.scope === "central" ? "badge-green" : "badge-blue"}">${escapeHtml(scope)}</span>
+        <span class="badge badge-muted">${escapeHtml(scholarship.level[0] || "All levels")}</span>
+      </div>
+      <h3><a href="/scholarships/${encodeURIComponent(scholarship.slug)}/">${escapeHtml(scholarship.name)}</a></h3>
+      <div class="job-org"><span aria-hidden="true">🏛</span>${escapeHtml(scholarship.provider)}</div>
+      <p class="small muted" style="margin:8px 0 0">${escapeHtml(scholarship.amount)}</p>
+      <div class="card-foot">
+        <a class="link-arrow" href="/scholarships/${encodeURIComponent(scholarship.slug)}/">View scheme →</a>
+        <a class="link-arrow" href="${escapeHtml(scholarship.portalUrl)}" target="_blank" rel="noopener nofollow">Official portal ↗</a>
+      </div>
+    </article>`;
+  }
+
+  function institutionCard(institution: Institution) {
+    return `<article class="institution-card">
+      <div class="job-card-top">
+        <span class="badge badge-blue">${escapeHtml(institution.typeName)}</span>
+        <span class="badge badge-muted">${escapeHtml(institution.stateName)}</span>
+      </div>
+      <h3><a href="/institutions/${encodeURIComponent(institution.slug)}/">${escapeHtml(institution.shortName)}</a></h3>
+      <p class="exam-full">${escapeHtml(institution.name)}</p>
+      <div class="job-meta"><span>📍 ${escapeHtml(institution.city)}</span><span>🎓 ${escapeHtml(institution.level)}</span></div>
+      <div class="card-foot">
+        <a class="link-arrow" href="/institutions/${encodeURIComponent(institution.slug)}/">View institution →</a>
+        <a class="link-arrow" href="${escapeHtml(institution.website)}" target="_blank" rel="noopener nofollow">Website ↗</a>
+      </div>
+    </article>`;
+  }
+
+  async function personalise(profile: UserProfile | null) {
+    const path = CAREER_PATHS[profile?.careerGoal || "Not decided"];
+    setText("#dash-level", profile?.educationLevel || "Not set");
+    setText("#dash-state", profile?.stateName || "Not set");
+    setText("#dash-goal", profile?.careerGoal || "Not decided");
+    setText("#dash-career-title", path.title === "Still exploring" ? "Explore the paths open to your current class." : path.description);
+    renderStages(path);
+
+    const percent = completion(profile);
+    setText("#dash-completion", `${percent}%`);
+    const bar = document.querySelector<HTMLElement>("#dash-progress-bar");
+    if (bar) bar.style.width = `${percent}%`;
+
+    if (!profile) return;
+
+    try {
+      const [examResponse, institutionResponse, scholarshipResponse] = await Promise.all([
+        fetch("/exams.json"),
+        fetch("/institutions.json"),
+        fetch("/scholarships.json"),
+      ]);
+      const examData = await examResponse.json();
+      const institutionData = await institutionResponse.json();
+      const scholarshipData = await scholarshipResponse.json();
+
+      const exams = recommendedExams(profile, examData.exams || []);
+      const institutions = recommendedInstitutions(profile, institutionData.institutions || []);
+      const scholarships = recommendedScholarships(profile, scholarshipData.scholarships || []);
+
+      const examTarget = document.querySelector<HTMLElement>("#dash-exams");
+      if (examTarget && exams.length) examTarget.innerHTML = exams.map(examCard).join("");
+
+      const institutionTarget = document.querySelector<HTMLElement>("#dash-institutions");
+      if (institutionTarget && institutions.length) {
+        institutionTarget.innerHTML = institutions.map(institutionCard).join("");
+      }
+
+      const scholarshipTarget = document.querySelector<HTMLElement>("#dash-scholarships");
+      if (scholarshipTarget && scholarships.length) {
+        scholarshipTarget.innerHTML = scholarships.map(scholarshipCard).join("");
+      }
+    } catch {
+      /* Server-rendered defaults stay in place. */
+    }
+  }
+
+  watchAuth(async (user) => {
+    if (!user) {
+      if (authView) authView.hidden = false;
+      if (dashboard) dashboard.hidden = true;
+      return;
+    }
+
+    if (authView) authView.hidden = true;
+    if (dashboard) dashboard.hidden = false;
+
+    const profile = await loadProfile(user);
+    const displayName = profile?.name || user.displayName || user.email?.split("@")[0] || "student";
+    if (nameEl) nameEl.textContent = displayName.split(/\s+/)[0] || displayName;
+    setText("#header-name", displayName);
+    setText("#header-avatar", initials(displayName));
+
+    await personalise(profile);
+  });
+</script>

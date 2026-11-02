@@ -1,0 +1,62 @@
+{
+  "packageId": "app.web.followupdates.twa",
+  "host": "followupdates.web.app",
+  "name": "FollowExam — Government Exam & Scholarship Portal",
+  "launcherName": "FollowExam",
+  "display": "standalone",
+  "themeColor": "#0b4f9c",
+  "themeColorDark": "#0b4f9c",
+  "navigationColor": "#0b4f9c",
+  "navigationColorDark": "#0b4f9c",
+  "navigationDividerColor": "#0b4f9c",
+  "navigationDividerColorDark": "#0b4f9c",
+  "backgroundColor": "#f5f8fc",
+  "enableNotifications": false,
+  "startUrl": "/",
+  "iconUrl": "https://followupdates.web.app/icons/icon-512.png",
+  "maskableIconUrl": "https://followupdates.web.app/icons/icon-512-maskable.png",
+  "monochromeIconUrl": "https://followupdates.web.app/icons/icon-512-maskable.png",
+  "splashScreenFadeOutDuration": 300,
+  "signingKey": {
+    "path": "./android.keystore",
+    "alias": "followexam"
+  },
+  "appVersionName": "1.0.0",
+  "appVersionCode": 1,
+  "shortcuts": [
+    {
+      "name": "All updates",
+      "shortName": "Updates",
+      "url": "/jobs/",
+      "chosenIconUrl": "https://followupdates.web.app/icons/icon-192.png"
+    },
+    {
+      "name": "Scholarships",
+      "shortName": "Scholarships",
+      "url": "/scholarships/",
+      "chosenIconUrl": "https://followupdates.web.app/icons/icon-192.png"
+    },
+    {
+      "name": "Career planner",
+      "shortName": "Career",
+      "url": "/career/",
+      "chosenIconUrl": "https://followupdates.web.app/icons/icon-192.png"
+    }
+  ],
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://followupdates.web.app/manifest.webmanifest",
+  "fallbackType": "customtabs",
+  "features": {},
+  "alphaDependencies": {
+    "enabled": false
+  },
+  "enableSiteSettingsShortcut": true,
+  "isChromeOSOnly": false,
+  "isMetaQuest": false,
+  "fullScopeUrl": "https://followupdates.web.app/",
+  "minSdkVersion": 21,
+  "orientation": "portrait-primary",
+  "fingerprints": [],
+  "additionalTrustedOrigins": [],
+  "retainedBundles": []
+}

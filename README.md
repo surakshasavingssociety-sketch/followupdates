@@ -1,28 +1,41 @@
 # FollowExam
 
-Free, automated Indian government exam & job update portal. Official sources se notifications discover karta hai, admin review ke baad publish karta hai, aur Telegram + email alerts bhejta hai.
+A free, automated portal for Indian government exams and jobs. It discovers official
+notifications, publishes them after review with the full details analysed, and sends
+Telegram and email alerts. The web app is account-based: the home page is a sign-in
+screen, and every update, scholarship, institution and career tool appears after login.
 
-> **Important:** FollowExam ek independent aggregator hai. Kisi government department se affiliated nahi hai. Har post me official notification ka direct link hota hai — apply se pehle wahan verify karein. Doosri websites ka content copy nahi kiya jata.
+> **Important:** FollowExam is an independent aggregator and is not affiliated with any
+> government department. Every post links directly to the official notification — verify
+> there before applying. No text or images from other websites are copied.
 
-> **Naya setup kar rahe hain?** Poora step-by-step guide yahan hai: [`SETUP.md`](./SETUP.md) — Firebase project se live deploy tak.
+> **Setting up from scratch?** The complete step-by-step guide is in
+> [`SETUP.md`](./SETUP.md), and Play Store publishing is covered in
+> [`PLAY_STORE.md`](./PLAY_STORE.md).
 
 ---
 
-## 1. Kya kaam karta hai
+## 1. What it does
 
-| Feature | Kaise |
+| Feature | How it works |
 |---|---|
-| Daily auto discovery | GitHub Actions cron + `scripts/ingest.mjs` (Google News RSS, PIB RSS, UPSC/NTA HTML) |
-| Admin review panel | `/admin/` — Firebase Auth + Firestore `pending` queue |
-| Publish | Approve hone par job Firestore `jobs` me jata hai, agli build me site par |
-| Exam database | `/exams/` — 224 central + state exam cycles, eligibility, official links |
-| State coverage | `/states/` — 28 states + 8 UTs ke PSC, police, TET aur board exams |
-| Exam calendar | `/calendar/` — 12-month notification, exam aur result windows |
-| Search & filters | `/jobs/` — Fuse.js client-side search, category/state/exam/qualification filters |
+| Daily discovery | GitHub Actions cron + `scripts/ingest.mjs` (Google News RSS, PIB RSS, UPSC/NTA pages) |
+| Admin review | `/admin/` — Firebase Auth + Firestore `pending` queue |
+| Publish | Approval moves the job to Firestore `jobs`; the next build renders it |
+| Notification analysis | Every job carries highlights, important dates, posts, eligibility, selection process, fees, documents, how to apply and official links |
+| Official source link | `notificationUrl` is required and validated for every published job |
+| Exam database | `/exams/` — 225 central and state exam cycles with eligibility and official links |
+| Institutions | `/institutions/` — 192 IITs, NITs, IIITs, AIIMS, IIMs, NLUs, central and state universities |
+| Scholarships | `/scholarships/` — 54 central and state/UT schemes with eligibility, benefits and application steps |
+| Career planner | `/career/` — a student picks a goal and gets a stage-by-stage roadmap with matching exams, institutions and scholarships |
+| State coverage | `/states/` — 28 states + 8 UTs with PSC, police, TET and board exams |
+| Exam calendar | `/calendar/` — 12-month notification, exam and result windows |
+| Search and filters | `/jobs/` — Fuse.js client-side search with category, state, exam and qualification filters |
 | Category pages | Latest Jobs, Results, Admit Card, Answer Key, Exam Date, Admission, Syllabus, Scholarship |
-| Email alerts | Nodemailer + Gmail SMTP, **ek-ek karke loop me** (bulk nahi) |
-| Telegram alerts | Bot API, per-job message |
-| User accounts | Firebase Auth (email/password + Google), saved jobs, alert settings |
+| Accounts | Firebase Auth (email/password, Google, optional phone), saved updates, alert settings, profile and career preferences |
+| Email alerts | Nodemailer + Gmail SMTP, sent **one by one in a loop** (never bulk) |
+| Telegram alerts | Bot API, one message per job |
+| Installable app | PWA manifest, service worker, offline page and Play Store TWA configuration |
 | SEO | Sitemap, JSON-LD (WebSite, JobPosting, CollectionPage), RSS `/feed.xml`, robots.txt |
 | Hosting | Firebase Hosting free tier (`*.web.app`) |
 
@@ -40,23 +53,27 @@ cp .env.example .env      # Windows PowerShell: Copy-Item .env.example .env
 npm run dev               # http://localhost:4321
 ```
 
-Firebase ke bina bhi site chalegi — sirf login/admin/alerts disabled rahenge.
+The site runs without Firebase; only login, admin and alerts stay disabled.
 
 Useful commands:
 
-| Command | Kya karta hai |
+| Command | What it does |
 |---|---|
 | `npm run dev` | Local dev server |
-| `npm run build` | Production build (`dist/`) |
-| `npm run preview` | Build preview |
-| `npm run ingest` | Naye notifications dhoondh kar `data/pending.json` me likhta hai |
-| `npm run exams:build` | `data/exams.json` rebuild (central catalog + state exams) |
-| `npm run validate` | `data/jobs.json`, `data/exams.json`, `data/states.json` check |
-| `npm run linkcheck` | Build ke baad internal links check |
+| `npm run build` | Production build (`dist/`) — also rebuilds exams, institutions, scholarships and icons |
+| `npm run preview` | Preview the production build |
+| `npm run ingest` | Discover new notifications into `data/pending.json` |
+| `npm run exams:build` | Rebuild `data/exams.json` |
+| `npm run institutions:build` | Rebuild `data/institutions.json` |
+| `npm run scholarships:build` | Rebuild `data/scholarships.json` |
+| `npm run icons:build` | Regenerate PNG app icons and favicon |
+| `npm run enrich:jobs` | Add missing analysis fields to jobs |
+| `npm run validate` | Check jobs, exams, institutions and scholarships |
+| `npm run linkcheck` | Crawl `dist/` for broken internal links |
 | `npm run sync` | `data/pending.json` → Firestore `pending` collection |
-| `npm run pull` | Firestore ke approved jobs → `data/jobs.json` |
-| `npm run notify` | Un-notified jobs ke Telegram + email alerts |
-| `npm run remove-demo` | `data/jobs.json` se sample/demo entries hatata hai |
+| `npm run pull` | Approved Firestore jobs → `data/jobs.json` |
+| `npm run notify` | Sequential Telegram + email alerts for new jobs |
+| `npm run remove-demo` | Remove sample/demo entries from `data/jobs.json` |
 
 ---
 
@@ -64,72 +81,95 @@ Useful commands:
 
 ```
 data/
-  jobs.json          # published jobs (site yahi se build hoti hai)
-  pending.json       # discovery queue (admin review se pehle)
-  sources.json       # konsa source, kaunsi category, kitne items
-  exam-catalog.json  # central exam reference (naam, body, indicative cycle months)
-  exams.json         # generated: central + state exams (build-exams.mjs)
-  states.json        # 28 states + 8 UTs: portals, PSC/police/board, cycle overrides
+  jobs.json            # published jobs (the site builds from this)
+  pending.json         # discovery queue (before admin review)
+  sources.json         # source, category and item counts
+  exam-catalog.json    # central exam reference
+  exams.json           # generated: central + state exams
+  institutions.json    # generated: 192 institutions
+  scholarships.json    # generated: 54 scholarship schemes
+  states.json          # 28 states + 8 UTs: portals, PSC/police/board, cycle overrides
 scripts/
-  ingest.mjs         # daily discovery pipeline (exam + state aware queries)
-  lib.mjs            # cleaning, slug, inference, exam/state matching helpers
-  build-exams.mjs    # exam-catalog.json + states.json → exams.json
-  validate.mjs       # data quality checks (jobs, exams, states)
-  linkcheck.mjs      # dist/ internal link crawl
-  sync.mjs           # pending → Firestore
-  pull-approved.mjs  # Firestore → jobs.json
-  notify.mjs         # sequential email + Telegram alerts
+  ingest.mjs           # daily discovery pipeline
+  lib.mjs              # cleaning, slug, inference and matching helpers
+  build-exams.mjs      # exam-catalog.json + states.json → exams.json
+  build-institutions.mjs
+  build-scholarships.mjs
+  build-icons.mjs      # dependency-free PNG icon generator
+  enrich-jobs.mjs      # fills analysis fields on jobs
+  validate.mjs         # data quality checks
+  linkcheck.mjs        # dist/ internal link crawl
+  sync.mjs             # pending → Firestore
+  pull-approved.mjs    # Firestore → jobs.json
+  notify.mjs           # sequential email + Telegram alerts
 src/
-  pages/             # home, jobs, exams, states, calendar, category, admin, account, legal, 404
-  components/        # Header, Footer, JobCard, ExamCard, StateCard, CycleTimeline, SubscribeForm
-  layouts/           # BaseLayout (SEO, JSON-LD, header/footer)
-  lib/               # types, constants, jobs/exams/states loaders, firebase client, saved jobs
-  styles/global.css  # design system
-public/              # favicon, OG image, manifest, robots.txt
-.github/workflows/
-  daily.yml          # discovery → sync → pull → build → deploy → notify
-  deploy.yml         # push to main par build & deploy
-firestore.rules      # security rules
+  pages/               # home, jobs, scholarships, institutions, exams, career, states,
+                       # calendar, category, profile, login, admin, account, legal, 404
+  components/          # Header, Footer, JobCard, ScholarshipCard, InstitutionCard, AuthGate, ...
+  layouts/             # BaseLayout (SEO, JSON-LD, header/footer, PWA, auth gate)
+  lib/                 # types, constants, data loaders, firebase, auth, profile, saved jobs
+  styles/global.css    # design system
+public/
+  icons/               # generated PNG icons (192, 512, maskable)
+  manifest.webmanifest # PWA manifest
+  sw.js                # service worker + offline fallback
+  favicon.svg, favicon-32.png, og-image, robots.txt
+twa-manifest.json      # bubblewrap configuration for the Play Store app
+firestore.rules
 firestore.indexes.json
 firebase.json
+.github/workflows/
+  daily.yml            # discovery → sync → pull → build → deploy → notify
+  deploy.yml           # build and deploy on push to main
 ```
 
 ---
 
-## 4. Exam database & state coverage
+## 4. Data model
 
-Site ki core reference `data/exams.json` hai, jo do jagah se banti hai:
+### Jobs
+
+Each published job contains the original summary plus a structured analysis:
+
+- `notificationUrl` — required official notification link
+- `highlights`, `importantDates`, `posts`, `selectionProcess`
+- `howToApply`, `documents`, `eligibility`, `officialLinks`
+- `category`, `state`, `examId`, `qualification`, `organization`, `lastDate`
+- `demo: true` on sample entries, which are replaced on the first real pull
+
+### Exams
+
+`data/exams.json` merges two sources:
 
 | File | Role |
 |---|---|
 | `data/exam-catalog.json` | Central exams — SSC, UPSC, Railways, Banking, Insurance, Regulatory, Teaching, Defence, Medical, Engineering, Law, Entrance, Boards |
 | `data/states.json` | 28 states + 8 UTs — official portal, PSC, police board, school board, labels, keywords |
-| `scripts/build-exams.mjs` | Dono ko merge karke state exams derive karta hai → `data/exams.json` |
+| `scripts/build-exams.mjs` | Merges both and derives state exams |
 
-Har exam record me hota hai: naam, full name, conducting body, level, qualification, age, official URL, frequency, aliases, aur **indicative** cycle:
+Every exam record has a name, full name, conducting body, level, qualification, age,
+official URL, frequency, aliases and an **indicative** cycle:
 
 ```json
 "cycle": { "notification": [4, 5], "apply": [4, 6], "exam": [9, 10], "result": [11, 12] }
 ```
 
-> Ye months historical pattern hain — official schedule nahi. Har exam page par ye baat clearly likhi hoti hai aur official website verify karne ko kaha jata hai.
+> These months are historical patterns, not an official schedule. Each exam page says
+> so clearly and asks the visitor to confirm on the official website.
 
-State exams (PSC, police constable, SI, TET, board) `states.json` se automatically generate hote hain, isliye naya state add karna = sirf ek entry add karna, phir `npm run exams:build`.
+### Institutions and scholarships
 
-### Ingestion exam/state aware kaise hai
+`scripts/build-institutions.mjs` generates 192 institutions across 23 IITs, 31 NITs,
+20 IIITs, 19 AIIMS, 20 IIMs, 20 NLUs, 37 central universities and 22 state universities.
+Each record includes type, state, official links, accepted exams and admission routes.
 
-`scripts/ingest.mjs` har run par:
-
-1. `data/exams.json` aur `data/states.json` load karta hai.
-2. Current month ke hisaab se un central exams ko chunta hai jinka notification/apply/exam/result window abhi active hai (phase ke hisaab se query badalti hai — notification, last date, admit card, result).
-3. Baaki exams aur states ko rotation se cover karta hai (`EXAM_QUERIES_PER_RUN`, `STATE_QUERIES_PER_RUN`).
-4. Har naye item par title se exam match karke `examId`, `examName`, `examStream`, `examScope`, `stateId` tag lagata hai.
-
-Isse roz fixed queries repeat nahi hoti, aur jis exam ka season chal raha hai uski updates pehle pakdi jaati hain.
+`scripts/build-scholarships.mjs` generates 54 schemes: 18 central and 36 state/UT.
+Each record includes level, category, benefits, eligibility, documents, application
+window and official links.
 
 ---
 
-## 5. Content pipeline
+## 5. How discovery works
 
 ```
 Official sources ──► ingest.mjs ──► data/pending.json ──► Firestore pending
@@ -146,20 +186,23 @@ Official sources ──► ingest.mjs ──► data/pending.json ──► Fire
                                                     deployed site + alerts
 ```
 
-- **Dedupe:** title + organization hash. Same update dobara nahi aata.
-- **Noise filter:** tender, quotation, EOI, hotel empanelment jaise non-exam notices skip hote hain.
-- **Demo data:** `data/jobs.json` me `"demo": true` items hain. Site par "Sample" badge aur top banner dikhta hai. Launch se pehle delete karein.
+- **Dedupe:** title + organisation hash, so the same update is not published twice.
+- **Noise filter:** tenders, quotations, EOIs and hotel empanelment notices are skipped.
+- **Exam and state awareness:** `ingest.mjs` prioritises exams whose notification, apply,
+  exam or result window is active this month, then rotates through the rest.
+- **Demo data:** `data/jobs.json` ships with `"demo": true` entries. The site shows a
+  “Sample” badge and a top banner. Remove them before launch.
 
 ---
 
 ## 6. Firebase setup (free)
 
-1. [console.firebase.google.com](https://console.firebase.google.com) → **Add project** → naam `followupdates` (ya jo available ho) → Google Analytics optional.
-2. **Build → Authentication** → Get started → Sign-in method:
-   - Email/Password enable
-   - Google enable (optional, admin Google login ke liye)
-3. **Build → Firestore Database** → Create database → **production mode** → region `asia-south1` (Mumbai).
-4. **Project settings ⚙ → Your apps → Web (`</>`)** → app register karein → config copy karein:
+1. [console.firebase.google.com](https://console.firebase.google.com) → **Add project**.
+2. **Build → Authentication** → enable **Email/Password** and **Google**.
+3. **Build → Firestore Database** → create in **production mode**, region `asia-south1`.
+4. **Project settings → Your apps → Web** → register the app and copy the config into
+   `.env` and GitHub **Variables**:
+
    ```
    PUBLIC_FIREBASE_API_KEY=...
    PUBLIC_FIREBASE_AUTH_DOMAIN=<project>.firebaseapp.com
@@ -168,62 +211,61 @@ Official sources ──► ingest.mjs ──► data/pending.json ──► Fire
    PUBLIC_FIREBASE_MESSAGING_SENDER_ID=...
    PUBLIC_FIREBASE_APP_ID=...
    ```
-   Ye values local `.env` me aur GitHub **Variables** me daalein (secret nahi, public hain).
-5. **Service account** (server scripts ke liye):
-   - Project settings → **Service accounts** → **Generate new private key**
-   - JSON file ka poora content ek line me GitHub secret `FIREBASE_SERVICE_ACCOUNT` me paste karein.
-   - `FIREBASE_PROJECT_ID` secret bhi add karein.
-6. `.firebaserc.example` ko `.firebaserc` banayein aur project id daalein.
-7. Rules + indexes deploy:
+
+5. **Service account** for server scripts: Project settings → **Service accounts** →
+   **Generate new private key**, then paste the whole JSON as one line into the
+   `FIREBASE_SERVICE_ACCOUNT` GitHub secret. Add `FIREBASE_PROJECT_ID` too.
+6. Copy `.firebaserc.example` to `.firebaserc` and set the project id.
+7. Deploy rules and indexes:
+
    ```bash
    npx firebase-tools login
    npx firebase-tools deploy --only firestore:rules,firestore:indexes
    ```
-8. **Hosting** enable: `npx firebase-tools init hosting` ki zaroorat nahi — `firebase.json` ready hai. Pehla deploy:
+
+8. Deploy hosting. **Do not run `firebase init`** — the config already exists:
+
    ```bash
    npm run build
-   npx firebase-tools deploy --only hosting
+   npx firebase-tools deploy --only hosting --project followupdates
    ```
-   Site milegi: `https://<project-id>.web.app`
 
-### Admin banao
+   The site is served at `https://<project-id>.web.app`.
 
-1. Site par `/account/` se ya Firebase Console → Authentication → **Add user** se apna email/password account banayein.
-2. Authentication me user ka **UID** copy karein.
-3. Firestore → **Start collection** `admins` → Document ID = wahi UID → field `email` (string) → Save.
-4. `/admin/` khol kar login karein. Bas.
+### Create an admin
 
-> Admin check har page load par `admins/{uid}` document se hota hai. Isliye UID exact hona chahiye.
+1. Create an account at `/account/` or add a user in Firebase Console → Authentication.
+2. Copy the user's **UID**.
+3. Firestore → create collection `admins` → document ID = that UID → field `email`.
+4. Open `/admin/` and sign in.
+
+> Admin access is checked against the `admins/{uid}` document on every page load.
 
 ---
 
 ## 7. GitHub setup
 
-1. Repo already ban chuka hai aur `main` push ho chuka hai:
-   **https://github.com/surakshasavingssociety-sketch/followexam**
-
-   Naye clone par kaam karna ho to:
-   ```bash
-   git clone https://github.com/surakshasavingssociety-sketch/followexam.git
-   ```
+1. Repository: **https://github.com/surakshasavingssociety-sketch/followexam**
 2. **Settings → Secrets and variables → Actions**
 
-   > ✅ Ye already set ho chuke hain (Firebase public config, project id, site URL, SMTP defaults, query counts).
-   > ⛔ Abhi khali hain: `FIREBASE_SERVICE_ACCOUNT`, `SMTP_USER`, `SMTP_PASS`, `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, `PUBLIC_TELEGRAM_URL`.
-   > Inke bina site build/deploy chalta hai, par real data pull + alerts band rahenge.
+   > ✅ Firebase public config, project id, site URL, SMTP defaults and query counts are
+   > already set.
+   > ⛔ Still empty: `FIREBASE_SERVICE_ACCOUNT`, `SMTP_USER`, `SMTP_PASS`,
+   > `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, `PUBLIC_TELEGRAM_URL`.
+   > Without them the site still builds and deploys, but real data pull and alerts stay off.
 
-   **Secrets** (private):
+   **Secrets**
 
    | Secret | Value |
    |---|---|
-   | `FIREBASE_SERVICE_ACCOUNT` | Service account JSON (ek line) |
+   | `FIREBASE_SERVICE_ACCOUNT` | Service account JSON (one line) |
    | `FIREBASE_PROJECT_ID` | `followupdates` |
    | `SITE_URL` | `https://followupdates.web.app` |
    | `SMTP_HOST` | `smtp.gmail.com` |
    | `SMTP_PORT` | `465` |
    | `SMTP_SECURE` | `true` |
-   | `SMTP_USER` | aapka Gmail |
-   | `SMTP_PASS` | Gmail **App Password** (normal password nahi) |
+   | `SMTP_USER` | your Gmail address |
+   | `SMTP_PASS` | Gmail **App Password** |
    | `MAIL_FROM` | `FollowExam <yourgmail@gmail.com>` |
    | `EMAIL_DELAY_MS` | `1500` |
    | `MAX_EMAILS_PER_RUN` | `350` |
@@ -231,58 +273,79 @@ Official sources ──► ingest.mjs ──► data/pending.json ──► Fire
    | `TELEGRAM_BOT_TOKEN` | BotFather token |
    | `TELEGRAM_CHAT_ID` | channel/group chat id |
 
-   **Variables** (public): `PUBLIC_SITE_URL`, `PUBLIC_CONTACT_EMAIL`, `PUBLIC_TELEGRAM_URL`, saare `PUBLIC_FIREBASE_*`, plus `EXAM_QUERIES_PER_RUN` (`8`) aur `STATE_QUERIES_PER_RUN` (`6`).
+   **Variables:** `PUBLIC_SITE_URL`, `PUBLIC_CONTACT_EMAIL`, `PUBLIC_TELEGRAM_URL`, all
+   `PUBLIC_FIREBASE_*`, plus `EXAM_QUERIES_PER_RUN` (`8`) and `STATE_QUERIES_PER_RUN` (`6`).
 
-3. **Actions** tab → `Daily update pipeline` → **Run workflow** se pehla manual run karein.
-4. Cron: daily **02:00 UTC (07:30 IST)**. Time badalna ho to `.github/workflows/daily.yml` me cron edit karein.
+3. **Actions → Daily update pipeline → Run workflow** for the first manual run.
+4. Cron runs daily at **02:00 UTC (07:30 IST)**. Edit `.github/workflows/daily.yml` to change it.
 
 ### Gmail App Password
 
-1. Google Account → Security → **2-Step Verification** on karein.
-2. Security → **App passwords** → app `Mail`, device `Other` → 16-character password copy karein.
-3. Wahi `SMTP_PASS` me daalein.
+1. Google Account → Security → enable **2-Step Verification**.
+2. Security → **App passwords** → app `Mail`, device `Other` → copy the 16-character password.
+3. Put it in `SMTP_PASS`.
 
-**Email loop:** `scripts/notify.mjs` har subscriber ke liye alag digest banata hai, `for` loop me ek-ek email bhejta hai, har email ke baad `EMAIL_DELAY_MS` wait karta hai, aur `MAX_EMAILS_PER_RUN` cross hone par ruk jata hai. Har successful email ke baad subscriber doc par `lastNotifiedAt` save hota hai — isliye cap lagne ya run fail hone par bache hue subscribers agli run me apna digest paate hain, aur pehle ja chuke subscribers ko duplicate email nahi jaati. Telegram per-job `telegramNotified` flag se track hota hai.
+**Email loop:** `scripts/notify.mjs` builds a separate digest per subscriber, sends them
+one at a time in a `for` loop, waits `EMAIL_DELAY_MS` between sends and stops at
+`MAX_EMAILS_PER_RUN`. Each success updates `lastNotifiedAt`, so a capped or failed run
+resumes next time without duplicate emails. Telegram tracks `telegramNotified` per job.
 
 ### Telegram bot
 
-1. Telegram me **@BotFather** → `/newbot` → token copy.
-2. Bot ko apne channel/group me **admin** banayein.
-3. Chat ID nikaalein: channel post ka link `https://t.me/c/1234567890/45` ho to chat id `-1001234567890` hoti hai. Ya `https://api.telegram.org/bot<TOKEN>/getUpdates` se `chat.id` dekhein.
-4. `TELEGRAM_BOT_TOKEN` + `TELEGRAM_CHAT_ID` secrets me daalein.
+1. Telegram → **@BotFather** → `/newbot` → copy the token.
+2. Add the bot as **admin** in your channel or group.
+3. Find the chat id from a post link such as `https://t.me/c/1234567890/45` → `-1001234567890`,
+   or from `https://api.telegram.org/bot<TOKEN>/getUpdates`.
+4. Add `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` as secrets.
 
 ---
 
-## 8. Free tier limits (approx)
+## 8. Web app and Play Store
+
+- The manifest is at `public/manifest.webmanifest`; icons are generated by
+  `scripts/build-icons.mjs`.
+- `public/sw.js` caches the app shell, uses network-first navigation and shows an offline
+  page when the connection drops. It registers only in production builds.
+- `twa-manifest.json` configures a Trusted Web Activity with package id
+  `app.web.followupdates.twa`, so web deploys update the installed app without a new APK.
+- Full publishing steps, signing, Digital Asset Links, store listing and the 14-day
+  closed-testing rule are in [`PLAY_STORE.md`](./PLAY_STORE.md).
+
+---
+
+## 9. Free tier limits (approximate)
 
 | Service | Free limit | FollowExam usage |
 |---|---|---|
-| Firebase Hosting | 10 GB storage, 360 MB/day transfer | Static site — kaafi |
-| Firestore | 1 GiB storage, 50k reads/20k writes per day | Jobs + subscribers |
+| Firebase Hosting | 10 GB storage, 360 MB/day transfer | Static site — plenty |
+| Firestore | 1 GiB storage, 50k reads / 20k writes per day | Jobs + subscribers |
 | Firebase Auth | 50k MAU (email/Google) | Free |
-| GitHub Actions | 2,000 min/month (private repo) | ~5–8 min/day |
-| Gmail SMTP | ~500 recipients/day (Workspace 2,000) | `MAX_EMAILS_PER_RUN` se control |
-| Telegram Bot API | Free | Unlimited practically |
+| GitHub Actions | 2,000 min/month (private) or unlimited (public) | ~5–8 min/day |
+| Gmail SMTP | ~500 recipients/day (Workspace 2,000) | Controlled by `MAX_EMAILS_PER_RUN` |
+| Telegram Bot API | Free | Practically unlimited |
 
-Traffic ya subscriber list bahut badh jaye to paid tier ya email provider (Brevo/Resend free tier) par shift kar sakte hain.
+If traffic or the subscriber list grows, move to a paid tier or an email provider with a
+free allowance such as Brevo or Resend.
 
 ---
 
-## 9. Launch checklist
+## 10. Launch checklist
 
-- [ ] `.env` aur GitHub secrets/variables bhare hue hain
-- [ ] Firestore rules deploy ho gaye
-- [ ] Admin user bana aur `admins/{uid}` doc exist karta hai
-- [ ] `/admin/` se 3–5 real entries approve karke test deploy hui
-- [ ] `data/jobs.json` se saare `"demo": true` items hata diye
-- [ ] Home page par demo banner nahi dikh raha
-- [ ] Email test: apne address par subscribe karke `npm run notify` chala kar dekha
-- [ ] Telegram test message receive hua
-- [ ] `/feed.xml`, `/sitemap-index.xml`, `/robots.txt` khul rahe hain
-- [ ] Google Search Console me property add ki
-- [ ] Legal pages (About, Contact, Privacy, Disclaimer) review kiye
+- [ ] `.env` and GitHub secrets/variables are filled in
+- [ ] Firestore rules are deployed
+- [ ] An admin user exists with an `admins/{uid}` document
+- [ ] 3–5 real entries approved from `/admin/` and deployed
+- [ ] All `"demo": true` entries removed from `data/jobs.json`
+- [ ] No demo banner on the home page
+- [ ] Email test: subscribe your address and run `npm run notify`
+- [ ] Telegram test message received
+- [ ] `/feed.xml`, `/sitemap-index.xml`, `/robots.txt` load
+- [ ] Google Search Console property added
+- [ ] About, Contact, Privacy and Disclaimer reviewed
+- [ ] PWA install prompt works on Android
+- [ ] Play Store test account and Data safety form prepared
 
-**Demo data remove karne ka quick way:**
+**Remove demo data:**
 
 ```bash
 npm run remove-demo
@@ -292,54 +355,59 @@ npm run build
 
 ---
 
-## 10. Troubleshooting
+## 11. Troubleshooting
 
 | Problem | Fix |
 |---|---|
-| `Admin panel: Firebase setup required` | `.env` me `PUBLIC_FIREBASE_*` values missing/invalid; dev server restart karein |
-| `Access nahi hai` on `/admin/` | `admins/{uid}` doc nahi hai ya UID galat hai |
-| `Missing or insufficient permissions` | `firestore.rules` deploy nahi hui: `npx firebase-tools deploy --only firestore:rules` |
-| Firestore index error | Console me diye gaye link se index create karein, ya `firestore.indexes.json` deploy karein |
-| Ingest me `HTTP 403` | Kuch official sites bot traffic block karti hain. `scripts/ingest.mjs` me headers already browser-like hain; fir bhi fail ho to us source ko `data/sources.json` se hata dein |
-| Email nahi ja raha | Gmail App Password use karein, 2FA on ho; `SMTP_SECURE`/port match karein (465 → true, 587 → false) |
-| Telegram 400 | Chat ID galat ya bot channel admin nahi hai |
-| Hosting par 404 | `firebase.json` me `"public": "dist"` aur `trailingSlash: true`; build ke baad deploy karein |
-| Purane links custom domain par | `PUBLIC_SITE_URL`, `astro.config.mjs`, `public/robots.txt`, `astro.config` sitemap — teeno update karein |
+| `Admin panel: Firebase setup required` | `PUBLIC_FIREBASE_*` values missing or invalid; restart the dev server |
+| `Access denied` on `/admin/` | `admins/{uid}` document missing or UID wrong |
+| `Missing or insufficient permissions` | Deploy rules: `npx firebase-tools deploy --only firestore:rules` |
+| Firestore index error | Create the index from the console link or deploy `firestore.indexes.json` |
+| `HTTP 403` during ingest | Some official sites block bots. Headers are already browser-like; if it persists, remove that source from `data/sources.json` |
+| Email not sending | Use a Gmail App Password with 2FA on; match `SMTP_SECURE`/port (465 → true, 587 → false) |
+| Telegram 400 | Wrong chat id, or the bot is not a channel admin |
+| 404 on hosting | `firebase.json` must point `"public": "dist"` and keep `trailingSlash: true`; deploy after building |
+| Old links use a custom domain | Update `PUBLIC_SITE_URL`, `astro.config.mjs`, `public/robots.txt` and redeploy |
+| Address bar visible in the Android app | Add `public/.well-known/assetlinks.json` with the Play signing SHA-256 |
 
 ---
 
-## 11. Custom domain (baad me)
+## 12. Custom domain (later)
 
-1. Firebase Hosting → **Add custom domain** → domain verify karein.
-2. DNS me diye gaye `A`/`TXT` records add karein.
-3. `.env` aur GitHub vars me `PUBLIC_SITE_URL=https://yourdomain.com` set karein.
-4. `public/robots.txt` me sitemap URL update karein, phir redeploy.
+1. Firebase Hosting → **Add custom domain** and verify ownership.
+2. Add the DNS `A`/`TXT` records Firebase provides.
+3. Set `PUBLIC_SITE_URL=https://yourdomain.com` in `.env` and GitHub variables.
+4. Update the sitemap URL in `public/robots.txt` and redeploy.
 
-Free `.web.app` subdomain hamesha kaam karta rahega.
+The free `.web.app` subdomain keeps working.
 
 ---
 
-## 12. Design & content rules
+## 13. Design and content rules
 
-- Design, logo, illustrations sab original hain — kisi doosri site se copy nahi.
-- Har post = short original summary + official source link. Long copied text, images ya PDFs host nahi kiye jate.
-- Source site ke naam/branding ka use nahi hota.
-- Facts (dates, fee, vacancy) official notification se verify hote hain; admin review final gate hai.
+- All design, logos and illustrations are original.
+- Every post is a short original summary plus the official source link. No copied long
+  text, images or hosted PDFs.
+- Source-site branding is not used.
+- Facts (dates, fees, vacancies) are checked against the official notification; admin
+  review is the final gate.
+- Visitor-facing copy is fully English, with no Hinglish.
 - Legal pages: `/about/`, `/contact/`, `/privacy/`, `/disclaimer/`.
 
 ---
 
-## 13. Roadmap (V2 ideas)
+## 14. Roadmap
 
-- Department-wise landing pages (SEO)
+- Department-wise landing pages for search
 - Saved-search alerts (state + qualification)
-- Hindi UI toggle
-- Result/answer-key PDF link extraction
 - Weekly digest email
-- Analytics dashboard for admin (approval rate, top sources)
+- Result and answer-key PDF link extraction
+- Admin analytics (approval rate, top sources)
 - Push notifications via Firebase Cloud Messaging
-- Exam detail pages me official notification history
+- Notification history on exam pages
+- Hindi interface option (only after the English experience is complete)
 
 ---
 
-**License:** Code private project ke liye hai. Content sirf informational; official notification hi authoritative source hai.
+**License:** Code is for this project only. Content is informational; the official
+notification is always the authoritative source.

@@ -1,0 +1,28 @@
+---
+import type { Institution } from "../lib/types";
+import { INSTITUTION_TYPE_LABELS } from "../lib/constants";
+
+type Props = { institution: Institution };
+
+const { institution } = Astro.props;
+---
+
+<article class="institution-card">
+  <div class="job-card-top">
+    <span class="badge badge-blue">{INSTITUTION_TYPE_LABELS[institution.type] || institution.typeName}</span>
+    <span class="badge badge-muted">{institution.stateName}</span>
+  </div>
+
+  <h3><a href={`/institutions/${institution.slug}/`}>{institution.shortName}</a></h3>
+  <p class="exam-full">{institution.name}</p>
+
+  <div class="job-meta">
+    <span>📍 {institution.city}</span>
+    <span>🎓 {institution.level}</span>
+  </div>
+
+  <div class="card-foot">
+    <a class="link-arrow" href={`/institutions/${institution.slug}/`}>View institution →</a>
+    <a class="link-arrow" href={institution.website} target="_blank" rel="noopener nofollow">Website ↗</a>
+  </div>
+</article>

@@ -1,0 +1,82 @@
+---
+/**
+ * Client-side access gate.
+ *
+ * Every content page is rendered statically, but the visitor only sees it after
+ * signing in. Signed-out visitors are sent to /login/ and returned to the page
+ * they asked for once authentication completes.
+ *
+ * Legal pages and the login page itself pass `gated={false}` so that the
+ * privacy policy stays publicly reachable.
+ */
+type Props = { gated?: boolean };
+
+const { gated = true } = Astro.props;
+---
+
+<div class="auth-gate" id="auth-gate" data-gated={String(gated)}>
+  <div class="auth-gate-wall" id="auth-gate-wall" hidden>
+    <div class="auth-gate-card">
+      <span class="brand-mark" aria-hidden="true">FE</span>
+      <h2>Sign in to continue</h2>
+      <p class="muted">FollowExam shows jobs, scholarships, institutions and career tools inside your account.</p>
+      <a class="btn btn-primary" id="auth-gate-signin" href="/login/">Sign in or create an account</a>
+      <p class="small muted" style="margin:12px 0 0">
+        New here? Creating an account is free and takes less than a minute.
+      </p>
+    </div>
+  </div>
+  <div class="auth-gate-content" id="auth-gate-content">
+    <slot />
+  </div>
+</div>
+
+<noscript>
+  <style>
+    .auth-gate-content {
+      visibility: visible !important;
+    }
+  </style>
+</noscript>
+
+<script>
+  import { firebaseConfigured } from "../lib/firebase";
+  import { watchAuth } from "../lib/auth";
+
+  const gate = document.querySelector<HTMLElement>("#auth-gate");
+  const content = document.querySelector<HTMLElement>("#auth-gate-content");
+  const wall = document.querySelector<HTMLElement>("#auth-gate-wall");
+  const signIn = document.querySelector<HTMLAnchorElement>("#auth-gate-signin");
+  const gated = gate?.dataset.gated !== "false";
+
+  const next = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+  if (signIn && next !== "/") signIn.href = `/login/?next=${encodeURIComponent(next)}`;
+
+  function reveal() {
+    if (gate) gate.dataset.ready = "true";
+    if (wall) wall.hidden = true;
+    if (content) content.hidden = false;
+  }
+
+  function block() {
+    if (!gated) {
+      reveal();
+      return;
+    }
+    if (gate) gate.dataset.ready = "blocked";
+    if (content) content.hidden = true;
+    if (wall) wall.hidden = false;
+    // Send the visitor to the login screen and bring them back afterwards.
+    const target = `/login/?next=${encodeURIComponent(next)}`;
+    window.setTimeout(() => window.location.replace(target), 1200);
+  }
+
+  if (!firebaseConfigured) {
+    reveal();
+  } else {
+    watchAuth((user) => {
+      if (user) reveal();
+      else block();
+    });
+  }
+</script>

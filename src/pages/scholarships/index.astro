@@ -1,0 +1,258 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ScholarshipCard from "../../components/ScholarshipCard.astro";
+import { SITE } from "../../lib/constants";
+import {
+  centralScholarships,
+  scholarshipCategories,
+  scholarshipDatabase,
+  scholarshipLevels,
+  scholarships,
+} from "../../lib/scholarships";
+
+const central = centralScholarships();
+const stateSchemes = scholarships
+  .filter((item) => item.scope === "state")
+  .sort((a, b) => (a.stateName || "").localeCompare(b.stateName || "") || a.name.localeCompare(b.name));
+const levels = scholarshipLevels();
+const categories = scholarshipCategories();
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Government scholarships for Indian students",
+    description:
+      "Central and state government scholarship schemes with eligibility, benefits, documents and official application portals.",
+    url: `${SITE.url}/scholarships/`,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE.url}/` },
+      { "@type": "ListItem", position: 2, name: "Scholarships", item: `${SITE.url}/scholarships/` },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Government Scholarships — Central and State Schemes"
+  description="Find central and state government scholarships for Class 10, Class 12, diploma, undergraduate and postgraduate students. Eligibility, benefits, documents and official application portals."
+  schema={schema}
+>
+  <section class="section-tight" style="padding-top:30px">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Dashboard</a><span aria-hidden="true">/</span><span>Scholarships</span>
+      </nav>
+
+      <div class="section-head" style="margin-bottom:14px">
+        <div>
+          <h1 style="font-size:clamp(1.8rem,3.6vw,2.5rem)">Scholarships</h1>
+          <p>
+            {scholarshipDatabase.counts.total} schemes · {scholarshipDatabase.counts.central} central ·{" "}
+            {scholarshipDatabase.counts.state} state and UT schemes. Each scheme links to its official application
+            portal.
+          </p>
+        </div>
+        <a class="btn btn-outline btn-sm" href="/institutions/">🏛 Institutions</a>
+      </div>
+
+      <div class="dash-stats" style="margin-bottom:22px">
+        <div class="dash-stat">
+          <span>Total schemes</span>
+          <strong>{scholarshipDatabase.counts.total}</strong>
+        </div>
+        <div class="dash-stat">
+          <span>Central schemes</span>
+          <strong>{scholarshipDatabase.counts.central}</strong>
+        </div>
+        <div class="dash-stat">
+          <span>State / UT schemes</span>
+          <strong>{scholarshipDatabase.counts.state}</strong>
+        </div>
+        <div class="dash-stat">
+          <span>States covered</span>
+          <strong>{scholarshipDatabase.counts.states}</strong>
+        </div>
+      </div>
+
+      <div class="notice-bar" style="margin-bottom:20px">
+        <div class="container" style="padding:0">
+          <strong>Note:</strong> scholarship deadlines, income limits and benefit amounts change every year. Confirm
+          every detail on the official portal before you apply.
+        </div>
+      </div>
+
+      <form class="filter-panel" role="search" onsubmit="return false">
+        <div class="filter-row" style="grid-template-columns:1.6fr 1fr 1fr">
+          <div class="field">
+            <label for="scholarship-search">Search schemes</label>
+            <input
+              class="input"
+              id="scholarship-search"
+              type="search"
+              placeholder="NSP, post-matric, minority, girl students…"
+              autocomplete="off"
+            />
+          </div>
+          <div class="field">
+            <label for="scholarship-level">Education level</label>
+            <select class="select" id="scholarship-level">
+              <option value="">All levels</option>
+              {levels.map((level) => <option value={level}>{level}</option>)}
+            </select>
+          </div>
+          <div class="field">
+            <label for="scholarship-category">Category</label>
+            <select class="select" id="scholarship-category">
+              <option value="">All categories</option>
+              {categories.map((category) => <option value={category}>{category}</option>)}
+            </select>
+          </div>
+        </div>
+        <div class="filter-foot">
+          <div class="chips" id="scope-chips">
+            <button class="chip" type="button" data-scope="all" aria-pressed="true">All schemes</button>
+            <button class="chip" type="button" data-scope="central" aria-pressed="false">Central</button>
+            <button class="chip" type="button" data-scope="state" aria-pressed="false">State / UT</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span class="result-count" id="scholarship-count">{scholarships.length} schemes</span>
+            <button class="btn btn-outline btn-sm" type="button" id="clear-scholarship-filters">Clear</button>
+          </div>
+        </div>
+      </form>
+
+      <section data-scholarship-group style="margin-top:26px">
+        <div class="section-head" style="margin-bottom:14px">
+          <div>
+            <h2 style="font-size:clamp(1.3rem,2.4vw,1.7rem)">Central government schemes</h2>
+            <p>Schemes open to students across India, usually applied through the National Scholarship Portal.</p>
+          </div>
+          <span class="badge badge-muted">{central.length}</span>
+        </div>
+        <div class="grid-3">
+          {central.map((scholarship) => (
+            <div
+              data-scholarship-item
+              data-scope={scholarship.scope}
+              data-level={scholarship.level.join("|")}
+              data-category={scholarship.categories.join("|")}
+              data-search={`${scholarship.name} ${scholarship.provider} ${scholarship.summary} ${scholarship.tags.join(" ")}`.toLowerCase()}
+            >
+              <ScholarshipCard scholarship={scholarship} />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section data-scholarship-group style="margin-top:34px">
+        <div class="section-head" style="margin-bottom:14px">
+          <div>
+            <h2 style="font-size:clamp(1.3rem,2.4vw,1.7rem)">State and union territory schemes</h2>
+            <p>State-run scholarships, usually applied through the state scholarship portal.</p>
+          </div>
+          <span class="badge badge-muted">{stateSchemes.length}</span>
+        </div>
+        <div class="grid-3">
+          {stateSchemes.map((scholarship) => (
+            <div
+              data-scholarship-item
+              data-scope={scholarship.scope}
+              data-level={scholarship.level.join("|")}
+              data-category={scholarship.categories.join("|")}
+              data-search={`${scholarship.name} ${scholarship.provider} ${scholarship.stateName || ""} ${scholarship.summary} ${scholarship.tags.join(" ")}`.toLowerCase()}
+            >
+              <ScholarshipCard scholarship={scholarship} />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <div class="empty" id="scholarship-empty" hidden>
+        <h3>No scheme matches these filters</h3>
+        <p>Try a different level, category or search term.</p>
+      </div>
+
+      <section class="panel" style="margin-top:28px">
+        <div class="section-head" style="margin-bottom:10px">
+          <div>
+            <h2 style="font-size:1.35rem">Before you apply</h2>
+            <p>Most rejections happen because of a small document mistake.</p>
+          </div>
+          <a class="btn btn-primary btn-sm" href="/profile/">Set up your profile</a>
+        </div>
+        <ul class="check-list">
+          <li>Keep Aadhaar, bank passbook, income certificate, marksheet and category certificate ready as PDF or JPG.</li>
+          <li>The bank account should be in the student's own name and linked to Aadhaar.</li>
+          <li>Apply before the portal closes; late applications are not accepted in most schemes.</li>
+          <li>Track the institute and state verification steps after submitting the form.</li>
+        </ul>
+      </section>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const search = document.querySelector<HTMLInputElement>("#scholarship-search");
+  const level = document.querySelector<HTMLSelectElement>("#scholarship-level");
+  const category = document.querySelector<HTMLSelectElement>("#scholarship-category");
+  const chips = [...document.querySelectorAll<HTMLButtonElement>("[data-scope]")];
+  const items = [...document.querySelectorAll<HTMLElement>("[data-scholarship-item]")];
+  const groups = [...document.querySelectorAll<HTMLElement>("[data-scholarship-group]")];
+  const empty = document.querySelector<HTMLElement>("#scholarship-empty");
+  const count = document.querySelector<HTMLElement>("#scholarship-count");
+  const clear = document.querySelector<HTMLButtonElement>("#clear-scholarship-filters");
+
+  let scope = "all";
+
+  function apply() {
+    const query = (search?.value || "").trim().toLowerCase();
+    const chosenLevel = level?.value || "";
+    const chosenCategory = category?.value || "";
+    let visible = 0;
+
+    items.forEach((item) => {
+      const matchScope = scope === "all" || item.dataset.scope === scope;
+      const matchLevel = !chosenLevel || (item.dataset.level || "").includes(chosenLevel);
+      const matchCategory = !chosenCategory || (item.dataset.category || "").includes(chosenCategory);
+      const matchSearch = !query || (item.dataset.search || "").includes(query);
+      const match = matchScope && matchLevel && matchCategory && matchSearch;
+      item.hidden = !match;
+      if (match) visible += 1;
+    });
+
+    groups.forEach((group) => {
+      const anyVisible = [...group.querySelectorAll<HTMLElement>("[data-scholarship-item]")].some(
+        (item) => !item.hidden,
+      );
+      group.hidden = !anyVisible;
+    });
+
+    if (empty) empty.hidden = visible > 0;
+    if (count) count.textContent = `${visible} scheme${visible === 1 ? "" : "s"}`;
+    chips.forEach((chip) => chip.setAttribute("aria-pressed", String(chip.dataset.scope === scope)));
+  }
+
+  search?.addEventListener("input", apply);
+  level?.addEventListener("change", apply);
+  category?.addEventListener("change", apply);
+
+  chips.forEach((chip) => {
+    chip.addEventListener("click", () => {
+      scope = chip.dataset.scope || "all";
+      apply();
+    });
+  });
+
+  clear?.addEventListener("click", () => {
+    if (search) search.value = "";
+    if (level) level.value = "";
+    if (category) category.value = "";
+    scope = "all";
+    apply();
+  });
+</script>
