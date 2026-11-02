@@ -245,7 +245,7 @@ Official sources ──► ingest.mjs ──► data/pending.json ──► Fire
 
 ## 7. GitHub setup
 
-1. Repository: **https://github.com/surakshasavingssociety-sketch/followexam**
+1. Repository: **https://github.com/surakshasavingssociety-sketch/followupdates**
 2. **Settings → Secrets and variables → Actions**
 
    > ✅ Firebase public config, project id, site URL, SMTP defaults and query counts are

@@ -192,7 +192,7 @@ git --version
 ### 3.2 Create the GitHub repo
 
 > ✅ **Already done.** The repo is public:
-> **https://github.com/surakshasavingssociety-sketch/followexam**
+> **https://github.com/surakshasavingssociety-sketch/followupdates**
 > GitHub CLI (`gh`) is installed and authenticated.
 
 To create a new repo:
@@ -207,7 +207,7 @@ To create a new repo:
 > ✅ **`main` is already pushed.** Run this only for a fresh clone:
 
 ```powershell
-git clone https://github.com/surakshasavingssociety-sketch/followexam.git
+git clone https://github.com/surakshasavingssociety-sketch/followupdates.git
 cd followexam
 npm install
 ```
