@@ -226,6 +226,10 @@ const STATE_UNIVERSITIES = [
   ["University of Calcutta", "University of Calcutta", "west-bengal", "Kolkata", "https://www.caluniv.ac.in/"],
   ["University of Kashmir", "University of Kashmir", "jammu-and-kashmir", "Srinagar", "https://www.kashmiruniversity.net/"],
   ["Chandigarh University", "Chandigarh University", "chandigarh", "Mohali", "https://www.cuchd.in/"],
+  ["Andaman and Nicobar Islands Institute of Medical Sciences", "ANIIMS", "andaman-and-nicobar-islands", "Port Blair", "https://aniims.andamannicobar.gov.in/"],
+  ["Government Engineering College Daman", "GEC Daman", "dadra-and-nagar-haveli-and-daman-and-diu", "Daman", "https://www.govtenggcollegedaman.org.in/"],
+  ["University of Ladakh", "UoL", "ladakh", "Leh", "https://uol.ac.in/"],
+  ["Pondicherry University Lakshadweep Campus", "PU Lakshadweep", "lakshadweep", "Kavaratti", "https://www.pondiuni.edu.in/department/lakshadweep-campus/"],
 ];
 
 const TYPE_META = {

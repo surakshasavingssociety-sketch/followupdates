@@ -13,15 +13,15 @@ before moving on.
 | 0. Tools (Node, Git, browser) | ✅ Done |
 | 1. Firebase project + web config | ✅ Done (`followupdates`) |
 | 1.6 Firestore rules + indexes deploy | ✅ Done |
-| 2. Service account JSON | ⛔ **Pending** — needed for real data pull |
+| 2. Service account JSON | ✅ Done — the daily pipeline pulled and synced data |
 | 3. GitHub repo + Actions secrets/variables | ✅ Done (repo public, defaults set) |
-| 3.4 Remaining secrets (`FIREBASE_SERVICE_ACCOUNT`, `SMTP_*`, `TELEGRAM_*`) | ⛔ **Pending** |
-| 4. Gmail app password | ⛔ **Pending** |
+| 3.4 Remaining secrets (`FIREBASE_SERVICE_ACCOUNT`, `SMTP_*`, `TELEGRAM_*`) | ⚠️ Service account and SMTP set; Telegram still pending |
+| 4. Gmail app password | ✅ Set (send a test digest before relying on it) |
 | 5. Telegram bot + channel | ⛔ **Pending** |
 | 6.2 Hosting deploy | ✅ Done → https://followupdates.web.app |
-| 6.3 Admin account + `admins/{uid}` doc | ⛔ **Pending** |
+| 6.3 Admin account + `admins/{uid}` doc | ✅ Done (admin document matches an auth user) |
 | 6.5 First real job publish | ⛔ **Pending** (the site currently shows 12 demo jobs) |
-| 7. PWA + Play Store | ⛔ **Pending** (config and runbook ready) |
+| 7. PWA + Play Store | ⚠️ PWA ready; Play Store publishing pending |
 
 > ⚠️ Never commit `.env`, the service-account JSON or app passwords to GitHub. The
 > commands in this guide are safe.
@@ -222,8 +222,10 @@ The first push opens a browser login — sign in to GitHub.
 > ✅ **Non-sensitive defaults are already set** (`FIREBASE_PROJECT_ID`, `SITE_URL`,
 > `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `MAIL_FROM`, `EMAIL_DELAY_MS`,
 > `MAX_EMAILS_PER_RUN`, `NOTIFY_LOOKBACK_DAYS`).
-> ⛔ **These are still empty and must be added:** `FIREBASE_SERVICE_ACCOUNT`, `SMTP_USER`,
-> `SMTP_PASS`, `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, `PUBLIC_TELEGRAM_URL`.
+> ✅ `FIREBASE_SERVICE_ACCOUNT`, `SMTP_USER` and `SMTP_PASS` are set; the daily pipeline
+> completed a full ingest, sync, build and deploy run.
+> ⛔ **These are still empty:** `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`,
+> `PUBLIC_TELEGRAM_URL`.
 
 GitHub repo → **Settings** → **Secrets and variables** → **Actions** → **Secrets** →
 **New repository secret**.

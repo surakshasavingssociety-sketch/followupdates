@@ -3,18 +3,18 @@
   "updated": "2026-11-02",
   "note": "Institution names, cities and official domains. Admission routes are indicative — verify on the official portal before applying.",
   "counts": {
-    "total": 192,
+    "total": 196,
     "byType": {
       "central-university": 37,
       "aiims": 19,
-      "state-university": 22,
+      "state-university": 26,
       "nlu": 20,
       "nit": 31,
       "iiit": 20,
       "iim": 20,
       "iit": 23
     },
-    "states": 32
+    "states": 36
   },
   "types": [
     {
@@ -598,6 +598,32 @@
       ],
       "level": "Undergraduate, postgraduate & nursing",
       "summary": "AIIMS Rishikesh is a All India Institute of Medical Sciences located in Rishikesh, Uttarakhand. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests."
+    },
+    {
+      "id": "aniims",
+      "slug": "aniims",
+      "name": "Andaman and Nicobar Islands Institute of Medical Sciences",
+      "shortName": "ANIIMS",
+      "type": "state-university",
+      "typeName": "State University",
+      "stateId": "andaman-and-nicobar-islands",
+      "stateName": "Andaman and Nicobar Islands",
+      "region": "Islands",
+      "city": "Port Blair",
+      "website": "https://aniims.andamannicobar.gov.in/",
+      "admissionPortal": "https://www.andaman.gov.in/",
+      "exams": [
+        "cuet-ug",
+        "cuet-pg"
+      ],
+      "streams": [
+        "Arts",
+        "Science",
+        "Commerce",
+        "Social Science"
+      ],
+      "level": "Undergraduate, postgraduate & research",
+      "summary": "ANIIMS is a State University located in Port Blair, Andaman and Nicobar Islands. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
     },
     {
       "id": "andhra-university",
@@ -1304,6 +1330,32 @@
       ],
       "level": "Undergraduate, postgraduate & research",
       "summary": "Goa University is a State University located in Taleigao, Goa. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
+    },
+    {
+      "id": "gec-daman",
+      "slug": "gec-daman",
+      "name": "Government Engineering College Daman",
+      "shortName": "GEC Daman",
+      "type": "state-university",
+      "typeName": "State University",
+      "stateId": "dadra-and-nagar-haveli-and-daman-and-diu",
+      "stateName": "Dadra and Nagar Haveli and Daman and Diu",
+      "region": "West",
+      "city": "Daman",
+      "website": "https://www.govtenggcollegedaman.org.in/",
+      "admissionPortal": "https://ddd.gov.in/",
+      "exams": [
+        "cuet-ug",
+        "cuet-pg"
+      ],
+      "streams": [
+        "Arts",
+        "Science",
+        "Commerce",
+        "Social Science"
+      ],
+      "level": "Undergraduate, postgraduate & research",
+      "summary": "GEC Daman is a State University located in Daman, Dadra and Nagar Haveli and Daman and Diu. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
     },
     {
       "id": "gnlu-gandhinagar",
@@ -4347,6 +4399,32 @@
       "summary": "Pondicherry University is a Central University located in Puducherry, Puducherry. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
     },
     {
+      "id": "pu-lakshadweep",
+      "slug": "pu-lakshadweep",
+      "name": "Pondicherry University Lakshadweep Campus",
+      "shortName": "PU Lakshadweep",
+      "type": "state-university",
+      "typeName": "State University",
+      "stateId": "lakshadweep",
+      "stateName": "Lakshadweep",
+      "region": "Islands",
+      "city": "Kavaratti",
+      "website": "https://www.pondiuni.edu.in/department/lakshadweep-campus/",
+      "admissionPortal": "https://lakshadweep.gov.in/",
+      "exams": [
+        "cuet-ug",
+        "cuet-pg"
+      ],
+      "streams": [
+        "Arts",
+        "Science",
+        "Commerce",
+        "Social Science"
+      ],
+      "level": "Undergraduate, postgraduate & research",
+      "summary": "PU Lakshadweep is a State University located in Kavaratti, Lakshadweep. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
+    },
+    {
       "id": "rgnul-patiala",
       "slug": "rgnul-patiala",
       "name": "Rajiv Gandhi National University of Law",
@@ -4756,6 +4834,32 @@
       ],
       "level": "Undergraduate, postgraduate & research",
       "summary": "University of Kerala is a State University located in Thiruvananthapuram, Kerala. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
+    },
+    {
+      "id": "uol",
+      "slug": "uol",
+      "name": "University of Ladakh",
+      "shortName": "UoL",
+      "type": "state-university",
+      "typeName": "State University",
+      "stateId": "ladakh",
+      "stateName": "Ladakh",
+      "region": "North",
+      "city": "Leh",
+      "website": "https://uol.ac.in/",
+      "admissionPortal": "https://ladakh.gov.in/",
+      "exams": [
+        "cuet-ug",
+        "cuet-pg"
+      ],
+      "streams": [
+        "Arts",
+        "Science",
+        "Commerce",
+        "Social Science"
+      ],
+      "level": "Undergraduate, postgraduate & research",
+      "summary": "UoL is a State University located in Leh, Ladakh. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
     },
     {
       "id": "university-of-lucknow",

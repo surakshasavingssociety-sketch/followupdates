@@ -25,7 +25,7 @@ screen, and every update, scholarship, institution and career tool appears after
 | Notification analysis | Every job carries highlights, important dates, posts, eligibility, selection process, fees, documents, how to apply and official links |
 | Official source link | `notificationUrl` is required and validated for every published job |
 | Exam database | `/exams/` — 225 central and state exam cycles with eligibility and official links |
-| Institutions | `/institutions/` — 192 IITs, NITs, IIITs, AIIMS, IIMs, NLUs, central and state universities |
+| Institutions | `/institutions/` — 196 IITs, NITs, IIITs, AIIMS, IIMs, NLUs, central and state universities |
 | Scholarships | `/scholarships/` — 54 central and state/UT schemes with eligibility, benefits and application steps |
 | Career planner | `/career/` — a student picks a goal and gets a stage-by-stage roadmap with matching exams, institutions and scholarships |
 | State coverage | `/states/` — 28 states + 8 UTs with PSC, police, TET and board exams |
@@ -86,7 +86,7 @@ data/
   sources.json         # source, category and item counts
   exam-catalog.json    # central exam reference
   exams.json           # generated: central + state exams
-  institutions.json    # generated: 192 institutions
+  institutions.json    # generated: 196 institutions
   scholarships.json    # generated: 54 scholarship schemes
   states.json          # 28 states + 8 UTs: portals, PSC/police/board, cycle overrides
 scripts/
@@ -159,8 +159,8 @@ official URL, frequency, aliases and an **indicative** cycle:
 
 ### Institutions and scholarships
 
-`scripts/build-institutions.mjs` generates 192 institutions across 23 IITs, 31 NITs,
-20 IIITs, 19 AIIMS, 20 IIMs, 20 NLUs, 37 central universities and 22 state universities.
+`scripts/build-institutions.mjs` generates 196 institutions across 23 IITs, 31 NITs,
+20 IIITs, 19 AIIMS, 20 IIMs, 20 NLUs, 37 central universities and 26 state universities.
 Each record includes type, state, official links, accepted exams and admission routes.
 
 `scripts/build-scholarships.mjs` generates 54 schemes: 18 central and 36 state/UT.
@@ -188,8 +188,15 @@ Official sources ──► ingest.mjs ──► data/pending.json ──► Fire
 
 - **Dedupe:** title + organisation hash, so the same update is not published twice.
 - **Noise filter:** tenders, quotations, EOIs and hotel empanelment notices are skipped.
+- **Recency filter:** HTML sources keep only notices whose date is within `MAX_AGE_DAYS`
+  (30 by default), and the sync step removes unreviewed queue entries older than that
+  window. Approved and rejected entries stay as review history.
 - **Exam and state awareness:** `ingest.mjs` prioritises exams whose notification, apply,
   exam or result window is active this month, then rotates through the rest.
+- **Automatic analysis:** when an approved job is pulled from Firestore, any analysis
+  fields the admin did not fill are generated from the notification metadata —
+  highlights, important dates, posts, selection stages, application steps, documents,
+  eligibility and official links. Admin edits always take priority.
 - **Demo data:** `data/jobs.json` ships with `"demo": true` entries. The site shows a
   “Sample” badge and a top banner. Remove them before launch.
 
@@ -248,11 +255,11 @@ Official sources ──► ingest.mjs ──► data/pending.json ──► Fire
 1. Repository: **https://github.com/surakshasavingssociety-sketch/followupdates**
 2. **Settings → Secrets and variables → Actions**
 
-   > ✅ Firebase public config, project id, site URL, SMTP defaults and query counts are
-   > already set.
-   > ⛔ Still empty: `FIREBASE_SERVICE_ACCOUNT`, `SMTP_USER`, `SMTP_PASS`,
-   > `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, `PUBLIC_TELEGRAM_URL`.
-   > Without them the site still builds and deploys, but real data pull and alerts stay off.
+   > ✅ Firebase public config, project id, site URL, the service account, SMTP credentials
+   > and query counts are already set. The daily pipeline has run successfully and writes
+   > discovered notifications to the admin queue.
+   > ⛔ Still empty: `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, `PUBLIC_TELEGRAM_URL`.
+   > Without Telegram the site still updates and email alerts work; only Telegram posts are skipped.
 
    **Secrets**
 

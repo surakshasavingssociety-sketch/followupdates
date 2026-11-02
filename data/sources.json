@@ -71,6 +71,10 @@
     {
       "name": "UPSC",
       "url": "https://upsc.gov.in/whats-new",
+      "fallbackUrls": [
+        "https://www.upsc.gov.in/whats-new",
+        "https://upsc.gov.in/"
+      ],
       "baseUrl": "https://upsc.gov.in",
       "itemSelector": ".views-row",
       "linkSelector": "a",

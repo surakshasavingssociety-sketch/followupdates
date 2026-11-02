@@ -363,7 +363,21 @@ async function ingestRss(config, existingKeys) {
 }
 
 async function ingestHtml(config, existingKeys) {
-  const html = await fetchText(config.url);
+  const candidates = [config.url, ...(config.fallbackUrls || [])].filter(Boolean);
+  let html = "";
+  let loadedUrl = config.url;
+  let lastError = null;
+  for (const candidate of candidates) {
+    try {
+      html = await fetchText(candidate);
+      loadedUrl = candidate;
+      lastError = null;
+      break;
+    } catch (error) {
+      lastError = error;
+    }
+  }
+  if (lastError) throw lastError;
   const $ = cheerio.load(html);
   const out = [];
 
@@ -376,7 +390,9 @@ async function ingestHtml(config, existingKeys) {
     const href = linkElement.attr("href") || "";
     if (!title || !href || !looksLikeUpdate(title)) return;
 
-    const url = absoluteUrl(href, config.baseUrl || config.url);
+    const url = absoluteUrl(href, config.baseUrl || loadedUrl);
+    const noticeDate = dateFromNoticeUrl(url);
+    if (noticeDate && !isRecent(noticeDate, MAX_AGE_DAYS)) return;
     const key = normalizeKey(title, inferOrganization(title, config.name));
     if (existingKeys.has(key)) return;
     existingKeys.add(key);
@@ -385,9 +401,9 @@ async function ingestHtml(config, existingKeys) {
       buildPending({
         title,
         url,
-        postDate: dateFromNoticeUrl(url) || new Date().toISOString(),
+        postDate: noticeDate || new Date().toISOString(),
         sourceName: config.name,
-        sourceUrl: config.baseUrl || config.url,
+        sourceUrl: config.baseUrl || loadedUrl,
         category: config.category,
         discoveryUrl: url,
         rawTitle: title,

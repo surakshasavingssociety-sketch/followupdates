@@ -1,7 +1,7 @@
 {
-  "runAt": "2026-11-02T03:31:50.932Z",
-  "newItems": 74,
-  "totalPending": 178,
+  "runAt": "2026-11-02T03:49:42.199Z",
+  "newItems": 2,
+  "totalPending": 140,
   "cycleQueries": [
     "Exam cycle: JEE Main (notification)",
     "Exam cycle: KVS Recruitment (notification)",
@@ -20,10 +20,5 @@
     "State: Tamil Nadu",
     "State: Telangana"
   ],
-  "errors": [
-    {
-      "source": "HTML: UPSC",
-      "error": "fetch failed"
-    }
-  ]
+  "errors": []
 }
