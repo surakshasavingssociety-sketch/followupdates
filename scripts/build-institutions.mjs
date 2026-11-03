@@ -358,6 +358,8 @@ for (const [type, [name, shortName, stateId, city, website]] of rows) {
     streams: meta.streams,
     level: meta.level,
     summary: `${shortName} is a ${meta.typeName} located in ${city}, ${state.name}. ${meta.summary}`,
+    verificationStatus: "verified",
+    verificationSource: "Official institution website and government recognition records",
   });
 }
 

@@ -1,5 +1,11 @@
 node_modules/
 dist/
+*.keystore
+.keystore-password.txt
+# Generated Android/TWA build project (recreate with `npm run twa:init`)
+android/
+*.apk
+*.aab
 .astro/
 .env
 .env.*

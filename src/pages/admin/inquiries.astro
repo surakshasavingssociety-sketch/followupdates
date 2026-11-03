@@ -1,0 +1,229 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Institution enquiries" description="Review enquiries submitted from institution pages." noindex>
+  <section class="section-tight" style="padding-top:30px">
+    <div class="container">
+      <div class="breadcrumb" style="padding:0 0 14px">
+        <a href="/">Dashboard</a><span>/</span>
+        <a href="/admin/">Admin</a><span>/</span><span>Enquiries</span>
+      </div>
+
+      <div class="section-head" style="margin-bottom:18px">
+        <div>
+          <div class="eyebrow">Admin</div>
+          <h1 style="font-size:clamp(1.8rem,3.6vw,2.5rem)">Institution enquiries</h1>
+          <p>Questions submitted from institution pages. Contact the student by email, then mark the enquiry as contacted or closed.</p>
+        </div>
+      </div>
+
+      <div id="inq-config" class="panel hidden">
+        <p class="small muted">Firebase is not configured. Set PUBLIC_FIREBASE_* values and rebuild.</p>
+      </div>
+
+      <div id="inq-login" class="form-card hidden">
+        <h2>Sign in</h2>
+        <p class="muted small">Admin access only.</p>
+        <form id="inq-login-form" class="form-grid">
+          <div class="field"><label for="inq-email">Email</label><input class="input" id="inq-email" type="email" required /></div>
+          <div class="field"><label for="inq-password">Password</label><input class="input" id="inq-password" type="password" required /></div>
+          <div class="field full"><button class="btn btn-primary" type="submit">Sign in</button></div>
+          <p class="form-message" id="inq-login-message" role="status"></p>
+        </form>
+      </div>
+
+      <div id="inq-denied" class="form-card hidden">
+        <h2>Access denied</h2>
+        <p class="muted small">This account is not an admin.</p>
+        <button class="btn btn-outline" type="button" id="inq-denied-signout">Sign out</button>
+      </div>
+
+      <div id="inq-panel" class="hidden">
+        <div class="form-message" id="inq-message" role="status"></div>
+
+        <div class="filter-panel" style="padding:12px;margin-bottom:16px">
+          <div class="filter-row" style="grid-template-columns:1fr auto">
+            <div class="field">
+              <label for="inq-status">Status</label>
+              <select class="select" id="inq-status">
+                <option value="new">New</option>
+                <option value="contacted">Contacted</option>
+                <option value="closed">Closed</option>
+                <option value="spam">Spam</option>
+                <option value="">All</option>
+              </select>
+            </div>
+            <div class="field" style="justify-content:flex-end">
+              <label>&nbsp;</label>
+              <button class="btn btn-outline" type="button" id="inq-refresh">Refresh</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="inq-list" class="admin-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+    import { collection, doc, getDoc, getDocs, updateDoc, serverTimestamp } from "firebase/firestore";
+    import { getFirebaseAuth, getFirebaseDb } from "../../lib/firebase";
+
+    const auth = getFirebaseAuth();
+    const db = getFirebaseDb();
+
+    const configPanel = document.querySelector<HTMLElement>("#inq-config");
+    const loginPanel = document.querySelector<HTMLElement>("#inq-login");
+    const deniedPanel = document.querySelector<HTMLElement>("#inq-denied");
+    const adminPanel = document.querySelector<HTMLElement>("#inq-panel");
+    const list = document.querySelector<HTMLElement>("#inq-list");
+    const message = document.querySelector<HTMLElement>("#inq-message");
+    const statusFilter = document.querySelector<HTMLSelectElement>("#inq-status");
+
+    type Inquiry = Record<string, any>;
+    let inquiries: Inquiry[] = [];
+
+    function show(panel: HTMLElement | null) {
+      [configPanel, loginPanel, deniedPanel, adminPanel].forEach((item) => item?.classList.add("hidden"));
+      panel?.classList.remove("hidden");
+    }
+
+    function showMessage(text: string, type = "info") {
+      if (!message) return;
+      message.textContent = text;
+      message.className = `form-message show ${type}`;
+      if (type === "success") setTimeout(() => message.classList.remove("show"), 4000);
+    }
+
+    function esc(value: unknown) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function badgeClass(status: string) {
+      if (status === "new") return "badge-blue";
+      if (status === "contacted") return "badge-amber";
+      if (status === "closed") return "badge-green";
+      return "badge-red";
+    }
+
+    function render() {
+      if (!list) return;
+      const filter = statusFilter?.value ?? "new";
+      const visible = inquiries.filter((item) => !filter || (item.status || "new") === filter);
+      if (!visible.length) {
+        list.innerHTML = `<div class="empty"><h3>No enquiries</h3><p>Questions submitted from institution pages appear here.</p></div>`;
+        return;
+      }
+      list.innerHTML = visible
+        .map((item) => {
+          const status = item.status || "new";
+          return `
+          <article class="admin-item" data-id="${esc(item.id)}">
+            <div class="admin-item-head">
+              <div>
+                <h3>${esc(item.institutionName || item.institutionId)}</h3>
+                <div class="admin-item-meta">
+                  ${esc(item.name)} · <a href="mailto:${esc(item.email)}">${esc(item.email)}</a>
+                  ${item.phone ? ` · ${esc(item.phone)}` : ""} · ${esc(item.topic || "Other")}
+                </div>
+              </div>
+              <span class="badge ${badgeClass(status)}">${esc(status)}</span>
+            </div>
+            <p class="small" style="margin:10px 0;white-space:pre-wrap">${esc(item.message)}</p>
+            <div class="admin-actions">
+              <span class="small muted">${esc(new Date(item.createdAt || Date.now()).toLocaleString("en-IN"))}</span>
+              ${["contacted", "closed", "spam"]
+                .filter((next) => next !== status)
+                .map((next) => `<button class="btn btn-outline btn-sm" type="button" data-action="status" data-status="${next}">Mark ${next}</button>`)
+                .join("")}
+            </div>
+          </article>`;
+        })
+        .join("");
+    }
+
+    async function loadInquiries() {
+      if (!db || !list) return;
+      try {
+        const snapshot = await getDocs(collection(db, "inquiries"));
+        inquiries = snapshot.docs
+          .map((item) => ({ id: item.id, ...item.data() }))
+          .sort((a, b) => String(b.createdAt || "").localeCompare(String(a.createdAt || "")));
+        render();
+      } catch (error) {
+        list.innerHTML = `<div class="empty"><h3>Could not load enquiries</h3><p>${esc(error instanceof Error ? error.message : "Unknown error")}</p></div>`;
+      }
+    }
+
+    async function boot(user: { uid: string }) {
+      if (!db) {
+        show(configPanel);
+        return;
+      }
+      const adminDoc = await getDoc(doc(db, "admins", user.uid));
+      if (!adminDoc.exists()) {
+        show(deniedPanel);
+        return;
+      }
+      show(adminPanel);
+      await loadInquiries();
+    }
+
+    if (!auth || !db) {
+      show(configPanel);
+    } else {
+      onAuthStateChanged(auth, (user) => {
+        if (user) boot(user).catch(() => show(deniedPanel));
+        else show(loginPanel);
+      });
+
+      document.querySelector("#inq-login-form")?.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const email = document.querySelector<HTMLInputElement>("#inq-email")?.value.trim() || "";
+        const password = document.querySelector<HTMLInputElement>("#inq-password")?.value || "";
+        try {
+          await signInWithEmailAndPassword(auth, email, password);
+        } catch (error) {
+          const msg = document.querySelector<HTMLElement>("#inq-login-message");
+          if (msg) {
+            msg.textContent = error instanceof Error ? error.message : "Sign-in failed.";
+            msg.className = "form-message show error";
+          }
+        }
+      });
+
+      document.querySelector("#inq-denied-signout")?.addEventListener("click", () => signOut(auth));
+      statusFilter?.addEventListener("change", render);
+      document.querySelector("#inq-refresh")?.addEventListener("click", loadInquiries);
+
+      list?.addEventListener("click", async (event) => {
+        const button = (event.target as HTMLElement).closest<HTMLElement>("[data-action='status']");
+        if (!button || !db) return;
+        const item = button.closest<HTMLElement>(".admin-item");
+        const id = item?.dataset.id;
+        const status = button.dataset.status;
+        if (!id || !status) return;
+        try {
+          await updateDoc(doc(db, "inquiries", id), {
+            status,
+            updatedAt: new Date().toISOString(),
+            serverUpdatedAt: serverTimestamp(),
+          });
+          const record = inquiries.find((entry) => entry.id === id);
+          if (record) record.status = status;
+          render();
+          showMessage(`Enquiry marked ${status}.`, "success");
+        } catch (error) {
+          showMessage(error instanceof Error ? error.message : "Could not update the enquiry.", "error");
+        }
+      });
+    }
+  </script>
+</BaseLayout>

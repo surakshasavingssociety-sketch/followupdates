@@ -1,0 +1,231 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { SITE } from "../../lib/constants";
+import { scholarships } from "../../lib/scholarships";
+import { states } from "../../lib/states";
+import { EDUCATION_LEVELS } from "../../lib/profile";
+
+const data = scholarships.map((item) => ({
+  id: item.id,
+  slug: item.slug,
+  name: item.name,
+  provider: item.provider,
+  scope: item.scope,
+  stateId: item.stateId,
+  stateName: item.stateName,
+  level: item.level,
+  categories: item.categories,
+  amount: item.amount,
+  eligibility: item.eligibility,
+  portalUrl: item.portalUrl,
+  officialUrl: item.officialUrl,
+  deadlineText: item.deadlineText,
+}));
+---
+<BaseLayout
+  title="Scholarship eligibility checker"
+  description="Check which central and state government scholarships match your state, education level and profile. Final eligibility follows official scheme rules."
+  noindex
+>
+  <section class="section-tight" style="padding-top:30px">
+    <div class="container">
+      <div class="breadcrumb" style="padding:0 0 14px">
+        <a href="/">Dashboard</a><span>/</span>
+        <a href="/scholarships/">Scholarships</a><span>/</span>
+        <span>Eligibility checker</span>
+      </div>
+
+      <div class="section-head" style="margin-bottom:18px">
+        <div>
+          <div class="eyebrow">Tools</div>
+          <h1 style="font-size:clamp(1.8rem,3.6vw,2.5rem)">Scholarship eligibility checker</h1>
+          <p>
+            Enter your details to see the central and state schemes you may be eligible for. Results are a guide only —
+            final eligibility follows the official scheme rules and the department's verification.
+          </p>
+        </div>
+      </div>
+
+      <div class="profile-layout">
+        <div class="panel">
+          <form id="eligibility-form" class="form-grid">
+            <div class="field">
+              <label for="elig-state">State / UT</label>
+              <select class="select" id="elig-state" name="stateId">
+                <option value="">All India (central schemes)</option>
+                {states.map((state) => (
+                  <option value={state.id}>{state.name}</option>
+                ))}
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="elig-level">Current education level</label>
+              <select class="select" id="elig-level" name="educationLevel">
+                <option value="">Any level</option>
+                {EDUCATION_LEVELS.map((level) => (
+                  <option value={level}>{level}</option>
+                ))}
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="elig-gender">Gender (only where the scheme requires it)</label>
+              <select class="select" id="elig-gender" name="gender">
+                <option value="">Prefer not to say</option>
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="elig-category">Category (optional)</label>
+              <select class="select" id="elig-category" name="category">
+                <option value="">Any / not specified</option>
+                <option value="general">General</option>
+                <option value="sc">SC</option>
+                <option value="st">ST</option>
+                <option value="obc">OBC</option>
+                <option value="ews">EWS</option>
+                <option value="minority">Minority</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="elig-income">Family income range (annual)</label>
+              <select class="select" id="elig-income" name="income">
+                <option value="">Not specified</option>
+                <option value="0-1">Up to ₹1 lakh</option>
+                <option value="1-2.5">₹1–2.5 lakh</option>
+                <option value="2.5-5">₹2.5–5 lakh</option>
+                <option value="5-8">₹5–8 lakh</option>
+                <option value="8+">Above ₹8 lakh</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="elig-percent">Approx. academic percentage</label>
+              <input class="input" id="elig-percent" name="percent" type="number" min="0" max="100" placeholder="e.g. 75" />
+            </div>
+
+            <div class="field full" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+              <button class="btn btn-primary" type="submit" id="elig-submit">Check eligibility</button>
+              <span class="form-message" id="elig-message" role="status"></span>
+            </div>
+          </form>
+        </div>
+
+        <aside>
+          <div class="sidebar-card">
+            <h3>How it works</h3>
+            <p class="small">
+              We match your state and education level against the central and state schemes in our database and list
+              the ones that could apply. Income, category and gender criteria are scheme-specific and are shown on each
+              scheme's page — please read the official guidelines before applying.
+            </p>
+            <p class="small muted" style="margin:0">
+              This tool is not a government decision. Final eligibility is determined by the awarding department.
+            </p>
+          </div>
+        </aside>
+      </div>
+
+      <div style="margin-top:24px">
+        <div class="section-head" style="margin-bottom:12px">
+          <div>
+            <h2 style="font-size:1.4rem;margin:0">Matching schemes</h2>
+            <p class="small muted" id="elig-summary">Submit the form to see matches.</p>
+          </div>
+        </div>
+        <div id="elig-results" class="cards"></div>
+      </div>
+    </div>
+  </section>
+
+  <script type="application/json" id="scholarship-data">
+    {JSON.stringify(data)}
+  </script>
+
+  <script>
+    const LEVEL_RANK = {
+      "Class 8": 1, "Class 9": 2, "Class 10": 3, "Class 11": 4, "Class 12": 5,
+      Diploma: 6, Graduate: 7, Postgraduate: 8,
+    };
+
+    const scholarships = JSON.parse(document.getElementById("scholarship-data")?.textContent || "[]");
+    const form = document.querySelector<HTMLFormElement>("#eligibility-form");
+    const results = document.querySelector<HTMLElement>("#elig-results");
+    const summary = document.querySelector<HTMLElement>("#elig-summary");
+    const message = document.querySelector<HTMLElement>("#elig-message");
+
+    function levelRank(value) {
+      return LEVEL_RANK[value] || 0;
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function match(item, stateId, level) {
+      const inState = item.scope === "central" || !stateId || item.stateId === stateId;
+      if (!inState) return false;
+      if (level) {
+        const userRank = levelRank(level);
+        const needed = Math.min(...item.level.map((l) => levelRank(l)).filter((v) => v > 0), 99);
+        if (needed && userRank && needed > userRank + 1) return false;
+      }
+      return true;
+    }
+
+    function render(items) {
+      if (!results) return;
+      if (!items.length) {
+        results.innerHTML = `<div class="empty"><h3>No matches found</h3><p>Try a different state or education level, or browse all scholarships.</p></div>`;
+        return;
+      }
+      results.innerHTML = items
+        .map(
+          (item) => `
+        <article class="card">
+          <div class="card-body">
+            <span class="badge ${item.scope === "central" ? "badge-blue" : "badge-green"}">${item.scope === "central" ? "Central" : item.stateName || "State"}</span>
+            <h3 style="margin:8px 0 4px"><a class="detail-link" data-slug="${escapeHtml(item.slug)}">${escapeHtml(item.name)}</a></h3>
+            <p class="small muted" style="margin:0 0 6px">${escapeHtml(item.provider)}</p>
+            <p class="small" style="margin:0 0 8px">${escapeHtml(item.amount)}</p>
+            <p class="small" style="margin:0 0 10px">${escapeHtml((item.eligibility || []).slice(0, 2).join(" · "))}</p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <a class="btn btn-outline btn-sm detail-link" data-slug="${escapeHtml(item.slug)}">Details</a>
+              <a class="btn btn-primary btn-sm apply-link" data-url="${escapeHtml(item.portalUrl || item.officialUrl)}" target="_blank" rel="noopener">Apply ↗</a>
+            </div>
+          </div>
+        </article>`,
+        )
+        .join("");
+      results.querySelectorAll<HTMLAnchorElement>(".detail-link").forEach((a) => {
+        a.href = `/scholarships/${a.dataset.slug}/`;
+      });
+      results.querySelectorAll<HTMLAnchorElement>(".apply-link").forEach((a) => {
+        a.href = a.dataset.url || "#";
+      });
+    }
+
+    form?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const stateId = String(data.get("stateId") || "");
+      const level = String(data.get("educationLevel") || "");
+      const matched = scholarships.filter((item) => match(item, stateId, level));
+      render(matched);
+      if (summary) summary.textContent = `${matched.length} scheme(s) match your state and education level.`;
+      if (message) {
+        message.textContent = "Results updated.";
+        message.className = "form-message show success";
+      }
+    });
+  </script>
+</BaseLayout>

@@ -1,4 +1,5 @@
 import "dotenv/config";
+import { pathToFileURL } from "node:url";
 import { readJson, writeJson } from "./lib.mjs";
 import { getDb, toIso } from "./firebase-admin.mjs";
 
@@ -76,7 +77,7 @@ function asList(value) {
   return [];
 }
 
-function buildAnalysis(job) {
+export function buildAnalysis(job) {
   const qualification = asList(job.qualification);
   const dates = [];
 
@@ -139,7 +140,7 @@ function buildAnalysis(job) {
   };
 }
 
-function withAnalysis(data) {
+export function withAnalysis(data) {
   const analysis = buildAnalysis(data);
   return {
     ...data,
@@ -186,8 +187,10 @@ async function main() {
   console.log(`Pulled ${jobs.length} approved job(s) from Firestore (${existing.length} previously).`);
 }
 
-main().catch((error) => {
-  console.error(error.message);
-  console.error("Set FIREBASE_SERVICE_ACCOUNT or GOOGLE_APPLICATION_CREDENTIALS to pull approved jobs.");
-  process.exitCode = 1;
-});
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch((error) => {
+    console.error(error.message);
+    console.error("Set FIREBASE_SERVICE_ACCOUNT or GOOGLE_APPLICATION_CREDENTIALS to pull approved jobs.");
+    process.exitCode = 1;
+  });
+}

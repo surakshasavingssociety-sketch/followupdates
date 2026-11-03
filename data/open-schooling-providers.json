@@ -1,0 +1,50 @@
+{
+  "note": "Verified open schooling and distance education providers. Only publicly recognised institutions are listed. Private service providers can request listing via the contact page and are verified before being shown.",
+  "providers": [
+    {
+      "name": "National Institute of Open Schooling (NIOS)",
+      "type": "Open school",
+      "level": ["Secondary (Class 10)", "Senior Secondary (Class 12)"],
+      "state": "National",
+      "stateId": null,
+      "website": "https://nios.ac.in/",
+      "description": "Government of India open school offering Secondary and Senior Secondary courses with flexible study."
+    },
+    {
+      "name": "Indira Gandhi National Open University (IGNOU)",
+      "type": "Open university",
+      "level": ["Graduation", "Postgraduate", "Diploma", "Certificate"],
+      "state": "National",
+      "stateId": null,
+      "website": "https://ignou.ac.in/",
+      "description": "Central open university offering distance and online programmes."
+    },
+    {
+      "name": "Dr. B.R. Ambedkar Open University (BRAOU)",
+      "type": "Open university",
+      "level": ["Graduation", "Postgraduate", "Diploma"],
+      "state": "Telangana",
+      "stateId": "telangana",
+      "website": "https://braou.ac.in/",
+      "description": "State open university for Telangana."
+    },
+    {
+      "name": "Uttar Pradesh Rajarshi Tandon Open University (UPRTOU)",
+      "type": "Open university",
+      "level": ["Graduation", "Postgraduate", "Diploma"],
+      "state": "Uttar Pradesh",
+      "stateId": "uttar-pradesh",
+      "website": "https://uprtou.ac.in/",
+      "description": "State open university for Uttar Pradesh."
+    },
+    {
+      "name": "Netaji Subhas Open University (NSOU)",
+      "type": "Open university",
+      "level": ["Graduation", "Postgraduate", "Diploma"],
+      "state": "West Bengal",
+      "stateId": "west-bengal",
+      "website": "https://wbnsou.ac.in/",
+      "description": "State open university for West Bengal."
+    }
+  ]
+}

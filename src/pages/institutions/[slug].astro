@@ -79,6 +79,7 @@ const schema = [
         <span class="badge badge-blue">{typeLabel}</span>
         <span class="badge badge-muted">{institution.stateName}</span>
         <span class="badge badge-violet">{institution.city}</span>
+        {institution.verificationStatus === "verified" && <span class="badge badge-green">Verified</span>}
       </div>
 
       <h1>{institution.name}</h1>
@@ -217,6 +218,54 @@ const schema = [
           </div>
         </section>
       ) : null}
+
+      <section class="detail-section" id="enquiry">
+        <h2>Send an enquiry</h2>
+        <p class="muted" style="margin-top:-4px">
+          Ask about admissions, courses, fees or eligibility. The FollowExam team reviews every enquiry; your
+          contact details are never shown publicly or sold.
+        </p>
+        <form id="enquiry-form" class="form-card" data-institution-id={institution.id} data-institution-name={institution.name}>
+          <div class="form-grid">
+            <div class="field">
+              <label for="enquiry-name">Your name *</label>
+              <input class="input" id="enquiry-name" name="name" required maxlength="120" autocomplete="name" />
+            </div>
+            <div class="field">
+              <label for="enquiry-email">Email *</label>
+              <input class="input" id="enquiry-email" name="email" type="email" required maxlength="200" autocomplete="email" />
+            </div>
+            <div class="field">
+              <label for="enquiry-phone">Phone (optional)</label>
+              <input class="input" id="enquiry-phone" name="phone" type="tel" maxlength="20" autocomplete="tel" />
+            </div>
+            <div class="field">
+              <label for="enquiry-topic">Topic</label>
+              <select class="select" id="enquiry-topic" name="topic">
+                <option>Admission process</option>
+                <option>Courses and seats</option>
+                <option>Fees and scholarships</option>
+                <option>Eligibility</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="enquiry-message">Your question *</label>
+              <textarea class="textarea" id="enquiry-message" name="message" required minlength="10" maxlength="2000" rows="4"></textarea>
+            </div>
+            <div class="field full">
+              <label style="display:flex;gap:8px;align-items:flex-start;font-weight:400">
+                <input type="checkbox" id="enquiry-consent" name="consent" required style="margin-top:4px" />
+                <span class="small">I agree to be contacted about this enquiry and have read the <a href="/privacy/">privacy policy</a>.</span>
+              </label>
+            </div>
+            <div class="field full">
+              <button class="btn btn-primary" type="submit" id="enquiry-submit">Send enquiry</button>
+            </div>
+            <p class="form-message" id="enquiry-message" role="status"></p>
+          </div>
+        </form>
+      </section>
     </article>
 
     <aside>
@@ -264,4 +313,65 @@ const schema = [
       </div>
     </aside>
   </div>
+
+  <script>
+    import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+    import { getFirebaseDb } from "../../lib/firebase";
+
+    const form = document.querySelector<HTMLFormElement>("#enquiry-form");
+    const message = document.querySelector<HTMLElement>("#enquiry-message");
+    const submit = document.querySelector<HTMLButtonElement>("#enquiry-submit");
+
+    function show(text: string, type: "success" | "error" | "info") {
+      if (!message) return;
+      message.textContent = text;
+      message.className = `form-message show ${type}`;
+    }
+
+    form?.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const db = getFirebaseDb();
+      if (!db) {
+        show("Enquiries are temporarily unavailable. Please try again later.", "error");
+        return;
+      }
+      const data = new FormData(form);
+      const name = String(data.get("name") || "").trim();
+      const email = String(data.get("email") || "").trim();
+      const phone = String(data.get("phone") || "").trim();
+      const messageText = String(data.get("message") || "").trim();
+      const topic = String(data.get("topic") || "Other");
+      const consent = data.get("consent") != null;
+
+      if (!name || !email || messageText.length < 10 || !consent) {
+        show("Add your name, email, a question of at least 10 characters and consent.", "error");
+        return;
+      }
+
+      submit?.setAttribute("disabled", "true");
+      show("Sending…", "info");
+      try {
+        await addDoc(collection(db, "inquiries"), {
+          institutionId: form.dataset.institutionId || "",
+          institutionName: form.dataset.institutionName || "",
+          name,
+          email,
+          phone,
+          topic,
+          message: messageText,
+          consent: true,
+          status: "new",
+          source: "institution-detail",
+          createdAt: new Date().toISOString(),
+          serverCreatedAt: serverTimestamp(),
+        });
+        form.reset();
+        show("Enquiry sent. The FollowExam team will review it and contact you by email.", "success");
+      } catch (error) {
+        show(error instanceof Error ? error.message : "Could not send the enquiry. Please try again.", "error");
+      } finally {
+        submit?.removeAttribute("disabled");
+      }
+    });
+  </script>
 </BaseLayout>

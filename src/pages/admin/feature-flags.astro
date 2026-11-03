@@ -1,0 +1,171 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { SITE } from "../../lib/constants";
+---
+
+<BaseLayout title="Feature flags" description="Enable or disable advanced features." noindex>
+  <section class="section-tight" style="padding-top:30px">
+    <div class="container">
+      <div class="breadcrumb" style="padding:0 0 14px">
+        <a href="/">Dashboard</a><span>/</span>
+        <a href="/admin/">Admin</a><span>/</span><span>Feature flags</span>
+      </div>
+
+      <div class="section-head" style="margin-bottom:18px">
+        <div>
+          <div class="eyebrow">Admin</div>
+          <h1 style="font-size:clamp(1.8rem,3.6vw,2.5rem)">Feature flags</h1>
+          <p>Toggle advanced features. A flag being enabled here does not activate a paid service or Firebase billing — those require separate setup.</p>
+        </div>
+      </div>
+
+      <div id="ff-config" class="panel hidden">
+        <p class="small muted">Firebase is not configured. Set PUBLIC_FIREBASE_* values and rebuild.</p>
+      </div>
+
+      <div id="ff-login" class="form-card hidden">
+        <h2>Sign in</h2>
+        <p class="muted small">Admin access only.</p>
+        <form id="ff-login-form" class="form-grid">
+          <div class="field"><label for="ff-email">Email</label><input class="input" id="ff-email" type="email" required /></div>
+          <div class="field"><label for="ff-password">Password</label><input class="input" id="ff-password" type="password" required /></div>
+          <div class="field full"><button class="btn btn-primary" type="submit">Sign in</button></div>
+          <p class="form-message" id="ff-login-message" role="status"></p>
+        </form>
+      </div>
+
+      <div id="ff-denied" class="form-card hidden">
+        <h2>Access denied</h2>
+        <p class="muted small">This account is not an admin.</p>
+        <button class="btn btn-outline" type="button" id="ff-denied-signout">Sign out</button>
+      </div>
+
+      <div id="ff-panel" class="hidden">
+        <div class="form-message" id="ff-message" role="status"></div>
+        <div id="ff-list" class="admin-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+    import { collection, doc, getDoc, getDocs, updateDoc, serverTimestamp } from "firebase/firestore";
+    import { getFirebaseAuth, getFirebaseDb } from "../../lib/firebase";
+
+    const auth = getFirebaseAuth();
+    const db = getFirebaseDb();
+
+    const configPanel = document.querySelector<HTMLElement>("#ff-config");
+    const loginPanel = document.querySelector<HTMLElement>("#ff-login");
+    const deniedPanel = document.querySelector<HTMLElement>("#ff-denied");
+    const adminPanel = document.querySelector<HTMLElement>("#ff-panel");
+    const list = document.querySelector<HTMLElement>("#ff-list");
+    const message = document.querySelector<HTMLElement>("#ff-message");
+
+    function show(panel) {
+      [configPanel, loginPanel, deniedPanel, adminPanel].forEach((p) => p?.classList.add("hidden"));
+      panel?.classList.remove("hidden");
+    }
+
+    function showMessage(text, type = "info") {
+      if (!message) return;
+      message.textContent = text;
+      message.className = `form-message show ${type}`;
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    async function loadFlags() {
+      if (!db || !list) return;
+      try {
+        const snapshot = await getDocs(collection(db, "featureFlags"));
+        const flags = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+        if (!flags.length) {
+          list.innerHTML = `<div class="empty"><h3>No flags</h3><p>Run <code>npm run seed:flags</code> to populate defaults.</p></div>`;
+          return;
+        }
+        list.innerHTML = flags
+          .map(
+            (flag) => `
+          <article class="admin-item">
+            <div class="admin-item-head">
+              <div>
+                <h3>${escapeHtml(flag.name)}</h3>
+                <div class="admin-item-meta">${escapeHtml(flag.requiredService)} · ${escapeHtml(flag.dependencyStatus)} · ${escapeHtml(flag.estimatedCost || "")}</div>
+              </div>
+              <label style="display:flex;align-items:center;gap:6px">
+                <input type="checkbox" data-flag="${escapeHtml(flag.id)}" ${flag.enabled ? "checked" : ""} />
+                <span class="small">${flag.enabled ? "Enabled" : "Disabled"}</span>
+              </label>
+            </div>
+            <div class="small muted" style="margin-top:6px">Config: ${escapeHtml(flag.configStatus)}</div>
+          </article>`,
+          )
+          .join("");
+
+        list.querySelectorAll<HTMLInputElement>('input[type="checkbox"][data-flag]').forEach((input) => {
+          input.addEventListener("change", async () => {
+            if (!db) return;
+            const id = input.dataset.flag as string;
+            try {
+              await updateDoc(doc(db, "featureFlags", id), {
+                enabled: input.checked,
+                updatedAt: new Date().toISOString(),
+                serverUpdatedAt: serverTimestamp(),
+              });
+              const label = input.nextElementSibling;
+              if (label) label.textContent = input.checked ? "Enabled" : "Disabled";
+              showMessage(`Flag ${id} ${input.checked ? "enabled" : "disabled"}.`, "success");
+            } catch (error) {
+              input.checked = !input.checked;
+              showMessage(error instanceof Error ? error.message : "Update failed.", "error");
+            }
+          });
+        });
+      } catch (error) {
+        list.innerHTML = `<div class="empty"><h3>Error</h3><p>${escapeHtml(error instanceof Error ? error.message : "Failed")}</p></div>`;
+      }
+    }
+
+    if (!auth || !db) {
+      show(configPanel);
+    } else {
+      onAuthStateChanged(auth, async (user) => {
+        if (!user) {
+          show(loginPanel);
+          return;
+        }
+        const adminDoc = await getDoc(doc(db, "admins", user.uid));
+        if (!adminDoc.exists()) {
+          show(deniedPanel);
+          return;
+        }
+        show(adminPanel);
+        loadFlags();
+      });
+
+      document.querySelector("#ff-login-form")?.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const email = document.querySelector<HTMLInputElement>("#ff-email")?.value.trim() || "";
+        const password = document.querySelector<HTMLInputElement>("#ff-password")?.value || "";
+        try {
+          await signInWithEmailAndPassword(auth, email, password);
+        } catch (error) {
+          const msg = document.querySelector<HTMLElement>("#ff-login-message");
+          if (msg) {
+            msg.textContent = error instanceof Error ? error.message : "Sign-in failed.";
+            msg.className = "form-message show error";
+          }
+        }
+      });
+
+      document.querySelector("#ff-denied-signout")?.addEventListener("click", () => signOut(auth));
+    }
+  </script>
+</BaseLayout>

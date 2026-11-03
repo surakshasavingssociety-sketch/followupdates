@@ -1,0 +1,126 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { SITE } from "../../lib/constants";
+import { states } from "../../lib/states";
+import fs from "node:fs";
+import path from "node:path";
+
+const providerFile = path.join(process.cwd(), "data", "open-schooling-providers.json");
+const providerData = JSON.parse(fs.readFileSync(providerFile, "utf8"));
+const providers = providerData.providers;
+const levels = [...new Set(providers.flatMap((item) => item.level))].sort();
+---
+
+<BaseLayout
+  title="Open schooling and distance education directory"
+  description="Verified open schools and open universities in India — NIOS, IGNOU and state open universities."
+  noindex
+>
+  <section class="section-tight" style="padding-top:30px">
+    <div class="container">
+      <div class="breadcrumb" style="padding:0 0 14px">
+        <a href="/">Dashboard</a><span>/</span><span>Open schooling</span>
+      </div>
+
+      <div class="section-head" style="margin-bottom:18px">
+        <div>
+          <div class="eyebrow">Education</div>
+          <h1 style="font-size:clamp(1.8rem,3.6vw,2.5rem)">Open schooling & distance education</h1>
+          <p>
+            Recognised open schools and open universities where you can complete Class 10, Class 12, graduation or
+            postgraduate studies with flexible study. Private service providers are listed only after verification.
+          </p>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-bottom:18px;display:flex;gap:12px;flex-wrap:wrap;align-items:end">
+        <div class="field" style="min-width:220px">
+          <label for="os-state">State / UT</label>
+          <select class="select" id="os-state">
+            <option value="">All (including national)</option>
+            {states.map((state) => (
+              <option value={state.id}>{state.name}</option>
+            ))}
+          </select>
+        </div>
+        <div class="field" style="min-width:220px">
+          <label for="os-level">Course level</label>
+          <select class="select" id="os-level">
+            <option value="">Any level</option>
+            {levels.map((level) => (
+              <option value={level}>{level}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      <div id="os-results" class="cards"></div>
+
+      <div class="panel" style="margin-top:24px">
+        <h3 style="margin:0 0 6px">Are you a service provider?</h3>
+        <p class="small muted" style="margin:0 0 10px">
+          Organisations that help students with open schooling or distance education can request a listing. Only
+          verified providers receive a Verified badge. FollowExam does not guarantee any admission, certificate or
+          qualification.
+        </p>
+        <a class="btn btn-outline btn-sm" href="/contact/">Request listing</a>
+      </div>
+    </div>
+  </section>
+
+  <script type="application/json" id="os-data">
+    {JSON.stringify(providers)}
+  </script>
+
+  <script>
+    const providers = JSON.parse(document.getElementById("os-data")?.textContent || "[]");
+    const stateSelect = document.querySelector<HTMLSelectElement>("#os-state");
+    const levelSelect = document.querySelector<HTMLSelectElement>("#os-level");
+    const results = document.querySelector<HTMLElement>("#os-results");
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function render() {
+      const stateId = stateSelect?.value || "";
+      const level = levelSelect?.value || "";
+      const filtered = providers.filter((item) => {
+        const stateOk = !stateId || item.stateId === stateId || item.stateId === null;
+        const levelOk = !level || (item.level || []).includes(level);
+        return stateOk && levelOk;
+      });
+      if (!results) return;
+      if (!filtered.length) {
+        results.innerHTML = `<div class="empty"><h3>No providers found</h3><p>Try a different state or level.</p></div>`;
+        return;
+      }
+      results.innerHTML = filtered
+        .map(
+          (item) => `
+        <article class="card">
+          <div class="card-body">
+            <span class="badge ${item.type === "Open school" ? "badge-blue" : "badge-green"}">${escapeHtml(item.type)}</span>
+            <h3 style="margin:8px 0 4px">${escapeHtml(item.name)}</h3>
+            <p class="small muted" style="margin:0 0 6px">${escapeHtml(item.state)}</p>
+            <p class="small" style="margin:0 0 8px">${escapeHtml(item.description)}</p>
+            <p class="small muted" style="margin:0 0 10px">Levels: ${escapeHtml((item.level || []).join(", "))}</p>
+            <a class="btn btn-outline btn-sm os-link" data-url="${escapeHtml(item.website)}" target="_blank" rel="noopener">Visit website ↗</a>
+          </div>
+        </article>`,
+        )
+        .join("");
+      results.querySelectorAll<HTMLAnchorElement>(".os-link").forEach((a) => {
+        a.href = a.dataset.url || "#";
+      });
+    }
+
+    stateSelect?.addEventListener("change", render);
+    levelSelect?.addEventListener("change", render);
+    render();
+  </script>
+</BaseLayout>

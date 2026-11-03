@@ -1,0 +1,361 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { SITE } from "../../lib/constants";
+
+const platforms = ["Telegram", "WhatsApp", "YouTube", "Instagram", "Facebook", "X (Twitter)", "LinkedIn"];
+---
+
+<BaseLayout title="Social media" description="Prepare and schedule social posts (admin only)." noindex>
+  <section class="section-tight" style="padding-top:30px">
+    <div class="container">
+      <div class="breadcrumb" style="padding:0 0 14px">
+        <a href="/">Dashboard</a><span>/</span>
+        <a href="/admin/">Admin</a><span>/</span><span>Social media</span>
+      </div>
+
+      <div class="section-head" style="margin-bottom:18px">
+        <div>
+          <div class="eyebrow">Admin</div>
+          <h1 style="font-size:clamp(1.8rem,3.6vw,2.5rem)">Social media management</h1>
+          <p>Write, preview and schedule posts for Telegram, WhatsApp, YouTube, Instagram, Facebook, X and LinkedIn. Automated publishing requires official platform APIs and permissions.</p>
+        </div>
+      </div>
+
+      <div id="sm-config" class="panel hidden">
+        <p class="small muted">Firebase is not configured. Set PUBLIC_FIREBASE_* values and rebuild.</p>
+      </div>
+
+      <div id="sm-login" class="form-card hidden">
+        <h2>Sign in</h2>
+        <p class="muted small">Admin access only.</p>
+        <form id="sm-login-form" class="form-grid">
+          <div class="field"><label for="sm-email">Email</label><input class="input" id="sm-email" type="email" required /></div>
+          <div class="field"><label for="sm-password">Password</label><input class="input" id="sm-password" type="password" required /></div>
+          <div class="field full"><button class="btn btn-primary" type="submit">Sign in</button></div>
+          <p class="form-message" id="sm-login-message" role="status"></p>
+        </form>
+      </div>
+
+      <div id="sm-denied" class="form-card hidden">
+        <h2>Access denied</h2>
+        <p class="muted small">This account is not an admin.</p>
+        <button class="btn btn-outline" type="button" id="sm-denied-signout">Sign out</button>
+      </div>
+
+      <div id="sm-panel" class="hidden">
+        <div class="form-message" id="sm-message" role="status"></div>
+
+        <div class="panel" style="margin-bottom:18px">
+          <h3 style="margin:0 0 8px">Compose a post</h3>
+          <form id="sm-form" class="form-grid">
+            <div class="field full">
+              <label for="sm-title">Post title *</label>
+              <input class="input" id="sm-title" type="text" required maxlength="120" placeholder="New government job notification" />
+            </div>
+            <div class="field full">
+              <label for="sm-body">Caption / body *</label>
+              <textarea class="textarea" id="sm-body" rows="4" required maxlength="2000" placeholder="Important dates, eligibility and official link…"></textarea>
+            </div>
+            <div class="field">
+              <label for="sm-platform">Platform</label>
+              <select class="select" id="sm-platform">
+                {platforms.map((platform) => <option>{platform}</option>)}
+              </select>
+            </div>
+            <div class="field">
+              <label for="sm-schedule">Schedule (optional)</label>
+              <input class="input" id="sm-schedule" type="datetime-local" />
+            </div>
+            <div class="field full">
+              <label for="sm-hashtags">Hashtags (space separated)</label>
+              <input class="input" id="sm-hashtags" type="text" placeholder="#FollowExam #GovtJobs" />
+            </div>
+            <div class="field full" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+              <button class="btn btn-primary" type="submit">Save draft</button>
+              <button class="btn btn-outline" type="button" id="sm-preview">Preview</button>
+              <span class="small muted">Saving stores the draft in Firestore. Publishing is manual or via official APIs only.</span>
+            </div>
+          </form>
+          <div id="sm-preview-box" class="panel hidden" style="margin-top:14px;background:#f7fafc"></div>
+        </div>
+
+        <div class="panel" style="margin-bottom:18px">
+          <div style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap">
+            <h3 style="margin:0">Drafts &amp; scheduled posts</h3>
+            <button class="btn btn-outline btn-sm" type="button" id="sm-refresh">Refresh</button>
+          </div>
+          <div id="sm-list" class="admin-list" style="margin-top:12px"></div>
+        </div>
+
+        <div class="panel" style="margin-bottom:18px">
+          <h3 style="margin:0 0 8px">30-second update video generator</h3>
+          <p class="small muted" style="margin:0 0 10px">
+            Input: post title, important information, important dates, logo, background and template. Output: a
+            30-second short video with text overlays, logo and captions. This needs media-processing capability and is
+            controlled by the <code>video_generation</code> feature flag.
+          </p>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+            <button class="btn btn-outline" type="button" disabled title="Enable the video_generation feature flag and configure media processing first">Generate video</button>
+            <span class="badge badge-amber">Not configured</span>
+            <a class="small" href="/admin/feature-flags/">Manage feature flags →</a>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3 style="margin:0 0 6px">Follow links (public)</h3>
+          <p class="small muted" style="margin:0">
+            Public follow links live in <code>src/lib/constants.ts</code> (<code>SITE.telegram</code>, etc.) and can be
+            overridden through build-time environment variables.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+    import {
+      addDoc,
+      collection,
+      deleteDoc,
+      doc,
+      getDoc,
+      getDocs,
+      orderBy,
+      query,
+      serverTimestamp,
+      updateDoc,
+    } from "firebase/firestore";
+    import { getFirebaseAuth, getFirebaseDb } from "../../lib/firebase";
+
+    const auth = getFirebaseAuth();
+    const db = getFirebaseDb();
+
+    const configPanel = document.querySelector<HTMLElement>("#sm-config");
+    const loginPanel = document.querySelector<HTMLElement>("#sm-login");
+    const deniedPanel = document.querySelector<HTMLElement>("#sm-denied");
+    const adminPanel = document.querySelector<HTMLElement>("#sm-panel");
+    const form = document.querySelector<HTMLFormElement>("#sm-form");
+    const list = document.querySelector<HTMLElement>("#sm-list");
+    const message = document.querySelector<HTMLElement>("#sm-message");
+    const previewBox = document.querySelector<HTMLElement>("#sm-preview-box");
+
+    type Draft = Record<string, any>;
+    let drafts: Draft[] = [];
+    let currentUid = "";
+
+    function show(panel: HTMLElement | null) {
+      [configPanel, loginPanel, deniedPanel, adminPanel].forEach((item) => item?.classList.add("hidden"));
+      panel?.classList.remove("hidden");
+    }
+
+    function showMessage(text: string, type = "info") {
+      if (!message) return;
+      message.textContent = text;
+      message.className = `form-message show ${type}`;
+      if (type === "success") setTimeout(() => message.classList.remove("show"), 4000);
+    }
+
+    function esc(value: unknown) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function captionFor(draft: Draft) {
+      const hashtags = String(draft.hashtags || "").trim();
+      return `${draft.body || ""}${hashtags ? `\n\n${hashtags}` : ""}`.trim();
+    }
+
+    function render() {
+      if (!list) return;
+      if (!drafts.length) {
+        list.innerHTML = `<div class="empty"><h3>No drafts yet</h3><p>Write a post above and save it to start.</p></div>`;
+        return;
+      }
+      list.innerHTML = drafts
+        .map((draft) => {
+          const status = draft.status || "draft";
+          const scheduledLabel = draft.scheduleAt
+            ? new Date(draft.scheduleAt).toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" })
+            : "";
+          return `
+          <article class="admin-item" data-id="${esc(draft.id)}">
+            <div class="admin-item-head">
+              <div>
+                <h3>${esc(draft.title)}</h3>
+                <div class="admin-item-meta">
+                  ${esc(draft.platform || "Telegram")} · ${esc(status)}${scheduledLabel ? ` · ${esc(scheduledLabel)}` : ""}
+                </div>
+              </div>
+              <span class="badge ${status === "published" ? "badge-green" : status === "scheduled" ? "badge-amber" : "badge-blue"}">${esc(status)}</span>
+            </div>
+            <p class="small" style="margin:10px 0;white-space:pre-wrap">${esc(draft.body)}</p>
+            ${draft.hashtags ? `<p class="small muted" style="margin:0 0 8px">${esc(draft.hashtags)}</p>` : ""}
+            <div class="admin-actions">
+              <button class="btn btn-outline btn-sm" type="button" data-action="copy">Copy caption</button>
+              ${status !== "published" ? `<button class="btn btn-primary btn-sm" type="button" data-action="mark-published">Mark published</button>` : ""}
+              ${status === "draft" && draft.scheduleAt ? `<button class="btn btn-outline btn-sm" type="button" data-action="mark-scheduled">Mark scheduled</button>` : ""}
+              <button class="btn btn-danger btn-sm" type="button" data-action="delete">Delete</button>
+            </div>
+          </article>`;
+        })
+        .join("");
+    }
+
+    async function loadDrafts() {
+      if (!db || !list) return;
+      try {
+        const snapshot = await getDocs(query(collection(db, "socialDrafts"), orderBy("createdAt", "desc")));
+        drafts = snapshot.docs.map((item) => ({ id: item.id, ...item.data() }));
+      } catch {
+        const snapshot = await getDocs(collection(db, "socialDrafts"));
+        drafts = snapshot.docs.map((item) => ({ id: item.id, ...item.data() }));
+      }
+      render();
+    }
+
+    function currentFormValues() {
+      return {
+        title: document.querySelector<HTMLInputElement>("#sm-title")?.value.trim() || "",
+        body: document.querySelector<HTMLTextAreaElement>("#sm-body")?.value.trim() || "",
+        platform: document.querySelector<HTMLSelectElement>("#sm-platform")?.value || "Telegram",
+        scheduleAt: document.querySelector<HTMLInputElement>("#sm-schedule")?.value || "",
+        hashtags: document.querySelector<HTMLInputElement>("#sm-hashtags")?.value.trim() || "",
+      };
+    }
+
+    async function boot(user: { uid: string }) {
+      currentUid = user.uid;
+      if (!db) {
+        show(configPanel);
+        return;
+      }
+      const adminDoc = await getDoc(doc(db, "admins", user.uid));
+      if (!adminDoc.exists()) {
+        show(deniedPanel);
+        return;
+      }
+      show(adminPanel);
+      await loadDrafts();
+    }
+
+    if (!auth || !db) {
+      show(configPanel);
+    } else {
+      onAuthStateChanged(auth, (user) => {
+        if (user) boot(user).catch(() => show(deniedPanel));
+        else show(loginPanel);
+      });
+
+      document.querySelector("#sm-login-form")?.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const email = document.querySelector<HTMLInputElement>("#sm-email")?.value.trim() || "";
+        const password = document.querySelector<HTMLInputElement>("#sm-password")?.value || "";
+        try {
+          await signInWithEmailAndPassword(auth, email, password);
+        } catch (error) {
+          const msg = document.querySelector<HTMLElement>("#sm-login-message");
+          if (msg) {
+            msg.textContent = error instanceof Error ? error.message : "Sign-in failed.";
+            msg.className = "form-message show error";
+          }
+        }
+      });
+
+      document.querySelector("#sm-denied-signout")?.addEventListener("click", () => signOut(auth));
+
+      form?.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (!db) return;
+        const values = currentFormValues();
+        if (!values.title || !values.body) {
+          showMessage("Add a title and caption before saving.", "error");
+          return;
+        }
+        const scheduleAt = values.scheduleAt ? new Date(values.scheduleAt) : null;
+        const scheduleIso = scheduleAt && !Number.isNaN(scheduleAt.getTime()) ? scheduleAt.toISOString() : null;
+        try {
+          await addDoc(collection(db, "socialDrafts"), {
+            ...values,
+            scheduleAt: scheduleIso,
+            status: scheduleIso && scheduleAt && scheduleAt.getTime() > Date.now() ? "scheduled" : "draft",
+            authorUid: currentUid,
+            createdAt: new Date().toISOString(),
+            serverCreatedAt: serverTimestamp(),
+            updatedAt: new Date().toISOString(),
+          });
+          form.reset();
+          previewBox?.classList.add("hidden");
+          showMessage("Draft saved.", "success");
+          await loadDrafts();
+        } catch (error) {
+          showMessage(error instanceof Error ? error.message : "Could not save the draft.", "error");
+        }
+      });
+
+      document.querySelector("#sm-preview")?.addEventListener("click", () => {
+        const values = currentFormValues();
+        if (!previewBox) return;
+        previewBox.innerHTML = `
+          <div class="small muted" style="margin-bottom:6px">${esc(values.platform)} preview</div>
+          <strong>${esc(values.title || "Untitled post")}</strong>
+          <p class="small" style="white-space:pre-wrap;margin:8px 0 0">${esc(values.body || "No caption yet.")}</p>
+          ${values.hashtags ? `<p class="small muted" style="margin:8px 0 0">${esc(values.hashtags)}</p>` : ""}`;
+        previewBox.classList.remove("hidden");
+      });
+
+      document.querySelector("#sm-refresh")?.addEventListener("click", loadDrafts);
+
+      list?.addEventListener("click", async (event) => {
+        const button = (event.target as HTMLElement).closest<HTMLElement>("[data-action]");
+        if (!button || !db) return;
+        const item = button.closest<HTMLElement>(".admin-item");
+        const id = item?.dataset.id;
+        if (!id) return;
+        const draft = drafts.find((entry) => entry.id === id);
+        if (!draft) return;
+
+        if (button.dataset.action === "copy") {
+          try {
+            await navigator.clipboard.writeText(`${draft.title}\n\n${captionFor(draft)}`);
+            showMessage("Caption copied to the clipboard.", "success");
+          } catch {
+            showMessage("Clipboard access was blocked. Select the caption and copy it manually.", "error");
+          }
+          return;
+        }
+
+        if (button.dataset.action === "delete") {
+          if (!confirm("Delete this draft?")) return;
+          try {
+            await deleteDoc(doc(db, "socialDrafts", id));
+            drafts = drafts.filter((entry) => entry.id !== id);
+            render();
+            showMessage("Draft deleted.", "info");
+          } catch (error) {
+            showMessage(error instanceof Error ? error.message : "Could not delete the draft.", "error");
+          }
+          return;
+        }
+
+        const nextStatus = button.dataset.action === "mark-published" ? "published" : "scheduled";
+        try {
+          await updateDoc(doc(db, "socialDrafts", id), {
+            status: nextStatus,
+            publishedAt: nextStatus === "published" ? new Date().toISOString() : draft.publishedAt || null,
+            updatedAt: new Date().toISOString(),
+          });
+          draft.status = nextStatus;
+          render();
+          showMessage(`Draft marked ${nextStatus}.`, "success");
+        } catch (error) {
+          showMessage(error instanceof Error ? error.message : "Could not update the draft.", "error");
+        }
+      });
+    }
+  </script>
+</BaseLayout>

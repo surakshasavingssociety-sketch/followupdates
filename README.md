@@ -162,6 +162,8 @@ official URL, frequency, aliases and an **indicative** cycle:
 `scripts/build-institutions.mjs` generates 196 institutions across 23 IITs, 31 NITs,
 20 IIITs, 19 AIIMS, 20 IIMs, 20 NLUs, 37 central universities and 26 state universities.
 Each record includes type, state, official links, accepted exams and admission routes.
+Every state and union territory now has at least one institution, and the scholarship
+dataset covers all 36 states and UTs.
 
 `scripts/build-scholarships.mjs` generates 54 schemes: 18 central and 36 state/UT.
 Each record includes level, category, benefits, eligibility, documents, application

@@ -1,0 +1,13 @@
+{
+  "note": "Only publicly available, free-to-read titles are listed. Copyrighted works are not hosted. Reading links point to official source libraries.",
+  "books": [
+    { "title": "Discovery of India", "author": "Jawaharlal Nehru", "language": "English", "subject": "History", "level": "General", "source": "National Digital Library of India", "readUrl": "https://ndl.iitkgp.ac.in/" },
+    { "title": "Gitanjali", "author": "Rabindranath Tagore", "language": "English", "subject": "Literature", "level": "General", "source": "Project Gutenberg", "readUrl": "https://www.gutenberg.org/ebooks/7164" },
+    { "title": "The Story of My Experiments with Truth", "author": "M. K. Gandhi", "language": "English", "subject": "Biography", "level": "General", "source": "National Digital Library of India", "readUrl": "https://ndl.iitkgp.ac.in/" },
+    { "title": "Arthashastra", "author": "Kautilya", "language": "English", "subject": "Economics", "level": "General", "source": "National Digital Library of India", "readUrl": "https://ndl.iitkgp.ac.in/" },
+    { "title": "Panchatantra", "author": "Vishnu Sharma", "language": "English", "subject": "Literature", "level": "General", "source": "Project Gutenberg", "readUrl": "https://www.gutenberg.org/ebooks/23839" },
+    { "title": "Constitution of India", "author": "Government of India", "language": "English", "subject": "Civics", "level": "General", "source": "Legislative Department", "readUrl": "https://legislative.gov.in/constitution-of-india/" },
+    { "title": "NCERT Class 10 Science", "author": "NCERT", "language": "English", "subject": "Science", "level": "Class 10", "source": "NCERT", "readUrl": "https://ncert.nic.in/textbook.php" },
+    { "title": "NCERT Class 12 Physics (Part I)", "author": "NCERT", "language": "English", "subject": "Physics", "level": "Class 12", "source": "NCERT", "readUrl": "https://ncert.nic.in/textbook.php" }
+  ]
+}

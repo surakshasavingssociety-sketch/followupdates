@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { SITE } from "../../lib/constants";
-import { CAREER_GOALS, EDUCATION_LEVELS } from "../../lib/profile";
+import { CAREER_GOALS, EDUCATION_LEVELS, USER_CATEGORIES } from "../../lib/profile";
 import { states } from "../../lib/states";
 
 const streams = ["Science (PCM)", "Science (PCB)", "Science (PCMB)", "Commerce", "Arts / Humanities", "Engineering", "Medical", "Other"];
@@ -42,6 +42,7 @@ const interestOptions = [
           </p>
         </div>
         <span class="badge badge-blue" id="profile-completion">Profile 0% complete</span>
+        <p class="small muted" id="profile-missing" style="margin:6px 0 0"></p>
       </div>
 
       <div class="profile-layout">
@@ -50,6 +51,16 @@ const interestOptions = [
             <div class="field full">
               <label for="profile-name">Full name *</label>
               <input class="input" id="profile-name" name="name" autocomplete="name" required />
+            </div>
+
+            <div class="field">
+              <label for="profile-category">User category</label>
+              <select class="select" id="profile-category" name="userCategory">
+                <option value="">Select your category</option>
+                {USER_CATEGORIES.map((category) => (
+                  <option value={category}>{category}</option>
+                ))}
+              </select>
             </div>
 
             <div class="field">
@@ -124,6 +135,24 @@ const interestOptions = [
                 <input type="checkbox" id="profile-alerts" name="emailAlerts" />
                 <span>Send me a daily email digest of updates that match my profile</span>
               </label>
+            </div>
+
+            <div class="field full" id="institution-section" style="display:none">
+              <label>Institution / organisation details</label>
+              <div class="form-grid" style="margin-top:8px">
+                <div class="field">
+                  <label for="profile-org-name">Organisation name</label>
+                  <input class="input" id="profile-org-name" name="organizationName" />
+                </div>
+                <div class="field">
+                  <label for="profile-org-website">Website</label>
+                  <input class="input" id="profile-org-website" name="organizationWebsite" type="url" />
+                </div>
+                <div class="field full">
+                  <label for="profile-org-about">About</label>
+                  <textarea class="textarea" id="profile-org-about" name="organizationAbout"></textarea>
+                </div>
+              </div>
             </div>
 
             <div class="field full" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
@@ -220,6 +249,7 @@ const interestOptions = [
   function completion(profile: Partial<UserProfile>) {
     const fields = [
       profile.name,
+      profile.userCategory,
       profile.stateId,
       profile.educationLevel,
       profile.careerGoal,
@@ -228,6 +258,19 @@ const interestOptions = [
     ];
     const filled = fields.filter((value) => Boolean(value && String(value).trim())).length;
     return Math.round((filled / fields.length) * 100);
+  }
+
+  function missingFields(profile: Partial<UserProfile>) {
+    const labels: Array<[string, unknown]> = [
+      ["name", profile.name],
+      ["user category", profile.userCategory],
+      ["state", profile.stateId],
+      ["education level", profile.educationLevel],
+      ["career goal", profile.careerGoal],
+      ["stream", profile.stream],
+      ["date of birth", profile.dateOfBirth],
+    ];
+    return labels.filter(([, value]) => !value || !String(value).trim()).map(([label]) => label);
   }
 
   function fill(profile: UserProfile | null, user: User) {
@@ -245,6 +288,7 @@ const interestOptions = [
       const element = document.querySelector<HTMLSelectElement>(id);
       if (element) element.value = value || "";
     };
+    setSelect("#profile-category", profile?.userCategory);
     setSelect("#profile-state", profile?.stateId);
     setSelect("#profile-level", profile?.educationLevel);
     setSelect("#profile-stream", profile?.stream);
@@ -261,6 +305,17 @@ const interestOptions = [
     const alerts = document.querySelector<HTMLInputElement>("#profile-alerts");
     if (alerts) alerts.checked = profile?.emailAlerts !== false;
 
+    const orgName = document.querySelector<HTMLInputElement>("#profile-org-name");
+    if (orgName) orgName.value = profile?.organizationName || "";
+    const orgWebsite = document.querySelector<HTMLInputElement>("#profile-org-website");
+    if (orgWebsite) orgWebsite.value = profile?.organizationWebsite || "";
+    const orgAbout = document.querySelector<HTMLTextAreaElement>("#profile-org-about");
+    if (orgAbout) orgAbout.value = profile?.organizationAbout || "";
+
+    const institutionCategories = new Set(["Educational institution","Coaching institute","School","College","University","Government organisation","Private organisation","Open schooling service provider"]);
+    const section = document.querySelector<HTMLElement>("#institution-section");
+    if (section) section.style.display = institutionCategories.has(profile?.userCategory || "") ? "" : "none";
+
     setText("#profile-avatar", initials(name));
     setText("#profile-display-name", name || "Student");
     setText("#profile-account-email", user.email || profile?.email || "—");
@@ -276,7 +331,21 @@ const interestOptions = [
       completionBadge.textContent = `Profile ${percent}% complete`;
       completionBadge.className = `badge ${percent >= 80 ? "badge-green" : percent >= 40 ? "badge-amber" : "badge-blue"}`;
     }
+    const missingEl = document.querySelector<HTMLElement>("#profile-missing");
+    if (missingEl) {
+      const missing = missingFields(profile || {});
+      missingEl.textContent = missing.length
+        ? `Still needed: ${missing.join(", ")}.`
+        : "All core fields complete.";
+    }
   }
+
+  const institutionCategories = new Set(["Educational institution","Coaching institute","School","College","University","Government organisation","Private organisation","Open schooling service provider"]);
+  const categorySelect = document.querySelector<HTMLSelectElement>("#profile-category");
+  categorySelect?.addEventListener("change", () => {
+    const section = document.querySelector<HTMLElement>("#institution-section");
+    if (section) section.style.display = institutionCategories.has(categorySelect.value) ? "" : "none";
+  });
 
   watchAuth(async (user) => {
     currentUser = user;
@@ -313,6 +382,7 @@ const interestOptions = [
     try {
       await saveProfile(currentUser, {
         name: String(data.get("name") || "").trim(),
+        userCategory: String(data.get("userCategory") || "") as UserProfile["userCategory"],
         email: String(data.get("email") || "").trim(),
         phone: String(data.get("phone") || "").trim(),
         stateId,
@@ -321,6 +391,9 @@ const interestOptions = [
         stream: String(data.get("stream") || ""),
         dateOfBirth: String(data.get("dateOfBirth") || ""),
         careerGoal: String(data.get("careerGoal") || "") as UserProfile["careerGoal"],
+        organizationName: String(data.get("organizationName") || "").trim(),
+        organizationWebsite: String(data.get("organizationWebsite") || "").trim(),
+        organizationAbout: String(data.get("organizationAbout") || "").trim(),
         interests,
         emailAlerts: Boolean(data.get("emailAlerts")),
       });

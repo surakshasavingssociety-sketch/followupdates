@@ -1,0 +1,50 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { SITE } from "../../lib/constants";
+import fs from "node:fs";
+import path from "node:path";
+
+const plansFile = path.join(process.cwd(), "data", "institution-plans.json");
+const plansData = JSON.parse(fs.readFileSync(plansFile, "utf8"));
+---
+
+<BaseLayout title="Institution plans" description="Manage institution subscription plans (admin only)." noindex>
+  <section class="section-tight" style="padding-top:30px">
+    <div class="container">
+      <div class="breadcrumb" style="padding:0 0 14px">
+        <a href="/">Dashboard</a><span>/</span>
+        <a href="/admin/">Admin</a><span>/</span><span>Institution plans</span>
+      </div>
+
+      <div class="section-head" style="margin-bottom:18px">
+        <div>
+          <div class="eyebrow">Admin</div>
+          <h1 style="font-size:clamp(1.8rem,3.6vw,2.5rem)">Institution subscription plans</h1>
+          <p>Manage free and paid plans for educational institutions. Pricing is set by admin. Paid listings are marked as Sponsored/Promoted.</p>
+        </div>
+      </div>
+
+      <div class="cards">
+        {plansData.plans.map((plan) => (
+          <article class="card">
+            <div class="card-body">
+              <h3 style="margin:0 0 4px">{plan.name}</h3>
+              <p class="small muted" style="margin:0 0 8px">{plan.price}</p>
+              <ul class="small" style="margin:0;padding-left:18px">
+                {plan.features.map((f) => <li>{f}</li>)}
+              </ul>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="panel" style="margin-top:24px">
+        <h3 style="margin:0 0 6px">Institution verification</h3>
+        <p class="small muted" style="margin:0">
+          Verification status (Verified / Pending / Failed / Not applicable) is shown on institution cards and detail pages.
+          Only verified institutions receive a Verified badge. Government and private institutions use separate forms.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

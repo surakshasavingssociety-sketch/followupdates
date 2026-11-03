@@ -60,6 +60,71 @@ export function normalizeKey(title = "", organization = "") {
     .trim();
 }
 
+const DUPLICATE_STOP_WORDS = new Set([
+  "a", "an", "and", "are", "as", "at", "be", "been", "by", "for", "from",
+  "has", "have", "in", "is", "it", "its", "of", "on", "or", "out", "that",
+  "the", "this", "to", "was", "were", "will", "with", "official", "notification",
+  "notifications", "notice", "released", "release", "published", "publish",
+  "update", "updates", "new", "now", "download", "check", "here",
+]);
+
+function duplicateTokens(value = "") {
+  return new Set(
+    cleanText(value)
+      .toLowerCase()
+      .replace(/&/g, " and ")
+      .replace(/[^a-z0-9]+/g, " ")
+      .split(" ")
+      .filter((token) => token.length > 1 && !DUPLICATE_STOP_WORDS.has(token)),
+  );
+}
+
+export function titleSimilarity(a = "", b = "") {
+  const left = duplicateTokens(a);
+  const right = duplicateTokens(b);
+  if (!left.size || !right.size) return 0;
+  let intersection = 0;
+  for (const token of left) if (right.has(token)) intersection += 1;
+  const union = left.size + right.size - intersection;
+  const jaccard = intersection / union;
+  const containment = intersection / Math.min(left.size, right.size);
+  return 0.45 * jaccard + 0.55 * containment;
+}
+
+function organizationsMatch(a = "", b = "") {
+  const left = cleanText(a).toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+  const right = cleanText(b).toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+  if (!left || !right) return false;
+  return left === right || left.includes(right) || right.includes(left);
+}
+
+/** Builds the in-memory index used to reject near-duplicate discoveries. */
+export function createSeenIndex(jobs = []) {
+  return {
+    keys: new Set(jobs.map((job) => normalizeKey(job.title, job.organization))),
+    entries: jobs.map((job) => ({ title: job.title, organization: job.organization })),
+  };
+}
+
+/** True when the headline matches an already-seen entry (exact or fuzzy). */
+export function isDuplicateEntry(seen, title, organization) {
+  if (seen.keys.has(normalizeKey(title, organization))) return true;
+  for (const entry of seen.entries) {
+    if (organizationsMatch(entry.organization, organization) && titleSimilarity(entry.title, title) >= 0.8) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/** Adds an entry to the index, returning false when it is a duplicate. */
+export function rememberEntry(seen, title, organization) {
+  if (isDuplicateEntry(seen, title, organization)) return false;
+  seen.keys.add(normalizeKey(title, organization));
+  seen.entries.push({ title, organization });
+  return true;
+}
+
 export function parseDate(value) {
   if (!value) return null;
   const date = new Date(value);

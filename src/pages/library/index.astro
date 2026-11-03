@@ -1,0 +1,134 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { SITE } from "../../lib/constants";
+import fs from "node:fs";
+import path from "node:path";
+
+const bookFile = path.join(process.cwd(), "data", "library-books.json");
+const bookData = JSON.parse(fs.readFileSync(bookFile, "utf8"));
+const books = bookData.books;
+const languages = [...new Set(books.map((b) => b.language))].sort();
+const subjects = [...new Set(books.map((b) => b.subject))].sort();
+const levels = [...new Set(books.map((b) => b.level))].sort();
+---
+
+<BaseLayout
+  title="Digital public library"
+  description="Free-to-read public domain and open access books for students and aspirants."
+  noindex
+>
+  <section class="section-tight" style="padding-top:30px">
+    <div class="container">
+      <div class="breadcrumb" style="padding:0 0 14px">
+        <a href="/">Dashboard</a><span>/</span><span>Digital library</span>
+      </div>
+
+      <div class="section-head" style="margin-bottom:18px">
+        <div>
+          <div class="eyebrow">Library</div>
+          <h1 style="font-size:clamp(1.8rem,3.6vw,2.5rem)">Digital public library</h1>
+          <p>
+            Free-to-read public domain and open access books from official sources. Copyrighted works are not hosted;
+            reading links open the original source. Reading counts are not tracked for external links.
+          </p>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-bottom:18px;display:flex;gap:12px;flex-wrap:wrap;align-items:end">
+        <div class="field" style="min-width:200px">
+          <label for="lib-search">Search</label>
+          <input class="input" id="lib-search" type="search" placeholder="Title or author" />
+        </div>
+        <div class="field" style="min-width:160px">
+          <label for="lib-subject">Subject</label>
+          <select class="select" id="lib-subject">
+            <option value="">All subjects</option>
+            {subjects.map((s) => <option value={s}>{s}</option>)}
+          </select>
+        </div>
+        <div class="field" style="min-width:160px">
+          <label for="lib-level">Level</label>
+          <select class="select" id="lib-level">
+            <option value="">All levels</option>
+            {levels.map((l) => <option value={l}>{l}</option>)}
+          </select>
+        </div>
+        <div class="field" style="min-width:160px">
+          <label for="lib-language">Language</label>
+          <select class="select" id="lib-language">
+            <option value="">All languages</option>
+            {languages.map((l) => <option value={l}>{l}</option>)}
+          </select>
+        </div>
+      </div>
+
+      <div id="lib-results" class="cards"></div>
+      <p class="small muted" id="lib-summary" style="margin-top:12px"></p>
+    </div>
+  </section>
+
+  <script type="application/json" id="lib-data">
+    {JSON.stringify(books)}
+  </script>
+
+  <script>
+    const books = JSON.parse(document.getElementById("lib-data")?.textContent || "[]");
+    const search = document.querySelector<HTMLInputElement>("#lib-search");
+    const subject = document.querySelector<HTMLSelectElement>("#lib-subject");
+    const level = document.querySelector<HTMLSelectElement>("#lib-level");
+    const language = document.querySelector<HTMLSelectElement>("#lib-language");
+    const results = document.querySelector<HTMLElement>("#lib-results");
+    const summary = document.querySelector<HTMLElement>("#lib-summary");
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function render() {
+      const q = (search?.value || "").toLowerCase().trim();
+      const subj = subject?.value || "";
+      const lvl = level?.value || "";
+      const lang = language?.value || "";
+      const filtered = books.filter((b) => {
+        const text = `${b.title} ${b.author}`.toLowerCase();
+        if (q && !text.includes(q)) return false;
+        if (subj && b.subject !== subj) return false;
+        if (lvl && b.level !== lvl) return false;
+        if (lang && b.language !== lang) return false;
+        return true;
+      });
+      if (!results) return;
+      if (!filtered.length) {
+        results.innerHTML = `<div class="empty"><h3>No books found</h3><p>Try a different filter.</p></div>`;
+        if (summary) summary.textContent = "";
+        return;
+      }
+      results.innerHTML = filtered
+        .map(
+          (b) => `
+        <article class="card">
+          <div class="card-body">
+            <span class="badge badge-blue">${escapeHtml(b.subject)}</span>
+            <h3 style="margin:8px 0 4px">${escapeHtml(b.title)}</h3>
+            <p class="small muted" style="margin:0 0 6px">${escapeHtml(b.author)} · ${escapeHtml(b.language)} · ${escapeHtml(b.level)}</p>
+            <p class="small muted" style="margin:0 0 10px">Source: ${escapeHtml(b.source)}</p>
+            <a class="btn btn-primary btn-sm lib-link" data-url="${escapeHtml(b.readUrl)}" target="_blank" rel="noopener">Read ↗</a>
+          </div>
+        </article>`,
+        )
+        .join("");
+      results.querySelectorAll<HTMLAnchorElement>(".lib-link").forEach((a) => {
+        a.href = a.dataset.url || "#";
+      });
+      if (summary) summary.textContent = `${filtered.length} of ${books.length} title(s) shown.`;
+    }
+
+    [search, subject, level, language].forEach((el) => el?.addEventListener("input", render));
+    [subject, level, language].forEach((el) => el?.addEventListener("change", render));
+    render();
+  </script>
+</BaseLayout>

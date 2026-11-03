@@ -1,0 +1,17 @@
+{
+  "plans": [
+    {
+      "id": "free",
+      "name": "Free",
+      "price": "₹0",
+      "features": ["Basic profile", "Basic contact details", "Limited information", "Standard listing"]
+    },
+    {
+      "id": "paid",
+      "name": "Paid (Premium)",
+      "price": "Configurable by admin",
+      "features": ["Premium profile", "Detailed course information", "Admission promotion", "Featured listing", "Additional images", "Prospectus upload", "Admission campaign", "Student enquiry management", "Performance analytics"]
+    }
+  ],
+  "note": "Pricing and plans are managed by admin. Paid listings are clearly marked as Sponsored/Promoted. Organic ranking cannot be purchased."
+}

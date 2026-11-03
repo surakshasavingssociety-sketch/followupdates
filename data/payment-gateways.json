@@ -1,0 +1,8 @@
+{
+  "note": "Payment gateway configuration is stored server-side. No API keys or secrets are exposed to the client. Test mode must be used until live credentials are verified.",
+  "gateways": [
+    { "id": "razorpay", "name": "Razorpay", "supported": true, "docs": "https://razorpay.com/docs/" },
+    { "id": "cashfree", "name": "Cashfree Payments", "supported": true, "docs": "https://docs.cashfree.com/" },
+    { "id": "payu", "name": "PayU", "supported": true, "docs": "https://docs.payu.in/" }
+  ]
+}

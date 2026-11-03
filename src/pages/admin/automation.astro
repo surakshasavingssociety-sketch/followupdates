@@ -1,0 +1,131 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { SITE } from "../../lib/constants";
+import fs from "node:fs";
+import path from "node:path";
+
+const sourcesFile = path.join(process.cwd(), "data", "sources.json");
+const sources = JSON.parse(fs.readFileSync(sourcesFile, "utf8"));
+
+let report: any = {};
+try {
+  report = JSON.parse(fs.readFileSync(path.join(process.cwd(), "data", "ingest-report.json"), "utf8"));
+} catch {
+  report = {};
+}
+const errorsBySource = new Map<string, string>(
+  (report.errors || []).map((entry: any) => [String(entry.source || ""), String(entry.error || "Unknown error")]),
+);
+const sourceError = (name: string) => {
+  for (const [label, error] of errorsBySource) {
+    if (label.includes(name)) return error;
+  }
+  return "";
+};
+
+const rows = [
+  ...(sources.googleNews || []).map((s) => ({ name: s.name, type: "Google News", category: s.category, maxItems: s.maxItems, enabled: s.enabled !== false })),
+  ...(sources.rss || []).map((s) => ({ name: s.name, type: "RSS", category: s.category, maxItems: s.maxItems, enabled: s.enabled !== false })),
+  ...(sources.html || []).map((s) => ({ name: s.name, type: "HTML scrape", category: s.category, maxItems: s.maxItems, enabled: s.enabled !== false })),
+].map((row) => {
+  const error = sourceError(row.name);
+  return {
+    ...row,
+    error,
+    status: !row.enabled ? "Disabled" : error ? "Failed" : "Configured",
+  };
+});
+
+const runAt = report.runAt ? new Date(report.runAt) : null;
+const lastRun = runAt && !Number.isNaN(runAt.getTime()) ? runAt.toLocaleString("en-IN") : "No run recorded";
+---
+
+<BaseLayout title="Automation control" description="Monitor and manage government source monitoring (admin only)." noindex>
+  <section class="section-tight" style="padding-top:30px">
+    <div class="container">
+      <div class="breadcrumb" style="padding:0 0 14px">
+        <a href="/">Dashboard</a><span>/</span>
+        <a href="/admin/">Admin</a><span>/</span><span>Automation</span>
+      </div>
+
+      <div class="section-head" style="margin-bottom:18px">
+        <div>
+          <div class="eyebrow">Admin</div>
+          <h1 style="font-size:clamp(1.8rem,3.6vw,2.5rem)">Automation control center</h1>
+          <p>Monitor government sources, review discovery status and manage the notification pipeline. Automation runs via GitHub Actions (daily.yml).</p>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-bottom:18px">
+        <h3 style="margin:0 0 8px">Pipeline</h3>
+        <p class="small muted" style="margin:0">
+          Official Government Website → Source Monitoring → New Notification Detection → Content Extraction → Duplicate Check →
+          Category Identification → Draft Generation → Admin Verification → Approval → Publishing.
+        </p>
+        <p class="small" style="margin:8px 0 0">
+          Runs daily at 02:00 UTC via GitHub Actions. Manual trigger: GitHub → Actions → Daily update pipeline → Run workflow.
+        </p>
+      </div>
+
+      <div class="panel" style="margin-bottom:18px">
+        <h3 style="margin:0 0 8px">Latest run</h3>
+        <div class="facts" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px">
+          <div><span class="small muted">Last run</span><strong>{lastRun}</strong></div>
+          <div><span class="small muted">New items</span><strong>{report.newItems ?? "—"}</strong></div>
+          <div><span class="small muted">Pending total</span><strong>{report.totalPending ?? "—"}</strong></div>
+          <div><span class="small muted">Failures</span><strong>{(report.errors || []).length}</strong></div>
+        </div>
+        {(report.errors || []).length ? (
+          <ul class="small" style="margin:10px 0 0;padding-left:18px">
+            {report.errors.map((entry: any) => (
+              <li><strong>{entry.source}</strong>: {entry.error}</li>
+            ))}
+          </ul>
+        ) : (
+          <p class="small muted" style="margin:8px 0 0">No source failures in the latest recorded run.</p>
+        )}
+      </div>
+
+      <div class="panel" style="margin-bottom:18px">
+        <h3 style="margin:0 0 8px">Government source registry</h3>
+        <p class="small muted" style="margin:0 0 10px">
+          {rows.length} configured source(s), {rows.filter((row) => !row.enabled).length} disabled. Add, disable or edit
+          sources in <code>data/sources.json</code> (<code>"enabled": false</code> skips a source on the next run).
+        </p>
+        <div style="overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-size:0.9rem">
+            <thead>
+              <tr style="text-align:left;border-bottom:1px solid var(--line)">
+                <th style="padding:8px">Source</th>
+                <th style="padding:8px">Type</th>
+                <th style="padding:8px">Category</th>
+                <th style="padding:8px">Max items</th>
+                <th style="padding:8px">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((row) => (
+                <tr style="border-bottom:1px solid var(--line)">
+                  <td style="padding:8px">{row.name}</td>
+                  <td style="padding:8px">{row.type}</td>
+                  <td style="padding:8px">{row.category}</td>
+                  <td style="padding:8px">{row.maxItems}</td>
+                  <td style="padding:8px"><span class={`badge ${row.status === "Configured" ? "badge-green" : row.status === "Disabled" ? "badge-muted" : "badge-red"}`} title={row.error || ""}>{row.status}</span></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3 style="margin:0 0 6px">Notification tracking</h3>
+        <p class="small muted" style="margin:0">
+          Expected vs. actual notification dates are tracked per organisation and exam. Expected dates are estimates only,
+          never presented as official dates. See <code>data/pending.json</code> and the admin review queue for current
+          discoveries.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

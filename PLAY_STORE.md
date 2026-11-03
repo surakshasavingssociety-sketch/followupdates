@@ -40,20 +40,28 @@ keytool -genkeypair -v \
 `android.keystore` is git-ignored. Back it up offline (password manager + encrypted
 drive). Never commit it.
 
+This repository already has a generated key:
+
+- Keystore: `android.keystore` (alias `followexam`, RSA 2048, valid 10,000 days).
+- Password: `.keystore-password.txt` (git-ignored). **Back both up now.** Losing them
+  blocks every future update to the Play listing.
+- Store the same password in a password manager; the file is only a local convenience.
+
 ## 3. Build the app
+
+The Android project is generated locally (it is not committed) with:
 
 ```bash
 npm install -g @bubblewrap/cli
-bubblewrap init --manifest https://followupdates.web.app/manifest.webmanifest
+npm run twa:init     # writes android/ from twa-manifest.json
+npm run twa:build    # builds and signs the APK + AAB
 ```
 
-Answer the prompts using `twa-manifest.json` as the reference. Then:
+`twa:build` reads the keystore password from `.keystore-password.txt` (or the
+`BUBBLEWRAP_KEYSTORE_PASSWORD` / `BUBBLEWRAP_KEY_PASSWORD` environment variables), so
+it runs without prompts.
 
-```bash
-bubblewrap build
-```
-
-Outputs:
+Outputs in `android/`:
 
 - `app-release-signed.apk` — install on a test phone.
 - `app-release-bundle.aab` — upload this to Play Console.
@@ -61,7 +69,7 @@ Outputs:
 Test the APK on a real device before uploading:
 
 ```bash
-adb install -r app-release-signed.apk
+adb install -r android/app-release-signed.apk
 ```
 
 If the address bar is visible, Digital Asset Links are not verified yet (step 4).
@@ -69,6 +77,16 @@ If the address bar is visible, Digital Asset Links are not verified yet (step 4)
 ## 4. Verify the domain (Digital Asset Links)
 
 Without this step the app opens with a browser address bar instead of full screen.
+
+The upload key created for this project has this SHA-256 fingerprint:
+
+```
+48:43:D4:F9:80:B9:A9:7C:87:37:07:31:6E:63:AA:37:91:8F:0D:AA:64:5D:80:2B:19:EB:AB:77:12:AE:63:3D
+```
+
+If Play App Signing is enabled (default for new apps), the fingerprint that matters is
+the **app signing key** shown in Play Console, not the upload key above. Add both to
+`assetlinks.json` while testing, then keep the Play signing fingerprint for production.
 
 1. Upload the first build to Play Console (internal testing is enough).
 2. Open **Release → Setup → App signing** and copy the **SHA-256 certificate
@@ -182,8 +200,22 @@ Build a new `.aab` only when you change:
 Before each native release:
 
 1. Increment `appVersionCode` (must always increase) and `appVersionName`.
-2. Run `bubblewrap update` then `bubblewrap build`.
+2. Run `npm run twa:init` then `npm run twa:build`.
 3. Upload the new `.aab` to the same track.
+
+## 12. Local build environment (already configured)
+
+| Component | Path |
+| --- | --- |
+| JDK 17 (space-free path for Bubblewrap) | `C:\jdk17` |
+| Android SDK | `C:\Users\tinte\AppData\Local\Android\Sdk` |
+| Bubblewrap config | `C:\Users\tinte\.bubblewrap\config.json` |
+| Generated Android project | `android/` (git-ignored, recreate with `npm run twa:init`) |
+| Build outputs | `android/app-release-signed.apk`, `android/app-release-bundle.aab` |
+
+Bubblewrap builds Java command strings without quoting, so a JDK under
+`C:\Program Files` breaks `apksigner`/`jarsigner`. Keep the space-free copy at
+`C:\jdk17` and point `~/.bubblewrap/config.json` at it.
 
 ## 11. Current blockers
 
@@ -202,8 +234,8 @@ npm run icons:build          # regenerate PNG icons from scripts/build-icons.mjs
 npm run build                # rebuild the static site
 npm run validate             # check data files and notification links
 firebase deploy --only hosting --project followupdates
-bubblewrap build             # produce APK + AAB
-bubblewrap update            # refresh the Android project after config changes
+npm run twa:init             # regenerate android/ from twa-manifest.json
+npm run twa:build            # produce APK + AAB (reads saved keystore password)
 ```
 
 ## 13. Troubleshooting

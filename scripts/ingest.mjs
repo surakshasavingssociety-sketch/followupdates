@@ -3,6 +3,7 @@ import * as cheerio from "cheerio";
 import {
   absoluteUrl,
   cleanText,
+  createSeenIndex,
   examTag,
   extractVacancies,
   inferCategory,
@@ -16,8 +17,8 @@ import {
   makeId,
   makeSummary,
   matchExam,
-  normalizeKey,
   readJson,
+  rememberEntry,
   slugify,
   writeJson,
 } from "./lib.mjs";
@@ -305,9 +306,7 @@ async function ingestGoogleNews(config, existingKeys) {
       (typeof source === "object" && source["@_url"]) ||
       (typeof source === "string" ? source : "") ||
       "";
-    const key = normalizeKey(title, inferOrganization(title, config.name));
-    if (existingKeys.has(key)) continue;
-    existingKeys.add(key);
+    if (!rememberEntry(existingKeys, title, inferOrganization(title, config.name))) continue;
 
     out.push(
       buildPending({
@@ -342,9 +341,7 @@ async function ingestRss(config, existingKeys) {
     if (!isRecent(rssText(item.pubDate || item.updated), MAX_AGE_DAYS)) continue;
 
     const link = rssLink(item);
-    const key = normalizeKey(title, inferOrganization(title, config.name));
-    if (existingKeys.has(key)) continue;
-    existingKeys.add(key);
+    if (!rememberEntry(existingKeys, title, inferOrganization(title, config.name))) continue;
 
     out.push(
       buildPending({
@@ -393,9 +390,7 @@ async function ingestHtml(config, existingKeys) {
     const url = absoluteUrl(href, config.baseUrl || loadedUrl);
     const noticeDate = dateFromNoticeUrl(url);
     if (noticeDate && !isRecent(noticeDate, MAX_AGE_DAYS)) return;
-    const key = normalizeKey(title, inferOrganization(title, config.name));
-    if (existingKeys.has(key)) return;
-    existingKeys.add(key);
+    if (!rememberEntry(existingKeys, title, inferOrganization(title, config.name))) return;
 
     out.push(
       buildPending({
@@ -439,9 +434,7 @@ async function main() {
     }
   }
 
-  const existingKeys = new Set(
-    [...jobs, ...pending].map((job) => normalizeKey(job.title, job.organization)),
-  );
+  const existingKeys = createSeenIndex([...jobs, ...pending]);
 
   const month = new Date().getMonth() + 1;
   const offset = dayOfYear();
@@ -453,19 +446,23 @@ async function main() {
   const errors = [];
 
   const tasks = [
-    ...googleNews.map((config) => ({
+    ...googleNews.filter((config) => config.enabled !== false).map((config) => ({
       label: `Google News: ${config.name}`,
       run: () => ingestGoogleNews(config, existingKeys),
     })),
-    ...(sources.rss || []).map((config) => ({
+    ...(sources.rss || []).filter((config) => config.enabled !== false).map((config) => ({
       label: `RSS: ${config.name}`,
       run: () => ingestRss(config, existingKeys),
     })),
-    ...(sources.html || []).map((config) => ({
+    ...(sources.html || []).filter((config) => config.enabled !== false).map((config) => ({
       label: `HTML: ${config.name}`,
       run: () => ingestHtml(config, existingKeys),
     })),
   ];
+
+  const disabledSources = [...(sources.googleNews || []), ...(sources.rss || []), ...(sources.html || [])]
+    .filter((config) => config.enabled === false)
+    .map((config) => config.name);
 
   for (const task of tasks) {
     try {
@@ -489,6 +486,7 @@ async function main() {
     totalPending: allPending.length,
     cycleQueries: cycleQueries.map((query) => query.name),
     stateQueries: stateQueries.map((query) => query.name),
+    disabledSources,
     errors,
   });
 

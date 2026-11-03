@@ -1,7 +1,27 @@
 import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import type { User } from "firebase/auth";
 import { getFirebaseDb } from "./firebase";
-import type { CareerGoal, EducationLevel, Exam, Institution, Scholarship, UserProfile } from "./types";
+import type { CareerGoal, EducationLevel, Exam, Institution, Scholarship, UserCategory, UserProfile } from "./types";
+
+export const USER_CATEGORIES: UserCategory[] = [
+  "Student",
+  "School student",
+  "College student",
+  "University student",
+  "Job aspirant",
+  "Competitive exam aspirant",
+  "Teacher",
+  "Faculty",
+  "Research scholar",
+  "Educational institution",
+  "Coaching institute",
+  "School",
+  "College",
+  "University",
+  "Government organisation",
+  "Private organisation",
+  "Open schooling service provider",
+];
 
 export const EDUCATION_LEVELS: EducationLevel[] = [
   "Class 8",

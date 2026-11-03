@@ -60,14 +60,47 @@ import { CATEGORY_META } from "../../lib/constants";
             </p>
           </div>
           <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <span class="badge badge-blue" id="admin-role" style="display:none"></span>
+            <a class="btn btn-ghost btn-sm" href="/admin/feature-flags/">Feature flags</a>
+            <a class="btn btn-ghost btn-sm" href="/admin/payments/">Payments</a>
+            <a class="btn btn-ghost btn-sm" href="/admin/social/">Social</a>
+            <a class="btn btn-ghost btn-sm" href="/admin/automation/">Automation</a>
+            <a class="btn btn-ghost btn-sm" href="/admin/tracking/">Tracking</a>
+            <a class="btn btn-ghost btn-sm" href="/admin/institutions/">Institutions</a>
+            <a class="btn btn-ghost btn-sm" href="/admin/users/">Admin users</a>
+            <a class="btn btn-ghost btn-sm" href="/admin/inquiries/">Enquiries</a>
+            <a class="btn btn-ghost btn-sm" href="/admin/analytics/">Analytics</a>
             <span class="small muted" id="admin-email"></span>
             <button class="btn btn-outline btn-sm" type="button" id="admin-signout">Sign out</button>
           </div>
         </div>
 
+        <div class="stats-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:12px 0 16px">
+          <div class="panel" style="padding:12px">
+            <div class="small muted">Pending</div>
+            <div style="font-size:1.6rem;font-weight:700" id="stat-pending">—</div>
+          </div>
+          <div class="panel" style="padding:12px">
+            <div class="small muted">Published</div>
+            <div style="font-size:1.6rem;font-weight:700" id="stat-published">—</div>
+          </div>
+          <div class="panel" style="padding:12px">
+            <div class="small muted">Scheduled</div>
+            <div style="font-size:1.6rem;font-weight:700" id="stat-scheduled">—</div>
+          </div>
+          <div class="panel" style="padding:12px">
+            <div class="small muted">Admins</div>
+            <div style="font-size:1.6rem;font-weight:700" id="stat-admins">—</div>
+          </div>
+          <div class="panel" style="padding:12px">
+            <div class="small muted">Subscribers</div>
+            <div style="font-size:1.6rem;font-weight:700" id="stat-subscribers">—</div>
+          </div>
+        </div>
+
         <div class="admin-tabs" role="tablist">
           <button type="button" role="tab" aria-selected="true" data-tab="pending">Pending <span id="pending-count"></span></button>
-          <button type="button" role="tab" aria-selected="false" data-tab="published">Published</button>
+          <button type="button" role="tab" aria-selected="false" data-tab="published">Published <span id="published-count"></span></button>
           <button type="button" role="tab" aria-selected="false" data-tab="add">Add manually</button>
         </div>
 
@@ -184,6 +217,22 @@ import { CATEGORY_META } from "../../lib/constants";
                 <textarea class="textarea" id="add-documents" name="documents"></textarea>
               </div>
               <div class="field full">
+                <label for="add-seo-title">SEO title (optional)</label>
+                <input class="input" id="add-seo-title" name="seoTitle" />
+              </div>
+              <div class="field full">
+                <label for="add-seo-description">SEO description (optional)</label>
+                <textarea class="textarea" id="add-seo-description" name="seoDescription"></textarea>
+              </div>
+              <div class="field">
+                <label for="add-featured-image">Featured image URL (optional)</label>
+                <input class="input" id="add-featured-image" name="featuredImage" type="url" />
+              </div>
+              <div class="field">
+                <label for="add-publish-at">Schedule publish (optional)</label>
+                <input class="input" id="add-publish-at" name="publishAt" type="datetime-local" />
+              </div>
+              <div class="field full">
                 <button class="btn btn-primary" type="submit">Publish update</button>
               </div>
             </form>
@@ -213,9 +262,11 @@ import { CATEGORY_META } from "../../lib/constants";
     orderBy,
     query,
     setDoc,
+    updateDoc,
     where,
   } from "firebase/firestore";
   import { firebaseConfigured, getFirebaseAuth, getFirebaseDb } from "../../lib/firebase";
+  import { findDuplicateJobs } from "../../lib/duplicates";
 
   type PendingJob = Record<string, any>;
 
@@ -237,6 +288,7 @@ import { CATEGORY_META } from "../../lib/constants";
 
   let db: ReturnType<typeof getFirebaseDb> = null;
   let currentUser: User | null = null;
+let currentUserRole = "admin";
   let pending: PendingJob[] = [];
   let published: PendingJob[] = [];
   let activeTab = "pending";
@@ -279,6 +331,14 @@ import { CATEGORY_META } from "../../lib/constants";
     return esc(value);
   }
 
+  function toLocalDateTimeInput(value: unknown) {
+    if (!value) return "";
+    const date = new Date(String(value));
+    if (Number.isNaN(date.getTime())) return "";
+    const pad = (input: number) => String(input).padStart(2, "0");
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
+  }
+
   function renderPending() {
     if (!pendingList) return;
     const search = (pendingSearch?.value || "").toLowerCase();
@@ -297,7 +357,31 @@ import { CATEGORY_META } from "../../lib/constants";
 
     pendingList.innerHTML = filtered
       .map(
-        (job) => `
+        (job) => {
+          const duplicates = findDuplicateJobs(
+            job as any,
+            [...published, ...pending] as any,
+          )
+            .filter((match) => match.strong)
+            .slice(0, 3);
+          const duplicateNotice = duplicates.length
+            ? `<div class="panel" style="padding:10px 12px;margin-top:10px;border-left:3px solid #d97706;background:#fffbeb">
+                <strong class="small">Possible duplicate</strong>
+                <ul class="small" style="margin:6px 0 0;padding-left:18px">
+                  ${duplicates
+                    .map((match) => {
+                      const candidate = match.job as any;
+                      const label =
+                        candidate.status === "published"
+                          ? `<a href="/jobs/${esc(candidate.slug || candidate.id)}/" target="_blank">${esc(candidate.title)}</a>`
+                          : `${esc(candidate.title)} <span class="muted">(in review queue)</span>`;
+                      return `<li>${label} — ${Math.round(match.score * 100)}% match · ${esc(match.reasons.join(", "))}</li>`;
+                    })
+                    .join("")}
+                </ul>
+              </div>`
+            : "";
+          return `
       <article class="admin-item" data-id="${esc(job.id)}">
         <div class="admin-item-head">
           <div>
@@ -308,6 +392,7 @@ import { CATEGORY_META } from "../../lib/constants";
           </div>
           <span class="badge badge-amber">Pending</span>
         </div>
+        ${duplicateNotice}
         <div class="admin-actions">
           <a class="btn btn-outline btn-sm" href="${esc(job.discoveryUrl || job.notificationUrl || job.officialUrl)}" target="_blank" rel="noopener">Open source ↗</a>
           <button class="btn btn-primary btn-sm" type="button" data-action="approve">Approve</button>
@@ -328,9 +413,11 @@ import { CATEGORY_META } from "../../lib/constants";
           <div class="field"><label>Salary</label><input class="input" data-field="salary" value="${inputValue(job.salary)}" /></div>
           <div class="field"><label>Official website</label><input class="input" type="url" data-field="officialUrl" value="${inputValue(job.officialUrl)}" /></div>
           <div class="field"><label>Official notification link</label><input class="input" type="url" data-field="notificationUrl" value="${inputValue(job.notificationUrl)}" /></div>
+          <div class="field"><label>Schedule publish (optional)</label><input class="input" type="datetime-local" data-field="publishAt" value="${toLocalDateTimeInput(job.publishAt)}" /></div>
           <div class="field full"><label>Summary</label><textarea class="textarea" data-field="summary">${esc(job.summary)}</textarea></div>
         </div>
-      </article>`,
+      </article>`;
+        },
       )
       .join("");
   }
@@ -352,6 +439,27 @@ import { CATEGORY_META } from "../../lib/constants";
     renderPending();
   }
 
+  async function loadStats() {
+    if (!db) return;
+    const set = (id: string, value: number) => {
+      const el = document.querySelector<HTMLElement>(id);
+      if (el) el.textContent = String(value);
+    };
+    try {
+      const s = await getDocs(collection(db, "pending"));
+      const count = s.docs.filter((item) => (item.data().status || "pending") === "pending").length;
+      set("#stat-pending", count);
+    } catch {}
+    try {
+      const s = await getDocs(collection(db, "jobs"));
+      const items = s.docs.map((item) => item.data());
+      set("#stat-published", items.filter((item) => (item.status || "published") === "published").length);
+      set("#stat-scheduled", items.filter((item) => item.status === "scheduled").length);
+    } catch {}
+    try { const s = await getDocs(collection(db, "admins")); set("#stat-admins", s.size); } catch {}
+    try { const s = await getDocs(collection(db, "subscribers")); set("#stat-subscribers", s.size); } catch {}
+  }
+
   async function loadPublished() {
     if (!db || !publishedList) return;
     try {
@@ -361,26 +469,33 @@ import { CATEGORY_META } from "../../lib/constants";
       const snapshot = await getDocs(query(collection(db, "jobs"), limit(100)));
       published = snapshot.docs.map((item) => ({ id: item.id, ...item.data() }));
     }
+    const pc = document.querySelector<HTMLElement>("#published-count");
+    if (pc) pc.textContent = published.length ? `(${published.length})` : "";
 
     publishedList.innerHTML = published.length
       ? published
-          .map(
-            (job) => `
+          .map((job) => {
+            const isScheduled = job.status === "scheduled";
+            const publishLabel = job.publishAt
+              ? new Date(job.publishAt).toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" })
+              : "";
+            return `
         <article class="admin-item">
           <div class="admin-item-head">
             <div>
               <h3><a href="/jobs/${esc(job.slug || job.id)}/" target="_blank">${esc(job.title)}</a></h3>
-              <div class="admin-item-meta">${esc(job.organization)} · ${esc(job.category)} · ${esc(job.postDate || "")}</div>
+              <div class="admin-item-meta">${esc(job.organization)} · ${esc(job.category)} · ${esc(job.postDate || "")}${isScheduled && publishLabel ? ` · goes live ${esc(publishLabel)}` : ""}</div>
             </div>
-            <span class="badge badge-green">Published</span>
+            <span class="badge ${isScheduled ? "badge-amber" : "badge-green"}">${isScheduled ? "Scheduled" : "Published"}</span>
           </div>
           <div class="admin-actions">
             <a class="btn btn-outline btn-sm" href="/jobs/${esc(job.slug || job.id)}/" target="_blank">View ↗</a>
             <a class="btn btn-outline btn-sm" href="${esc(job.notificationUrl || job.officialUrl)}" target="_blank" rel="noopener">Notification ↗</a>
+            ${isScheduled ? `<button class="btn btn-primary btn-sm" type="button" data-action="publish-now" data-id="${esc(job.id)}">Publish now</button>` : ""}
             <button class="btn btn-danger btn-sm" type="button" data-action="unpublish" data-id="${esc(job.id)}">Unpublish</button>
           </div>
-        </article>`,
-          )
+        </article>`;
+          })
           .join("")
       : `<div class="empty"><h3>Nothing published yet</h3><p>Approve the first entry from the pending queue.</p></div>`;
   }
@@ -421,7 +536,22 @@ import { CATEGORY_META } from "../../lib/constants";
       return;
     }
 
+    const duplicates = findDuplicateJobs(original as any, [...published, ...pending] as any).filter(
+      (match) => match.strong,
+    );
+    if (duplicates.length) {
+      const first = duplicates[0];
+      const proceed = confirm(
+        `This looks like a duplicate of "${first.job.title}" (${Math.round(first.score * 100)}% match). Publish anyway?`,
+      );
+      if (!proceed) return;
+    }
+
     const now = new Date().toISOString();
+    const publishAtInput = values.publishAt || original.publishAt || null;
+    const publishDate = publishAtInput ? new Date(publishAtInput) : null;
+    const publishAt = publishDate && !Number.isNaN(publishDate.getTime()) ? publishDate.toISOString() : null;
+    const isFuture = publishAt != null && new Date(publishAt).getTime() > Date.now();
     const approved = {
       ...original,
       ...values,
@@ -429,7 +559,8 @@ import { CATEGORY_META } from "../../lib/constants";
       slug: original.slug || slugify(title),
       title,
       notificationUrl,
-      status: "published",
+      status: isFuture ? "scheduled" : "published",
+      publishAt,
       demo: false,
       approvedAt: now,
       updatedAt: now,
@@ -446,8 +577,15 @@ import { CATEGORY_META } from "../../lib/constants";
       { merge: true },
     );
     pending = pending.filter((job) => job.id !== id);
+    if (!isFuture) published = [approved as any, ...published];
     renderPending();
-    showMessage(adminMessage, "Approved. The update goes live with the next site build.", "success");
+    showMessage(
+      adminMessage,
+      isFuture
+        ? `Scheduled for ${new Date(publishAt as string).toLocaleString("en-IN")}. It goes live automatically with the next build after that time.`
+        : "Approved. The update goes live with the next site build.",
+      "success",
+    );
   }
 
   async function reject(item: HTMLElement) {
@@ -500,8 +638,17 @@ import { CATEGORY_META } from "../../lib/constants";
         showPanel(deniedPanel);
         return;
       }
+      const role = (adminDoc.data()?.role as string) || "admin";
+      currentUserRole = role;
+      const roleBadge = document.querySelector<HTMLElement>("#admin-role");
+      if (roleBadge) {
+        roleBadge.textContent = role.replace(/_/g, " ");
+        roleBadge.style.display = "";
+      }
       showPanel(adminPanel);
       await loadPending();
+      await loadPublished();
+      loadStats();
     } catch (error) {
       showPanel(deniedPanel);
       console.error(error);
@@ -580,10 +727,25 @@ import { CATEGORY_META } from "../../lib/constants";
   });
 
   publishedList?.addEventListener("click", async (event) => {
-    const target = (event.target as HTMLElement).closest<HTMLElement>("[data-action='unpublish']");
-    if (!target) return;
+    const target = (event.target as HTMLElement).closest<HTMLElement>("[data-action]");
+    if (!target || !db) return;
     const id = target.dataset.id;
-    if (id) await unpublish(id);
+    if (!id) return;
+    if (target.dataset.action === "unpublish") {
+      await unpublish(id);
+    } else if (target.dataset.action === "publish-now") {
+      try {
+        await updateDoc(doc(db, "jobs", id), {
+          status: "published",
+          publishAt: null,
+          updatedAt: new Date().toISOString(),
+        });
+        await loadPublished();
+        showMessage(adminMessage, "Published now. It appears on the site after the next build.", "success");
+      } catch (error) {
+        showMessage(adminMessage, error instanceof Error ? error.message : "Could not publish.", "error");
+      }
+    }
   });
 
   addForm?.addEventListener("submit", async (event) => {
@@ -601,8 +763,34 @@ import { CATEGORY_META } from "../../lib/constants";
         .split("\n")
         .map((item) => item.trim())
         .filter(Boolean);
+
+    const duplicates = findDuplicateJobs(
+      {
+        id: "__new__",
+        title,
+        organization: String(data.get("organization") || "").trim(),
+        notificationUrl,
+        officialUrl: String(data.get("officialUrl") || "").trim(),
+        postDate: String(data.get("postDate") || new Date().toISOString().slice(0, 10)),
+      } as any,
+      published as any,
+    ).filter((match) => match.strong);
+    if (duplicates.length) {
+      const first = duplicates[0];
+      const proceed = confirm(
+        `A similar update is already published: "${first.job.title}" (${Math.round(first.score * 100)}% match). Publish anyway?`,
+      );
+      if (!proceed) return;
+    }
     const id = `manual-${Date.now().toString(36)}`;
     const now = new Date().toISOString();
+    const publishAtInput = String(data.get("publishAt") || "") || null;
+    const publishDate = publishAtInput ? new Date(publishAtInput) : null;
+    const publishAt = publishDate && !Number.isNaN(publishDate.getTime()) ? publishDate.toISOString() : null;
+    const isFuture = publishAt != null && new Date(publishAt).getTime() > Date.now();
+    const seoTitle = String(data.get("seoTitle") || "").trim() || null;
+    const seoDescription = String(data.get("seoDescription") || "").trim() || null;
+    const featuredImage = String(data.get("featuredImage") || "").trim() || null;
     try {
       await setDoc(doc(db, "jobs", id), {
         id,
@@ -629,16 +817,26 @@ import { CATEGORY_META } from "../../lib/constants";
         howToApply: lines("howToApply"),
         documents: lines("documents"),
         officialUrl: String(data.get("officialUrl") || "").trim(),
+        seoTitle,
+        seoDescription,
+        featuredImage,
+        publishAt,
         notificationUrl,
         sourceName: "Manual entry",
-        status: "published",
+        status: isFuture ? "scheduled" : "published",
         demo: false,
         createdAt: now,
         updatedAt: now,
         notified: false,
       });
       addForm.reset();
-      showMessage(adminMessage, "Update published. It appears on the site after the next build.", "success");
+      showMessage(
+        adminMessage,
+        isFuture
+          ? `Scheduled for ${new Date(publishAt as string).toLocaleString("en-IN")}. It goes live with the next build after that time.`
+          : "Update published. It appears on the site after the next build.",
+        "success",
+      );
     } catch (error) {
       showMessage(adminMessage, error instanceof Error ? error.message : "Save failed.", "error");
     }

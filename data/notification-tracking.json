@@ -1,0 +1,39 @@
+{
+  "note": "Expected notification periods are estimates, never official dates. Update after each real notification.",
+  "records": [
+    {
+      "organization": "UPSC",
+      "officialWebsite": "https://upsc.gov.in",
+      "category": "Latest Jobs",
+      "expectedType": "Civil Services (Preliminary) notification",
+      "previousNotificationDate": "2025-01-15",
+      "expectedPeriod": "January-February",
+      "actualNotificationDate": null,
+      "applicationStart": null,
+      "lastDate": null,
+      "examDate": null,
+      "resultDate": null,
+      "lastMonitoringDate": null,
+      "nextMonitoringDate": null,
+      "monitoringStatus": "pending",
+      "relatedPostId": null
+    },
+    {
+      "organization": "SSC",
+      "officialWebsite": "https://ssc.gov.in",
+      "category": "Latest Jobs",
+      "expectedType": "Combined Graduate Level (CGL) notification",
+      "previousNotificationDate": "2025-03-10",
+      "expectedPeriod": "February-March",
+      "actualNotificationDate": null,
+      "applicationStart": null,
+      "lastDate": null,
+      "examDate": null,
+      "resultDate": null,
+      "lastMonitoringDate": null,
+      "nextMonitoringDate": null,
+      "monitoringStatus": "pending",
+      "relatedPostId": null
+    }
+  ]
+}

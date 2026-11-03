@@ -69,7 +69,7 @@ export type Job = {
   notificationUrl: string;
   sourceName: string;
   sourceUrl?: string;
-  status: "published" | "pending" | "rejected";
+  status: "draft" | "pending_approval" | "approved" | "published" | "scheduled" | "rejected" | "archived" | "pending";
   featured?: boolean;
   demo?: boolean;
   examId?: string | null;
@@ -95,6 +95,14 @@ export type Job = {
   eligibility?: string[];
   /** Every official link (notification, apply, syllabus, result, admit card). */
   officialLinks?: OfficialLink[];
+
+  /* --- CMS fields (all optional for backward compatibility) --- */
+  seoTitle?: string;
+  seoDescription?: string;
+  featuredImage?: string;
+  /** ISO date for scheduled publishing. */
+  publishAt?: string | null;
+  archivedAt?: string | null;
 
   createdAt: string;
   updatedAt: string;
@@ -206,6 +214,8 @@ export type Institution = {
   streams: string[];
   level: string;
   summary: string;
+  verificationStatus?: "verified" | "pending" | "failed" | "not_applicable";
+  verificationSource?: string;
 };
 
 export type InstitutionDatabase = {
@@ -285,11 +295,42 @@ export type CareerGoal =
   | "Research"
   | "Not decided";
 
+export type UserCategory =
+  | "Student"
+  | "School student"
+  | "College student"
+  | "University student"
+  | "Job aspirant"
+  | "Competitive exam aspirant"
+  | "Teacher"
+  | "Faculty"
+  | "Research scholar"
+  | "Educational institution"
+  | "Coaching institute"
+  | "School"
+  | "College"
+  | "University"
+  | "Government organisation"
+  | "Private organisation"
+  | "Open schooling service provider";
+
+export type FeatureFlag = {
+  id: string;
+  name: string;
+  enabled: boolean;
+  configStatus: "configured" | "needs_setup" | "disabled";
+  requiredService: string;
+  dependencyStatus: "ready" | "pending" | "blocked";
+  estimatedCost?: string;
+  updatedAt?: string;
+};
+
 export type UserProfile = {
   uid: string;
   name: string;
   email?: string;
   phone?: string;
+  userCategory?: UserCategory;
   stateId?: string;
   stateName?: string;
   educationLevel?: EducationLevel;
@@ -297,7 +338,26 @@ export type UserProfile = {
   dateOfBirth?: string;
   careerGoal?: CareerGoal;
   interests?: string[];
+  organizationName?: string;
+  organizationWebsite?: string;
+  organizationAbout?: string;
   emailAlerts?: boolean;
   createdAt?: string;
+  updatedAt?: string;
+};
+
+export type InstitutionInquiry = {
+  id: string;
+  institutionId: string;
+  institutionName: string;
+  name: string;
+  email: string;
+  phone?: string;
+  topic: string;
+  message: string;
+  consent: boolean;
+  status: "new" | "contacted" | "closed" | "spam";
+  source?: string;
+  createdAt: string;
   updatedAt?: string;
 };

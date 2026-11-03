@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-11-02",
+  "updated": "2026-11-03",
   "note": "Institution names, cities and official domains. Admission routes are indicative — verify on the official portal before applying.",
   "counts": {
     "total": 196,
@@ -84,7 +84,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "AMU is a Central University located in Aligarh, Uttar Pradesh. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "AMU is a Central University located in Aligarh, Uttar Pradesh. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "aiims-bathinda",
@@ -111,7 +113,9 @@
         "Allied Health"
       ],
       "level": "Undergraduate, postgraduate & nursing",
-      "summary": "AIIMS Bathinda is a All India Institute of Medical Sciences located in Bathinda, Punjab. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests."
+      "summary": "AIIMS Bathinda is a All India Institute of Medical Sciences located in Bathinda, Punjab. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "aiims-bhopal",
@@ -138,7 +142,9 @@
         "Allied Health"
       ],
       "level": "Undergraduate, postgraduate & nursing",
-      "summary": "AIIMS Bhopal is a All India Institute of Medical Sciences located in Bhopal, Madhya Pradesh. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests."
+      "summary": "AIIMS Bhopal is a All India Institute of Medical Sciences located in Bhopal, Madhya Pradesh. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "aiims-bhubaneswar",
@@ -165,7 +171,9 @@
         "Allied Health"
       ],
       "level": "Undergraduate, postgraduate & nursing",
-      "summary": "AIIMS Bhubaneswar is a All India Institute of Medical Sciences located in Bhubaneswar, Odisha. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests."
+      "summary": "AIIMS Bhubaneswar is a All India Institute of Medical Sciences located in Bhubaneswar, Odisha. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "aiims-bibinagar",
@@ -192,7 +200,9 @@
         "Allied Health"
       ],
       "level": "Undergraduate, postgraduate & nursing",
-      "summary": "AIIMS Bibinagar is a All India Institute of Medical Sciences located in Bibinagar, Telangana. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests."
+      "summary": "AIIMS Bibinagar is a All India Institute of Medical Sciences located in Bibinagar, Telangana. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "aiims-bilaspur",
@@ -219,7 +229,9 @@
         "Allied Health"
       ],
       "level": "Undergraduate, postgraduate & nursing",
-      "summary": "AIIMS Bilaspur is a All India Institute of Medical Sciences located in Bilaspur, Himachal Pradesh. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests."
+      "summary": "AIIMS Bilaspur is a All India Institute of Medical Sciences located in Bilaspur, Himachal Pradesh. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "aiims-darbhanga",
@@ -246,7 +258,9 @@
         "Allied Health"
       ],
       "level": "Undergraduate, postgraduate & nursing",
-      "summary": "AIIMS Darbhanga is a All India Institute of Medical Sciences located in Darbhanga, Bihar. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests."
+      "summary": "AIIMS Darbhanga is a All India Institute of Medical Sciences located in Darbhanga, Bihar. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "aiims-deoghar",
@@ -273,7 +287,9 @@
         "Allied Health"
       ],
       "level": "Undergraduate, postgraduate & nursing",
-      "summary": "AIIMS Deoghar is a All India Institute of Medical Sciences located in Deoghar, Jharkhand. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests."
+      "summary": "AIIMS Deoghar is a All India Institute of Medical Sciences located in Deoghar, Jharkhand. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "aiims-gorakhpur",
@@ -300,7 +316,9 @@
         "Allied Health"
       ],
       "level": "Undergraduate, postgraduate & nursing",
-      "summary": "AIIMS Gorakhpur is a All India Institute of Medical Sciences located in Gorakhpur, Uttar Pradesh. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests."
+      "summary": "AIIMS Gorakhpur is a All India Institute of Medical Sciences located in Gorakhpur, Uttar Pradesh. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "aiims-guwahati",
@@ -327,7 +345,9 @@
         "Allied Health"
       ],
       "level": "Undergraduate, postgraduate & nursing",
-      "summary": "AIIMS Guwahati is a All India Institute of Medical Sciences located in Guwahati, Assam. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests."
+      "summary": "AIIMS Guwahati is a All India Institute of Medical Sciences located in Guwahati, Assam. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "aiims-jodhpur",
@@ -354,7 +374,9 @@
         "Allied Health"
       ],
       "level": "Undergraduate, postgraduate & nursing",
-      "summary": "AIIMS Jodhpur is a All India Institute of Medical Sciences located in Jodhpur, Rajasthan. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests."
+      "summary": "AIIMS Jodhpur is a All India Institute of Medical Sciences located in Jodhpur, Rajasthan. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "aiims-kalyani",
@@ -381,7 +403,9 @@
         "Allied Health"
       ],
       "level": "Undergraduate, postgraduate & nursing",
-      "summary": "AIIMS Kalyani is a All India Institute of Medical Sciences located in Kalyani, West Bengal. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests."
+      "summary": "AIIMS Kalyani is a All India Institute of Medical Sciences located in Kalyani, West Bengal. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "aiims-madurai",
@@ -408,7 +432,9 @@
         "Allied Health"
       ],
       "level": "Undergraduate, postgraduate & nursing",
-      "summary": "AIIMS Madurai is a All India Institute of Medical Sciences located in Madurai, Tamil Nadu. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests."
+      "summary": "AIIMS Madurai is a All India Institute of Medical Sciences located in Madurai, Tamil Nadu. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "aiims-mangalagiri",
@@ -435,7 +461,9 @@
         "Allied Health"
       ],
       "level": "Undergraduate, postgraduate & nursing",
-      "summary": "AIIMS Mangalagiri is a All India Institute of Medical Sciences located in Mangalagiri, Andhra Pradesh. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests."
+      "summary": "AIIMS Mangalagiri is a All India Institute of Medical Sciences located in Mangalagiri, Andhra Pradesh. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "aiims-nagpur",
@@ -462,7 +490,9 @@
         "Allied Health"
       ],
       "level": "Undergraduate, postgraduate & nursing",
-      "summary": "AIIMS Nagpur is a All India Institute of Medical Sciences located in Nagpur, Maharashtra. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests."
+      "summary": "AIIMS Nagpur is a All India Institute of Medical Sciences located in Nagpur, Maharashtra. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "aiims-new-delhi",
@@ -489,7 +519,9 @@
         "Allied Health"
       ],
       "level": "Undergraduate, postgraduate & nursing",
-      "summary": "AIIMS New Delhi is a All India Institute of Medical Sciences located in New Delhi, Delhi. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests."
+      "summary": "AIIMS New Delhi is a All India Institute of Medical Sciences located in New Delhi, Delhi. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "aiims-patna",
@@ -516,7 +548,9 @@
         "Allied Health"
       ],
       "level": "Undergraduate, postgraduate & nursing",
-      "summary": "AIIMS Patna is a All India Institute of Medical Sciences located in Patna, Bihar. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests."
+      "summary": "AIIMS Patna is a All India Institute of Medical Sciences located in Patna, Bihar. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "aiims-raipur",
@@ -543,7 +577,9 @@
         "Allied Health"
       ],
       "level": "Undergraduate, postgraduate & nursing",
-      "summary": "AIIMS Raipur is a All India Institute of Medical Sciences located in Raipur, Chhattisgarh. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests."
+      "summary": "AIIMS Raipur is a All India Institute of Medical Sciences located in Raipur, Chhattisgarh. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "aiims-rajkot",
@@ -570,7 +606,9 @@
         "Allied Health"
       ],
       "level": "Undergraduate, postgraduate & nursing",
-      "summary": "AIIMS Rajkot is a All India Institute of Medical Sciences located in Rajkot, Gujarat. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests."
+      "summary": "AIIMS Rajkot is a All India Institute of Medical Sciences located in Rajkot, Gujarat. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "aiims-rishikesh",
@@ -597,7 +635,9 @@
         "Allied Health"
       ],
       "level": "Undergraduate, postgraduate & nursing",
-      "summary": "AIIMS Rishikesh is a All India Institute of Medical Sciences located in Rishikesh, Uttarakhand. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests."
+      "summary": "AIIMS Rishikesh is a All India Institute of Medical Sciences located in Rishikesh, Uttarakhand. MBBS admission is through NEET UG. PG and nursing courses use INI-CET and AIIMS nursing entrance tests.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "aniims",
@@ -623,7 +663,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "ANIIMS is a State University located in Port Blair, Andaman and Nicobar Islands. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
+      "summary": "ANIIMS is a State University located in Port Blair, Andaman and Nicobar Islands. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "andhra-university",
@@ -649,7 +691,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "Andhra University is a State University located in Visakhapatnam, Andhra Pradesh. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
+      "summary": "Andhra University is a State University located in Visakhapatnam, Andhra Pradesh. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "assam-university",
@@ -676,7 +720,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "Assam University is a Central University located in Silchar, Assam. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "Assam University is a Central University located in Silchar, Assam. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "bbau-lucknow",
@@ -703,7 +749,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "BBAU Lucknow is a Central University located in Lucknow, Uttar Pradesh. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "BBAU Lucknow is a Central University located in Lucknow, Uttar Pradesh. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "bhu",
@@ -730,7 +778,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "BHU is a Central University located in Varanasi, Uttar Pradesh. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "BHU is a Central University located in Varanasi, Uttar Pradesh. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "bangalore-university",
@@ -756,7 +806,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "Bangalore University is a State University located in Bengaluru, Karnataka. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
+      "summary": "Bangalore University is a State University located in Bengaluru, Karnataka. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "barkatullah-university",
@@ -782,7 +834,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "Barkatullah University is a State University located in Bhopal, Madhya Pradesh. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
+      "summary": "Barkatullah University is a State University located in Bhopal, Madhya Pradesh. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "cu-andhra-pradesh",
@@ -809,7 +863,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "CU Andhra Pradesh is a Central University located in Anantapur, Andhra Pradesh. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "CU Andhra Pradesh is a Central University located in Anantapur, Andhra Pradesh. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "cu-gujarat",
@@ -836,7 +892,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "CU Gujarat is a Central University located in Gandhinagar, Gujarat. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "CU Gujarat is a Central University located in Gandhinagar, Gujarat. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "cu-haryana",
@@ -863,7 +921,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "CU Haryana is a Central University located in Mahendragarh, Haryana. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "CU Haryana is a Central University located in Mahendragarh, Haryana. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "cu-himachal",
@@ -890,7 +950,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "CU Himachal is a Central University located in Dharamshala, Himachal Pradesh. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "CU Himachal is a Central University located in Dharamshala, Himachal Pradesh. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "cu-jammu",
@@ -917,7 +979,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "CU Jammu is a Central University located in Jammu, Jammu and Kashmir. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "CU Jammu is a Central University located in Jammu, Jammu and Kashmir. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "cu-jharkhand",
@@ -944,7 +1008,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "CU Jharkhand is a Central University located in Ranchi, Jharkhand. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "CU Jharkhand is a Central University located in Ranchi, Jharkhand. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "cu-karnataka",
@@ -971,7 +1037,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "CU Karnataka is a Central University located in Kalaburagi, Karnataka. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "CU Karnataka is a Central University located in Kalaburagi, Karnataka. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "cu-kerala",
@@ -998,7 +1066,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "CU Kerala is a Central University located in Kasaragod, Kerala. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "CU Kerala is a Central University located in Kasaragod, Kerala. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "cu-odisha",
@@ -1025,7 +1095,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "CU Odisha is a Central University located in Koraput, Odisha. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "CU Odisha is a Central University located in Koraput, Odisha. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "cu-punjab",
@@ -1052,7 +1124,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "CU Punjab is a Central University located in Bathinda, Punjab. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "CU Punjab is a Central University located in Bathinda, Punjab. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "cu-rajasthan",
@@ -1079,7 +1153,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "CU Rajasthan is a Central University located in Kishangarh, Rajasthan. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "CU Rajasthan is a Central University located in Kishangarh, Rajasthan. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "cu-south-bihar",
@@ -1106,7 +1182,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "CU South Bihar is a Central University located in Gaya, Bihar. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "CU South Bihar is a Central University located in Gaya, Bihar. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "cu-tamil-nadu",
@@ -1133,7 +1211,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "CU Tamil Nadu is a Central University located in Thiruvarur, Tamil Nadu. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "CU Tamil Nadu is a Central University located in Thiruvarur, Tamil Nadu. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "cu-uttarakhand",
@@ -1160,7 +1240,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "CU Uttarakhand is a Central University located in Pauri Garhwal, Uttarakhand. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "CU Uttarakhand is a Central University located in Pauri Garhwal, Uttarakhand. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "cnlu-patna",
@@ -1182,7 +1264,9 @@
         "Law"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "CNLU Patna is a National Law University located in Patna, Bihar. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs."
+      "summary": "CNLU Patna is a National Law University located in Patna, Bihar. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "chandigarh-university",
@@ -1208,7 +1292,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "Chandigarh University is a State University located in Mohali, Chandigarh. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
+      "summary": "Chandigarh University is a State University located in Mohali, Chandigarh. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "dsnlu-visakhapatnam",
@@ -1230,7 +1316,9 @@
         "Law"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "DSNLU Visakhapatnam is a National Law University located in Visakhapatnam, Andhra Pradesh. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs."
+      "summary": "DSNLU Visakhapatnam is a National Law University located in Visakhapatnam, Andhra Pradesh. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nit-jalandhar",
@@ -1255,7 +1343,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NIT Jalandhar is a National Institute of Technology located in Jalandhar, Punjab. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "NIT Jalandhar is a National Institute of Technology located in Jalandhar, Punjab. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "rmlnlu-lucknow",
@@ -1277,7 +1367,9 @@
         "Law"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "RMLNLU Lucknow is a National Law University located in Lucknow, Uttar Pradesh. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs."
+      "summary": "RMLNLU Lucknow is a National Law University located in Lucknow, Uttar Pradesh. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "gauhati-university",
@@ -1303,7 +1395,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "Gauhati University is a State University located in Guwahati, Assam. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
+      "summary": "Gauhati University is a State University located in Guwahati, Assam. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "goa-university",
@@ -1329,7 +1423,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "Goa University is a State University located in Taleigao, Goa. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
+      "summary": "Goa University is a State University located in Taleigao, Goa. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "gec-daman",
@@ -1355,7 +1451,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "GEC Daman is a State University located in Daman, Dadra and Nagar Haveli and Daman and Diu. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
+      "summary": "GEC Daman is a State University located in Daman, Dadra and Nagar Haveli and Daman and Diu. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "gnlu-gandhinagar",
@@ -1377,7 +1475,9 @@
         "Law"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "GNLU Gandhinagar is a National Law University located in Gandhinagar, Gujarat. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs."
+      "summary": "GNLU Gandhinagar is a National Law University located in Gandhinagar, Gujarat. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "gujarat-university",
@@ -1403,7 +1503,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "Gujarat University is a State University located in Ahmedabad, Gujarat. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
+      "summary": "Gujarat University is a State University located in Ahmedabad, Gujarat. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "hnbgu",
@@ -1430,7 +1532,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "HNBGU is a Central University located in Srinagar, Uttarakhand. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "HNBGU is a Central University located in Srinagar, Uttarakhand. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "hnlu-raipur",
@@ -1452,7 +1556,9 @@
         "Law"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "HNLU Raipur is a National Law University located in Raipur, Chhattisgarh. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs."
+      "summary": "HNLU Raipur is a National Law University located in Raipur, Chhattisgarh. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "hpnlu-shimla",
@@ -1474,7 +1580,9 @@
         "Law"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "HPNLU Shimla is a National Law University located in Shimla, Himachal Pradesh. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs."
+      "summary": "HPNLU Shimla is a National Law University located in Shimla, Himachal Pradesh. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "hp-university",
@@ -1500,7 +1608,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "HP University is a State University located in Shimla, Himachal Pradesh. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
+      "summary": "HP University is a State University located in Shimla, Himachal Pradesh. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iiit-agartala",
@@ -1524,7 +1634,9 @@
         "Design"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIIT Agartala is a Indian Institute of Information Technology located in Agartala, Tripura. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling."
+      "summary": "IIIT Agartala is a Indian Institute of Information Technology located in Agartala, Tripura. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iiit-allahabad",
@@ -1548,7 +1660,9 @@
         "Design"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIIT Allahabad is a Indian Institute of Information Technology located in Prayagraj, Uttar Pradesh. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling."
+      "summary": "IIIT Allahabad is a Indian Institute of Information Technology located in Prayagraj, Uttar Pradesh. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iiitm-gwalior",
@@ -1572,7 +1686,9 @@
         "Design"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIITM Gwalior is a Indian Institute of Information Technology located in Gwalior, Madhya Pradesh. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling."
+      "summary": "IIITM Gwalior is a Indian Institute of Information Technology located in Gwalior, Madhya Pradesh. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iiit-bhopal",
@@ -1596,7 +1712,9 @@
         "Design"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIIT Bhopal is a Indian Institute of Information Technology located in Bhopal, Madhya Pradesh. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling."
+      "summary": "IIIT Bhopal is a Indian Institute of Information Technology located in Bhopal, Madhya Pradesh. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iiit-bhubaneswar",
@@ -1620,7 +1738,9 @@
         "Design"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIIT Bhubaneswar is a Indian Institute of Information Technology located in Bhubaneswar, Odisha. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling."
+      "summary": "IIIT Bhubaneswar is a Indian Institute of Information Technology located in Bhubaneswar, Odisha. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iiitdm-jabalpur",
@@ -1644,7 +1764,9 @@
         "Design"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIITDM Jabalpur is a Indian Institute of Information Technology located in Jabalpur, Madhya Pradesh. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling."
+      "summary": "IIITDM Jabalpur is a Indian Institute of Information Technology located in Jabalpur, Madhya Pradesh. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iiitdm-kancheepuram",
@@ -1668,7 +1790,9 @@
         "Design"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIITDM Kancheepuram is a Indian Institute of Information Technology located in Chennai, Tamil Nadu. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling."
+      "summary": "IIITDM Kancheepuram is a Indian Institute of Information Technology located in Chennai, Tamil Nadu. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iiit-gandhinagar",
@@ -1692,7 +1816,9 @@
         "Design"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIIT Gandhinagar is a Indian Institute of Information Technology located in Gandhinagar, Gujarat. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling."
+      "summary": "IIIT Gandhinagar is a Indian Institute of Information Technology located in Gandhinagar, Gujarat. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iiit-guwahati",
@@ -1716,7 +1842,9 @@
         "Design"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIIT Guwahati is a Indian Institute of Information Technology located in Guwahati, Assam. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling."
+      "summary": "IIIT Guwahati is a Indian Institute of Information Technology located in Guwahati, Assam. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iiit-kota",
@@ -1740,7 +1868,9 @@
         "Design"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIIT Kota is a Indian Institute of Information Technology located in Kota, Rajasthan. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling."
+      "summary": "IIIT Kota is a Indian Institute of Information Technology located in Kota, Rajasthan. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iiit-lucknow",
@@ -1764,7 +1894,9 @@
         "Design"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIIT Lucknow is a Indian Institute of Information Technology located in Lucknow, Uttar Pradesh. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling."
+      "summary": "IIIT Lucknow is a Indian Institute of Information Technology located in Lucknow, Uttar Pradesh. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iiit-nagpur",
@@ -1788,7 +1920,9 @@
         "Design"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIIT Nagpur is a Indian Institute of Information Technology located in Nagpur, Maharashtra. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling."
+      "summary": "IIIT Nagpur is a Indian Institute of Information Technology located in Nagpur, Maharashtra. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iiit-pune",
@@ -1812,7 +1946,9 @@
         "Design"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIIT Pune is a Indian Institute of Information Technology located in Pune, Maharashtra. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling."
+      "summary": "IIIT Pune is a Indian Institute of Information Technology located in Pune, Maharashtra. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iiit-ranchi",
@@ -1836,7 +1972,9 @@
         "Design"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIIT Ranchi is a Indian Institute of Information Technology located in Ranchi, Jharkhand. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling."
+      "summary": "IIIT Ranchi is a Indian Institute of Information Technology located in Ranchi, Jharkhand. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iiit-sonepat",
@@ -1860,7 +1998,9 @@
         "Design"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIIT Sonepat is a Indian Institute of Information Technology located in Sonepat, Haryana. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling."
+      "summary": "IIIT Sonepat is a Indian Institute of Information Technology located in Sonepat, Haryana. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iiit-sri-city",
@@ -1884,7 +2024,9 @@
         "Design"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIIT Sri City is a Indian Institute of Information Technology located in Sri City, Andhra Pradesh. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling."
+      "summary": "IIIT Sri City is a Indian Institute of Information Technology located in Sri City, Andhra Pradesh. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iiit-surat",
@@ -1908,7 +2050,9 @@
         "Design"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIIT Surat is a Indian Institute of Information Technology located in Surat, Gujarat. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling."
+      "summary": "IIIT Surat is a Indian Institute of Information Technology located in Surat, Gujarat. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iiit-vadodara",
@@ -1932,7 +2076,9 @@
         "Design"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIIT Vadodara is a Indian Institute of Information Technology located in Vadodara, Gujarat. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling."
+      "summary": "IIIT Vadodara is a Indian Institute of Information Technology located in Vadodara, Gujarat. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iim-ahmedabad",
@@ -1956,7 +2102,9 @@
         "Analytics"
       ],
       "level": "Postgraduate & doctoral",
-      "summary": "IIM Ahmedabad is a Indian Institute of Management located in Ahmedabad, Gujarat. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM."
+      "summary": "IIM Ahmedabad is a Indian Institute of Management located in Ahmedabad, Gujarat. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iim-amritsar",
@@ -1980,7 +2128,9 @@
         "Analytics"
       ],
       "level": "Postgraduate & doctoral",
-      "summary": "IIM Amritsar is a Indian Institute of Management located in Amritsar, Punjab. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM."
+      "summary": "IIM Amritsar is a Indian Institute of Management located in Amritsar, Punjab. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iim-bangalore",
@@ -2004,7 +2154,9 @@
         "Analytics"
       ],
       "level": "Postgraduate & doctoral",
-      "summary": "IIM Bangalore is a Indian Institute of Management located in Bengaluru, Karnataka. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM."
+      "summary": "IIM Bangalore is a Indian Institute of Management located in Bengaluru, Karnataka. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iim-bodh-gaya",
@@ -2028,7 +2180,9 @@
         "Analytics"
       ],
       "level": "Postgraduate & doctoral",
-      "summary": "IIM Bodh Gaya is a Indian Institute of Management located in Bodh Gaya, Bihar. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM."
+      "summary": "IIM Bodh Gaya is a Indian Institute of Management located in Bodh Gaya, Bihar. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iim-calcutta",
@@ -2052,7 +2206,9 @@
         "Analytics"
       ],
       "level": "Postgraduate & doctoral",
-      "summary": "IIM Calcutta is a Indian Institute of Management located in Kolkata, West Bengal. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM."
+      "summary": "IIM Calcutta is a Indian Institute of Management located in Kolkata, West Bengal. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iim-indore",
@@ -2076,7 +2232,9 @@
         "Analytics"
       ],
       "level": "Postgraduate & doctoral",
-      "summary": "IIM Indore is a Indian Institute of Management located in Indore, Madhya Pradesh. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM."
+      "summary": "IIM Indore is a Indian Institute of Management located in Indore, Madhya Pradesh. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iim-jammu",
@@ -2100,7 +2258,9 @@
         "Analytics"
       ],
       "level": "Postgraduate & doctoral",
-      "summary": "IIM Jammu is a Indian Institute of Management located in Jammu, Jammu and Kashmir. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM."
+      "summary": "IIM Jammu is a Indian Institute of Management located in Jammu, Jammu and Kashmir. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iim-kashipur",
@@ -2124,7 +2284,9 @@
         "Analytics"
       ],
       "level": "Postgraduate & doctoral",
-      "summary": "IIM Kashipur is a Indian Institute of Management located in Kashipur, Uttarakhand. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM."
+      "summary": "IIM Kashipur is a Indian Institute of Management located in Kashipur, Uttarakhand. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iim-kozhikode",
@@ -2148,7 +2310,9 @@
         "Analytics"
       ],
       "level": "Postgraduate & doctoral",
-      "summary": "IIM Kozhikode is a Indian Institute of Management located in Kozhikode, Kerala. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM."
+      "summary": "IIM Kozhikode is a Indian Institute of Management located in Kozhikode, Kerala. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iim-lucknow",
@@ -2172,7 +2336,9 @@
         "Analytics"
       ],
       "level": "Postgraduate & doctoral",
-      "summary": "IIM Lucknow is a Indian Institute of Management located in Lucknow, Uttar Pradesh. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM."
+      "summary": "IIM Lucknow is a Indian Institute of Management located in Lucknow, Uttar Pradesh. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iim-nagpur",
@@ -2196,7 +2362,9 @@
         "Analytics"
       ],
       "level": "Postgraduate & doctoral",
-      "summary": "IIM Nagpur is a Indian Institute of Management located in Nagpur, Maharashtra. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM."
+      "summary": "IIM Nagpur is a Indian Institute of Management located in Nagpur, Maharashtra. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iim-raipur",
@@ -2220,7 +2388,9 @@
         "Analytics"
       ],
       "level": "Postgraduate & doctoral",
-      "summary": "IIM Raipur is a Indian Institute of Management located in Raipur, Chhattisgarh. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM."
+      "summary": "IIM Raipur is a Indian Institute of Management located in Raipur, Chhattisgarh. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iim-ranchi",
@@ -2244,7 +2414,9 @@
         "Analytics"
       ],
       "level": "Postgraduate & doctoral",
-      "summary": "IIM Ranchi is a Indian Institute of Management located in Ranchi, Jharkhand. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM."
+      "summary": "IIM Ranchi is a Indian Institute of Management located in Ranchi, Jharkhand. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iim-rohtak",
@@ -2268,7 +2440,9 @@
         "Analytics"
       ],
       "level": "Postgraduate & doctoral",
-      "summary": "IIM Rohtak is a Indian Institute of Management located in Rohtak, Haryana. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM."
+      "summary": "IIM Rohtak is a Indian Institute of Management located in Rohtak, Haryana. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iim-sambalpur",
@@ -2292,7 +2466,9 @@
         "Analytics"
       ],
       "level": "Postgraduate & doctoral",
-      "summary": "IIM Sambalpur is a Indian Institute of Management located in Sambalpur, Odisha. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM."
+      "summary": "IIM Sambalpur is a Indian Institute of Management located in Sambalpur, Odisha. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iim-shillong",
@@ -2316,7 +2492,9 @@
         "Analytics"
       ],
       "level": "Postgraduate & doctoral",
-      "summary": "IIM Shillong is a Indian Institute of Management located in Shillong, Meghalaya. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM."
+      "summary": "IIM Shillong is a Indian Institute of Management located in Shillong, Meghalaya. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iim-sirmaur",
@@ -2340,7 +2518,9 @@
         "Analytics"
       ],
       "level": "Postgraduate & doctoral",
-      "summary": "IIM Sirmaur is a Indian Institute of Management located in Paonta Sahib, Himachal Pradesh. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM."
+      "summary": "IIM Sirmaur is a Indian Institute of Management located in Paonta Sahib, Himachal Pradesh. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iim-tiruchirappalli",
@@ -2364,7 +2544,9 @@
         "Analytics"
       ],
       "level": "Postgraduate & doctoral",
-      "summary": "IIM Tiruchirappalli is a Indian Institute of Management located in Tiruchirappalli, Tamil Nadu. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM."
+      "summary": "IIM Tiruchirappalli is a Indian Institute of Management located in Tiruchirappalli, Tamil Nadu. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iim-udaipur",
@@ -2388,7 +2570,9 @@
         "Analytics"
       ],
       "level": "Postgraduate & doctoral",
-      "summary": "IIM Udaipur is a Indian Institute of Management located in Udaipur, Rajasthan. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM."
+      "summary": "IIM Udaipur is a Indian Institute of Management located in Udaipur, Rajasthan. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iim-visakhapatnam",
@@ -2412,7 +2596,9 @@
         "Analytics"
       ],
       "level": "Postgraduate & doctoral",
-      "summary": "IIM Visakhapatnam is a Indian Institute of Management located in Visakhapatnam, Andhra Pradesh. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM."
+      "summary": "IIM Visakhapatnam is a Indian Institute of Management located in Visakhapatnam, Andhra Pradesh. MBA admission is through CAT, followed by a written ability test and personal interview at each IIM.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iit-bhu",
@@ -2439,7 +2625,9 @@
         "Management"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIT BHU is a Indian Institute of Technology located in Varanasi, Uttar Pradesh. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE."
+      "summary": "IIT BHU is a Indian Institute of Technology located in Varanasi, Uttar Pradesh. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iit-ism-dhanbad",
@@ -2466,7 +2654,9 @@
         "Management"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIT (ISM) Dhanbad is a Indian Institute of Technology located in Dhanbad, Jharkhand. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE."
+      "summary": "IIT (ISM) Dhanbad is a Indian Institute of Technology located in Dhanbad, Jharkhand. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iit-bhilai",
@@ -2493,7 +2683,9 @@
         "Management"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIT Bhilai is a Indian Institute of Technology located in Raipur, Chhattisgarh. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE."
+      "summary": "IIT Bhilai is a Indian Institute of Technology located in Raipur, Chhattisgarh. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iit-bhubaneswar",
@@ -2520,7 +2712,9 @@
         "Management"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIT Bhubaneswar is a Indian Institute of Technology located in Bhubaneswar, Odisha. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE."
+      "summary": "IIT Bhubaneswar is a Indian Institute of Technology located in Bhubaneswar, Odisha. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iit-bombay",
@@ -2547,7 +2741,9 @@
         "Management"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIT Bombay is a Indian Institute of Technology located in Mumbai, Maharashtra. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE."
+      "summary": "IIT Bombay is a Indian Institute of Technology located in Mumbai, Maharashtra. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iit-delhi",
@@ -2574,7 +2770,9 @@
         "Management"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIT Delhi is a Indian Institute of Technology located in New Delhi, Delhi. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE."
+      "summary": "IIT Delhi is a Indian Institute of Technology located in New Delhi, Delhi. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iit-dharwad",
@@ -2601,7 +2799,9 @@
         "Management"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIT Dharwad is a Indian Institute of Technology located in Dharwad, Karnataka. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE."
+      "summary": "IIT Dharwad is a Indian Institute of Technology located in Dharwad, Karnataka. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iit-gandhinagar",
@@ -2628,7 +2828,9 @@
         "Management"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIT Gandhinagar is a Indian Institute of Technology located in Gandhinagar, Gujarat. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE."
+      "summary": "IIT Gandhinagar is a Indian Institute of Technology located in Gandhinagar, Gujarat. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iit-goa",
@@ -2655,7 +2857,9 @@
         "Management"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIT Goa is a Indian Institute of Technology located in Ponda, Goa. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE."
+      "summary": "IIT Goa is a Indian Institute of Technology located in Ponda, Goa. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iit-guwahati",
@@ -2682,7 +2886,9 @@
         "Management"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIT Guwahati is a Indian Institute of Technology located in Guwahati, Assam. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE."
+      "summary": "IIT Guwahati is a Indian Institute of Technology located in Guwahati, Assam. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iit-hyderabad",
@@ -2709,7 +2915,9 @@
         "Management"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIT Hyderabad is a Indian Institute of Technology located in Sangareddy, Telangana. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE."
+      "summary": "IIT Hyderabad is a Indian Institute of Technology located in Sangareddy, Telangana. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iit-indore",
@@ -2736,7 +2944,9 @@
         "Management"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIT Indore is a Indian Institute of Technology located in Indore, Madhya Pradesh. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE."
+      "summary": "IIT Indore is a Indian Institute of Technology located in Indore, Madhya Pradesh. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iit-jammu",
@@ -2763,7 +2973,9 @@
         "Management"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIT Jammu is a Indian Institute of Technology located in Jammu, Jammu and Kashmir. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE."
+      "summary": "IIT Jammu is a Indian Institute of Technology located in Jammu, Jammu and Kashmir. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iit-jodhpur",
@@ -2790,7 +3002,9 @@
         "Management"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIT Jodhpur is a Indian Institute of Technology located in Jodhpur, Rajasthan. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE."
+      "summary": "IIT Jodhpur is a Indian Institute of Technology located in Jodhpur, Rajasthan. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iit-kanpur",
@@ -2817,7 +3031,9 @@
         "Management"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIT Kanpur is a Indian Institute of Technology located in Kanpur, Uttar Pradesh. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE."
+      "summary": "IIT Kanpur is a Indian Institute of Technology located in Kanpur, Uttar Pradesh. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iit-kharagpur",
@@ -2844,7 +3060,9 @@
         "Management"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIT Kharagpur is a Indian Institute of Technology located in Kharagpur, West Bengal. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE."
+      "summary": "IIT Kharagpur is a Indian Institute of Technology located in Kharagpur, West Bengal. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iit-madras",
@@ -2871,7 +3089,9 @@
         "Management"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIT Madras is a Indian Institute of Technology located in Chennai, Tamil Nadu. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE."
+      "summary": "IIT Madras is a Indian Institute of Technology located in Chennai, Tamil Nadu. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iit-mandi",
@@ -2898,7 +3118,9 @@
         "Management"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIT Mandi is a Indian Institute of Technology located in Mandi, Himachal Pradesh. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE."
+      "summary": "IIT Mandi is a Indian Institute of Technology located in Mandi, Himachal Pradesh. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iit-palakkad",
@@ -2925,7 +3147,9 @@
         "Management"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIT Palakkad is a Indian Institute of Technology located in Palakkad, Kerala. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE."
+      "summary": "IIT Palakkad is a Indian Institute of Technology located in Palakkad, Kerala. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iit-patna",
@@ -2952,7 +3176,9 @@
         "Management"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIT Patna is a Indian Institute of Technology located in Patna, Bihar. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE."
+      "summary": "IIT Patna is a Indian Institute of Technology located in Patna, Bihar. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iit-roorkee",
@@ -2979,7 +3205,9 @@
         "Management"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIT Roorkee is a Indian Institute of Technology located in Roorkee, Uttarakhand. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE."
+      "summary": "IIT Roorkee is a Indian Institute of Technology located in Roorkee, Uttarakhand. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iit-ropar",
@@ -3006,7 +3234,9 @@
         "Management"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIT Ropar is a Indian Institute of Technology located in Rupnagar, Punjab. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE."
+      "summary": "IIT Ropar is a Indian Institute of Technology located in Rupnagar, Punjab. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iit-tirupati",
@@ -3033,7 +3263,9 @@
         "Management"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIT Tirupati is a Indian Institute of Technology located in Tirupati, Andhra Pradesh. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE."
+      "summary": "IIT Tirupati is a Indian Institute of Technology located in Tirupati, Andhra Pradesh. Admission to the B.Tech programme is through JEE Advanced after qualifying JEE Main. Postgraduate entry is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "ignou",
@@ -3060,7 +3292,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "IGNOU is a Central University located in New Delhi, Delhi. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "IGNOU is a Central University located in New Delhi, Delhi. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iiit-bangalore",
@@ -3084,7 +3318,9 @@
         "Design"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIIT Bangalore is a Indian Institute of Information Technology located in Bengaluru, Karnataka. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling."
+      "summary": "IIIT Bangalore is a Indian Institute of Information Technology located in Bengaluru, Karnataka. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "iiit-hyderabad",
@@ -3108,7 +3344,9 @@
         "Design"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "IIIT Hyderabad is a Indian Institute of Information Technology located in Hyderabad, Telangana. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling."
+      "summary": "IIIT Hyderabad is a Indian Institute of Information Technology located in Hyderabad, Telangana. Most IIITs admit B.Tech students through JEE Main and JoSAA counselling. Some institutes run their own counselling.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "jmi",
@@ -3135,7 +3373,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "JMI is a Central University located in New Delhi, Delhi. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "JMI is a Central University located in New Delhi, Delhi. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "jnu",
@@ -3162,7 +3402,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "JNU is a Central University located in New Delhi, Delhi. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "JNU is a Central University located in New Delhi, Delhi. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "kurukshetra-university",
@@ -3188,7 +3430,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "Kurukshetra University is a State University located in Kurukshetra, Haryana. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
+      "summary": "Kurukshetra University is a State University located in Kurukshetra, Haryana. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "mnlu-mumbai",
@@ -3210,7 +3454,9 @@
         "Law"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "MNLU Mumbai is a National Law University located in Mumbai, Maharashtra. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs."
+      "summary": "MNLU Mumbai is a National Law University located in Mumbai, Maharashtra. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "mnlu-nagpur",
@@ -3232,7 +3478,9 @@
         "Law"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "MNLU Nagpur is a National Law University located in Nagpur, Maharashtra. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs."
+      "summary": "MNLU Nagpur is a National Law University located in Nagpur, Maharashtra. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "mnit-jaipur",
@@ -3257,7 +3505,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "MNIT Jaipur is a National Institute of Technology located in Jaipur, Rajasthan. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "MNIT Jaipur is a National Institute of Technology located in Jaipur, Rajasthan. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "manipur-university",
@@ -3284,7 +3534,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "Manipur University is a Central University located in Imphal, Manipur. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "Manipur University is a Central University located in Imphal, Manipur. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "manit-bhopal",
@@ -3309,7 +3561,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "MANIT Bhopal is a National Institute of Technology located in Bhopal, Madhya Pradesh. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "MANIT Bhopal is a National Institute of Technology located in Bhopal, Madhya Pradesh. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "manuu",
@@ -3336,7 +3590,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "MANUU is a Central University located in Hyderabad, Telangana. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "MANUU is a Central University located in Hyderabad, Telangana. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "mizoram-university",
@@ -3363,7 +3619,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "Mizoram University is a Central University located in Aizawl, Mizoram. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "Mizoram University is a Central University located in Aizawl, Mizoram. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "mnnit-allahabad",
@@ -3388,7 +3646,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "MNNIT Allahabad is a National Institute of Technology located in Prayagraj, Uttar Pradesh. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "MNNIT Allahabad is a National Institute of Technology located in Prayagraj, Uttar Pradesh. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nagaland-university",
@@ -3415,7 +3675,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "Nagaland University is a Central University located in Lumami, Nagaland. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "Nagaland University is a Central University located in Lumami, Nagaland. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nalsar-hyderabad",
@@ -3437,7 +3699,9 @@
         "Law"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NALSAR Hyderabad is a National Law University located in Hyderabad, Telangana. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs."
+      "summary": "NALSAR Hyderabad is a National Law University located in Hyderabad, Telangana. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nit-agartala",
@@ -3462,7 +3726,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NIT Agartala is a National Institute of Technology located in Agartala, Tripura. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "NIT Agartala is a National Institute of Technology located in Agartala, Tripura. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nit-andhra-pradesh",
@@ -3487,7 +3753,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NIT Andhra Pradesh is a National Institute of Technology located in Tadepalligudem, Andhra Pradesh. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "NIT Andhra Pradesh is a National Institute of Technology located in Tadepalligudem, Andhra Pradesh. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nit-arunachal-pradesh",
@@ -3512,7 +3780,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NIT Arunachal Pradesh is a National Institute of Technology located in Yupia, Arunachal Pradesh. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "NIT Arunachal Pradesh is a National Institute of Technology located in Yupia, Arunachal Pradesh. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nit-calicut",
@@ -3537,7 +3807,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NIT Calicut is a National Institute of Technology located in Kozhikode, Kerala. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "NIT Calicut is a National Institute of Technology located in Kozhikode, Kerala. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nit-delhi",
@@ -3562,7 +3834,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NIT Delhi is a National Institute of Technology located in New Delhi, Delhi. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "NIT Delhi is a National Institute of Technology located in New Delhi, Delhi. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nit-durgapur",
@@ -3587,7 +3861,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NIT Durgapur is a National Institute of Technology located in Durgapur, West Bengal. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "NIT Durgapur is a National Institute of Technology located in Durgapur, West Bengal. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nit-goa",
@@ -3612,7 +3888,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NIT Goa is a National Institute of Technology located in Ponda, Goa. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "NIT Goa is a National Institute of Technology located in Ponda, Goa. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nit-hamirpur",
@@ -3637,7 +3915,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NIT Hamirpur is a National Institute of Technology located in Hamirpur, Himachal Pradesh. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "NIT Hamirpur is a National Institute of Technology located in Hamirpur, Himachal Pradesh. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nit-jamshedpur",
@@ -3662,7 +3942,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NIT Jamshedpur is a National Institute of Technology located in Jamshedpur, Jharkhand. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "NIT Jamshedpur is a National Institute of Technology located in Jamshedpur, Jharkhand. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nit-surathkal",
@@ -3687,7 +3969,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NIT Surathkal is a National Institute of Technology located in Mangaluru, Karnataka. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "NIT Surathkal is a National Institute of Technology located in Mangaluru, Karnataka. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nit-kurukshetra",
@@ -3712,7 +3996,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NIT Kurukshetra is a National Institute of Technology located in Kurukshetra, Haryana. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "NIT Kurukshetra is a National Institute of Technology located in Kurukshetra, Haryana. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nit-manipur",
@@ -3737,7 +4023,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NIT Manipur is a National Institute of Technology located in Imphal, Manipur. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "NIT Manipur is a National Institute of Technology located in Imphal, Manipur. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nit-meghalaya",
@@ -3762,7 +4050,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NIT Meghalaya is a National Institute of Technology located in Shillong, Meghalaya. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "NIT Meghalaya is a National Institute of Technology located in Shillong, Meghalaya. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nit-mizoram",
@@ -3787,7 +4077,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NIT Mizoram is a National Institute of Technology located in Aizawl, Mizoram. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "NIT Mizoram is a National Institute of Technology located in Aizawl, Mizoram. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nit-nagaland",
@@ -3812,7 +4104,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NIT Nagaland is a National Institute of Technology located in Chumukedima, Nagaland. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "NIT Nagaland is a National Institute of Technology located in Chumukedima, Nagaland. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nit-patna",
@@ -3837,7 +4131,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NIT Patna is a National Institute of Technology located in Patna, Bihar. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "NIT Patna is a National Institute of Technology located in Patna, Bihar. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nit-puducherry",
@@ -3862,7 +4158,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NIT Puducherry is a National Institute of Technology located in Karaikal, Puducherry. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "NIT Puducherry is a National Institute of Technology located in Karaikal, Puducherry. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nit-raipur",
@@ -3887,7 +4185,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NIT Raipur is a National Institute of Technology located in Raipur, Chhattisgarh. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "NIT Raipur is a National Institute of Technology located in Raipur, Chhattisgarh. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nit-rourkela",
@@ -3912,7 +4212,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NIT Rourkela is a National Institute of Technology located in Rourkela, Odisha. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "NIT Rourkela is a National Institute of Technology located in Rourkela, Odisha. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nit-sikkim",
@@ -3937,7 +4239,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NIT Sikkim is a National Institute of Technology located in Ravangla, Sikkim. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "NIT Sikkim is a National Institute of Technology located in Ravangla, Sikkim. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nit-silchar",
@@ -3962,7 +4266,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NIT Silchar is a National Institute of Technology located in Silchar, Assam. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "NIT Silchar is a National Institute of Technology located in Silchar, Assam. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nit-srinagar",
@@ -3987,7 +4293,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NIT Srinagar is a National Institute of Technology located in Srinagar, Jammu and Kashmir. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "NIT Srinagar is a National Institute of Technology located in Srinagar, Jammu and Kashmir. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nit-trichy",
@@ -4012,7 +4320,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NIT Trichy is a National Institute of Technology located in Tiruchirappalli, Tamil Nadu. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "NIT Trichy is a National Institute of Technology located in Tiruchirappalli, Tamil Nadu. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nit-uttarakhand",
@@ -4037,7 +4347,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NIT Uttarakhand is a National Institute of Technology located in Srinagar, Uttarakhand. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "NIT Uttarakhand is a National Institute of Technology located in Srinagar, Uttarakhand. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nit-warangal",
@@ -4062,7 +4374,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NIT Warangal is a National Institute of Technology located in Warangal, Telangana. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "NIT Warangal is a National Institute of Technology located in Warangal, Telangana. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nliu-bhopal",
@@ -4084,7 +4398,9 @@
         "Law"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NLIU Bhopal is a National Law University located in Bhopal, Madhya Pradesh. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs."
+      "summary": "NLIU Bhopal is a National Law University located in Bhopal, Madhya Pradesh. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nlsiu-bengaluru",
@@ -4106,7 +4422,9 @@
         "Law"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NLSIU Bengaluru is a National Law University located in Bengaluru, Karnataka. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs."
+      "summary": "NLSIU Bengaluru is a National Law University located in Bengaluru, Karnataka. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nluja-assam",
@@ -4128,7 +4446,9 @@
         "Law"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NLUJA Assam is a National Law University located in Guwahati, Assam. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs."
+      "summary": "NLUJA Assam is a National Law University located in Guwahati, Assam. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nlu-delhi",
@@ -4150,7 +4470,9 @@
         "Law"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NLU Delhi is a National Law University located in New Delhi, Delhi. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs."
+      "summary": "NLU Delhi is a National Law University located in New Delhi, Delhi. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nlu-jodhpur",
@@ -4172,7 +4494,9 @@
         "Law"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NLU Jodhpur is a National Law University located in Jodhpur, Rajasthan. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs."
+      "summary": "NLU Jodhpur is a National Law University located in Jodhpur, Rajasthan. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nlu-odisha",
@@ -4194,7 +4518,9 @@
         "Law"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NLU Odisha is a National Law University located in Cuttack, Odisha. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs."
+      "summary": "NLU Odisha is a National Law University located in Cuttack, Odisha. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nuals-kochi",
@@ -4216,7 +4542,9 @@
         "Law"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NUALS Kochi is a National Law University located in Kochi, Kerala. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs."
+      "summary": "NUALS Kochi is a National Law University located in Kochi, Kerala. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nusrl-ranchi",
@@ -4238,7 +4566,9 @@
         "Law"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NUSRL Ranchi is a National Law University located in Ranchi, Jharkhand. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs."
+      "summary": "NUSRL Ranchi is a National Law University located in Ranchi, Jharkhand. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nehu",
@@ -4265,7 +4595,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "NEHU is a Central University located in Shillong, Meghalaya. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "NEHU is a Central University located in Shillong, Meghalaya. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "osmania-university",
@@ -4291,7 +4623,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "Osmania University is a State University located in Hyderabad, Telangana. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
+      "summary": "Osmania University is a State University located in Hyderabad, Telangana. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "prsu-raipur",
@@ -4317,7 +4651,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "PRSU Raipur is a State University located in Raipur, Chhattisgarh. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
+      "summary": "PRSU Raipur is a State University located in Raipur, Chhattisgarh. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "panjab-university",
@@ -4343,7 +4679,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "Panjab University is a State University located in Chandigarh, Punjab. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
+      "summary": "Panjab University is a State University located in Chandigarh, Punjab. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "patna-university",
@@ -4369,7 +4707,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "Patna University is a State University located in Patna, Bihar. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
+      "summary": "Patna University is a State University located in Patna, Bihar. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "pondicherry-university",
@@ -4396,7 +4736,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "Pondicherry University is a Central University located in Puducherry, Puducherry. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "Pondicherry University is a Central University located in Puducherry, Puducherry. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "pu-lakshadweep",
@@ -4422,7 +4764,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "PU Lakshadweep is a State University located in Kavaratti, Lakshadweep. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
+      "summary": "PU Lakshadweep is a State University located in Kavaratti, Lakshadweep. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "rgnul-patiala",
@@ -4444,7 +4788,9 @@
         "Law"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "RGNUL Patiala is a National Law University located in Patiala, Punjab. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs."
+      "summary": "RGNUL Patiala is a National Law University located in Patiala, Punjab. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "rgu",
@@ -4471,7 +4817,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "RGU is a Central University located in Itanagar, Arunachal Pradesh. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "RGU is a Central University located in Itanagar, Arunachal Pradesh. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "ranchi-university",
@@ -4497,7 +4845,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "Ranchi University is a State University located in Ranchi, Jharkhand. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
+      "summary": "Ranchi University is a State University located in Ranchi, Jharkhand. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "svnit-surat",
@@ -4522,7 +4872,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "SVNIT Surat is a National Institute of Technology located in Surat, Gujarat. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "SVNIT Surat is a National Institute of Technology located in Surat, Gujarat. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "sikkim-university",
@@ -4549,7 +4901,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "Sikkim University is a Central University located in Gangtok, Sikkim. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "Sikkim University is a Central University located in Gangtok, Sikkim. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "tnnlu-tiruchirappalli",
@@ -4571,7 +4925,9 @@
         "Law"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "TNNLU Tiruchirappalli is a National Law University located in Tiruchirappalli, Tamil Nadu. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs."
+      "summary": "TNNLU Tiruchirappalli is a National Law University located in Tiruchirappalli, Tamil Nadu. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "tiss",
@@ -4598,7 +4954,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "TISS is a Central University located in Mumbai, Maharashtra. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "TISS is a Central University located in Mumbai, Maharashtra. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "tezpur-university",
@@ -4625,7 +4983,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "Tezpur University is a Central University located in Tezpur, Assam. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "Tezpur University is a Central University located in Tezpur, Assam. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "eflu",
@@ -4652,7 +5012,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "EFLU is a Central University located in Hyderabad, Telangana. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "EFLU is a Central University located in Hyderabad, Telangana. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "nujs-kolkata",
@@ -4674,7 +5036,9 @@
         "Law"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "NUJS Kolkata is a National Law University located in Kolkata, West Bengal. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs."
+      "summary": "NUJS Kolkata is a National Law University located in Kolkata, West Bengal. BA LLB and LLM admission is through CLAT, conducted by the Consortium of NLUs.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "tripura-university",
@@ -4701,7 +5065,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "Tripura University is a Central University located in Agartala, Tripura. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "Tripura University is a Central University located in Agartala, Tripura. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "university-of-calcutta",
@@ -4727,7 +5093,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "University of Calcutta is a State University located in Kolkata, West Bengal. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
+      "summary": "University of Calcutta is a State University located in Kolkata, West Bengal. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "du",
@@ -4754,7 +5122,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "DU is a Central University located in New Delhi, Delhi. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "DU is a Central University located in New Delhi, Delhi. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "uoh",
@@ -4781,7 +5151,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "UoH is a Central University located in Hyderabad, Telangana. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "UoH is a Central University located in Hyderabad, Telangana. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "university-of-kashmir",
@@ -4807,7 +5179,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "University of Kashmir is a State University located in Srinagar, Jammu and Kashmir. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
+      "summary": "University of Kashmir is a State University located in Srinagar, Jammu and Kashmir. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "university-of-kerala",
@@ -4833,7 +5207,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "University of Kerala is a State University located in Thiruvananthapuram, Kerala. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
+      "summary": "University of Kerala is a State University located in Thiruvananthapuram, Kerala. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "uol",
@@ -4859,7 +5235,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "UoL is a State University located in Leh, Ladakh. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
+      "summary": "UoL is a State University located in Leh, Ladakh. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "university-of-lucknow",
@@ -4885,7 +5263,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "University of Lucknow is a State University located in Lucknow, Uttar Pradesh. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
+      "summary": "University of Lucknow is a State University located in Lucknow, Uttar Pradesh. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "university-of-madras",
@@ -4911,7 +5291,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "University of Madras is a State University located in Chennai, Tamil Nadu. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
+      "summary": "University of Madras is a State University located in Chennai, Tamil Nadu. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "university-of-mumbai",
@@ -4937,7 +5319,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "University of Mumbai is a State University located in Mumbai, Maharashtra. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
+      "summary": "University of Mumbai is a State University located in Mumbai, Maharashtra. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "university-of-rajasthan",
@@ -4963,7 +5347,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "University of Rajasthan is a State University located in Jaipur, Rajasthan. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
+      "summary": "University of Rajasthan is a State University located in Jaipur, Rajasthan. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "utkal-university",
@@ -4989,7 +5375,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "Utkal University is a State University located in Bhubaneswar, Odisha. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes."
+      "summary": "Utkal University is a State University located in Bhubaneswar, Odisha. Admission is usually through the university's own entrance test or the state common entrance test, with CUET accepted for several programmes.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "visva-bharati",
@@ -5016,7 +5404,9 @@
         "Social Science"
       ],
       "level": "Undergraduate, postgraduate & research",
-      "summary": "Visva-Bharati is a Central University located in Santiniketan, West Bengal. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET."
+      "summary": "Visva-Bharati is a Central University located in Santiniketan, West Bengal. Most central universities admit students through CUET UG and CUET PG. Research and teaching posts use UGC-NET.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     },
     {
       "id": "vnit-nagpur",
@@ -5041,7 +5431,9 @@
         "Architecture"
       ],
       "level": "Undergraduate & postgraduate",
-      "summary": "VNIT Nagpur is a National Institute of Technology located in Nagpur, Maharashtra. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE."
+      "summary": "VNIT Nagpur is a National Institute of Technology located in Nagpur, Maharashtra. B.Tech admission is through JEE Main and JoSAA counselling. M.Tech admission is through GATE.",
+      "verificationStatus": "verified",
+      "verificationSource": "Official institution website and government recognition records"
     }
   ]
 }

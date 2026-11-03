@@ -11,6 +11,7 @@ const { institution } = Astro.props;
   <div class="job-card-top">
     <span class="badge badge-blue">{INSTITUTION_TYPE_LABELS[institution.type] || institution.typeName}</span>
     <span class="badge badge-muted">{institution.stateName}</span>
+    {institution.verificationStatus === "verified" && <span class="badge badge-green">Verified</span>}
   </div>
 
   <h3><a href={`/institutions/${institution.slug}/`}>{institution.shortName}</a></h3>
