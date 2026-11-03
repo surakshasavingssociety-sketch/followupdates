@@ -209,6 +209,7 @@ const schema = {
 
 <script>
   import { watchAuth } from "../lib/auth";
+  import { getAuth } from "firebase/auth";
   import {
     CAREER_PATHS,
     loadProfile,
@@ -364,6 +365,10 @@ const schema = {
   }
 
   watchAuth(async (user) => {
+    if (!user && getAuth().currentUser) {
+      // Auth state has not yet propagated; treat as signed in
+      user = getAuth().currentUser;
+    }
     if (!user) {
       if (authView) authView.hidden = false;
       if (dashboard) dashboard.hidden = true;
