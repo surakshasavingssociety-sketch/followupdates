@@ -1,0 +1,10 @@
+---
+const links = [
+  {label:"Twitter / X", url:"https://x.com/followexam"},
+  {label:"Instagram", url:"https://instagram.com/followexam"},
+  {label:"YouTube", url:"https://youtube.com/followexam"},
+];
+---
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+  {links.map(l => <a href={l.url} target="_blank" rel="noopener" class="btn btn-outline btn-sm" style="text-decoration:none">{l.label}</a>)}
+</div>
