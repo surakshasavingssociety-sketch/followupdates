@@ -63,6 +63,7 @@ const categories = [
 <script>
   import { firebaseConfigured } from "../lib/firebase";
   import { watchAuth } from "../lib/auth";
+  import { currentUser } from "firebase/auth";
 
   const gate = document.querySelector<HTMLElement>("#auth-gate");
   const content = document.querySelector<HTMLElement>("#auth-gate-content");
@@ -92,12 +93,18 @@ const categories = [
     window.setTimeout(() => window.location.replace(target), 1200);
   }
 
-  if (!firebaseConfigured) {
+  const maybeReveal = () => {
+    if (!firebaseConfigured || !currentUser()) {
+      if (!gated) return;
+      block();
+      return;
+    }
     reveal();
-  } else {
-    watchAuth((user) => {
-      if (user) reveal();
-      else block();
-    });
-  }
+  };
+
+  maybeReveal();
+  watchAuth((user) => {
+    if (user) reveal();
+    else block();
+  });
 </script>
