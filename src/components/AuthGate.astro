@@ -1,21 +1,42 @@
 ---
-/**
- * Client-side access gate.
- *
- * Every content page is rendered statically, but the visitor only sees it after
- * signing in. Signed-out visitors are sent to /login/ and returned to the page
- * they asked for once authentication completes.
- *
- * Legal pages and the login page itself pass `gated={false}` so that the
- * privacy policy stays publicly reachable.
- */
-type Props = { gated?: boolean };
+type Props = {
+  gated?: boolean;
+}
 
 const { gated = true } = Astro.props;
+
+const categories = [
+  { label: "Latest Jobs", slug: "latest-jobs", icon: "💼", tone: "blue" },
+  { label: "Results", slug: "results", icon: "🏆", tone: "green" },
+  { label: "Admit Card", slug: "admit-card", icon: "🎫", tone: "amber" },
+  { label: "Answer Key", slug: "answer-key", icon: "🔑", tone: "violet" },
+  { label: "Exam Date", slug: "exam-date", icon: "🗓️", tone: "rose" },
+  { label: "Admission", slug: "admission", icon: "🎓", tone: "cyan" },
+  { label: "Syllabus", slug: "syllabus", icon: "📚", tone: "indigo" },
+  { label: "Scholarship", slug: "scholarship", icon: "🎁", tone: "teal" },
+  { label: "Career", slug: "career", icon: "💼", tone: "cyan" },
+  { label: "States", slug: "states", icon: "📍", tone: "green" },
+  { label: "Exams", slug: "exams", icon: "📚", tone: "blue" },
+  { label: "Scholarships", slug: "scholarships", icon: "🎁", tone: "teal" }
+];
 ---
 
 <div class="auth-gate" id="auth-gate" data-gated={String(gated)}>
   <div class="auth-gate-wall" id="auth-gate-wall" hidden>
+    <div class="categories-banner">
+      <div class="container">
+        {categories.map((category) => (
+          <a 
+            class="category-banner-item" 
+            href={`/category/${category.slug}/`}
+            style="display: inline-block; margin: 0 8px; padding: 8px 12px; border-radius: 20px; text-decoration: none; font-weight: 600; transition: all 0.2s ease"
+          >
+            <span class="category-icon" style="margin-right: 6px; font-size: 1.2em;">{category.icon}</span>
+            <span class="category-label">{category.label}</span>
+          </a>
+        ))}
+      </div>
+    </div>
     <div class="auth-gate-card">
       <span class="brand-mark" aria-hidden="true">FE</span>
       <h2>Sign in to continue</h2>
