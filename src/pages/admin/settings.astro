@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+<BaseLayout title="Admin settings" noindex gated={false}>
+  <section class="admin-shell">
+    <div class="container">
+      <h1>Admin settings</h1>
+      <p class="muted">Configure portal name, logo URL, Blaze feature toggles, and payment settings.</p>
+
+      <div class="panel" style="margin-top:16px">
+        <h2 style="font-size:1.1rem">Brand</h2>
+        <div class="form-grid" style="margin-top:8px">
+          <div class="field">
+            <label for="site-name">Portal name</label>
+            <input class="input" id="site-name" value="FollowExam" />
+          </div>
+          <div class="field">
+            <label for="logo-url">Logo URL</label>
+            <input class="input" id="logo-url" value="/favicon.svg" />
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:8px">
+        <h2 style="font-size:1.1rem">Blaze features</h2>
+        <p class="small muted">Enable or disable features that use Firebase Blaze services.</p>
+        <div class="form-grid" style="margin-top:8px">
+          <label class="check-item"><input type="checkbox" checked /> Automation & daily pipeline</label>
+          <label class="check-item"><input type="checkbox" /> Phone authentication</label>
+          <label class="check-item"><input type="checkbox" /> Telegram bot notifications</label>
+          <label class="check-item"><input type="checkbox" /> Email digest (SMTP)</label>
+          <label class="check-item"><input type="checkbox" /> Social media auto-post</label>
+          <label class="check-item"><input type="checkbox" /> Payment gateways</label>
+          <label class="check-item"><input type="checkbox" /> Analytics dashboard</label>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:8px">
+        <h2 style="font-size:1.1rem">Admin users & roles</h2>
+        <p class="small muted">Create new roles (manager, executive) and assign users.</p>
+        <a class="btn btn-outline btn-sm" href="/admin/users/">Manage users</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
