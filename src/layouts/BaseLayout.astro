@@ -2,6 +2,7 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import PageBanner from "../components/PageBanner.astro";
+import SocialFollow from "../components/SocialFollow.astro";
 import AuthGate from "../components/AuthGate.astro";
 import { SITE } from "../lib/constants";
 import "../styles/global.css";
@@ -93,6 +94,7 @@ const allSchema = [websiteSchema, ...(Array.isArray(schema) ? schema : schema ? 
         <slot />
       </AuthGate>
     </main>
+    <SocialFollow />
     <Footer />
     <script>
       if ("serviceWorker" in navigator && import.meta.env.PROD) {

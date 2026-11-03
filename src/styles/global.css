@@ -20,7 +20,7 @@
   --radius-sm: 10px;
   --shadow: 0 12px 30px rgba(18, 35, 61, 0.08);
   --shadow-sm: 0 4px 14px rgba(18, 35, 61, 0.06);
-  --max: 1320px;
+  --max: 1480px;
 }
 
 * {
@@ -83,7 +83,7 @@ ol {
 }
 
 .container {
-  width: min(100% - 32px, var(--max));
+  width: min(100% - 32px, 1480px);
   margin-inline: auto;
 }
 

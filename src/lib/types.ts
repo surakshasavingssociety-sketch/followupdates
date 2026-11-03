@@ -325,11 +325,27 @@ export type FeatureFlag = {
   updatedAt?: string;
 };
 
+export type UserStatus =
+  | "Student"
+  | "Job aspirant"
+  | "Teacher"
+  | "Faculty"
+  | "Research scholar"
+  | "School"
+  | "College"
+  | "University"
+  | "Coaching institute"
+  | "Educational organisation"
+  | "Government organisation"
+  | "Private organisation"
+  | "Open schooling provider";
+
 export type UserProfile = {
   uid: string;
   name: string;
   email?: string;
   phone?: string;
+  userStatus?: UserStatus;
   userCategory?: UserCategory;
   stateId?: string;
   stateName?: string;
@@ -341,6 +357,15 @@ export type UserProfile = {
   organizationName?: string;
   organizationWebsite?: string;
   organizationAbout?: string;
+  organizationType?: "government" | "private" | "autonomous" | "deemed";
+  organizationAccreditation?: string;
+  organizationRanking?: string;
+  organizationApproved?: boolean;
+  portfolio?: string;
+  resumeUrl?: string;
+  cvUrl?: string;
+  skills?: string[];
+  achievements?: string[];
   emailAlerts?: boolean;
   createdAt?: string;
   updatedAt?: string;

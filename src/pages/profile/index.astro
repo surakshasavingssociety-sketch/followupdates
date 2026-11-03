@@ -54,12 +54,22 @@ const interestOptions = [
             </div>
 
             <div class="field">
-              <label for="profile-category">User category</label>
-              <select class="select" id="profile-category" name="userCategory">
-                <option value="">Select your category</option>
-                {USER_CATEGORIES.map((category) => (
-                  <option value={category}>{category}</option>
-                ))}
+              <label for="profile-category">User status</label>
+              <select class="select" id="profile-user-status" name="userStatus">
+                <option value="">Select your status</option>
+                <option value="Student">Student</option>
+                <option value="Job aspirant">Job aspirant</option>
+                <option value="Teacher">Teacher</option>
+                <option value="Faculty">Faculty</option>
+                <option value="Research scholar">Research scholar</option>
+                <option value="School">School</option>
+                <option value="College">College</option>
+                <option value="University">University</option>
+                <option value="Coaching institute">Coaching institute</option>
+                <option value="Educational organisation">Educational organisation</option>
+                <option value="Government organisation">Government organisation</option>
+                <option value="Private organisation">Private organisation</option>
+                <option value="Open schooling provider">Open schooling provider</option>
               </select>
             </div>
 
@@ -289,6 +299,7 @@ const interestOptions = [
       if (element) element.value = value || "";
     };
     setSelect("#profile-category", profile?.userCategory);
+    setSelect("#profile-user-status", profile?.userStatus);
     setSelect("#profile-state", profile?.stateId);
     setSelect("#profile-level", profile?.educationLevel);
     setSelect("#profile-stream", profile?.stream);
@@ -383,6 +394,7 @@ const interestOptions = [
       await saveProfile(currentUser, {
         name: String(data.get("name") || "").trim(),
         userCategory: String(data.get("userCategory") || "") as UserProfile["userCategory"],
+        userStatus: String(data.get("userStatus") || "") as UserProfile["userStatus"],
         email: String(data.get("email") || "").trim(),
         phone: String(data.get("phone") || "").trim(),
         stateId,

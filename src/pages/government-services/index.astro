@@ -1,141 +1,39 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { SITE } from "../../lib/constants";
-import { states } from "../../lib/states";
-
-const centralServices = [
-  { name: "DigiLocker", url: "https://www.digilocker.gov.in/", description: "Store and share government-issued documents digitally." },
-  { name: "UMANG", url: "https://web.umang.gov.in/", description: "Single app for central and state government services." },
-  { name: "National Scholarship Portal", url: "https://scholarships.gov.in/", description: "Apply for central and state scholarships." },
-  { name: "e-District (services locator)", url: "https://edistrict.gov.in/", description: "Find your state's e-District portal for certificates and services." },
-  { name: "Employment Exchange (NCSEMIS)", url: "https://www.ncs.gov.in/", description: "National Career Service — job search and career guidance." },
-  { name: "Aadhaar services", url: "https://uidai.gov.in/", description: "Update Aadhaar, download e-Aadhaar, book appointments." },
-  { name: "PAN services (NSDL)", url: "https://www.onlineservices.nsdl.com/paam/endUserRegisterContact.html", description: "Apply for or correct PAN." },
-  { name: "Passport Seva", url: "https://www.passportindia.gov.in/", description: "Passport application and appointment booking." },
-  { name: "EPFO (provident fund)", url: "https://www.epfindia.gov.in/", description: "PF balance, claims and UAN services." },
-  { name: "Income tax e-filing", url: "https://www.incometax.gov.in/", description: "File income tax returns and view Form 26AS." },
-];
 ---
-
-<BaseLayout
-  title="Government services directory"
-  description="Official government service portals for students, aspirants, teachers and faculty — filtered by state."
-  noindex
->
-  <section class="section-tight" style="padding-top:30px">
+<BaseLayout title="Government services" description="E-district, scholarships, and government service links." gated={false}>
+  <section class="section-tight">
     <div class="container">
-      <div class="breadcrumb" style="padding:0 0 14px">
-        <a href="/">Dashboard</a><span>/</span><span>Government services</span>
-      </div>
+      <div class="eyebrow" style="background:var(--brand-soft);color:var(--brand);border-color:transparent">Government services</div>
+      <h1>Government services & e-district</h1>
+      <p class="muted">Useful government portals for students, aspirants, teachers and faculty.</p>
 
-      <div class="section-head" style="margin-bottom:18px">
-        <div>
-          <div class="eyebrow">Services</div>
-          <h1 style="font-size:clamp(1.8rem,3.6vw,2.5rem)">Government services directory</h1>
-          <p>
-            Official portals for certificates, scholarships, employment, identity and tax services. Pick your state to
-            see its government portal alongside the central services. Always verify the URL before entering personal
-            details.
-          </p>
-        </div>
-      </div>
-
-      <div class="panel" style="margin-bottom:18px">
-        <div class="field" style="max-width:360px">
-          <label for="service-state">Your state / UT</label>
-          <select class="select" id="service-state">
-            <option value="">All India (central services only)</option>
-            {states.map((state) => (
-              <option value={state.id}>{state.name}</option>
-            ))}
-          </select>
-        </div>
-        <p class="small muted" id="state-portal" style="margin:12px 0 0"></p>
-      </div>
-
-      <div class="section-head" style="margin-bottom:12px">
-        <div>
-          <h2 style="font-size:1.4rem;margin:0">Central government services</h2>
-        </div>
-      </div>
-      <div class="cards" style="margin-bottom:24px">
-        {centralServices.map((service) => (
-          <article class="card">
-            <div class="card-body">
-              <h3 style="margin:0 0 4px"><a href={service.url} target="_blank" rel="noopener">{service.name} ↗</a></h3>
-              <p class="small muted" style="margin:0">{service.description}</p>
-            </div>
-          </article>
-        ))}
-      </div>
-
-      <div class="section-head" style="margin-bottom:12px">
-        <div>
-          <h2 style="font-size:1.4rem;margin:0">State / UT portal</h2>
-          <p class="small muted">Select a state above to view its official government portal and education bodies.</p>
-        </div>
-      </div>
-      <div id="state-details" class="panel">
-        <p class="small muted">Select a state to see its portal, PSC, police recruitment board and education board.</p>
+      <div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+        <a class="panel" href="https://edistrict.gov.in/" target="_blank" rel="noopener" style="text-decoration:none">
+          <h3>e-District</h3>
+          <p class="small muted">State e-district services, certificates, applications.</p>
+        </a>
+        <a class="panel" href="https://scholarships.gov.in/" target="_blank" rel="noopener" style="text-decoration:none">
+          <h3>National Scholarship Portal</h3>
+          <p class="small muted">Central and state scholarships — apply online.</p>
+        </a>
+        <a class="panel" href="https://digilocker.gov.in/" target="_blank" rel="noopener" style="text-decoration:none">
+          <h3>DigiLocker</h3>
+          <p class="small muted">Digital document wallet for certificates and marksheets.</p>
+        </a>
+        <a class="panel" href="https://www.ugc.ac.in/" target="_blank" rel="noopener" style="text-decoration:none">
+          <h3>UGC</h3>
+          <p class="small muted">University Grants Commission — universities and colleges.</p>
+        </a>
+        <a class="panel" href="https://www.aicte-india.org/" target="_blank" rel="noopener" style="text-decoration:none">
+          <h3>AICTE</h3>
+          <p class="small muted">All India Council for Technical Education.</p>
+        </a>
+        <a class="panel" href="https://ncweb.du.ac.in/" target="_blank" rel="noopener" style="text-decoration:none">
+          <h3>NCWEB</h3>
+          <p class="small muted">Non-collegiate Women's Education Board.</p>
+        </a>
       </div>
     </div>
   </section>
-
-  <script type="application/json" id="states-data">
-    {JSON.stringify(states.map((s) => ({ id: s.id, name: s.name, portal: s.portal, psc: s.psc, police: s.police, board: s.board })))}
-  </script>
-
-  <script>
-    const states = JSON.parse(document.getElementById("states-data")?.textContent || "[]");
-    const select = document.querySelector<HTMLSelectElement>("#service-state");
-    const portal = document.querySelector<HTMLElement>("#state-portal");
-    const details = document.querySelector<HTMLElement>("#state-details");
-
-    function escapeHtml(value) {
-      return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;");
-    }
-
-    function renderState(id) {
-      const state = states.find((item) => item.id === id);
-      if (!state) {
-        if (portal) portal.textContent = "";
-        if (details) details.innerHTML = `<p class="small muted">Select a state to see its portal, PSC, police recruitment board and education board.</p>`;
-        return;
-      }
-      if (portal) {
-        portal.innerHTML = `Official portal: <a class="portal-link" data-url="${escapeHtml(state.portal)}" target="_blank" rel="noopener">${escapeHtml(state.portal)} ↗</a>`;
-        const a = portal.querySelector<HTMLAnchorElement>(".portal-link");
-        if (a) a.href = a.dataset.url || "#";
-      }
-      const rows = [
-        ["PSC", state.psc],
-        ["Police recruitment", state.police],
-        ["Education board", state.board],
-      ];
-      if (details) {
-        details.innerHTML = `
-          <h3 style="margin:0 0 8px">${escapeHtml(state.name)}</h3>
-          ${rows
-            .map(([label, value]) => {
-              const name = Array.isArray(value) ? value[0] : value;
-              const url = Array.isArray(value) ? value[value.length - 1] : "";
-              const link = url && /^https?:\/\//.test(url)
-                ? `<a class="src-link" data-url="${escapeHtml(url)}" target="_blank" rel="noopener">${escapeHtml(url)} ↗</a>`
-                : escapeHtml(String(value));
-              return `<div style="margin-bottom:8px"><strong>${escapeHtml(label)}:</strong> ${escapeHtml(name)}<br><span class="small">${link}</span></div>`;
-            })
-            .join("")}
-        `;
-        details.querySelectorAll<HTMLAnchorElement>(".src-link").forEach((a) => {
-          a.href = a.dataset.url || "#";
-        });
-      }
-    }
-
-    select?.addEventListener("change", () => renderState(select.value));
-  </script>
 </BaseLayout>
