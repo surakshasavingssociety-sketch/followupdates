@@ -1728,6 +1728,10 @@ a.exam-tag:hover {
   justify-content: center;
   padding: 60px 16px;
 }
+[hidden] {
+  display: none !important;
+}
+
 .auth-gate-wall[hidden] {
   display: none !important;
 }
