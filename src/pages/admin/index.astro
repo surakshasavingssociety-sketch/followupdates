@@ -633,6 +633,7 @@ let currentUserRole = "admin";
     }
 
     try {
+      if (!user.uid) { showPanel(deniedPanel); return; }
       const adminDoc = await getDoc(doc(db, "admins", user.uid));
       if (!adminDoc.exists()) {
         showPanel(deniedPanel);
