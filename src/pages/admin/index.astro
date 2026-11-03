@@ -42,10 +42,12 @@ import { CATEGORY_META } from "../../lib/constants";
       <div id="admin-denied" class="form-card hidden">
         <h1>Access denied</h1>
         <p>
-          Your account is signed in but is not on the admin list. Create the Firestore document
-          <code>admins/&lt;your-uid&gt;</code> to grant access.
+          You are signed in as <code>user@example.com</code> but are not on the admin list. Create the
+          Firestore document <code>admins/&lt;your-uid&gt;</code> to grant access. Copy this exact ID: <code id="admin-uid"></code>
         </p>
-        <button class="btn btn-outline" type="button" id="denied-signout">Sign out</button>
+        <p class="small muted">Run this shell command once (needs the service-account JSON in <code>.env</code>):</p>
+        <pre style="background:#f6f7f9;padding:10px 12px;border-radius:8px;font-size:0.75rem;overflow:auto"><span id="admin-uid-cmd"></span></pre>
+        <a class="btn btn-outline" type="button" href="/login/?next=/admin/">Go back to sign in</a>
       </div>
 
       <div id="admin-panel" class="hidden">
@@ -627,6 +629,10 @@ let currentUserRole = "admin";
   async function boot(user: User) {
     currentUser = user;
     if (adminEmail) adminEmail.textContent = user.email || "";
+    const uidEl = document.querySelector<HTMLElement>("#admin-uid");
+    const cmdEl = document.querySelector<HTMLElement>("#admin-uid-cmd");
+    if (uidEl) uidEl.textContent = user.uid || "unknown";
+    if (cmdEl && user.uid) cmdEl.textContent = `node -e "const {doc,setDoc,getFirestore,initializeApp}=require('firebase-admin');initializeApp({projectId:'followupdates'});getFirestore();"`;
     if (!db) {
       showPanel(configPanel);
       return;
