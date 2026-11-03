@@ -63,7 +63,7 @@ const categories = [
 <script>
   import { firebaseConfigured } from "../lib/firebase";
   import { watchAuth } from "../lib/auth";
-  import { currentUser } from "firebase/auth";
+  import { getAuth } from "firebase/auth";
 
   const gate = document.querySelector<HTMLElement>("#auth-gate");
   const content = document.querySelector<HTMLElement>("#auth-gate-content");
@@ -94,7 +94,7 @@ const categories = [
   }
 
   const maybeReveal = () => {
-    if (!firebaseConfigured || !currentUser()) {
+    if (!firebaseConfigured || !getAuth().currentUser) {
       if (!gated) return;
       block();
       return;
