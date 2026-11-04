@@ -69,6 +69,9 @@ Isi liye:
 - [x] Institution verification approve/reject — admin inquiries se `users/{uid}.institutionVerified` set hota hai
 - [x] Profile verification request — official proof link + pending/verified status
 - [x] Dynamic dashboard banner — live counts, next deadline, closing-in-7-days
+- [x] Category-wise dashboard banner — 17 user categories, alag kicker/CTA/palette
+- [x] Admin pages se public page banner + sign-in promo hidden
+- [x] Review queue fix — `discoveredAt` missing wale legacy docs bhi ab dikhte hain; fast pending count
 - [x] App-like responsive polish — fluid containers, mobile admin actions, safe wrapping
 - [x] Public portfolio — opt-in `portfolios/{uid}` + share link
 - [x] Social follow icons removed from public site
@@ -100,3 +103,4 @@ Isi liye:
 | `6093c7f` | Structure: unique exam titles, 1 h1/page, generator fix, manager/executive roles | ✅ |
 | `26cf217` | Structure: exam title polish | ✅ |
 | `15ea235` | Admin panel: sticky nav, automation runner, verification approvals, dashboard banner, portfolio + resume foundation | ✅ |
+| `2c4f892` | Queue visibility fix (legacy docs), admin banners/promo removed, 17 category dashboard banners | ✅ |
