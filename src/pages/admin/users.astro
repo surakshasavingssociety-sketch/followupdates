@@ -221,7 +221,13 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         } catch (error) {
           const msg = document.querySelector<HTMLElement>("#au-login-message");
           if (msg) {
-            msg.textContent = error instanceof Error ? error.message : "Sign-in failed.";
+            const code = (error as { code?: string })?.code || "";
+            msg.textContent =
+              code === "auth/invalid-credential" || code === "auth/wrong-password" || code === "auth/user-not-found"
+                ? "Email or password is incorrect. Ask a Super Admin to reset your access."
+                : error instanceof Error
+                  ? error.message
+                  : "Sign-in failed.";
             msg.className = "form-message show error";
           }
         }

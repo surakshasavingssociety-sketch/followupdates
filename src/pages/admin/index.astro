@@ -37,17 +37,29 @@ import { CATEGORY_META } from "../../lib/constants";
           <button class="btn btn-primary" type="submit">Sign in</button>
           <button class="btn btn-outline" type="button" id="google-login">Continue with Google</button>
         </form>
+        <p class="small muted" style="margin:12px 0 0">
+          Forgot your password?
+          <button class="btn btn-ghost btn-sm" type="button" id="reset-password">Send reset link</button>
+        </p>
+        <p class="small muted" style="margin:6px 0 0">
+          Owner email: <strong>surakshasavingssociety@gmail.com</strong> — first sign-in creates the admin account automatically.
+        </p>
       </div>
 
       <div id="admin-denied" class="form-card hidden">
         <h1>Access denied</h1>
         <p>
-          You are signed in as <code>user@example.com</code> but are not on the admin list. Create the
-          Firestore document <code>admins/&lt;your-uid&gt;</code> to grant access. Copy this exact ID: <code id="admin-uid"></code>
+          You are signed in as <strong id="denied-email">—</strong> but this account is not on the admin list.
         </p>
-        <p class="small muted">Run this shell command once (needs the service-account JSON in <code>.env</code>):</p>
-        <pre style="background:#f6f7f9;padding:10px 12px;border-radius:8px;font-size:0.75rem;overflow:auto"><span id="admin-uid-cmd"></span></pre>
-        <a class="btn btn-outline" type="button" href="/login/?next=/admin/">Go back to sign in</a>
+        <p>
+          Only the owner email can self-provision the first admin account. If you are the owner, sign out and sign in again
+          with <strong>surakshasavingssociety@gmail.com</strong> — the admin document will be created automatically.
+        </p>
+        <p class="small muted">Your user ID: <code id="admin-uid"></code></p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+          <button class="btn btn-outline" type="button" id="denied-signout">Sign out and try another account</button>
+          <a class="btn btn-ghost" href="/login/?next=/admin/">Go to sign in</a>
+        </div>
       </div>
 
       <div id="admin-panel" class="hidden">
@@ -72,6 +84,8 @@ import { CATEGORY_META } from "../../lib/constants";
             <a class="btn btn-ghost btn-sm" href="/admin/users/">Admin users</a>
             <a class="btn btn-ghost btn-sm" href="/admin/inquiries/">Enquiries</a>
             <a class="btn btn-ghost btn-sm" href="/admin/analytics/">Analytics</a>
+            <a class="btn btn-ghost btn-sm" href="/admin/settings/">Settings</a>
+            <a class="btn btn-ghost btn-sm" href="/" target="_blank" rel="noopener">View site ↗</a>
             <span class="small muted" id="admin-email"></span>
             <button class="btn btn-outline btn-sm" type="button" id="admin-signout">Sign out</button>
           </div>
@@ -249,6 +263,7 @@ import { CATEGORY_META } from "../../lib/constants";
   import {
     GoogleAuthProvider,
     onAuthStateChanged,
+    sendPasswordResetEmail,
     signInWithEmailAndPassword,
     signInWithPopup,
     signOut,
@@ -290,7 +305,34 @@ import { CATEGORY_META } from "../../lib/constants";
 
   let db: ReturnType<typeof getFirebaseDb> = null;
   let currentUser: User | null = null;
-let currentUserRole = "admin";
+let currentUserRole = "";
+const OWNER_EMAIL = "surakshasavingssociety@gmail.com";
+
+function authErrorMessage(error: unknown): string {
+  const code = (error as { code?: string })?.code || "";
+  switch (code) {
+    case "auth/invalid-credential":
+    case "auth/wrong-password":
+    case "auth/user-not-found":
+      return "Email or password is incorrect. Check the details, or use “Send reset link” to reset your password.";
+    case "auth/invalid-email":
+      return "That email address is not valid.";
+    case "auth/too-many-requests":
+      return "Too many attempts. Please wait a minute and try again.";
+    case "auth/operation-not-allowed":
+      return "Email/password sign-in is not enabled for this Firebase project. Enable it in Firebase Console → Authentication → Sign-in method.";
+    case "auth/unauthorized-domain":
+      return "This domain is not authorised in Firebase Authentication → Settings → Authorized domains.";
+    case "auth/popup-blocked":
+      return "The Google popup was blocked. Allow popups for this site and try again.";
+    case "auth/popup-closed-by-user":
+      return "Google sign-in was closed before it finished.";
+    case "auth/network-request-failed":
+      return "Network error. Check your connection and try again.";
+    default:
+      return error instanceof Error ? error.message : "Sign-in failed. Please try again.";
+  }
+}
   let pending: PendingJob[] = [];
   let published: PendingJob[] = [];
   let activeTab = "pending";
@@ -626,25 +668,38 @@ let currentUserRole = "admin";
     if (tab === "published") loadPublished();
   }
 
+  function showDenied(user: User) {
+    const deniedEmail = document.querySelector<HTMLElement>("#denied-email");
+    const uidEl = document.querySelector<HTMLElement>("#admin-uid");
+    if (deniedEmail) deniedEmail.textContent = user.email || user.displayName || "this account";
+    if (uidEl) uidEl.textContent = user.uid || "unknown";
+    showPanel(deniedPanel);
+  }
+
   async function boot(user: User) {
     currentUser = user;
     if (adminEmail) adminEmail.textContent = user.email || "";
-    const uidEl = document.querySelector<HTMLElement>("#admin-uid");
-    const cmdEl = document.querySelector<HTMLElement>("#admin-uid-cmd");
-    if (uidEl) uidEl.textContent = user.uid || "unknown";
-    if (cmdEl && user.uid) cmdEl.textContent = `node -e "const {doc,setDoc,getFirestore,initializeApp}=require('firebase-admin');initializeApp({projectId:'followupdates'});getFirestore();"`;
     if (!db) {
       showPanel(configPanel);
       return;
     }
 
     try {
-      if (!user.uid) { showPanel(deniedPanel); return; }
-      const adminDoc = await getDoc(doc(db, "admins", user.uid));
-      if (!adminDoc.exists()) {
-        showPanel(deniedPanel);
-        return;
+      if (!user.uid) { showDenied(user); return; }
+      let adminDoc = await getDoc(doc(db, "admins", user.uid));
+
+      // Owner bootstrap: first sign-in with the owner email creates the admin
+      // document, so there is no chicken-and-egg lockout.
+      if (!adminDoc.exists() && (user.email || "").toLowerCase() === OWNER_EMAIL) {
+        await setDoc(
+          doc(db, "admins", user.uid),
+          { email: user.email, role: "super_admin", createdAt: new Date().toISOString() },
+          { merge: true },
+        );
+        adminDoc = await getDoc(doc(db, "admins", user.uid));
       }
+
+      if (!adminDoc.exists()) { showDenied(user); return; }
       const role = (adminDoc.data()?.role as string) || "admin";
       currentUserRole = role;
       const roleBadge = document.querySelector<HTMLElement>("#admin-role");
@@ -657,7 +712,7 @@ let currentUserRole = "admin";
       await loadPublished();
       loadStats();
     } catch (error) {
-      showPanel(deniedPanel);
+      showDenied(user);
       console.error(error);
     }
   }
@@ -684,7 +739,21 @@ let currentUserRole = "admin";
           showMessage(loginMessage, "Signing in…", "info");
           await signInWithEmailAndPassword(auth, email, password);
         } catch (error) {
-          showMessage(loginMessage, error instanceof Error ? error.message : "Sign-in failed.", "error");
+          showMessage(loginMessage, authErrorMessage(error), "error");
+        }
+      });
+
+      document.querySelector("#reset-password")?.addEventListener("click", async () => {
+        const email = document.querySelector<HTMLInputElement>("#login-email")?.value.trim() || "";
+        if (!email) {
+          showMessage(loginMessage, "Enter your email address first, then press “Send reset link”.", "error");
+          return;
+        }
+        try {
+          await sendPasswordResetEmail(auth, email);
+          showMessage(loginMessage, `Password reset link sent to ${email}. Check your inbox and spam folder.`, "success");
+        } catch (error) {
+          showMessage(loginMessage, authErrorMessage(error), "error");
         }
       });
 
@@ -692,7 +761,7 @@ let currentUserRole = "admin";
         try {
           await signInWithPopup(auth, new GoogleAuthProvider());
         } catch (error) {
-          showMessage(loginMessage, error instanceof Error ? error.message : "Google sign-in failed.", "error");
+          showMessage(loginMessage, authErrorMessage(error), "error");
         }
       });
 

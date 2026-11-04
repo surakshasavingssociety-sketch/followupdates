@@ -347,6 +347,9 @@ export type UserProfile = {
   phone?: string;
   userStatus?: UserStatus;
   userCategory?: UserCategory;
+  institutionVerified?: boolean;
+  institutionName?: string;
+  institutionType?: "government" | "private" | "autonomous" | "deemed";
   stateId?: string;
   stateName?: string;
   educationLevel?: EducationLevel;

@@ -70,6 +70,9 @@ const {
         <button class="btn btn-primary btn-block" type="submit" id="email-submit">Sign in</button>
       </form>
       <p class="auth-switch">
+        <button class="link-button" type="button" id="email-forgot">Forgot password?</button>
+      </p>
+      <p class="auth-switch">
         <span id="email-mode-text">New to FollowExam?</span>
         <button class="link-button" type="button" id="email-mode-toggle">Create an account</button>
       </p>
@@ -118,6 +121,7 @@ const {
   import {
     confirmPhoneCode,
     friendlyAuthError,
+    requestPasswordReset,
     signInWithEmail,
     signInWithGoogle,
     signUpWithEmail,
@@ -234,6 +238,22 @@ const {
       show(friendlyAuthError(error), "error");
     } finally {
       setBusy(emailSubmit, false, emailMode === "signup" ? "Create account" : "Sign in");
+    }
+  });
+
+  document.querySelector("#email-forgot")?.addEventListener("click", async () => {
+    const email = document.querySelector<HTMLInputElement>("#auth-email")?.value.trim() || "";
+    if (!email) {
+      show("Enter your email address above, then press “Forgot password?”.", "error");
+      document.querySelector<HTMLInputElement>("#auth-email")?.focus();
+      return;
+    }
+    try {
+      show("Sending a password reset link…", "info");
+      await requestPasswordReset(email);
+      show(`Password reset link sent to ${email}. Check your inbox and spam folder.`, "success");
+    } catch (error) {
+      show(friendlyAuthError(error), "error");
     }
   });
 

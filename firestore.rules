@@ -25,6 +25,13 @@ service cloud.firestore {
        return isAdmin() && adminRole() == role;
     }
 
+    // Bootstrap: the registered owner email may create its own admin doc once.
+    function isBootstrapOwner(candidateUid) {
+      return isSignedIn()
+        && request.auth.uid == candidateUid
+        && request.auth.token.email == 'surakshasavingssociety@gmail.com';
+    }
+
     function validEmail(value) {
       return value is string && value.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$') && value.size() < 200;
     }
@@ -47,7 +54,8 @@ service cloud.firestore {
     match /admins/{uid} {
       allow get: if isSignedIn() && request.auth.uid == uid;
       allow read: if isAdmin();
-      allow create, update, delete: if isSuperAdmin();
+      allow create: if isSuperAdmin() || isBootstrapOwner(uid);
+      allow update, delete: if isSuperAdmin();
     }
 
     // Newsletter subscribers.

@@ -74,6 +74,30 @@ const interestOptions = [
             </div>
 
             <div class="field">
+              <label for="profile-institution-verify">Institution verification</label>
+              <select class="select" id="profile-institution-verify" name="institutionVerified">
+                <option value="">Not verified</option>
+                <option value="verified">Verified details</option>
+                <option value="public-profile">Public profile only</option>
+              </select>
+            </div>
+
+            <div class="field full">
+              <label for="profile-portfolio">Portfolio link</label>
+              <input class="input" type="url" id="profile-portfolio" name="portfolio" placeholder="https://…" />
+            </div>
+
+            <div class="field full">
+              <label for="profile-resume">Resume / CV link</label>
+              <input class="input" type="url" id="profile-resume" name="resumeUrl" placeholder="https://…" />
+            </div>
+
+            <div class="field full">
+              <label for="profile-skills">Skills (comma separated)</label>
+              <input class="input" id="profile-skills" name="skills" placeholder="Python, SQL" />
+            </div>
+
+            <div class="field">
               <label for="profile-email">Email</label>
               <input class="input" id="profile-email" name="email" type="email" autocomplete="email" readonly />
             </div>
@@ -300,6 +324,10 @@ const interestOptions = [
     };
     setSelect("#profile-category", profile?.userCategory);
     setSelect("#profile-user-status", profile?.userStatus);
+    setSelect("#profile-institution-verify", profile?.institutionVerified ? "verified" : "");
+    setInput("#profile-portfolio", profile?.portfolio);
+    setInput("#profile-resume", profile?.resumeUrl);
+    setInput("#profile-skills", profile?.skills ? (profile.skills || []).join(", ") : "");
     setSelect("#profile-state", profile?.stateId);
     setSelect("#profile-level", profile?.educationLevel);
     setSelect("#profile-stream", profile?.stream);
@@ -395,6 +423,10 @@ const interestOptions = [
         name: String(data.get("name") || "").trim(),
         userCategory: String(data.get("userCategory") || "") as UserProfile["userCategory"],
         userStatus: String(data.get("userStatus") || "") as UserProfile["userStatus"],
+        institutionVerified: data.get("institutionVerified") === "verified",
+        portfolio: String(data.get("portfolio") || "") || undefined,
+        resumeUrl: String(data.get("resumeUrl") || "") || undefined,
+        skills: String(data.get("skills") || "").split(",").map(s => s.trim()).filter(Boolean) || undefined,
         email: String(data.get("email") || "").trim(),
         phone: String(data.get("phone") || "").trim(),
         stateId,

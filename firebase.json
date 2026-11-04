@@ -37,5 +37,14 @@
   "firestore": {
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
+  },
+  "auth": {
+    "providers": {
+      "emailPassword": true,
+      "googleSignIn": {
+        "oAuthBrandDisplayName": "FollowExam",
+        "supportEmail": "surakshasavingssociety@gmail.com"
+      }
+    }
   }
 }

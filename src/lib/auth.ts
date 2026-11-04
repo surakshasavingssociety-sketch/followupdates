@@ -3,6 +3,7 @@ import {
   RecaptchaVerifier,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPhoneNumber,
   signInWithPopup,
@@ -50,6 +51,12 @@ export async function signUpWithEmail(email: string, password: string, name?: st
   const result = await createUserWithEmailAndPassword(auth, email, password);
   if (name) await updateProfile(result.user, { displayName: name });
   return result.user;
+}
+
+export async function requestPasswordReset(email: string): Promise<void> {
+  const auth = getFirebaseAuth();
+  if (!auth) throw new Error("Firebase is not configured.");
+  await sendPasswordResetEmail(auth, email);
 }
 
 let recaptcha: RecaptchaVerifier | null = null;
