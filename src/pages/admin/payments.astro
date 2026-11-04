@@ -8,7 +8,7 @@ const gwFile = path.join(process.cwd(), "data", "payment-gateways.json");
 const gwData = JSON.parse(fs.readFileSync(gwFile, "utf8"));
 ---
 
-<BaseLayout title="Payment settings" description="Configure payment gateways (admin only)." noindex gated={false}>
+<BaseLayout banner={false} title="Payment settings" description="Configure payment gateways (admin only)." noindex gated={false}>
   <section class="section-tight" style="padding-top:30px">
     <div class="container">
       <AdminNav />

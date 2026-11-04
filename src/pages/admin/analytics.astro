@@ -45,7 +45,7 @@ const states = [...byState.entries()].sort((a, b) => b[1] - a[1]).slice(0, 12);
 const exams = [...byExam.entries()].sort((a, b) => b[1] - a[1]).slice(0, 10);
 ---
 
-<BaseLayout title="Analytics" description="Content and audience analytics (admin only)." noindex>
+<BaseLayout banner={false} title="Analytics" description="Content and audience analytics (admin only)." noindex>
   <section class="section-tight" style="padding-top:30px">
     <div class="container">
       <AdminNav />

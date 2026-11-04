@@ -4,7 +4,7 @@ import AdminNav from "../../components/AdminNav.astro";
 import { CATEGORY_META } from "../../lib/constants";
 ---
 
-<BaseLayout title="Admin review" description="FollowExam admin review queue." noindex gated={false}>
+<BaseLayout banner={false} title="Admin review" description="FollowExam admin review queue." noindex gated={false}>
   <section class="admin-shell">
     <div class="container">
       <AdminNav />
@@ -279,6 +279,7 @@ import { CATEGORY_META } from "../../lib/constants";
     collection,
     deleteDoc,
     doc,
+    getCountFromServer,
     getDoc,
     getDocs,
     limit,
@@ -476,20 +477,64 @@ function authErrorMessage(error: unknown): string {
       .join("");
   }
 
+  function toMillis(value: unknown): number {
+    if (!value) return 0;
+    if (typeof value === "number") return value;
+    if (value instanceof Date) return value.getTime();
+    if (typeof value === "object" && value !== null && typeof (value as any).toDate === "function") {
+      return (value as any).toDate().getTime();
+    }
+    const parsed = Date.parse(String(value));
+    return Number.isNaN(parsed) ? 0 : parsed;
+  }
+
+  function isOpenPending(job: PendingJob) {
+    const status = String(job.status || "pending").toLowerCase();
+    return !["approved", "rejected", "published", "archived", "deleted"].includes(status);
+  }
+
+  function sortByNewest(items: PendingJob[]) {
+    return items.sort(
+      (a, b) =>
+        toMillis(b.discoveredAt ?? b.createdAt ?? b.updatedAt) - toMillis(a.discoveredAt ?? a.createdAt ?? a.updatedAt),
+    );
+  }
+
   async function loadPending() {
     if (!db) return;
+    let rows: PendingJob[] = [];
+    let failed = false;
+
+    // Deliberately no orderBy: Firestore drops documents that are missing the
+    // ordered field, which made legacy queue entries invisible. Fetch, then
+    // filter and sort locally so every pending item is always shown.
     try {
-      const snapshot = await getDocs(
-        query(collection(db, "pending"), where("status", "==", "pending"), orderBy("discoveredAt", "desc"), limit(200)),
-      );
-      pending = snapshot.docs.map((item) => ({ id: item.id, ...item.data() }));
-    } catch {
-      const snapshot = await getDocs(query(collection(db, "pending"), orderBy("discoveredAt", "desc"), limit(300)));
-      pending = snapshot.docs
-        .map((item) => ({ id: item.id, ...item.data() }))
-        .filter((item) => item.status !== "approved" && item.status !== "rejected")
-        .slice(0, 200);
+      const snapshot = await getDocs(query(collection(db, "pending"), where("status", "==", "pending"), limit(400)));
+      rows = snapshot.docs.map((item) => ({ id: item.id, ...item.data() }));
+    } catch (error) {
+      console.warn("Pending status query failed, falling back to full collection.", error);
+      failed = true;
     }
+
+    if (!rows.length) {
+      try {
+        const snapshot = await getDocs(query(collection(db, "pending"), limit(600)));
+        rows = snapshot.docs.map((item) => ({ id: item.id, ...item.data() })).filter(isOpenPending);
+        failed = false;
+      } catch (error) {
+        console.error("Could not load the review queue.", error);
+        pending = [];
+        if (pendingList) {
+          const message = error instanceof Error ? error.message : "Unknown error";
+          pendingList.innerHTML = `<div class="empty"><h3>Could not load the queue</h3><p>${esc(message)}</p><p class="small muted">Check the browser console and Firestore rules.</p></div>`;
+        }
+        if (pendingCount) pendingCount.textContent = "";
+        return;
+      }
+    }
+
+    pending = sortByNewest(rows.filter(isOpenPending)).slice(0, 300);
+    if (failed) console.info("Review queue loaded using fallback query.");
     renderPending();
   }
 
@@ -500,10 +545,14 @@ function authErrorMessage(error: unknown): string {
       if (el) el.textContent = String(value);
     };
     try {
-      const s = await getDocs(collection(db, "pending"));
-      const count = s.docs.filter((item) => (item.data().status || "pending") === "pending").length;
-      set("#stat-pending", count);
-    } catch {}
+      const s = await getCountFromServer(query(collection(db, "pending"), where("status", "==", "pending")));
+      set("#stat-pending", s.data().count);
+    } catch {
+      try {
+        const s = await getDocs(collection(db, "pending"));
+        set("#stat-pending", s.docs.filter((item) => (item.data().status || "pending") === "pending").length);
+      } catch {}
+    }
     try {
       const s = await getDocs(collection(db, "jobs"));
       const items = s.docs.map((item) => item.data());

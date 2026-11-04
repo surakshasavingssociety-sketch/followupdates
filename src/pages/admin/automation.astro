@@ -41,7 +41,7 @@ const runAt = report.runAt ? new Date(report.runAt) : null;
 const lastRun = runAt && !Number.isNaN(runAt.getTime()) ? runAt.toLocaleString("en-IN") : "No run recorded";
 ---
 
-<BaseLayout title="Automation control" description="Monitor and manage government source monitoring (admin only)." noindex>
+<BaseLayout banner={false} title="Automation control" description="Monitor and manage government source monitoring (admin only)." noindex>
   <section class="section-tight" style="padding-top:30px">
     <div class="container">
       <AdminNav />

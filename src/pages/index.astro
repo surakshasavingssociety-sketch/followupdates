@@ -82,14 +82,18 @@ const schema = {
 
     <!-- Signed-in view: the dashboard. -->
     <div id="home-dashboard" class="home-dashboard" hidden>
-      <section class="dash-hero" aria-label="Dashboard summary">
+      <section class="dash-hero" id="dash-hero" data-category="student" aria-label="Dashboard summary">
         <div class="dash-hero-copy">
-          <div class="eyebrow dash-eyebrow">Live dashboard · <span id="dash-date">{bannerDate}</span></div>
+          <div class="dash-hero-top">
+            <div class="eyebrow dash-eyebrow">Live dashboard · <span id="dash-date">{bannerDate}</span></div>
+            <span class="dash-hero-chip" id="dash-chip" hidden>Student</span>
+          </div>
+          <p class="dash-hero-kicker" id="dash-kicker">Your study and exam command centre</p>
           <h2>Welcome back, <span id="dash-name">student</span>.</h2>
           <p id="dash-subtitle">
             Here are the latest official notifications, scholarships and institutions that match your profile.
           </p>
-          <div class="dash-hero-actions">
+          <div class="dash-hero-actions" id="dash-actions">
             <a class="btn btn-accent" href="/jobs/">Browse updates</a>
             <a class="btn btn-outline" href="/profile/">Edit profile</a>
             <a class="btn btn-ghost" href="/career/">Career roadmap</a>
@@ -236,6 +240,7 @@ const schema = {
     recommendedScholarships,
     type CareerPath,
   } from "../lib/profile";
+  import { bannerFor, type CategoryBanner } from "../lib/banners";
   import type { Exam, Institution, Scholarship, UserProfile } from "../lib/types";
 
   const authView = document.querySelector<HTMLElement>("#home-auth");
@@ -270,6 +275,42 @@ const schema = {
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;")
       .replace(/'/g, "&#39;");
+  }
+
+  function renderBannerActions(banner: CategoryBanner) {
+    const actions = document.querySelector<HTMLElement>("#dash-actions");
+    if (!actions) return;
+    actions.innerHTML = `
+      <a class="btn btn-accent" href="${banner.primary.href}">${escapeHtml(banner.primary.label)}</a>
+      <a class="btn btn-outline" href="${banner.secondary.href}">${escapeHtml(banner.secondary.label)}</a>
+      <a class="btn btn-ghost" href="${banner.ghost.href}">${escapeHtml(banner.ghost.label)}</a>`;
+  }
+
+  /** Swap the hero copy, CTA and palette for the signed-in user's category. */
+  function applyDashboardBanner(profile: UserProfile | null) {
+    const hero = document.querySelector<HTMLElement>("#dash-hero");
+    const banner = bannerFor(profile);
+    if (!hero) return;
+
+    hero.dataset.category = banner.category.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+    hero.setAttribute("aria-label", `Dashboard summary for ${banner.category}`);
+    hero.style.setProperty("--hero-accent", banner.accent);
+    hero.style.setProperty("--hero-glow-1", banner.glow1);
+    hero.style.setProperty("--hero-glow-2", banner.glow2);
+    hero.style.setProperty("--hero-from", banner.from);
+    hero.style.setProperty("--hero-via", banner.via);
+    hero.style.setProperty("--hero-to", banner.to);
+
+    setText("#dash-kicker", banner.kicker);
+    setText("#dash-subtitle", banner.subtitle);
+
+    const chip = document.querySelector<HTMLElement>("#dash-chip");
+    if (chip) {
+      chip.textContent = banner.label;
+      chip.hidden = false;
+    }
+
+    renderBannerActions(banner);
   }
 
   function completion(profile: UserProfile | null) {
@@ -398,6 +439,7 @@ const schema = {
     if (dashboard) dashboard.hidden = false;
 
     const profile = await loadProfile(user);
+    applyDashboardBanner(profile);
     const displayName = profile?.name || user.displayName || user.email?.split("@")[0] || "student";
     if (nameEl) nameEl.textContent = displayName.split(/\s+/)[0] || displayName;
     setText("#header-name", displayName);

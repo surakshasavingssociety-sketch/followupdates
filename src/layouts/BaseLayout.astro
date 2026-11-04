@@ -15,6 +15,8 @@ type Props = {
   schema?: Record<string, unknown> | Record<string, unknown>[];
   /** Set to false for the login screen and the legal pages. */
   gated?: boolean;
+  /** Set to false to hide the public page banner and sign-in promo (e.g. admin pages). */
+  banner?: boolean;
 };
 
 const {
@@ -25,6 +27,7 @@ const {
   type = "website",
   schema,
   gated = true,
+  banner = true,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, SITE.url).toString();
@@ -87,9 +90,9 @@ const allSchema = [websiteSchema, ...(Array.isArray(schema) ? schema : schema ? 
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <Header />
-    <PageBanner eyebrow="FollowExam" title="Every government exam. One account." />
+    {banner && <PageBanner eyebrow="FollowExam" title="Every government exam. One account." />}
     <main id="main">
-      <AuthGate gated={gated}>
+      <AuthGate gated={gated} promo={banner}>
         <slot />
       </AuthGate>
     </main>

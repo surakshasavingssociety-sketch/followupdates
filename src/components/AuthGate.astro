@@ -1,19 +1,22 @@
 ---
 type Props = {
   gated?: boolean;
+  promo?: boolean;
 }
 
-const { gated = true } = Astro.props;
+const { gated = true, promo = true } = Astro.props;
 ---
 
 <div class="auth-gate" id="auth-gate" data-gated={String(gated)}>
-  <div class="auth-banner" id="auth-banner">
-    <div class="container" style="display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;padding:14px 16px;background:linear-gradient(90deg,#0b4f9c,#083a73);border-radius:0 0 var(--radius) var(--radius);color:#fff;">
-      <span style="font-weight:700;font-size:0.85rem;letter-spacing:0.04em;">EVERY EXAM. ONE ACCOUNT.</span>
-      <span style="opacity:0.7;font-size:0.78rem;">FollowExam shows jobs, scholarships, institutions and career tools inside your account.</span>
-      <a class="btn" href="/login/" style="background:#fff;color:#083a73;padding:6px 14px;border-radius:999px;font-size:0.82rem;font-weight:700;text-decoration:none;margin-left:auto;white-space:nowrap;">Sign in</a>
+  {promo && (
+    <div class="auth-banner" id="auth-banner">
+      <div class="container" style="display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;padding:14px 16px;background:linear-gradient(90deg,#0b4f9c,#083a73);border-radius:0 0 var(--radius) var(--radius);color:#fff;">
+        <span style="font-weight:700;font-size:0.85rem;letter-spacing:0.04em;">EVERY EXAM. ONE ACCOUNT.</span>
+        <span style="opacity:0.7;font-size:0.78rem;">FollowExam shows jobs, scholarships, institutions and career tools inside your account.</span>
+        <a class="btn" href="/login/" style="background:#fff;color:#083a73;padding:6px 14px;border-radius:999px;font-size:0.82rem;font-weight:700;text-decoration:none;margin-left:auto;white-space:nowrap;">Sign in</a>
+      </div>
     </div>
-  </div>
+  )}
   <div class="auth-gate-content" id="auth-gate-content" style="display:block;visibility:visible;">
     <slot />
   </div>

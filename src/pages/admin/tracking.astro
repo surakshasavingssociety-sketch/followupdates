@@ -10,7 +10,7 @@ const tracking = JSON.parse(fs.readFileSync(trackingFile, "utf8"));
 const records = tracking.records || [];
 ---
 
-<BaseLayout title="Notification tracking" description="Track expected vs actual government notifications (admin only)." noindex>
+<BaseLayout banner={false} title="Notification tracking" description="Track expected vs actual government notifications (admin only)." noindex>
   <section class="section-tight" style="padding-top:30px">
     <div class="container">
       <AdminNav />

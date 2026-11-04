@@ -9,7 +9,7 @@ const plansFile = path.join(process.cwd(), "data", "institution-plans.json");
 const plansData = JSON.parse(fs.readFileSync(plansFile, "utf8"));
 ---
 
-<BaseLayout title="Institution plans" description="Manage institution subscription plans (admin only)." noindex>
+<BaseLayout banner={false} title="Institution plans" description="Manage institution subscription plans (admin only)." noindex>
   <section class="section-tight" style="padding-top:30px">
     <div class="container">
       <AdminNav />
