@@ -1,24 +1,25 @@
 {
-  "runAt": "2026-11-03T02:38:33.116Z",
-  "newItems": 41,
-  "totalPending": 199,
+  "runAt": "2026-11-04T02:37:16.958Z",
+  "newItems": 36,
+  "totalPending": 235,
   "cycleQueries": [
-    "Exam cycle: KVS Recruitment (notification)",
     "Exam cycle: LIC Assistant (exam)",
     "Exam cycle: NEET PG (notification)",
     "Exam cycle: NIACL AO (exam)",
     "Exam cycle: NVS Recruitment (exam)",
     "Exam cycle: RBI Assistant (exam)",
     "Exam cycle: RRB ALP (exam)",
-    "Exam cycle: RRB JE (exam)"
+    "Exam cycle: RRB JE (exam)",
+    "Exam cycle: RRB NTPC (notification)"
   ],
   "stateQueries": [
-    "State: Punjab",
     "State: Rajasthan",
     "State: Sikkim",
     "State: Tamil Nadu",
     "State: Telangana",
-    "State: Tripura"
+    "State: Tripura",
+    "State: Uttar Pradesh"
   ],
+  "disabledSources": [],
   "errors": []
 }
