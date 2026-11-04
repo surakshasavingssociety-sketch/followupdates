@@ -1,45 +1,272 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 ---
+
 <BaseLayout title="Admin settings" noindex gated={false}>
   <section class="admin-shell">
     <div class="container">
-      <h1>Admin settings</h1>
-      <p class="muted">Configure portal name, logo URL, Blaze feature toggles, and payment settings.</p>
-
-      <div class="panel" style="margin-top:16px">
-        <h2 style="font-size:1.1rem">Brand</h2>
-        <div class="form-grid" style="margin-top:8px">
-          <div class="field">
-            <label for="site-name">Portal name</label>
-            <input class="input" id="site-name" value="FollowExam" />
-          </div>
-          <div class="field">
-            <label for="logo-url">Logo URL</label>
-            <input class="input" id="logo-url" value="/favicon.svg" />
-          </div>
-        </div>
+      <div id="st-loading" class="panel">
+        <p class="muted">Loading settings…</p>
       </div>
 
-      <div class="panel" style="margin-top:8px">
-        <h2 style="font-size:1.1rem">Blaze features</h2>
-        <p class="small muted">Enable or disable features that use Firebase Blaze services.</p>
-        <div class="form-grid" style="margin-top:8px">
-          <label class="check-item"><input type="checkbox" checked /> Automation & daily pipeline</label>
-          <label class="check-item"><input type="checkbox" /> Phone authentication</label>
-          <label class="check-item"><input type="checkbox" /> Telegram bot notifications</label>
-          <label class="check-item"><input type="checkbox" /> Email digest (SMTP)</label>
-          <label class="check-item"><input type="checkbox" /> Social media auto-post</label>
-          <label class="check-item"><input type="checkbox" /> Payment gateways</label>
-          <label class="check-item"><input type="checkbox" /> Analytics dashboard</label>
-        </div>
+      <div id="st-config" class="panel hidden">
+        <h1 style="font-size:1.4rem">Firebase setup required</h1>
+        <p class="small muted">Set the PUBLIC_FIREBASE_* values and rebuild to use admin settings.</p>
       </div>
 
-      <div class="panel" style="margin-top:8px">
-        <h2 style="font-size:1.1rem">Admin users & roles</h2>
-        <p class="small muted">Create new roles (manager, executive) and assign users.</p>
-        <a class="btn btn-outline btn-sm" href="/admin/users/">Manage users</a>
+      <div id="st-login" class="form-card hidden">
+        <h1>Admin sign in</h1>
+        <p class="muted small">Only authorised administrators can change site settings.</p>
+        <div class="form-message" id="st-login-message" role="status"></div>
+        <form id="st-login-form" class="form-grid">
+          <div class="field">
+            <label for="st-email">Email</label>
+            <input class="input" id="st-email" type="email" autocomplete="email" required />
+          </div>
+          <div class="field">
+            <label for="st-password">Password</label>
+            <input class="input" id="st-password" type="password" autocomplete="current-password" required />
+          </div>
+          <div class="field full">
+            <button class="btn btn-primary" type="submit">Sign in</button>
+          </div>
+        </form>
+      </div>
+
+      <div id="st-denied" class="form-card hidden">
+        <h1>Access denied</h1>
+        <p class="small muted">This account is not an admin.</p>
+        <button class="btn btn-outline" type="button" id="st-denied-signout">Sign out</button>
+      </div>
+
+      <div id="st-panel" class="hidden">
+        <div class="admin-head" style="margin-bottom:12px">
+          <div>
+            <div class="eyebrow" style="background:var(--brand-soft);color:var(--brand);border-color:transparent">Admin</div>
+            <h1 style="font-size:clamp(1.6rem,3vw,2.2rem);margin:6px 0 0">Site settings</h1>
+            <p class="muted small" style="margin:4px 0 0">Brand, Blaze feature toggles and payment configuration.</p>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <a class="btn btn-ghost btn-sm" href="/admin/">Back to admin</a>
+            <button class="btn btn-outline btn-sm" type="button" id="st-signout">Sign out</button>
+          </div>
+        </div>
+
+        <div class="form-message" id="st-message" role="status"></div>
+
+        <div class="panel" style="margin-top:12px">
+          <h2 style="font-size:1.1rem">Brand</h2>
+          <div class="form-grid" style="margin-top:8px">
+            <div class="field">
+              <label for="st-site-name">Portal name</label>
+              <input class="input" id="st-site-name" placeholder="FollowExam" />
+            </div>
+            <div class="field">
+              <label for="st-tagline">Tagline</label>
+              <input class="input" id="st-tagline" placeholder="Every exam. One account." />
+            </div>
+            <div class="field">
+              <label for="st-logo-url">Logo URL</label>
+              <input class="input" id="st-logo-url" placeholder="/favicon.svg" />
+            </div>
+            <div class="field">
+              <label for="st-contact-email">Contact email</label>
+              <input class="input" type="email" id="st-contact-email" placeholder="hello@followupdates.web.app" />
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-top:8px">
+          <h2 style="font-size:1.1rem">Blaze features</h2>
+          <p class="small muted">Enable or disable features that use Firebase Blaze services. Toggling here does not start billing — billing must be enabled in the Firebase Console.</p>
+          <div class="form-grid" style="margin-top:8px">
+            <label class="check-item"><input type="checkbox" data-flag="automation" /> Automation &amp; daily pipeline</label>
+            <label class="check-item"><input type="checkbox" data-flag="phoneAuth" /> Phone authentication</label>
+            <label class="check-item"><input type="checkbox" data-flag="telegramBot" /> Telegram bot notifications</label>
+            <label class="check-item"><input type="checkbox" data-flag="emailDigest" /> Email digest (SMTP)</label>
+            <label class="check-item"><input type="checkbox" data-flag="socialAutoPost" /> Social media auto-post</label>
+            <label class="check-item"><input type="checkbox" data-flag="payments" /> Payment gateways</label>
+            <label class="check-item"><input type="checkbox" data-flag="analytics" /> Analytics dashboard</label>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-top:8px">
+          <h2 style="font-size:1.1rem">Payment settings</h2>
+          <p class="small muted">Shown only when the payment gateway toggle is enabled. Credentials are stored in Firestore and should be restricted to admins.</p>
+          <div class="form-grid" style="margin-top:8px">
+            <div class="field">
+              <label for="st-payment-provider">Provider</label>
+              <select class="select" id="st-payment-provider">
+                <option value="">Not configured</option>
+                <option value="razorpay">Razorpay</option>
+                <option value="stripe">Stripe</option>
+                <option value="payu">PayU</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="st-payment-key">Public key / client ID</label>
+              <input class="input" id="st-payment-key" placeholder="pk_live_…" />
+            </div>
+            <div class="field">
+              <label for="st-payment-currency">Currency</label>
+              <input class="input" id="st-payment-currency" placeholder="INR" />
+            </div>
+            <div class="field">
+              <label for="st-payment-note">Checkout note</label>
+              <input class="input" id="st-payment-note" placeholder="Secure payments by …" />
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-top:8px">
+          <h2 style="font-size:1.1rem">Admin users &amp; roles</h2>
+          <p class="small muted">Create manager, executive and moderator roles and assign users.</p>
+          <a class="btn btn-outline btn-sm" href="/admin/users/">Manage users</a>
+        </div>
+
+        <div style="display:flex;gap:10px;align-items:center;margin-top:14px">
+          <button class="btn btn-primary" type="button" id="st-save">Save settings</button>
+          <span class="small muted" id="st-saved-at"></span>
+        </div>
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+  import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
+  import { firebaseConfigured, getFirebaseAuth, getFirebaseDb } from "../../lib/firebase";
+
+  const loadingPanel = document.querySelector<HTMLElement>("#st-loading");
+  const configPanel = document.querySelector<HTMLElement>("#st-config");
+  const loginPanel = document.querySelector<HTMLElement>("#st-login");
+  const deniedPanel = document.querySelector<HTMLElement>("#st-denied");
+  const settingsPanel = document.querySelector<HTMLElement>("#st-panel");
+  const message = document.querySelector<HTMLElement>("#st-message");
+
+  function show(panel: HTMLElement | null) {
+    [loadingPanel, configPanel, loginPanel, deniedPanel, settingsPanel].forEach((p) => p?.classList.add("hidden"));
+    panel?.classList.remove("hidden");
+  }
+
+  function showMessage(text: string, type: "info" | "success" | "error" = "info") {
+    if (!message) return;
+    message.textContent = text;
+    message.className = `form-message show ${type}`;
+  }
+
+  function authError(error: unknown): string {
+    const code = (error as { code?: string })?.code || "";
+    if (code === "auth/invalid-credential" || code === "auth/wrong-password" || code === "auth/user-not-found") {
+      return "Email or password is incorrect.";
+    }
+    return error instanceof Error ? error.message : "Sign-in failed.";
+  }
+
+  const input = (id: string) => document.querySelector<HTMLInputElement>(id);
+  const FLAGS = ["automation", "phoneAuth", "telegramBot", "emailDigest", "socialAutoPost", "payments", "analytics"];
+
+  function fill(data: Record<string, any> = {}) {
+    if (input("#st-site-name")) input("#st-site-name")!.value = data.siteName || "FollowExam";
+    if (input("#st-tagline")) input("#st-tagline")!.value = data.tagline || "Every exam. One account.";
+    if (input("#st-logo-url")) input("#st-logo-url")!.value = data.logoUrl || "/favicon.svg";
+    if (input("#st-contact-email")) input("#st-contact-email")!.value = data.contactEmail || "hello@followupdates.web.app";
+
+    const flags = data.flags || {};
+    document.querySelectorAll<HTMLInputElement>("[data-flag]").forEach((el) => {
+      el.checked = Boolean(flags[el.dataset.flag as string]);
+    });
+
+    const payments = data.payments || {};
+    const provider = document.querySelector<HTMLSelectElement>("#st-payment-provider");
+    if (provider) provider.value = payments.provider || "";
+    if (input("#st-payment-key")) input("#st-payment-key")!.value = payments.publicKey || "";
+    if (input("#st-payment-currency")) input("#st-payment-currency")!.value = payments.currency || "INR";
+    if (input("#st-payment-note")) input("#st-payment-note")!.value = payments.note || "";
+    const saved = document.querySelector<HTMLElement>("#st-saved-at");
+    if (saved && data.updatedAt) saved.textContent = `Last saved: ${new Date(data.updatedAt).toLocaleString("en-IN")}`;
+  }
+
+  function collect() {
+    const flags: Record<string, boolean> = {};
+    document.querySelectorAll<HTMLInputElement>("[data-flag]").forEach((el) => {
+      flags[el.dataset.flag as string] = el.checked;
+    });
+    return {
+      siteName: input("#st-site-name")?.value.trim() || "FollowExam",
+      tagline: input("#st-tagline")?.value.trim() || "",
+      logoUrl: input("#st-logo-url")?.value.trim() || "/favicon.svg",
+      contactEmail: input("#st-contact-email")?.value.trim() || "",
+      flags,
+      payments: {
+        provider: document.querySelector<HTMLSelectElement>("#st-payment-provider")?.value || "",
+        publicKey: input("#st-payment-key")?.value.trim() || "",
+        currency: input("#st-payment-currency")?.value.trim() || "INR",
+        note: input("#st-payment-note")?.value.trim() || "",
+      },
+    };
+  }
+
+  const auth = firebaseConfigured ? getFirebaseAuth() : null;
+  const db = firebaseConfigured ? getFirebaseDb() : null;
+
+  if (!auth || !db) {
+    show(configPanel);
+  } else {
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        show(loginPanel);
+        return;
+      }
+      try {
+        const adminDoc = await getDoc(doc(db, "admins", user.uid));
+        if (!adminDoc.exists()) {
+          show(deniedPanel);
+          return;
+        }
+        show(settingsPanel);
+        const snap = await getDoc(doc(db, "settings", "site"));
+        fill(snap.exists() ? (snap.data() as Record<string, any>) : {});
+      } catch (error) {
+        show(deniedPanel);
+        console.error(error);
+      }
+    });
+
+    document.querySelector("#st-login-form")?.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const email = input("#st-email")?.value.trim() || "";
+      const password = input("#st-password")?.value || "";
+      const msg = document.querySelector<HTMLElement>("#st-login-message");
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+      } catch (error) {
+        if (msg) {
+          msg.textContent = authError(error);
+          msg.className = "form-message show error";
+        }
+      }
+    });
+
+    document.querySelector("#st-save")?.addEventListener("click", async () => {
+      try {
+        showMessage("Saving…", "info");
+        await setDoc(
+          doc(db, "settings", "site"),
+          { ...collect(), updatedAt: new Date().toISOString(), serverUpdatedAt: serverTimestamp() },
+          { merge: true },
+        );
+        showMessage("Settings saved.", "success");
+      } catch (error) {
+        showMessage(error instanceof Error ? error.message : "Could not save settings.", "error");
+      }
+    });
+
+    document.querySelector("#st-signout")?.addEventListener("click", () => signOut(auth));
+    document.querySelector("#st-denied-signout")?.addEventListener("click", () => signOut(auth));
+  }
+
+  // Keep FLAGS referenced for future per-flag validation without tree-shaking noise.
+  void FLAGS;
+</script>

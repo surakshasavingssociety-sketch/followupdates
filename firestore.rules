@@ -112,6 +112,13 @@ service cloud.firestore {
       allow read, write: if isAdmin();
     }
 
+    // Site settings (brand, feature toggles, payment config). Public read so the
+    // public pages can show the configured brand; admins write.
+    match /settings/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
     // Everything else is closed.
     match /{document=**} {
       allow read, write: if false;
