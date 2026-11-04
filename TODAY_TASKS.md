@@ -89,3 +89,5 @@ Isi liye:
 | `708ab53` | Functional admin settings (brand, Blaze toggles, payments) | ✅ |
 | `6db75bb` | Create owner account flow | ✅ |
 | `1be6514` | Duplicate account cleanup, login hardening, task list | ✅ |
+| `6093c7f` | Structure: unique exam titles, 1 h1/page, generator fix, manager/executive roles | ✅ |
+| `26cf217` | Structure: exam title polish | ✅ |
