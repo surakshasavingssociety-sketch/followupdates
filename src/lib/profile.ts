@@ -1,7 +1,16 @@
 import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import type { User } from "firebase/auth";
 import { getFirebaseDb } from "./firebase";
-import type { CareerGoal, EducationLevel, Exam, Institution, Scholarship, UserCategory, UserProfile } from "./types";
+import type {
+  CareerGoal,
+  EducationLevel,
+  Exam,
+  Institution,
+  Scholarship,
+  UserCategory,
+  UserProfile,
+  UserStatus,
+} from "./types";
 
 export const USER_CATEGORIES: UserCategory[] = [
   "Student",
@@ -22,6 +31,53 @@ export const USER_CATEGORIES: UserCategory[] = [
   "Private organisation",
   "Open schooling service provider",
 ];
+
+export type StatusGroup = "learner" | "educator" | "organisation";
+
+/** Statuses that share the same progressive profile fields. */
+export const STATUS_GROUPS: Record<UserStatus, StatusGroup> = {
+  Student: "learner",
+  "Job aspirant": "learner",
+  "Research scholar": "learner",
+  Teacher: "educator",
+  Faculty: "educator",
+  School: "organisation",
+  College: "organisation",
+  University: "organisation",
+  "Coaching institute": "organisation",
+  "Educational organisation": "organisation",
+  "Government organisation": "organisation",
+  "Private organisation": "organisation",
+  "Open schooling provider": "organisation",
+};
+
+export const USER_STATUSES = Object.keys(STATUS_GROUPS) as UserStatus[];
+
+export function statusGroup(status?: string | null): StatusGroup | null {
+  if (!status) return null;
+  return STATUS_GROUPS[status as UserStatus] || null;
+}
+
+/** Collapse the detailed status into the broader category used for matching. */
+export function userCategoryForStatus(status?: string | null): UserCategory | undefined {
+  if (!status) return undefined;
+  const map: Record<string, UserCategory> = {
+    Student: "Student",
+    "Job aspirant": "Job aspirant",
+    "Research scholar": "Research scholar",
+    Teacher: "Teacher",
+    Faculty: "Faculty",
+    School: "School",
+    College: "College",
+    University: "University",
+    "Coaching institute": "Coaching institute",
+    "Educational organisation": "Educational institution",
+    "Government organisation": "Government organisation",
+    "Private organisation": "Private organisation",
+    "Open schooling provider": "Open schooling service provider",
+  };
+  return map[status];
+}
 
 export const EDUCATION_LEVELS: EducationLevel[] = [
   "Class 8",

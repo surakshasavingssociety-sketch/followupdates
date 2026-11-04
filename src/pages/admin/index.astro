@@ -1,11 +1,13 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import AdminNav from "../../components/AdminNav.astro";
 import { CATEGORY_META } from "../../lib/constants";
 ---
 
 <BaseLayout title="Admin review" description="FollowExam admin review queue." noindex gated={false}>
   <section class="admin-shell">
     <div class="container">
+      <AdminNav />
       <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Review queue</h1>
       <div id="admin-loading" class="panel">
         <p class="muted">Loading the admin workspace…</p>

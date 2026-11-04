@@ -1,10 +1,12 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import AdminNav from "../../components/AdminNav.astro";
 ---
 
 <BaseLayout title="Admin settings" noindex gated={false}>
   <section class="admin-shell">
     <div class="container">
+      <AdminNav />
       <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Site settings</h1>
       <div id="st-loading" class="panel">
         <p class="muted">Loading settings…</p>
@@ -253,12 +255,25 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     document.querySelector("#st-save")?.addEventListener("click", async () => {
       try {
         showMessage("Saving…", "info");
+        const payload = collect();
         await setDoc(
           doc(db, "settings", "site"),
-          { ...collect(), updatedAt: new Date().toISOString(), serverUpdatedAt: serverTimestamp() },
+          { ...payload, updatedAt: new Date().toISOString(), serverUpdatedAt: serverTimestamp() },
           { merge: true },
         );
-        showMessage("Settings saved.", "success");
+        try {
+          localStorage.setItem(
+            "fex-site-brand",
+            JSON.stringify({
+              siteName: payload.siteName,
+              tagline: payload.tagline,
+              logoUrl: payload.logoUrl,
+            }),
+          );
+        } catch {
+          /* private mode — the saved Firestore settings still apply on the next rebuild */
+        }
+        showMessage("Settings saved. Brand applied on this device — open any page to see it.", "success");
       } catch (error) {
         showMessage(error instanceof Error ? error.message : "Could not save settings.", "error");
       }

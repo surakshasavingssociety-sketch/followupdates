@@ -1,0 +1,71 @@
+name: Admin-triggered automation
+
+on:
+  schedule:
+    # Poll for admin requests every 10 minutes.
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: admin-automation
+  cancel-in-progress: false
+
+env:
+  FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+  FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+  EXAM_QUERIES_PER_RUN: ${{ vars.EXAM_QUERIES_PER_RUN }}
+  STATE_QUERIES_PER_RUN: ${{ vars.STATE_QUERIES_PER_RUN }}
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Authenticate to Google Cloud
+        if: env.FIREBASE_SERVICE_ACCOUNT != ''
+        uses: google-github-actions/auth@v3
+        with:
+          credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+
+      - name: Pick a queued admin run
+        id: pick
+        if: env.FIREBASE_SERVICE_ACCOUNT != ''
+        run: node scripts/automation-runner.mjs pick
+
+      - name: Discover new notifications
+        if: steps.pick.outputs.queued == 'true'
+        run: npm run ingest
+
+      - name: Push discovery queue to Firestore
+        if: steps.pick.outputs.queued == 'true'
+        run: npm run sync
+
+      - name: Finish run (completed)
+        if: success() && steps.pick.outputs.queued == 'true'
+        env:
+          AUTOMATION_RUN_ID: ${{ steps.pick.outputs.runId }}
+          AUTOMATION_STATUS: completed
+        run: node scripts/automation-runner.mjs finish
+
+      - name: Finish run (failed)
+        if: failure() && steps.pick.outputs.queued == 'true'
+        env:
+          AUTOMATION_RUN_ID: ${{ steps.pick.outputs.runId }}
+          AUTOMATION_STATUS: failed
+        run: node scripts/automation-runner.mjs finish

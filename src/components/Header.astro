@@ -8,10 +8,10 @@ const isActive = (href: string) => (href === "/" ? path === "/" : path.startsWit
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href="/">
-      <span class="brand-mark" aria-hidden="true">FE</span>
+      <span class="brand-mark" aria-hidden="true" data-site-mark>FE</span>
       <span>
-        {SITE.name}
-        <small>Every exam. One account.</small>
+        <span data-site-name>{SITE.name}</span>
+        <small data-site-tagline>Every exam. One account.</small>
       </span>
     </a>
 
@@ -41,6 +41,46 @@ const isActive = (href: string) => (href === "/" ? path === "/" : path.startsWit
 
 <script>
   import { signOutUser, watchAuth } from "../lib/auth";
+
+  /**
+   * Instant brand bridge: admin settings writes the brand to localStorage so the
+   * static header/footer pick it up on the next page view without a rebuild.
+   */
+  try {
+    const raw = localStorage.getItem("fex-site-brand");
+    if (raw) {
+      const brand = JSON.parse(raw) as { siteName?: string; tagline?: string; logoUrl?: string };
+      const siteName = (brand.siteName || "").trim();
+      if (siteName) {
+        document.querySelectorAll<HTMLElement>("[data-site-name]").forEach((el) => (el.textContent = siteName));
+        document.querySelectorAll<HTMLElement>("[data-site-copyright]").forEach((el) => (el.textContent = siteName));
+        document.title = document.title.replaceAll("FollowExam", siteName);
+        document.querySelectorAll<HTMLElement>("[data-site-mark]").forEach((el) => {
+          if (!brand.logoUrl || brand.logoUrl.endsWith("favicon.svg")) {
+            el.textContent = siteName
+              .split(/\s+/)
+              .filter(Boolean)
+              .slice(0, 2)
+              .map((part) => part[0]?.toUpperCase() || "")
+              .join("");
+          }
+        });
+      }
+      if (brand.tagline) {
+        document.querySelectorAll<HTMLElement>("[data-site-tagline]").forEach((el) => (el.textContent = brand.tagline || ""));
+      }
+      if (brand.logoUrl && !brand.logoUrl.endsWith("favicon.svg")) {
+        document.querySelectorAll<HTMLElement>("[data-site-mark]").forEach((el) => {
+          el.textContent = "";
+          el.style.backgroundImage = `url("${brand.logoUrl}")`;
+          el.style.backgroundSize = "cover";
+          el.style.backgroundPosition = "center";
+        });
+      }
+    }
+  } catch {
+    /* localStorage unavailable — keep the build-time brand */
+  }
 
   const toggle = document.querySelector<HTMLButtonElement>(".menu-toggle");
   const nav = document.querySelector<HTMLElement>("#primary-nav");

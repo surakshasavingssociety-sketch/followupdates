@@ -1,10 +1,12 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import AdminNav from "../../components/AdminNav.astro";
 ---
 
 <BaseLayout title="Institution enquiries" description="Review enquiries submitted from institution pages." noindex>
   <section class="section-tight" style="padding-top:30px">
     <div class="container">
+      <AdminNav />
       <div class="breadcrumb" style="padding:0 0 14px">
         <a href="/">Dashboard</a><span>/</span>
         <a href="/admin/">Admin</a><span>/</span><span>Enquiries</span>
@@ -124,6 +126,13 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       list.innerHTML = visible
         .map((item) => {
           const status = item.status || "new";
+          const isVerification = item.kind === "institution-verification" || item.topic === "Institution verification";
+          const verificationActions =
+            isVerification && status === "new"
+              ? `
+                <button class="btn btn-primary btn-sm" type="button" data-action="verify" data-approve="true">Approve verification</button>
+                <button class="btn btn-danger btn-sm" type="button" data-action="verify" data-approve="false">Reject verification</button>`
+              : "";
           return `
           <article class="admin-item" data-id="${esc(item.id)}">
             <div class="admin-item-head">
@@ -132,13 +141,24 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                 <div class="admin-item-meta">
                   ${esc(item.name)} · <a href="mailto:${esc(item.email)}">${esc(item.email)}</a>
                   ${item.phone ? ` · ${esc(item.phone)}` : ""} · ${esc(item.topic || "Other")}
+                  ${isVerification ? ' · <span class="badge badge-violet">Verification</span>' : ""}
                 </div>
               </div>
               <span class="badge ${badgeClass(status)}">${esc(status)}</span>
             </div>
             <p class="small" style="margin:10px 0;white-space:pre-wrap">${esc(item.message)}</p>
+            ${
+              isVerification && item.proofUrl
+                ? `<div class="panel" style="padding:10px 12px;margin:0 0 10px;border-left:3px solid var(--brand)">
+                    <strong class="small">Official proof</strong>
+                    <a class="small" style="display:block;word-break:break-all" href="${esc(item.proofUrl)}" target="_blank" rel="noopener">${esc(item.proofUrl)} ↗</a>
+                    ${item.uid ? `<span class="small muted">Account: <code>${esc(item.uid)}</code></span>` : ""}
+                  </div>`
+                : ""
+            }
             <div class="admin-actions">
               <span class="small muted">${esc(new Date(item.createdAt || Date.now()).toLocaleString("en-IN"))}</span>
+              ${verificationActions}
               ${["contacted", "closed", "spam"]
                 .filter((next) => next !== status)
                 .map((next) => `<button class="btn btn-outline btn-sm" type="button" data-action="status" data-status="${next}">Mark ${next}</button>`)
@@ -204,16 +224,56 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       document.querySelector("#inq-refresh")?.addEventListener("click", loadInquiries);
 
       list?.addEventListener("click", async (event) => {
-        const button = (event.target as HTMLElement).closest<HTMLElement>("[data-action='status']");
+        const button = (event.target as HTMLElement).closest<HTMLElement>("[data-action]");
         if (!button || !db) return;
         const item = button.closest<HTMLElement>(".admin-item");
         const id = item?.dataset.id;
+        if (!id) return;
+        const action = button.dataset.action;
+        const now = new Date().toISOString();
+
+        if (action === "verify") {
+          const record = inquiries.find((entry) => entry.id === id);
+          const approved = button.dataset.approve === "true";
+          if (!record?.uid) {
+            showMessage("This verification request is not linked to a user account.", "error");
+            return;
+          }
+          button.setAttribute("disabled", "true");
+          try {
+            await updateDoc(doc(db, "users", record.uid), {
+              institutionVerified: approved,
+              verificationStatus: approved ? "approved" : "rejected",
+              verificationReviewedAt: now,
+              verificationReviewedBy: auth?.currentUser?.uid || "",
+            });
+            await updateDoc(doc(db, "inquiries", id), {
+              status: "closed",
+              resolution: approved ? "verified" : "rejected",
+              updatedAt: now,
+              serverUpdatedAt: serverTimestamp(),
+            });
+            record.status = "closed";
+            record.resolution = approved ? "verified" : "rejected";
+            render();
+            showMessage(
+              approved ? "Institution verified. The Verified badge is now visible on the profile." : "Verification rejected.",
+              approved ? "success" : "info",
+            );
+          } catch (error) {
+            showMessage(error instanceof Error ? error.message : "Could not update verification.", "error");
+          } finally {
+            button.removeAttribute("disabled");
+          }
+          return;
+        }
+
         const status = button.dataset.status;
-        if (!id || !status) return;
+        if (action !== "status" || !status) return;
         try {
           await updateDoc(doc(db, "inquiries", id), {
             status,
-            updatedAt: new Date().toISOString(),
+            updatedAt: now,
             serverUpdatedAt: serverTimestamp(),
           });
           const record = inquiries.find((entry) => entry.id === id);

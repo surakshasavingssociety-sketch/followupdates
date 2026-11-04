@@ -72,6 +72,10 @@ service cloud.firestore {
     match /users/{uid} {
       allow read, write: if isSignedIn() && request.auth.uid == uid;
       allow read: if isAdmin();
+      // Admins may only flip verification fields, never edit the rest of a profile.
+      allow update: if isAdmin() &&
+        request.resource.data.diff(resource.data).affectedKeys()
+          .hasOnly(['institutionVerified', 'verificationStatus', 'verificationReviewedAt', 'verificationReviewedBy']);
 
       // Saved jobs subcollection.
       match /saved/{jobId} {
@@ -83,6 +87,12 @@ service cloud.firestore {
         allow read, write: if isSignedIn() && request.auth.uid == uid;
         allow read: if isAdmin();
       }
+    }
+
+    // Public portfolio: opt-in safe fields only, readable by anyone with the link.
+    match /portfolios/{uid} {
+      allow read: if true;
+      allow write: if isSignedIn() && request.auth.uid == uid;
     }
 
     // Contact/feedback messages (optional collection).
@@ -111,6 +121,17 @@ service cloud.firestore {
     // Admin activity audit log.
     match /adminActivity/{entryId} {
       allow read, write: if isAdmin();
+    }
+
+    // Admin-triggered automation requests. Admins create queued runs; the
+    // GitHub Actions worker (Admin SDK) picks them up and updates the status.
+    match /automationRuns/{runId} {
+      allow read: if isAdmin();
+      allow create: if isAdmin() &&
+        request.resource.data.status == 'queued' &&
+        request.resource.data.requestedBy is string &&
+        request.resource.data.requestedBy.size() < 200;
+      allow update, delete: if isAdmin();
     }
 
     // Social post drafts: admins can manage; only admin-side code writes them.

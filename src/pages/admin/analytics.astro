@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import AdminNav from "../../components/AdminNav.astro";
+import BarChart from "../../components/BarChart.astro";
 import { jobs, scheduledJobs } from "../../lib/jobs";
 import fs from "node:fs";
 import path from "node:path";
@@ -46,6 +48,7 @@ const exams = [...byExam.entries()].sort((a, b) => b[1] - a[1]).slice(0, 10);
 <BaseLayout title="Analytics" description="Content and audience analytics (admin only)." noindex>
   <section class="section-tight" style="padding-top:30px">
     <div class="container">
+      <AdminNav />
       <div class="breadcrumb" style="padding:0 0 14px">
         <a href="/">Dashboard</a><span>/</span>
         <a href="/admin/">Admin</a><span>/</span><span>Analytics</span>
@@ -84,39 +87,48 @@ const exams = [...byExam.entries()].sort((a, b) => b[1] - a[1]).slice(0, 10);
         <div class="panel">
           <h3 style="margin:0 0 8px">By category</h3>
           {categories.length ? (
-            <table style="width:100%;border-collapse:collapse;font-size:0.9rem">
-              <tbody>
-                {categories.map(([name, count]) => (
-                  <tr style="border-bottom:1px solid var(--line)"><td style="padding:7px 0">{name}</td><td style="padding:7px 0;text-align:right;font-weight:600">{count}</td></tr>
-                ))}
-              </tbody>
-            </table>
+            <>
+              <BarChart entries={categories} label="published updates by category" />
+              <table style="width:100%;border-collapse:collapse;font-size:0.9rem">
+                <tbody>
+                  {categories.map(([name, count]) => (
+                    <tr style="border-bottom:1px solid var(--line)"><td style="padding:7px 0">{name}</td><td style="padding:7px 0;text-align:right;font-weight:600">{count}</td></tr>
+                  ))}
+                </tbody>
+              </table>
+            </>
           ) : <p class="small muted">No published entries yet.</p>}
         </div>
 
         <div class="panel">
           <h3 style="margin:0 0 8px">By state</h3>
           {states.length ? (
-            <table style="width:100%;border-collapse:collapse;font-size:0.9rem">
-              <tbody>
-                {states.map(([name, count]) => (
-                  <tr style="border-bottom:1px solid var(--line)"><td style="padding:7px 0">{name}</td><td style="padding:7px 0;text-align:right;font-weight:600">{count}</td></tr>
-                ))}
-              </tbody>
-            </table>
+            <>
+              <BarChart entries={states} label="published updates by state" />
+              <table style="width:100%;border-collapse:collapse;font-size:0.9rem">
+                <tbody>
+                  {states.map(([name, count]) => (
+                    <tr style="border-bottom:1px solid var(--line)"><td style="padding:7px 0">{name}</td><td style="padding:7px 0;text-align:right;font-weight:600">{count}</td></tr>
+                  ))}
+                </tbody>
+              </table>
+            </>
           ) : <p class="small muted">No published entries yet.</p>}
         </div>
 
         <div class="panel">
           <h3 style="margin:0 0 8px">By exam</h3>
           {exams.length ? (
-            <table style="width:100%;border-collapse:collapse;font-size:0.9rem">
-              <tbody>
-                {exams.map(([name, count]) => (
-                  <tr style="border-bottom:1px solid var(--line)"><td style="padding:7px 0">{name}</td><td style="padding:7px 0;text-align:right;font-weight:600">{count}</td></tr>
-                ))}
-              </tbody>
-            </table>
+            <>
+              <BarChart entries={exams} label="published updates by exam" />
+              <table style="width:100%;border-collapse:collapse;font-size:0.9rem">
+                <tbody>
+                  {exams.map(([name, count]) => (
+                    <tr style="border-bottom:1px solid var(--line)"><td style="padding:7px 0">{name}</td><td style="padding:7px 0;text-align:right;font-weight:600">{count}</td></tr>
+                  ))}
+                </tbody>
+              </table>
+            </>
           ) : <p class="small muted">No matched exams yet.</p>}
         </div>
       </div>

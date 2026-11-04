@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import AdminNav from "../../components/AdminNav.astro";
 import { SITE } from "../../lib/constants";
 import fs from "node:fs";
 import path from "node:path";
@@ -43,6 +44,7 @@ const lastRun = runAt && !Number.isNaN(runAt.getTime()) ? runAt.toLocaleString("
 <BaseLayout title="Automation control" description="Monitor and manage government source monitoring (admin only)." noindex>
   <section class="section-tight" style="padding-top:30px">
     <div class="container">
+      <AdminNav />
       <div class="breadcrumb" style="padding:0 0 14px">
         <a href="/">Dashboard</a><span>/</span>
         <a href="/admin/">Admin</a><span>/</span><span>Automation</span>
@@ -53,6 +55,72 @@ const lastRun = runAt && !Number.isNaN(runAt.getTime()) ? runAt.toLocaleString("
           <div class="eyebrow">Admin</div>
           <h1 style="font-size:clamp(1.8rem,3.6vw,2.5rem)">Automation control center</h1>
           <p>Monitor government sources, review discovery status and manage the notification pipeline. Automation runs via GitHub Actions (daily.yml).</p>
+        </div>
+      </div>
+
+      <div id="auto-loading" class="panel">
+        <p class="muted small">Checking admin access…</p>
+      </div>
+
+      <div id="auto-config" class="panel hidden">
+        <p class="small muted">Firebase is not configured. Set PUBLIC_FIREBASE_* values and rebuild.</p>
+      </div>
+
+      <div id="auto-login" class="form-card hidden">
+        <h2>Admin sign in</h2>
+        <p class="muted small">Only authorised administrators can trigger automation.</p>
+        <form id="auto-login-form" class="form-grid">
+          <div class="field"><label for="auto-email">Email</label><input class="input" id="auto-email" type="email" autocomplete="email" required /></div>
+          <div class="field"><label for="auto-password">Password</label><input class="input" id="auto-password" type="password" autocomplete="current-password" required /></div>
+          <div class="field full"><button class="btn btn-primary" type="submit">Sign in</button></div>
+          <p class="form-message" id="auto-login-message" role="status"></p>
+        </form>
+      </div>
+
+      <div id="auto-denied" class="form-card hidden">
+        <h2>Access denied</h2>
+        <p class="muted small">This account is not an admin.</p>
+        <button class="btn btn-outline" type="button" id="auto-denied-signout">Sign out</button>
+      </div>
+
+      <div id="auto-panel" class="hidden">
+        <div class="panel dash-banner" style="margin-bottom:18px">
+          <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between">
+            <div>
+              <div class="eyebrow" style="background:var(--brand-soft);color:var(--brand);border-color:transparent">Automation trigger</div>
+              <h2 style="margin:8px 0 4px;font-size:1.3rem">Run the pipeline now</h2>
+              <p class="small muted" style="margin:0;max-width:620px">
+                Queues a run for the GitHub Actions worker. It polls every 10 minutes and runs
+                <code>npm run ingest &amp;&amp; npm run sync</code>. No deploy is triggered; review new items in the queue.
+              </p>
+            </div>
+            <button class="btn btn-primary" type="button" id="auto-run">Run automation now</button>
+          </div>
+        </div>
+
+        <div class="form-message" id="auto-message" role="status"></div>
+
+        <div class="panel" style="margin-bottom:18px">
+          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between">
+            <div>
+              <h3 style="margin:0 0 4px">Recent admin-triggered runs</h3>
+              <p class="small muted" style="margin:0">Latest requests from this panel. The worker updates each status automatically.</p>
+            </div>
+            <button class="btn btn-outline btn-sm" type="button" id="auto-refresh">Refresh</button>
+          </div>
+          <div id="auto-runs" class="admin-list" style="margin-top:12px">
+            <p class="small muted">Loading runs…</p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3 style="margin:0 0 8px">Manual command</h3>
+          <p class="small muted" style="margin:0 0 8px">Run locally or from the GitHub Actions tab if the worker is paused:</p>
+          <pre style="margin:0;padding:12px;background:var(--surface-2);border-radius:9px;overflow-x:auto"><code>npm run ingest &amp;&amp; npm run sync</code></pre>
+          <p class="small muted" style="margin:10px 0 0">
+            The worker needs the <code>FIREBASE_SERVICE_ACCOUNT</code> repository secret. GitHub → Actions →
+            <strong>Admin-triggered automation</strong> → Run workflow also works.
+          </p>
         </div>
       </div>
 
@@ -129,3 +197,174 @@ const lastRun = runAt && !Number.isNaN(runAt.getTime()) ? runAt.toLocaleString("
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  import { onAuthStateChanged, signInWithEmailAndPassword, signOut, type User } from "firebase/auth";
+  import {
+    addDoc,
+    collection,
+    doc,
+    getDoc,
+    getDocs,
+    limit,
+    orderBy,
+    query,
+    serverTimestamp,
+  } from "firebase/firestore";
+  import { firebaseConfigured, getFirebaseAuth, getFirebaseDb } from "../../lib/firebase";
+
+  const loadingPanel = document.querySelector<HTMLElement>("#auto-loading");
+  const configPanel = document.querySelector<HTMLElement>("#auto-config");
+  const loginPanel = document.querySelector<HTMLElement>("#auto-login");
+  const deniedPanel = document.querySelector<HTMLElement>("#auto-denied");
+  const panel = document.querySelector<HTMLElement>("#auto-panel");
+  const runsList = document.querySelector<HTMLElement>("#auto-runs");
+  const message = document.querySelector<HTMLElement>("#auto-message");
+  const runButton = document.querySelector<HTMLButtonElement>("#auto-run");
+
+  const auth = firebaseConfigured ? getFirebaseAuth() : null;
+  const db = firebaseConfigured ? getFirebaseDb() : null;
+  let currentUser: User | null = null;
+
+  function show(target: HTMLElement | null) {
+    [loadingPanel, configPanel, loginPanel, deniedPanel, panel].forEach((item) => item?.classList.add("hidden"));
+    target?.classList.remove("hidden");
+  }
+
+  function showMessage(text: string, type: "error" | "success" | "info" = "info") {
+    if (!message) return;
+    message.textContent = text;
+    message.className = `form-message show ${type}`;
+    if (type === "success") setTimeout(() => message.classList.remove("show"), 5000);
+  }
+
+  function esc(value: unknown) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function statusBadge(status: string) {
+    if (status === "completed") return "badge-green";
+    if (status === "running") return "badge-blue";
+    if (status === "failed") return "badge-red";
+    return "badge-amber";
+  }
+
+  function renderRuns(runs: Record<string, any>[]) {
+    if (!runsList) return;
+    if (!runs.length) {
+      runsList.innerHTML = `<div class="empty"><h3>No admin-triggered runs yet</h3><p>Press “Run automation now” to queue the first one.</p></div>`;
+      return;
+    }
+    runsList.innerHTML = runs
+      .map((run) => {
+        const status = String(run.status || "queued");
+        const when = run.createdAt ? new Date(run.createdAt).toLocaleString("en-IN") : "—";
+        const finished = run.finishedAt ? ` · finished ${new Date(run.finishedAt).toLocaleString("en-IN")}` : "";
+        return `
+        <article class="admin-item">
+          <div class="admin-item-head">
+            <div>
+              <h3 style="margin:0 0 4px">Run ${esc(String(run.id || "").slice(0, 8))}</h3>
+              <div class="admin-item-meta">${esc(run.requestedBy || "admin")} · queued ${esc(when)}${esc(finished)}</div>
+            </div>
+            <span class="badge ${statusBadge(status)}">${esc(status)}</span>
+          </div>
+          ${run.message ? `<p class="small muted" style="margin:8px 0 0">${esc(run.message)}</p>` : ""}
+        </article>`;
+      })
+      .join("");
+  }
+
+  async function loadRuns() {
+    if (!db || !runsList) return;
+    try {
+      const snapshot = await getDocs(query(collection(db, "automationRuns"), orderBy("createdAt", "desc"), limit(10)));
+      renderRuns(snapshot.docs.map((item) => ({ id: item.id, ...item.data() })));
+    } catch {
+      try {
+        const snapshot = await getDocs(collection(db, "automationRuns"));
+        renderRuns(
+          snapshot.docs
+            .map((item) => ({ id: item.id, ...item.data() }))
+            .sort((a: any, b: any) => String(b.createdAt || "").localeCompare(String(a.createdAt || "")))
+            .slice(0, 10),
+        );
+      } catch (error) {
+        runsList.innerHTML = `<div class="empty"><h3>Could not load runs</h3><p>${esc(error instanceof Error ? error.message : "Unknown error")}</p></div>`;
+      }
+    }
+  }
+
+  if (!auth || !db) {
+    show(configPanel);
+  } else {
+    onAuthStateChanged(auth, async (user) => {
+      currentUser = user;
+      if (!user) {
+        show(loginPanel);
+        return;
+      }
+      try {
+        const adminDoc = await getDoc(doc(db, "admins", user.uid));
+        if (!adminDoc.exists()) {
+          show(deniedPanel);
+          return;
+        }
+        show(panel);
+        await loadRuns();
+      } catch (error) {
+        console.error(error);
+        show(deniedPanel);
+      }
+    });
+
+    document.querySelector("#auto-login-form")?.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const email = document.querySelector<HTMLInputElement>("#auto-email")?.value.trim() || "";
+      const password = document.querySelector<HTMLInputElement>("#auto-password")?.value || "";
+      const loginMessage = document.querySelector<HTMLElement>("#auto-login-message");
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+      } catch (error) {
+        if (loginMessage) {
+          loginMessage.textContent = error instanceof Error ? error.message : "Sign-in failed.";
+          loginMessage.className = "form-message show error";
+        }
+      }
+    });
+
+    runButton?.addEventListener("click", async () => {
+      if (!currentUser || !db) return;
+      runButton.disabled = true;
+      runButton.textContent = "Queueing…";
+      try {
+        await addDoc(collection(db, "automationRuns"), {
+          status: "queued",
+          source: "admin-panel",
+          requestedBy: currentUser.email || currentUser.uid,
+          requestedByUid: currentUser.uid,
+          createdAt: new Date().toISOString(),
+          serverCreatedAt: serverTimestamp(),
+        });
+        showMessage(
+          "Automation queued. The GitHub Actions worker picks it up within about 10 minutes; refresh to see the status.",
+          "success",
+        );
+        await loadRuns();
+      } catch (error) {
+        showMessage(error instanceof Error ? error.message : "Could not queue automation.", "error");
+      } finally {
+        runButton.disabled = false;
+        runButton.textContent = "Run automation now";
+      }
+    });
+
+    document.querySelector("#auto-refresh")?.addEventListener("click", () => loadRuns());
+    document.querySelector("#auto-denied-signout")?.addEventListener("click", () => signOut(auth));
+  }
+</script>

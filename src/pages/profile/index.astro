@@ -74,12 +74,8 @@ const interestOptions = [
             </div>
 
             <div class="field">
-              <label for="profile-institution-verify">Institution verification</label>
-              <select class="select" id="profile-institution-verify" name="institutionVerified">
-                <option value="">Not verified</option>
-                <option value="verified">Verified details</option>
-                <option value="public-profile">Public profile only</option>
-              </select>
+              <label>Institution verification</label>
+              <div id="profile-verify-status" class="small muted" style="padding-top:8px">Not verified</div>
             </div>
 
             <div class="field full">
@@ -95,6 +91,26 @@ const interestOptions = [
             <div class="field full">
               <label for="profile-skills">Skills (comma separated)</label>
               <input class="input" id="profile-skills" name="skills" placeholder="Python, SQL" />
+            </div>
+
+            <div class="field full">
+              <label class="check-item" style="font-weight:600">
+                <input type="checkbox" id="profile-portfolio-public" name="portfolioPublic" />
+                Make my portfolio public
+              </label>
+              <p class="small muted" style="margin:4px 0 0">
+                Publishes only your name, status, state, skills, portfolio and resume link. Email, phone and date of birth
+                stay private. You can turn this off any time.
+              </p>
+            </div>
+
+            <div class="field full" id="portfolio-share" style="display:none">
+              <label for="profile-share-link">Public portfolio link</label>
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <input class="input" id="profile-share-link" readonly style="flex:1;min-width:220px" />
+                <button class="btn btn-outline btn-sm" type="button" id="profile-copy-link">Copy link</button>
+                <a class="btn btn-ghost btn-sm" id="profile-view-link" href="/portfolio/" target="_blank" rel="noopener">Preview</a>
+              </div>
             </div>
 
             <div class="field">
@@ -186,6 +202,18 @@ const interestOptions = [
                   <label for="profile-org-about">About</label>
                   <textarea class="textarea" id="profile-org-about" name="organizationAbout"></textarea>
                 </div>
+                <div class="field full">
+                  <label for="profile-proof-url">Official proof link</label>
+                  <input class="input" id="profile-proof-url" name="verificationProof" type="url" placeholder="https://your-institution.edu.in/about" />
+                  <p class="small muted" style="margin:6px 0 8px">
+                    Link to your institution's official website or government recognition page. An admin reviews it before
+                    adding a Verified badge.
+                  </p>
+                  <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+                    <button class="btn btn-outline btn-sm" type="button" id="profile-verify-request">Request verification</button>
+                    <span class="form-message" id="profile-verify-message" role="status"></span>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -204,6 +232,7 @@ const interestOptions = [
               <span class="avatar" id="profile-avatar" aria-hidden="true">FE</span>
               <div>
                 <strong id="profile-display-name">Student</strong>
+                <span class="badge badge-green hidden" id="profile-verified-badge">Verified</span>
                 <div class="small muted" id="profile-provider">—</div>
               </div>
             </div>
@@ -249,7 +278,7 @@ const interestOptions = [
   import { signOutUser, watchAuth } from "../../lib/auth";
   import { CAREER_PATHS, loadProfile, saveProfile } from "../../lib/profile";
   import { getFirebaseDb } from "../../lib/firebase";
-  import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
+  import { addDoc, collection, deleteDoc, doc, getDocs, serverTimestamp, setDoc } from "firebase/firestore";
   import type { User } from "firebase/auth";
   import type { UserProfile } from "../../lib/types";
 
@@ -324,10 +353,19 @@ const interestOptions = [
     };
     setSelect("#profile-category", profile?.userCategory);
     setSelect("#profile-user-status", profile?.userStatus);
-    setSelect("#profile-institution-verify", profile?.institutionVerified ? "verified" : "");
     setInput("#profile-portfolio", profile?.portfolio);
     setInput("#profile-resume", profile?.resumeUrl);
     setInput("#profile-skills", profile?.skills ? (profile.skills || []).join(", ") : "");
+
+    const publicToggle = document.querySelector<HTMLInputElement>("#profile-portfolio-public");
+    if (publicToggle) publicToggle.checked = Boolean(profile?.portfolioPublic);
+    const share = document.querySelector<HTMLElement>("#portfolio-share");
+    const shareLink = `${location.origin}/portfolio/?u=${user.uid}`;
+    const shareInput = document.querySelector<HTMLInputElement>("#profile-share-link");
+    if (shareInput) shareInput.value = shareLink;
+    const viewLink = document.querySelector<HTMLAnchorElement>("#profile-view-link");
+    if (viewLink) viewLink.href = shareLink;
+    if (share) share.style.display = publicToggle?.checked ? "" : "none";
     setSelect("#profile-state", profile?.stateId);
     setSelect("#profile-level", profile?.educationLevel);
     setSelect("#profile-stream", profile?.stream);
@@ -357,6 +395,19 @@ const interestOptions = [
 
     setText("#profile-avatar", initials(name));
     setText("#profile-display-name", name || "Student");
+
+    const verified = Boolean(profile?.institutionVerified);
+    document.querySelector<HTMLElement>("#profile-verified-badge")?.classList.toggle("hidden", !verified);
+    const verifyStatus = document.querySelector<HTMLElement>("#profile-verify-status");
+    if (verifyStatus) {
+      if (verified) {
+        verifyStatus.innerHTML = '<span class="badge badge-green">Verified</span> Institution details verified by FollowExam.';
+      } else if (profile?.verificationStatus === "pending") {
+        verifyStatus.innerHTML = '<span class="badge badge-amber">Pending review</span> Your proof link is with the admin team.';
+      } else {
+        verifyStatus.innerHTML = '<span class="badge badge-amber">Not verified</span> Submit an official proof link to request a badge.';
+      }
+    }
     setText("#profile-account-email", user.email || profile?.email || "—");
     setText("#profile-account-phone", user.phoneNumber || profile?.phone || "—");
     setText("#profile-uid", user.uid);
@@ -386,6 +437,77 @@ const interestOptions = [
     if (section) section.style.display = institutionCategories.has(categorySelect.value) ? "" : "none";
   });
 
+  document.querySelector("#profile-verify-request")?.addEventListener("click", async () => {
+    if (!currentUser) {
+      show("Sign in first to request verification.", "error");
+      return;
+    }
+    const proof = document.querySelector<HTMLInputElement>("#profile-proof-url")?.value.trim() || "";
+    const orgName = document.querySelector<HTMLInputElement>("#profile-org-name")?.value.trim() || "";
+    const orgWebsite = document.querySelector<HTMLInputElement>("#profile-org-website")?.value.trim() || "";
+    const orgAbout = document.querySelector<HTMLTextAreaElement>("#profile-org-about")?.value.trim() || "";
+    const name =
+      document.querySelector<HTMLInputElement>("#profile-name")?.value.trim() || currentUser.displayName || "FollowExam member";
+    const email =
+      currentUser.email || document.querySelector<HTMLInputElement>("#profile-email")?.value.trim() || "";
+    const note = document.querySelector<HTMLElement>("#profile-verify-message");
+
+    const setNote = (text: string, type: "error" | "success" | "info" = "info") => {
+      if (!note) return;
+      note.textContent = text;
+      note.className = `form-message show ${type}`;
+    };
+
+    if (!/^https?:\/\//i.test(proof)) {
+      setNote("Add a full official proof link starting with https://.", "error");
+      return;
+    }
+    if (!orgName) {
+      setNote("Add your organisation name first.", "error");
+      return;
+    }
+    const db = getFirebaseDb();
+    if (!db) {
+      setNote("Verification requests are temporarily unavailable.", "error");
+      return;
+    }
+
+    setNote("Sending verification request…", "info");
+    try {
+      await addDoc(collection(db, "inquiries"), {
+        institutionId: `verification-${currentUser.uid}`,
+        institutionName: orgName,
+        uid: currentUser.uid,
+        name,
+        email,
+        phone: "",
+        topic: "Institution verification",
+        kind: "institution-verification",
+        proofUrl: proof,
+        website: orgWebsite,
+        about: orgAbout,
+        message: `Institution verification request for ${orgName}. Official proof: ${proof}${orgWebsite ? `\nWebsite: ${orgWebsite}` : ""}${orgAbout ? `\nAbout: ${orgAbout}` : ""}`,
+        consent: true,
+        status: "new",
+        source: "profile-verification",
+        createdAt: new Date().toISOString(),
+        serverCreatedAt: serverTimestamp(),
+      });
+      await setDoc(
+        doc(db, "users", currentUser.uid),
+        {
+          verificationStatus: "pending",
+          verificationProof: proof,
+          verificationRequestedAt: new Date().toISOString(),
+        },
+        { merge: true },
+      );
+      setNote("Request sent. An admin will review your proof link and add the Verified badge.", "success");
+    } catch (error) {
+      setNote(error instanceof Error ? error.message : "Could not send the request. Please try again.", "error");
+    }
+  });
+
   watchAuth(async (user) => {
     currentUser = user;
     if (!user) {
@@ -396,6 +518,23 @@ const interestOptions = [
     fill(profile, user);
     if (profile?.careerGoal && CAREER_PATHS[profile.careerGoal]) {
       show(`Roadmap ready for ${profile.careerGoal}.`, "info");
+    }
+  });
+
+  document.querySelector("#profile-portfolio-public")?.addEventListener("change", (event) => {
+    const share = document.querySelector<HTMLElement>("#portfolio-share");
+    if (share) share.style.display = (event.target as HTMLInputElement).checked ? "" : "none";
+  });
+
+  document.querySelector("#profile-copy-link")?.addEventListener("click", async () => {
+    const input = document.querySelector<HTMLInputElement>("#profile-share-link");
+    if (!input?.value) return;
+    try {
+      await navigator.clipboard.writeText(input.value);
+      show("Portfolio link copied.", "success");
+    } catch {
+      input.select();
+      show("Select and copy the link manually.", "info");
     }
   });
 
@@ -419,14 +558,16 @@ const interestOptions = [
     show("Saving…", "info");
 
     try {
+      const publicProfile = Boolean(data.get("portfolioPublic"));
+      const skills = String(data.get("skills") || "").split(",").map(s => s.trim()).filter(Boolean);
       await saveProfile(currentUser, {
         name: String(data.get("name") || "").trim(),
         userCategory: String(data.get("userCategory") || "") as UserProfile["userCategory"],
         userStatus: String(data.get("userStatus") || "") as UserProfile["userStatus"],
-        institutionVerified: data.get("institutionVerified") === "verified",
         portfolio: String(data.get("portfolio") || "") || undefined,
         resumeUrl: String(data.get("resumeUrl") || "") || undefined,
-        skills: String(data.get("skills") || "").split(",").map(s => s.trim()).filter(Boolean) || undefined,
+        portfolioPublic: publicProfile,
+        skills: skills.length ? skills : undefined,
         email: String(data.get("email") || "").trim(),
         phone: String(data.get("phone") || "").trim(),
         stateId,
@@ -441,6 +582,39 @@ const interestOptions = [
         interests,
         emailAlerts: Boolean(data.get("emailAlerts")),
       });
+
+      // Public portfolio is a separate, opt-in document so private fields never leak.
+      const db = getFirebaseDb();
+      if (db) {
+        try {
+          if (publicProfile) {
+            await setDoc(
+              doc(db, "portfolios", currentUser.uid),
+              {
+                uid: currentUser.uid,
+                name: String(data.get("name") || "").trim() || currentUser.displayName || "FollowExam member",
+                headline: String(data.get("careerGoal") || "") || String(data.get("userStatus") || ""),
+                userStatus: String(data.get("userStatus") || ""),
+                stateName: stateId ? stateName : "",
+                educationLevel: String(data.get("educationLevel") || ""),
+                skills,
+                portfolio: String(data.get("portfolio") || ""),
+                resumeUrl: String(data.get("resumeUrl") || ""),
+                organizationName: String(data.get("organizationName") || "").trim(),
+                updatedAt: new Date().toISOString(),
+                serverUpdatedAt: serverTimestamp(),
+              },
+              { merge: true },
+            );
+          } else {
+            await deleteDoc(doc(db, "portfolios", currentUser.uid));
+          }
+        } catch {
+          show("Profile saved, but the public portfolio could not update. Try again.", "error");
+          return;
+        }
+      }
+
       const refreshed = await loadProfile(currentUser);
       fill(refreshed, currentUser);
       show("Profile saved. Recommendations update immediately.", "success");
@@ -468,6 +642,7 @@ const interestOptions = [
       const saved = await getDocs(collection(db, "users", currentUser.uid, "saved"));
       await Promise.all(saved.docs.map((item) => deleteDoc(item.ref)));
       await deleteDoc(doc(db, "users", currentUser.uid));
+      await deleteDoc(doc(db, "portfolios", currentUser.uid)).catch(() => {});
       form?.reset();
       show("Profile data deleted. You can create it again from this page.", "success");
     } catch (error) {

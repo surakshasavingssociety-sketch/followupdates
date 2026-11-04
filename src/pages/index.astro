@@ -13,6 +13,22 @@ import { centralScholarships, scholarshipDatabase } from "../lib/scholarships";
 
 const latest = jobs.slice(0, 6);
 
+// Dashboard banner: data-driven deadlines and coverage. All values come from the
+// same data files that generate the public pages, so the banner never drifts.
+const DAY_MS = 24 * 60 * 60 * 1000;
+const nowMs = Date.now();
+const upcomingDeadlines = jobs
+  .filter((job) => job.applyEnd && new Date(job.applyEnd).getTime() >= nowMs)
+  .sort((a, b) => new Date(a.applyEnd as string).getTime() - new Date(b.applyEnd as string).getTime());
+const nextDeadline = upcomingDeadlines[0];
+const nextDeadlineDays = nextDeadline
+  ? Math.max(0, Math.ceil((new Date(nextDeadline.applyEnd as string).getTime() - nowMs) / DAY_MS))
+  : null;
+const closingSoon = upcomingDeadlines.filter(
+  (job) => new Date(job.applyEnd as string).getTime() - nowMs <= 7 * DAY_MS,
+).length;
+const bannerDate = new Date(nowMs).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+
 const featuredExamIds = ["ssc-cgl", "upsc-cse", "ibps-po", "rrb-ntpc", "neet-ug", "ctet"];
 const featuredExams = featuredExamIds
   .map((id) => getExam(id))
@@ -66,37 +82,39 @@ const schema = {
 
     <!-- Signed-in view: the dashboard. -->
     <div id="home-dashboard" class="home-dashboard" hidden>
-      <section class="dash-head">
-        <div>
-          <div class="eyebrow">Your dashboard</div>
-          <h2 style="font-size:clamp(1.6rem,3vw,2.2rem)">Welcome back, <span id="dash-name">student</span>.</h2>
-          <p class="muted" id="dash-subtitle">
+      <section class="dash-hero" aria-label="Dashboard summary">
+        <div class="dash-hero-copy">
+          <div class="eyebrow dash-eyebrow">Live dashboard · <span id="dash-date">{bannerDate}</span></div>
+          <h2>Welcome back, <span id="dash-name">student</span>.</h2>
+          <p id="dash-subtitle">
             Here are the latest official notifications, scholarships and institutions that match your profile.
           </p>
+          <div class="dash-hero-actions">
+            <a class="btn btn-accent" href="/jobs/">Browse updates</a>
+            <a class="btn btn-outline" href="/profile/">Edit profile</a>
+            <a class="btn btn-ghost" href="/career/">Career roadmap</a>
+          </div>
         </div>
-        <div class="dash-head-actions">
-          <a class="btn btn-primary" href="/profile/">Edit profile</a>
-          <a class="btn btn-outline" href="/career/">Career roadmap</a>
+        <div class="dash-hero-side">
+          <div class="dash-hero-deadline">
+            <span class="badge badge-amber">Next deadline</span>
+            {nextDeadline ? (
+              <>
+                <a href={`/jobs/${nextDeadline.slug || nextDeadline.id}/`}>{nextDeadline.title}</a>
+                <strong>{nextDeadlineDays} {nextDeadlineDays === 1 ? "day" : "days"} left</strong>
+              </>
+            ) : (
+              <span class="small">No closing dates on record yet.</span>
+            )}
+          </div>
+          <div class="dash-hero-stats">
+            <a href="/jobs/"><span>Notifications</span><strong>{jobs.length}</strong></a>
+            <a href="/exams/"><span>Exam cycles</span><strong>{examDatabase.counts.total}</strong></a>
+            <a href="/institutions/"><span>Institutions</span><strong>{institutionDatabase.counts.total}</strong></a>
+            <a href="/scholarships/"><span>Scholarships</span><strong>{scholarshipDatabase.counts.total}</strong></a>
+            <a href="/calendar/"><span>Closing in 7 days</span><strong>{closingSoon}</strong></a>
+          </div>
         </div>
-      </section>
-
-      <section class="dash-stats" aria-label="Coverage">
-        <a class="dash-stat" href="/jobs/">
-          <span>Analysed notifications</span>
-          <strong>{jobs.length}</strong>
-        </a>
-        <a class="dash-stat" href="/exams/">
-          <span>Exam cycles</span>
-          <strong>{examDatabase.counts.total}</strong>
-        </a>
-        <a class="dash-stat" href="/institutions/">
-          <span>Institutions</span>
-          <strong>{institutionDatabase.counts.total}</strong>
-        </a>
-        <a class="dash-stat" href="/scholarships/">
-          <span>Scholarships</span>
-          <strong>{scholarshipDatabase.counts.total}</strong>
-        </a>
       </section>
 
       <div class="dash-grid">
@@ -228,6 +246,11 @@ const schema = {
     const element = document.querySelector<HTMLElement>(id);
     if (element) element.textContent = value;
   }
+
+  setText(
+    "#dash-date",
+    new Date().toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }),
+  );
 
   function initials(name: string) {
     return (

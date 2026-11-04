@@ -340,6 +340,26 @@ export type UserStatus =
   | "Private organisation"
   | "Open schooling provider";
 
+export type ResumeExperience = {
+  role: string;
+  organization?: string;
+  period?: string;
+  description?: string;
+};
+
+export type ResumeEducation = {
+  qualification: string;
+  institution?: string;
+  year?: string;
+  score?: string;
+};
+
+export type ResumeProject = {
+  name: string;
+  link?: string;
+  description?: string;
+};
+
 export type UserProfile = {
   uid: string;
   name: string;
@@ -367,9 +387,22 @@ export type UserProfile = {
   portfolio?: string;
   resumeUrl?: string;
   cvUrl?: string;
+  /** Opt-in: mirror safe profile fields to the public portfolio page. */
+  portfolioPublic?: boolean;
   skills?: string[];
   achievements?: string[];
   emailAlerts?: boolean;
+  // Resume / CV builder fields.
+  headline?: string;
+  summary?: string;
+  subjects?: string[];
+  teachingExperience?: string;
+  qualifications?: string;
+  experience?: ResumeExperience[];
+  educationHistory?: ResumeEducation[];
+  projects?: ResumeProject[];
+  certifications?: string[];
+  languages?: string[];
   createdAt?: string;
   updatedAt?: string;
 };

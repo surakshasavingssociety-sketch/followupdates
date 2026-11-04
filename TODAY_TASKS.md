@@ -63,16 +63,24 @@ Isi liye:
 - [x] **Admin users profile data** — har admin ke saath `users/{uid}` se name, status, institution, organisation, state dikhta hai
 
 ### 🟡 EASY — next (chhote, safe)
-- [ ] Admin settings: "Save" ke baad site header/footer par brand name/logo turant apply (localStorage bridge)
+- [x] Admin settings: "Save" ke baad site header/footer par brand name/logo turant apply (localStorage bridge)
+- [x] Admin nav permanent — sticky tabs sab 11 admin pages par
+- [x] Admin automation trigger — `automationRuns` queue + GitHub Actions 10-min worker + "Run automation now" panel
+- [x] Institution verification approve/reject — admin inquiries se `users/{uid}.institutionVerified` set hota hai
+- [x] Profile verification request — official proof link + pending/verified status
+- [x] Dynamic dashboard banner — live counts, next deadline, closing-in-7-days
+- [x] App-like responsive polish — fluid containers, mobile admin actions, safe wrapping
+- [x] Public portfolio — opt-in `portfolios/{uid}` + share link
+- [x] Social follow icons removed from public site
 
 ### 🟠 MEDIUM
 - [ ] Library: direct PDF reader / download links (read tracking ✅ done)
 - [ ] Centralized logo/name poori site par (settings → header/footer/meta)
-- [ ] Analytics: SVG bar charts (category/state/exam)
-- [ ] Profile: portfolio/resume public view
-- [ ] Profile: institution verification form + Verified badge
-- [ ] Admin: full user-data access (users page expand)
-- [ ] Full fluid grid (left/right gap) sab pages par
+- [x] Analytics: SVG bar charts (category/state/exam)
+- [x] Profile: portfolio/resume public view
+- [x] Profile: institution verification form + Verified badge
+- [x] Admin: full user-data access (users page expand)
+- [x] Full fluid grid (left/right gap) sab pages par
 
 ### 🔴 HARD (baad ke liye — external setup chahiye)
 - [ ] Institution government-site verification (scraping + rules)

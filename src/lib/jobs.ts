@@ -5,6 +5,9 @@ import type { Job } from "./types";
 const dataFile = path.join(process.cwd(), "data", "jobs.json");
 
 export function isJobVisible(job: Job, now = Date.now()): boolean {
+  // Demo/sample entries are never published, even if a status flips to published.
+  if (job.demo === true) return false;
+
   const publishTime = job.publishAt ? new Date(job.publishAt).getTime() : null;
 
   // Drafts, archived entries and pending approvals never appear publicly.

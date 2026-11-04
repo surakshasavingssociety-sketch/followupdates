@@ -11,10 +11,10 @@ const categories = Object.values(CATEGORY_META);
     <div class="footer-grid">
       <div>
         <a class="brand" href="/" style="color:#fff">
-          <span class="brand-mark" aria-hidden="true">FE</span>
+          <span class="brand-mark" aria-hidden="true" data-site-mark>FE</span>
           <span>
-            {SITE.name}
-            <small style="color:rgba(255,255,255,.5)">Every exam. One account.</small>
+            <span data-site-name>{SITE.name}</span>
+            <small style="color:rgba(255,255,255,.5)" data-site-tagline>Every exam. One account.</small>
           </span>
         </a>
         <p style="margin-top:14px;max-width:320px">
@@ -51,33 +51,15 @@ const categories = Object.values(CATEGORY_META);
         ))}
       </div>
 
-      <div>
-        <h2>Follow us</h2>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
-          <a href="https://t.me/followexamupdates" target="_blank" rel="noopener" class="btn btn-sm" style="background:#0088cc;color:#fff">Telegram</a>
-          <a href="https://wa.me/919999999999" target="_blank" rel="noopener" class="btn btn-sm" style="background:#25d366;color:#fff">WhatsApp</a>
-          <a href="https://twitter.com/followexam" target="_blank" rel="noopener" class="btn btn-sm" style="background:#1da1f2;color:#fff">X (Twitter)</a>
-          <a href="https://instagram.com/followexam" target="_blank" rel="noopener" class="btn btn-sm" style="background:#e1306c;color:#fff">Instagram</a>
-          <a href="https://youtube.com/followexam" target="_blank" rel="noopener" class="btn btn-sm" style="background:#ff0000;color:#fff">YouTube</a>
-        </div>
-      </div>
-
       <div id="alerts">
         <h2>Daily email alerts</h2>
         <p style="margin-bottom:8px">One email a day with the updates that match your profile. Free.</p>
         <SubscribeForm compact source="footer" />
-        {SITE.telegram && (
-          <p style="margin-top:12px">
-            <a href={SITE.telegram} target="_blank" rel="noopener" style="color:#ffc45c;font-weight:700">
-              Join us on Telegram →
-            </a>
-          </p>
-        )}
       </div>
     </div>
 
     <div class="footer-bottom">
-      <span>© {year} {SITE.name}. All rights reserved.</span>
+      <span>© {year} <span data-site-copyright>{SITE.name}</span>. All rights reserved.</span>
       <span>
         <a href="/about/" style="display:inline">About</a> ·
         <a href="/contact/" style="display:inline">Contact</a> ·

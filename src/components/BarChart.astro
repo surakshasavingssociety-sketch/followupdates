@@ -1,0 +1,35 @@
+---
+type Entry = [string, number];
+type Props = {
+  entries: Entry[];
+  label: string;
+  /** Approx. width of the bar area in SVG units. */
+  barArea?: number;
+};
+
+const { entries, label, barArea = 165 } = Astro.props;
+const max = Math.max(1, ...entries.map(([, value]) => value));
+const rows = entries.map(([name, value], index) => ({
+  name: name.length > 20 ? `${name.slice(0, 19)}…` : name,
+  value,
+  y: index * 24,
+  width: Math.max(4, Math.round((value / max) * barArea)),
+}));
+const height = Math.max(24, rows.length * 24);
+---
+
+<svg
+  viewBox={`0 0 360 ${height}`}
+  width="100%"
+  role="img"
+  aria-label={`Bar chart: ${label}`}
+  style="display:block;margin:0 0 10px;overflow:visible"
+>
+  {rows.map((row) => (
+    <g>
+      <text x="0" y={row.y + 13} font-size="10" fill="currentColor" opacity="0.75">{row.name}</text>
+      <rect x="126" y={row.y + 3} width={row.width} height="12" rx="3" fill="var(--brand)" opacity="0.85" />
+      <text x={130 + row.width} y={row.y + 13} font-size="10" fill="currentColor" opacity="0.75">{row.value}</text>
+    </g>
+  ))}
+</svg>
