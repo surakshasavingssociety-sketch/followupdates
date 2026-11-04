@@ -92,6 +92,10 @@ export function friendlyAuthError(error: unknown): string {
     "auth/wrong-password": "Incorrect password. Try again.",
     "auth/invalid-credential": "Incorrect email or password.",
     "auth/email-already-in-use": "An account already exists with this email. Sign in instead.",
+    "auth/account-exists-with-different-credential":
+      "This email is already registered with a different sign-in method. Use the method you used earlier (Google or email password).",
+    "auth/password-does-not-meet-requirements":
+      "Password is too weak. Use at least 8 characters with a number and an uppercase letter.",
     "auth/weak-password": "Use a password with at least 6 characters.",
     "auth/popup-closed-by-user": "Google sign-in was cancelled.",
     "auth/too-many-requests": "Too many attempts. Please wait a few minutes.",
