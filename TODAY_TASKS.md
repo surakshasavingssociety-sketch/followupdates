@@ -47,7 +47,7 @@ Isi liye:
 - [x] Forgot password / reset link UI
 - [x] Settings page persists to Firestore (`settings/site`)
 - [x] Admin users / analytics / payments / inquiries / institutions pages live
-- [ ] Login duplicate-account cleanup (today)
+- [x] Login duplicate-account cleanup (today)
 
 ## D. Feature backlog — Easy → Medium → Hard (kal ke instructions)
 
@@ -99,3 +99,4 @@ Isi liye:
 | `1be6514` | Duplicate account cleanup, login hardening, task list | ✅ |
 | `6093c7f` | Structure: unique exam titles, 1 h1/page, generator fix, manager/executive roles | ✅ |
 | `26cf217` | Structure: exam title polish | ✅ |
+| `15ea235` | Admin panel: sticky nav, automation runner, verification approvals, dashboard banner, portfolio + resume foundation | ✅ |
