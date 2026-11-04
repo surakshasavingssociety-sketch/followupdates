@@ -2,17 +2,17 @@
 const path = Astro.url.pathname.replace(/\/+$/, "") + "/";
 
 const links = [
-  { href: "/admin/", label: "Queue", icon: "🗂" },
-  { href: "/admin/analytics/", label: "Analytics", icon: "📊" },
-  { href: "/admin/users/", label: "Users", icon: "👤" },
-  { href: "/admin/inquiries/", label: "Enquiries", icon: "✉" },
-  { href: "/admin/institutions/", label: "Institutions", icon: "🏫" },
-  { href: "/admin/payments/", label: "Payments", icon: "💳" },
-  { href: "/admin/automation/", label: "Automation", icon: "⚙" },
-  { href: "/admin/social/", label: "Social", icon: "📣" },
-  { href: "/admin/feature-flags/", label: "Flags", icon: "🚩" },
-  { href: "/admin/tracking/", label: "Tracking", icon: "🎯" },
-  { href: "/admin/settings/", label: "Settings", icon: "🛠" },
+  { href: "/admin/", label: "Queue", icon: "🗂", perm: "queue.view" },
+  { href: "/admin/analytics/", label: "Analytics", icon: "📊", perm: "analytics.view" },
+  { href: "/admin/users/", label: "Users", icon: "👤", perm: "users.view" },
+  { href: "/admin/inquiries/", label: "Enquiries", icon: "✉", perm: "inquiries.view" },
+  { href: "/admin/institutions/", label: "Institutions", icon: "🏫", perm: "institutions.view" },
+  { href: "/admin/payments/", label: "Payments", icon: "💳", perm: "payments.view" },
+  { href: "/admin/automation/", label: "Automation", icon: "⚙", perm: "automation.run" },
+  { href: "/admin/social/", label: "Social", icon: "📣", perm: "social.manage" },
+  { href: "/admin/feature-flags/", label: "Flags", icon: "🚩", perm: "flags.manage" },
+  { href: "/admin/tracking/", label: "Tracking", icon: "🎯", perm: "tracking.view" },
+  { href: "/admin/settings/", label: "Settings", icon: "🛠", perm: "settings.manage" },
 ];
 
 const isActive = (href: string) => (href === "/admin/" ? path === "/admin/" : path.startsWith(href));
@@ -21,9 +21,16 @@ const isActive = (href: string) => (href === "/admin/" ? path === "/admin/" : pa
 <nav class="admin-nav" aria-label="Admin sections">
   <div class="admin-nav-inner">
     <span class="admin-nav-title" aria-hidden="true">Admin</span>
+    <span class="admin-nav-role" id="admin-nav-role" hidden></span>
     <div class="admin-nav-scroll">
       {links.map((link) => (
-        <a class="admin-nav-link" href={link.href} aria-current={isActive(link.href) ? "page" : undefined}>
+        <a
+          class="admin-nav-link"
+          href={link.href}
+          data-admin-link
+          data-perm={link.perm}
+          aria-current={isActive(link.href) ? "page" : undefined}
+        >
           <span aria-hidden="true">{link.icon}</span>
           <span>{link.label}</span>
         </a>
@@ -32,6 +39,42 @@ const isActive = (href: string) => (href === "/admin/" ? path === "/admin/" : pa
     <a class="admin-nav-site" href="/" target="_blank" rel="noopener">View site ↗</a>
   </div>
 </nav>
+
+<script>
+  import { watchAuth } from "../lib/auth";
+  import {
+    ADMIN_ROLE_INFO,
+    hasPermission,
+    permissionForAdminPath,
+    resolveAccess,
+  } from "../lib/roles";
+
+  const roleChip = document.querySelector<HTMLElement>("#admin-nav-role");
+  const links = [...document.querySelectorAll<HTMLElement>("[data-admin-link]")];
+
+  watchAuth(async (user) => {
+    if (!user) return;
+    const access = await resolveAccess(user);
+    if (access.kind !== "admin" || !access.adminRole) return;
+
+    // Hide admin sections this role cannot use.
+    for (const link of links) {
+      const perm = link.dataset.perm as Parameters<typeof hasPermission>[1];
+      if (!hasPermission(access, perm)) link.remove();
+    }
+
+    if (roleChip) {
+      roleChip.textContent = ADMIN_ROLE_INFO[access.adminRole].label;
+      roleChip.hidden = false;
+    }
+
+    // Direct URL access to a section the role cannot use goes back to the queue.
+    const required = permissionForAdminPath(window.location.pathname);
+    if (!hasPermission(access, required)) {
+      window.location.replace("/admin/?denied=1");
+    }
+  });
+</script>
 
 <style>
   .admin-nav {
@@ -61,6 +104,20 @@ const isActive = (href: string) => (href === "/admin/" ? path === "/admin/" : pa
     text-transform: uppercase;
     color: var(--muted);
     flex: 0 0 auto;
+  }
+
+  .admin-nav-role {
+    flex: 0 0 auto;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--brand-soft);
+    border: 1px solid #c9dcf5;
+    color: var(--brand);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
   }
 
   .admin-nav-scroll {

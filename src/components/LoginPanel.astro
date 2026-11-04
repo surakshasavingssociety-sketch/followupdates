@@ -119,6 +119,16 @@ const HeadingTag = headingLevel === 2 ? "h2" : "h1";
       <a href="/disclaimer/">Disclaimer</a>. Your profile data is stored in your own account and can be edited or
       deleted at any time.
     </p>
+
+    <details class="auth-roles">
+      <summary>Who can sign in?</summary>
+      <ul class="small muted">
+        <li><strong>Student / job aspirant</strong> — exams, jobs, scholarships and a personalised dashboard.</li>
+        <li><strong>Teacher / faculty</strong> — teaching vacancies, TET/UGC-NET and reading resources.</li>
+        <li><strong>Institution / organisation</strong> — directory, verification request and enquiry tools.</li>
+        <li><strong>Admin team</strong> — role-based admin panel. A Super Admin assigns roles from Admin → Users.</li>
+      </ul>
+    </details>
   </div>
 </section>
 
@@ -133,6 +143,7 @@ const HeadingTag = headingLevel === 2 ? "h2" : "h1";
     startPhoneSignIn,
   } from "../lib/auth";
   import { loadProfile, saveProfile } from "../lib/profile";
+  import { resolveAccess } from "../lib/roles";
   import type { ConfirmationResult } from "firebase/auth";
 
   const screen = document.querySelector<HTMLElement>("[data-auth-screen]");
@@ -177,8 +188,12 @@ const HeadingTag = headingLevel === 2 ? "h2" : "h1";
 
     if (screen?.dataset.redirect === "true") {
       const params = new URLSearchParams(window.location.search);
-      const next = params.get("next") || "/";
-      const safe = next.startsWith("/") && !next.startsWith("//") ? next : "/";
+      const requested = params.get("next");
+      const access = await resolveAccess(user);
+      // Admins land in the admin panel unless a deeper page was requested.
+      const fallback = access.kind === "admin" ? access.homePath : "/";
+      const safe =
+        requested && requested.startsWith("/") && !requested.startsWith("//") ? requested : fallback;
       window.location.replace(safe);
     }
   }
@@ -309,3 +324,25 @@ const HeadingTag = headingLevel === 2 ? "h2" : "h1";
     }
   });
 </script>
+
+<style>
+  .auth-roles {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+  }
+
+  .auth-roles summary {
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--ink-soft);
+  }
+
+  .auth-roles ul {
+    display: grid;
+    gap: 6px;
+    margin: 8px 0 0;
+    padding-left: 18px;
+  }
+</style>

@@ -25,9 +25,11 @@ const isActive = (href: string) => (href === "/" ? path === "/" : path.startsWit
 
     <div class="header-actions">
       <button class="btn btn-ghost btn-sm hidden" type="button" id="install-app">Install app</button>
+      <a class="btn btn-ghost btn-sm hidden" href="/admin/" id="header-admin">Admin panel</a>
       <a class="btn btn-outline btn-sm hidden" href="/profile/" id="header-profile">
         <span class="avatar avatar-sm" id="header-avatar" aria-hidden="true">FE</span>
         <span id="header-name">My profile</span>
+        <span id="header-role" style="display:none;margin-left:6px;padding:2px 8px;border-radius:999px;background:var(--brand-soft);color:var(--brand);font-size:0.68rem;font-weight:800;letter-spacing:0.03em;text-transform:uppercase;"></span>
       </a>
       <a class="btn btn-primary btn-sm" href="/login/" id="header-signin">Sign in</a>
       <button class="btn btn-ghost btn-sm hidden" type="button" id="header-signout">Sign out</button>
@@ -41,6 +43,7 @@ const isActive = (href: string) => (href === "/" ? path === "/" : path.startsWit
 
 <script>
   import { signOutUser, watchAuth } from "../lib/auth";
+  import { accessChipLabel, resolveAccess } from "../lib/roles";
 
   /**
    * Instant brand bridge: admin settings writes the brand to localStorage so the
@@ -92,6 +95,8 @@ const isActive = (href: string) => (href === "/" ? path === "/" : path.startsWit
   const profileLink = document.querySelector<HTMLElement>("#header-profile");
   const nameEl = document.querySelector<HTMLElement>("#header-name");
   const avatar = document.querySelector<HTMLElement>("#header-avatar");
+  const roleChip = document.querySelector<HTMLElement>("#header-role");
+  const adminLink = document.querySelector<HTMLElement>("#header-admin");
   const signIn = document.querySelector<HTMLElement>("#header-signin");
   const signOut = document.querySelector<HTMLElement>("#header-signout");
 
@@ -106,7 +111,7 @@ const isActive = (href: string) => (href === "/" ? path === "/" : path.startsWit
     );
   }
 
-  watchAuth((user) => {
+  watchAuth(async (user) => {
     if (user) {
       const label = user.displayName || user.email?.split("@")[0] || "My profile";
       if (nameEl) nameEl.textContent = label;
@@ -114,10 +119,22 @@ const isActive = (href: string) => (href === "/" ? path === "/" : path.startsWit
       profileLink?.classList.remove("hidden");
       signIn?.classList.add("hidden");
       signOut?.classList.remove("hidden");
+
+      // Recognise the signed-in role and surface the matching entry point.
+      const access = await resolveAccess(user);
+      if (roleChip) {
+        const chip = accessChipLabel(access);
+        roleChip.textContent = access.label;
+        roleChip.style.display = chip ? "" : "none";
+        roleChip.title = chip ? `Signed in as ${access.label}` : "";
+      }
+      adminLink?.classList.toggle("hidden", access.kind !== "admin");
     } else {
       profileLink?.classList.add("hidden");
       signIn?.classList.remove("hidden");
       signOut?.classList.add("hidden");
+      adminLink?.classList.add("hidden");
+      if (roleChip) roleChip.style.display = "none";
     }
   });
 

@@ -25,6 +25,20 @@ service cloud.firestore {
        return isAdmin() && adminRole() == role;
     }
 
+    // Staff roles that may work the content queue (every admin role).
+    function roleIn(roles) {
+      return isAdmin() && (adminRole() == null || adminRole() in roles);
+    }
+
+    function canReview() {
+      return roleIn(['super_admin', 'admin', 'manager', 'executive', 'moderator']);
+    }
+
+    // Operations roles: automation, social drafts and feature flags.
+    function canManageOps() {
+      return roleIn(['super_admin', 'admin', 'manager']);
+    }
+
     // Bootstrap: the registered owner email may create its own admin doc once.
     function isBootstrapOwner(candidateUid) {
       return isSignedIn()
@@ -36,17 +50,18 @@ service cloud.firestore {
       return value is string && value.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$') && value.size() < 200;
     }
 
-    // Published jobs: everyone can read. Only admins can write.
+    // Published jobs: everyone can read. Staff can write; only Super Admin deletes.
     match /jobs/{jobId} {
       allow read: if resource.data.status == 'published';
       allow read: if isAdmin();
-      allow create, update: if isAdmin();
+      allow create, update: if canReview();
      allow delete: if isSuperAdmin();
     }
 
-    // Review queue: admins only.
+    // Review queue: every staff role can review; deletion needs operations access.
     match /pending/{itemId} {
-      allow read, write: if isAdmin();
+      allow read, create, update: if canReview();
+      allow delete: if canManageOps();
     }
 
     // Admin allow-list: a user can read only their own doc; admins can list,
@@ -65,15 +80,16 @@ service cloud.firestore {
       allow create, update: if
         validEmail(request.resource.data.email) &&
         request.resource.data.active is bool;
-      allow read, delete: if isAdmin();
+      allow read: if canReview();
+      allow delete: if canManageOps();
     }
 
     // User profile.
     match /users/{uid} {
       allow read, write: if isSignedIn() && request.auth.uid == uid;
-      allow read: if isAdmin();
+      allow read: if canReview();
       // Admins may only flip verification fields, never edit the rest of a profile.
-      allow update: if isAdmin() &&
+      allow update: if canReview() &&
         request.resource.data.diff(resource.data).affectedKeys()
           .hasOnly(['institutionVerified', 'verificationStatus', 'verificationReviewedAt', 'verificationReviewedBy']);
 
@@ -98,7 +114,7 @@ service cloud.firestore {
     // Contact/feedback messages (optional collection).
     match /messages/{messageId} {
       allow create: if true;
-      allow read, delete: if isAdmin();
+      allow read, delete: if canReview();
     }
 
     // Institution enquiries. Anyone can submit a validated enquiry; only admins
@@ -115,35 +131,41 @@ service cloud.firestore {
         request.resource.data.institutionId is string &&
         request.resource.data.status == 'new' &&
         request.resource.data.consent == true;
-      allow read, update, delete: if isAdmin();
+      allow read, update, delete: if canReview();
     }
 
     // Admin activity audit log.
     match /adminActivity/{entryId} {
-      allow read, write: if isAdmin();
+      allow read, write: if canReview();
     }
 
     // Admin-triggered automation requests. Admins create queued runs; the
     // GitHub Actions worker (Admin SDK) picks them up and updates the status.
     match /automationRuns/{runId} {
-      allow read: if isAdmin();
-      allow create: if isAdmin() &&
+      allow read: if canManageOps();
+      allow create: if canManageOps() &&
         request.resource.data.status == 'queued' &&
         request.resource.data.requestedBy is string &&
         request.resource.data.requestedBy.size() < 200;
-      allow update, delete: if isAdmin();
+      allow update, delete: if canManageOps();
     }
 
-    // Social post drafts: admins can manage; only admin-side code writes them.
+    // Social post drafts: operations roles manage them; the worker uses the Admin SDK.
     match /socialDrafts/{draftId} {
-      allow read, write: if isAdmin();
+      allow read, write: if canManageOps();
+    }
+
+    // Feature flags: staff can read; operations roles can change them.
+    match /featureFlags/{flagId} {
+      allow read: if canReview();
+      allow write: if canManageOps();
     }
 
     // Site settings (brand, feature toggles, payment config). Public read so the
-    // public pages can show the configured brand; admins write.
+    // public pages can show the configured brand; only Super Admin writes.
     match /settings/{docId} {
       allow read: if true;
-      allow write: if isAdmin();
+      allow write: if isSuperAdmin();
     }
 
     // Everything else is closed.

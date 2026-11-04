@@ -16,12 +16,16 @@ import LoginPanel from "../../components/LoginPanel.astro";
 
 <script>
   import { watchAuth } from "../../lib/auth";
+  import { resolveAccess } from "../../lib/roles";
 
-  watchAuth((user) => {
+  watchAuth(async (user) => {
     if (!user) return;
     const params = new URLSearchParams(window.location.search);
-    const next = params.get("next") || "/";
-    const safe = next.startsWith("/") && !next.startsWith("//") ? next : "/";
+    const requested = params.get("next");
+    const access = await resolveAccess(user);
+    const fallback = access.kind === "admin" ? access.homePath : "/";
+    const safe =
+      requested && requested.startsWith("/") && !requested.startsWith("//") ? requested : fallback;
     window.location.replace(safe);
   });
 </script>
