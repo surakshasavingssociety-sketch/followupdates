@@ -105,3 +105,32 @@ Isi liye:
 | `15ea235` | Admin panel: sticky nav, automation runner, verification approvals, dashboard banner, portfolio + resume foundation | ✅ |
 | `2c4f892` | Queue visibility fix (legacy docs), admin banners/promo removed, 17 category dashboard banners | ✅ |
 | `a2cf11a` | Queue: merge entries missing `status`/`discoveredAt`, faster pending count, automation poll every 5 min | ✅ |
+| `eef1df6` | Role-based access: unified resolver, permission-gated admin nav, persona dashboard, role-aware login | ⏳ deploying |
+
+## F. Role model — final (2026-11-04)
+
+### Access roles (`admins/{uid}.role`)
+
+| Role | Lands on | Can use |
+|---|---|---|
+| Super Admin | `/admin/` | Everything + Users/roles + Settings |
+| Admin | `/admin/` | Queue, analytics, institutions, enquiries, automation, social, flags, tracking |
+| Manager | `/admin/` | Queue/publish, analytics, institutions, payments, automation, social, flags, tracking |
+| Executive | `/admin/` | Queue, analytics, enquiries, tracking |
+| Moderator | `/admin/` | Queue, tracking |
+
+### Persona roles (`users/{uid}.userStatus` → `src/lib/roles.ts`)
+
+| Persona | Dashboard response |
+|---|---|
+| Student / Job aspirant / Research scholar | Exams, jobs, scholarships, institutions, career roadmap |
+| Teacher / Faculty | Teaching jobs, TET/UGC-NET, library, institutions (no career roadmap) |
+| Institution | Institution directory, verification, open schooling, government services (no exams/scholarships) |
+| Organisation | Sector updates, institution directory, library, government services |
+
+### Enforcement
+- `src/lib/roles.ts` — single source of truth (permissions, personas, redirects, page guard).
+- Admin nav links filtered by permission; direct URL to a forbidden section redirects to the queue.
+- `firestore.rules` — role-aware writes (settings = Super Admin only; automation/social/flags = ops roles).
+- Login redirects by role: admin → `/admin/`, member → requested `next` or home dashboard.
+- Header shows the recognised role chip + Admin panel link for staff.

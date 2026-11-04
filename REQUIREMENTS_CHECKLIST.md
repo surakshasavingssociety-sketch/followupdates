@@ -15,19 +15,28 @@
 - [x] Responsive fix (container 1480px, eyebrow visible)
 - [x] Data build (exams, institutions, scholarships)
 
+## Role-based access (deployed 2026-11-04)
+- [x] Access roles: `super_admin`, `admin`, `manager`, `executive`, `moderator` (`admins/{uid}.role`)
+- [x] Single role resolver (`src/lib/roles.ts`) used by header, login, dashboard and admin nav
+- [x] Admin nav filtered by permission; direct URL to a forbidden section redirects to the queue
+- [x] Firestore rules role-aware (settings = Super Admin only; automation/social/flags = ops roles)
+- [x] Role-aware login redirect (admin → `/admin/`, member → `next` or home)
+- [x] Persona dashboard: student, job aspirant, research scholar, teacher, faculty, institution, organisation
+- [x] Login page role guide ("Who can sign in?")
+
 ## To complete (local first, deploy after your confirm: tab kijiyega)
 - [ ] Admin panel: full reports/charts (analytics page expand)
-- [ ] Admin: user roles (manager, executive) — Firestore role doc + UI
-- [ ] Profile: institution verification (government site check + form)
-- [ ] Profile: portfolio / resume / CV fields + public view
-- [ ] Library: PDF direct-read + user read-record tracking
+- [x] Admin: user roles (manager, executive, moderator, super_admin) — Firestore role doc + permission UI
+- [x] Profile: institution verification (request form + admin approve/reject)
+- [x] Profile: portfolio / resume public view (auto CV builder still pending)
+- [x] Library: user read-record tracking (direct PDF reader still pending)
 - [ ] Post automation: time-based notification fetch (Blaze hidden toggle)
-- [ ] Post categories enforced (every post must have category + official URL + notification URL)
-- [ ] Payment gateway settings page (admin toggle + credentials storage - hidden until Blaze)
+- [x] Post categories enforced (category + official URL + notification URL required on approve)
+- [ ] Payment gateway live integration (Razorpay/Stripe keys + webhook)
 - [ ] Social auto-post / video short (hidden Blaze toggle)
-- [ ] Logo/name update centralized (admin settings apply everywhere)
-- [ ] Screen auto-adjust (left/right gap) — done partially; full fluid grid for all pages
-- [ ] User data full access from admin (users page expand)
+- [x] Logo/name update centralized (admin settings → localStorage → header/footer)
+- [x] Screen auto-adjust (full fluid grid + mobile admin actions)
+- [x] User data full access from admin (users page expand)
 - [x] Remove unintended model/openrouter edits (stray `src/firebase.js` + `firestore-debug.log` deleted; 0 references remain)
 
 ## Note — Remove openrouter/model stray edits
