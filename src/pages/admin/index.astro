@@ -516,20 +516,28 @@ function authErrorMessage(error: unknown): string {
       failed = true;
     }
 
-    if (!rows.length) {
+    if (rows.length < 400) {
+      // Also merge the whole collection: entries created before the status
+      // field existed have no "status" value, so a status query cannot see them.
       try {
         const snapshot = await getDocs(query(collection(db, "pending"), limit(600)));
-        rows = snapshot.docs.map((item) => ({ id: item.id, ...item.data() })).filter(isOpenPending);
+        const byId = new Map(rows.map((row) => [row.id, row]));
+        for (const item of snapshot.docs) {
+          if (!byId.has(item.id)) byId.set(item.id, { id: item.id, ...item.data() });
+        }
+        rows = [...byId.values()];
         failed = false;
       } catch (error) {
-        console.error("Could not load the review queue.", error);
-        pending = [];
-        if (pendingList) {
-          const message = error instanceof Error ? error.message : "Unknown error";
-          pendingList.innerHTML = `<div class="empty"><h3>Could not load the queue</h3><p>${esc(message)}</p><p class="small muted">Check the browser console and Firestore rules.</p></div>`;
+        if (!rows.length) {
+          console.error("Could not load the review queue.", error);
+          pending = [];
+          if (pendingList) {
+            const message = error instanceof Error ? error.message : "Unknown error";
+            pendingList.innerHTML = `<div class="empty"><h3>Could not load the queue</h3><p>${esc(message)}</p><p class="small muted">Check the browser console and Firestore rules.</p></div>`;
+          }
+          if (pendingCount) pendingCount.textContent = "";
+          return;
         }
-        if (pendingCount) pendingCount.textContent = "";
-        return;
       }
     }
 
