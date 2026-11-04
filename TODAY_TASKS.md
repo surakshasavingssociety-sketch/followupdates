@@ -58,15 +58,15 @@ Isi liye:
 - [x] **Duplicate exam titles fixed** — board/exam pages ab state ke saath unique title (`BSEAP Board Exams (Andhra Pradesh)` vs `(Arunachal Pradesh)`, Delhi Police `(Delhi)` vs `(All India)`)
 - [x] **Data generator bug fixed** — `scripts/build-exams.mjs` ab `"undefined"` aliases/keywords generate nahi karta; board exam names state-wise unique
 - [x] **Admin analytics base** — 5 stat cards + live user/subscriber/admin/enquiry counts + category/state/exam tables (already live)
+- [x] **Library page** — 12 official govt/open sources, search + category filter, read tracking (`users/{uid}/reading` Firestore + localStorage fallback)
+- [x] **Payments admin page** — live gateway status from `settings/site` (provider, key presence, currency, note, toggle state) + auth guard
+- [x] **Admin users profile data** — har admin ke saath `users/{uid}` se name, status, institution, organisation, state dikhta hai
 
 ### 🟡 EASY — next (chhote, safe)
-- [ ] Payments admin page: Firestore `settings/site` se live gateway status dikhao (abhi static JSON)
 - [ ] Admin settings: "Save" ke baad site header/footer par brand name/logo turant apply (localStorage bridge)
-- [ ] Library page: hardcoded 2 cards ki jagah `library-books.json` se list + search/filter
-- [ ] Admin users: profile data (status/institution) bhi list mein dikhao
 
 ### 🟠 MEDIUM
-- [ ] Library: PDF direct-read + read-record tracking (`users/{uid}/reading`)
+- [ ] Library: direct PDF reader / download links (read tracking ✅ done)
 - [ ] Centralized logo/name poori site par (settings → header/footer/meta)
 - [ ] Analytics: SVG bar charts (category/state/exam)
 - [ ] Profile: portfolio/resume public view

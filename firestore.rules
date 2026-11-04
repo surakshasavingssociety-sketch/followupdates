@@ -77,6 +77,12 @@ service cloud.firestore {
       match /saved/{jobId} {
         allow read, write: if isSignedIn() && request.auth.uid == uid;
       }
+
+      // Library read records.
+      match /reading/{bookId} {
+        allow read, write: if isSignedIn() && request.auth.uid == uid;
+        allow read: if isAdmin();
+      }
     }
 
     // Contact/feedback messages (optional collection).

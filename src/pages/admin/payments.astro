@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { SITE } from "../../lib/constants";
 import fs from "node:fs";
 import path from "node:path";
 
@@ -8,54 +7,241 @@ const gwFile = path.join(process.cwd(), "data", "payment-gateways.json");
 const gwData = JSON.parse(fs.readFileSync(gwFile, "utf8"));
 ---
 
-<BaseLayout title="Payment settings" description="Configure payment gateways (admin only)." noindex>
+<BaseLayout title="Payment settings" description="Configure payment gateways (admin only)." noindex gated={false}>
   <section class="section-tight" style="padding-top:30px">
     <div class="container">
+      <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Payment settings</h1>
+
       <div class="breadcrumb" style="padding:0 0 14px">
         <a href="/">Dashboard</a><span>/</span>
         <a href="/admin/">Admin</a><span>/</span><span>Payments</span>
       </div>
 
-      <div class="section-head" style="margin-bottom:18px">
-        <div>
-          <div class="eyebrow">Admin</div>
-          <h1 style="font-size:clamp(1.8rem,3.6vw,2.5rem)">Payment settings</h1>
-          <p>Configure payment gateways for institution subscriptions and service provider listings. Test mode only until live credentials are verified.</p>
+      <div id="pm-loading" class="panel">
+        <p class="muted">Loading payment status…</p>
+      </div>
+
+      <div id="pm-config" class="panel hidden">
+        <h2 style="font-size:1.4rem">Firebase setup required</h2>
+        <p class="small muted">Set the PUBLIC_FIREBASE_* values and rebuild to view live payment status.</p>
+      </div>
+
+      <div id="pm-login" class="form-card hidden">
+        <h2>Admin sign in</h2>
+        <p class="muted small">Only authorised administrators can view payment configuration.</p>
+        <div class="form-message" id="pm-login-message" role="status"></div>
+        <form id="pm-login-form" class="form-grid">
+          <div class="field">
+            <label for="pm-email">Email</label>
+            <input class="input" id="pm-email" type="email" autocomplete="email" required />
+          </div>
+          <div class="field">
+            <label for="pm-password">Password</label>
+            <input class="input" id="pm-password" type="password" autocomplete="current-password" required />
+          </div>
+          <div class="field full">
+            <button class="btn btn-primary" type="submit">Sign in</button>
+          </div>
+        </form>
+      </div>
+
+      <div id="pm-denied" class="form-card hidden">
+        <h2>Access denied</h2>
+        <p class="small muted">This account is not an admin.</p>
+        <button class="btn btn-outline" type="button" id="pm-denied-signout">Sign out</button>
+      </div>
+
+      <div id="pm-panel" class="hidden">
+        <div class="section-head" style="margin-bottom:18px">
+          <div>
+            <div class="eyebrow">Admin</div>
+            <h2 style="font-size:clamp(1.6rem,3vw,2.2rem);margin:6px 0 0">Payment settings</h2>
+            <p>Live gateway status from <code>settings/site</code>. Test mode only until live credentials are verified.</p>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <a class="btn btn-ghost btn-sm" href="/admin/">Back to admin</a>
+            <a class="btn btn-outline btn-sm" href="/admin/settings/">Edit settings</a>
+          </div>
         </div>
-      </div>
 
-      <div class="panel" style="margin-bottom:18px">
-        <h3 style="margin:0 0 8px">Important</h3>
-        <ul class="small" style="margin:0;padding-left:18px">
-          <li>API keys and secrets must be stored server-side (GitHub Secrets / environment), never in the client or Firestore.</li>
-          <li>Payments are verified via webhooks, not frontend success messages.</li>
-          <li>Live mode is disabled until credentials are provided and verified.</li>
-          <li>Idempotency keys prevent duplicate transactions.</li>
-        </ul>
-      </div>
-
-      <div class="cards">
-        {gwData.gateways.map((gw) => (
-          <article class="card">
-            <div class="card-body">
-              <h3 style="margin:0 0 4px">{gw.name}</h3>
-              <p class="small muted" style="margin:0 0 8px">Status: Test mode (credentials not configured)</p>
-              <p class="small" style="margin:0 0 10px">
-                <a href={gw.docs} target="_blank" rel="noopener">Documentation ↗</a>
-              </p>
-              <span class="badge badge-amber">Pending credentials</span>
+        <div class="panel" id="pm-live" style="margin-bottom:18px">
+          <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between">
+            <div>
+              <h3 style="margin:0 0 4px">Current configuration</h3>
+              <p class="small muted" style="margin:0" id="pm-live-summary">Checking settings…</p>
             </div>
-          </article>
-        ))}
-      </div>
+            <span class="badge badge-amber" id="pm-live-badge">Checking</span>
+          </div>
+          <div class="form-grid" style="margin-top:12px">
+            <div class="field">
+              <label>Provider</label>
+              <div class="input" id="pm-live-provider" style="background:var(--surface-2)">—</div>
+            </div>
+            <div class="field">
+              <label>Public key</label>
+              <div class="input" id="pm-live-key" style="background:var(--surface-2)">—</div>
+            </div>
+            <div class="field">
+              <label>Currency</label>
+              <div class="input" id="pm-live-currency" style="background:var(--surface-2)">—</div>
+            </div>
+            <div class="field">
+              <label>Checkout note</label>
+              <div class="input" id="pm-live-note" style="background:var(--surface-2)">—</div>
+            </div>
+          </div>
+          <p class="small muted" id="pm-live-saved" style="margin:10px 0 0"></p>
+        </div>
 
-      <div class="panel" style="margin-top:24px">
-        <h3 style="margin:0 0 6px">Transaction dashboard</h3>
-        <p class="small muted" style="margin:0">
-          Transactions will appear here once a gateway is configured in test mode. Each record includes transaction ID,
-          user, gateway, purpose, amount, status, gateway reference, refund and settlement details.
-        </p>
+        <div class="panel" style="margin-bottom:18px">
+          <h3 style="margin:0 0 8px">Important</h3>
+          <ul class="small" style="margin:0;padding-left:18px">
+            <li>API keys and secrets must be stored server-side (GitHub Secrets / environment), never in the client or Firestore.</li>
+            <li>Payments are verified via webhooks, not frontend success messages.</li>
+            <li>Live mode is disabled until credentials are provided and verified.</li>
+            <li>Idempotency keys prevent duplicate transactions.</li>
+          </ul>
+        </div>
+
+        <div class="cards">
+          {gwData.gateways.map((gw) => (
+            <article class="card" data-gateway={gw.id}>
+              <div class="card-body">
+                <h3 style="margin:0 0 4px">{gw.name}</h3>
+                <p class="small muted" style="margin:0 0 8px" data-gateway-status>Status: Test mode (credentials not configured)</p>
+                <p class="small" style="margin:0 0 10px">
+                  <a href={gw.docs} target="_blank" rel="noopener">Documentation ↗</a>
+                </p>
+                <span class="badge badge-amber" data-gateway-badge>Pending credentials</span>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div class="panel" style="margin-top:24px">
+          <h3 style="margin:0 0 6px">Transaction dashboard</h3>
+          <p class="small muted" style="margin:0">
+            Transactions will appear here once a gateway is configured in test mode. Each record includes transaction ID,
+            user, gateway, purpose, amount, status, gateway reference, refund and settlement details.
+          </p>
+        </div>
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+  import { doc, getDoc } from "firebase/firestore";
+  import { firebaseConfigured, getFirebaseAuth, getFirebaseDb } from "../../lib/firebase";
+
+  const loadingPanel = document.querySelector<HTMLElement>("#pm-loading");
+  const configPanel = document.querySelector<HTMLElement>("#pm-config");
+  const loginPanel = document.querySelector<HTMLElement>("#pm-login");
+  const deniedPanel = document.querySelector<HTMLElement>("#pm-denied");
+  const panel = document.querySelector<HTMLElement>("#pm-panel");
+
+  function show(target: HTMLElement | null) {
+    [loadingPanel, configPanel, loginPanel, deniedPanel, panel].forEach((item) => item?.classList.add("hidden"));
+    target?.classList.remove("hidden");
+  }
+
+  function setText(id: string, value: string) {
+    const el = document.querySelector<HTMLElement>(id);
+    if (el) el.textContent = value;
+  }
+
+  function applySettings(data: Record<string, any> = {}) {
+    const payments = data.payments || {};
+    const flags = data.flags || {};
+    const provider = String(payments.provider || "");
+    const enabled = Boolean(flags.payments);
+    const hasKey = Boolean(payments.publicKey);
+
+    setText("#pm-live-provider", provider ? provider.replace(/^\w/, (c: string) => c.toUpperCase()) : "Not configured");
+    setText("#pm-live-key", hasKey ? "Configured (hidden)" : "Not configured");
+    setText("#pm-live-currency", String(payments.currency || "INR"));
+    setText("#pm-live-note", String(payments.note || "—"));
+    setText(
+      "#pm-live-summary",
+      enabled
+        ? `Gateway toggle is ON${provider ? ` for ${provider}` : ""}. Live mode still requires server-side secrets and webhook verification.`
+        : "Gateway toggle is OFF. Payments are disabled on the public site.",
+    );
+    setText("#pm-live-saved", data.updatedAt ? `Last saved: ${new Date(data.updatedAt).toLocaleString("en-IN")}` : "");
+
+    const badge = document.querySelector<HTMLElement>("#pm-live-badge");
+    if (badge) {
+      badge.textContent = enabled ? "Toggle on" : "Toggle off";
+      badge.className = `badge ${enabled ? "badge-blue" : "badge-amber"}`;
+    }
+
+    document.querySelectorAll<HTMLElement>("[data-gateway]").forEach((card) => {
+      const id = card.dataset.gateway || "";
+      const active = provider === id;
+      const status = card.querySelector<HTMLElement>("[data-gateway-status]");
+      const chip = card.querySelector<HTMLElement>("[data-gateway-badge]");
+      if (status) {
+        status.textContent = active
+          ? hasKey
+            ? `Status: Selected${enabled ? " · live checkout pending verification" : " · toggle off"}`
+            : "Status: Selected · public key missing"
+          : "Status: Not selected";
+      }
+      if (chip) {
+        chip.textContent = active ? (hasKey ? "Configured" : "Key missing") : "Available";
+        chip.className = `badge ${active && hasKey ? "badge-green" : active ? "badge-amber" : "badge-blue"}`;
+      }
+    });
+  }
+
+  const auth = firebaseConfigured ? getFirebaseAuth() : null;
+  const db = firebaseConfigured ? getFirebaseDb() : null;
+
+  if (!auth || !db) {
+    show(configPanel);
+  } else {
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        show(loginPanel);
+        return;
+      }
+      try {
+        const adminDoc = await getDoc(doc(db, "admins", user.uid));
+        if (!adminDoc.exists()) {
+          show(deniedPanel);
+          return;
+        }
+        show(panel);
+        const snap = await getDoc(doc(db, "settings", "site"));
+        applySettings(snap.exists() ? (snap.data() as Record<string, any>) : {});
+      } catch (error) {
+        console.error(error);
+        show(deniedPanel);
+      }
+    });
+
+    document.querySelector("#pm-login-form")?.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const email = document.querySelector<HTMLInputElement>("#pm-email")?.value.trim() || "";
+      const password = document.querySelector<HTMLInputElement>("#pm-password")?.value || "";
+      const message = document.querySelector<HTMLElement>("#pm-login-message");
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+      } catch (error) {
+        const code = (error as { code?: string })?.code || "";
+        if (message) {
+          message.textContent =
+            code === "auth/invalid-credential" || code === "auth/wrong-password" || code === "auth/user-not-found"
+              ? "Email or password is incorrect."
+              : error instanceof Error
+                ? error.message
+                : "Sign-in failed.";
+          message.className = "form-message show error";
+        }
+      }
+    });
+
+    document.querySelector("#pm-denied-signout")?.addEventListener("click", () => signOut(auth));
+  }
+</script>

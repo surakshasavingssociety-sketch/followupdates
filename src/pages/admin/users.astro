@@ -157,6 +157,15 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       const admins = snapshot.docs.map((item) => ({ uid: item.id, ...item.data() } as Record<string, any>));
       admins.sort((a, b) => String(a.email || a.uid).localeCompare(String(b.email || b.uid)));
 
+      // Pull the matching public profile for each admin so role decisions have context.
+      const profileSnaps = await Promise.all(
+        admins.map((admin) => getDoc(doc(db, "users", admin.uid)).catch(() => null)),
+      );
+      const profiles = new Map<string, Record<string, any>>();
+      profileSnaps.forEach((snap, index) => {
+        if (snap?.exists()) profiles.set(admins[index].uid, snap.data() as Record<string, any>);
+      });
+
       const canManage = isSuperAdmin(currentRole);
       const superCount = admins.filter((admin) => isSuperAdmin(String(admin.role || ""))).length;
       if (readonly) readonly.style.display = canManage ? "none" : "";
@@ -167,6 +176,14 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
           const role = String(admin.role || "");
           const self = admin.uid === currentUid;
           const lastSuper = isSuperAdmin(role) && superCount <= 1;
+          const profile = profiles.get(admin.uid) || {};
+          const profileBits = [
+            profile.name ? esc(profile.name) : "",
+            profile.userStatus ? `Status: ${esc(profile.userStatus)}` : "",
+            profile.institutionName ? `Institution: ${esc(profile.institutionName)}` : "",
+            profile.organizationName ? `Organisation: ${esc(profile.organizationName)}` : "",
+            profile.stateName ? esc(profile.stateName) : "",
+          ].filter(Boolean);
           const options = ["super_admin", "admin", "manager", "executive", "moderator"]
             .map((option) => `<option value="${option}" ${option === (role || "admin") ? "selected" : ""}>${roleLabel(option)}</option>`)
             .join("");
@@ -176,6 +193,9 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
               <div>
                 <h3>${esc(admin.email || admin.uid)} ${self ? '<span class="badge badge-green">You</span>' : ""}</h3>
                 <div class="admin-item-meta">UID: ${esc(admin.uid)} · ${esc(roleLabel(role))}</div>
+                ${profileBits.length
+                  ? `<div class="admin-item-meta" style="margin-top:4px">${profileBits.join(" · ")}</div>`
+                  : `<div class="admin-item-meta" style="margin-top:4px;opacity:0.7">No profile data yet · <a href="/account/">view account</a></div>`}
               </div>
               <span class="badge ${isSuperAdmin(role) ? "badge-green" : "badge-amber"}">${esc(roleLabel(role))}</span>
             </div>

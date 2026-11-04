@@ -1,24 +1,185 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import books from "../../../data/library-books.json";
+
+const categories = [...new Set(books.map((book) => book.category))].sort();
+const total = books.length;
 ---
-<BaseLayout title="Library" description="Free government library books — direct PDF access." gated={false}>
+
+<BaseLayout
+  title="Library — free government books, papers & law"
+  description="Free government and public-domain books, syllabus, previous papers and law resources — read directly from official sources."
+  gated={false}
+>
   <section class="section-tight">
     <div class="container">
-      <h1>Library</h1>
-      <p class="muted">Government and public domain books — read directly in your browser.</p>
-      <div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
-        <div class="panel">
-          <h3>CBSE Class 10</h3>
-          <p class="small">Mathematics — NCERT</p>
-          <a class="btn btn-outline btn-sm" href="https://ncert.nic.in/textbook/pdf/hemh1.pdf" target="_blank" rel="noopener">Read PDF →</a>
-        </div>
-        <div class="panel">
-          <h3>UPSC CSAT</h3>
-          <p class="small">Strategy & ethics — reference</p>
-          <a class="btn btn-outline btn-sm" href="https://www.upsc.gov.in/" target="_blank" rel="noopener">Open source →</a>
+      <div class="section-head" style="margin-bottom:16px">
+        <div>
+          <div class="eyebrow">Free · official sources</div>
+          <h1 style="font-size:clamp(1.8rem,3.6vw,2.5rem)">Library</h1>
+          <p>Government and public-domain books, syllabus, previous papers and law — every link opens the official source.</p>
         </div>
       </div>
-      <p class="small muted" style="margin-top:14px">Full library features: user tracking, search, government-approved source only.</p>
+
+      <div class="panel" style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;margin-bottom:16px">
+        <div class="field" style="flex:1;min-width:240px;margin:0">
+          <label for="lib-search">Search</label>
+          <input class="input" id="lib-search" type="search" placeholder="Book, exam or subject…" />
+        </div>
+        <div class="field" style="min-width:190px;margin:0">
+          <label for="lib-category">Category</label>
+          <select class="select" id="lib-category">
+            <option value="">All categories</option>
+            {categories.map((category) => <option value={category}>{category}</option>)}
+          </select>
+        </div>
+        <div class="small muted" id="lib-progress" aria-live="polite">{total} resources · 0 read</div>
+      </div>
+
+      <div id="lib-grid" style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+        {books.map((book) => (
+          <article class="panel lib-card" data-book-id={book.id} data-category={book.category} data-search={`${book.title} ${book.author} ${book.source} ${book.level} ${book.category} ${book.description}`.toLowerCase()}>
+            <div style="display:flex;justify-content:space-between;gap:8px;align-items:start">
+              <h2 style="font-size:1.02rem;margin:0">{book.title}</h2>
+              <span class="badge badge-blue">{book.category}</span>
+            </div>
+            <p class="small muted" style="margin:6px 0 8px">{book.author} · {book.level} · {book.source}</p>
+            <p class="small" style="margin:0 0 12px">{book.description}</p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+              <a class="btn btn-outline btn-sm" href={book.url} target="_blank" rel="noopener noreferrer">Open source ↗</a>
+              <button class="btn btn-ghost btn-sm" type="button" data-read-id={book.id} aria-pressed="false">Mark as read</button>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <p class="small muted" id="lib-empty" style="margin-top:14px" hidden>No resources match this search.</p>
+      <p class="small muted" id="lib-status" role="status" style="margin-top:10px"></p>
+
+      <div class="panel" style="margin-top:20px">
+        <h2 style="font-size:1.05rem;margin:0 0 6px">About this library</h2>
+        <p class="small muted" style="margin:0">
+          Only government, public-domain and open-education sources are listed. Read progress is saved to your account
+          when signed in, and on this device otherwise. FollowExam never hosts or re-uploads copyrighted books.
+        </p>
+      </div>
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  import { watchAuth } from "../../lib/auth";
+  import { getFirebaseDb } from "../../lib/firebase";
+  import { collection, deleteDoc, doc, getDocs, serverTimestamp, setDoc } from "firebase/firestore";
+
+  const STORAGE_KEY = "fex-library-read";
+  const grid = document.querySelector<HTMLElement>("#lib-grid");
+  const cards = [...document.querySelectorAll<HTMLElement>("[data-book-id]")];
+  const search = document.querySelector<HTMLInputElement>("#lib-search");
+  const category = document.querySelector<HTMLSelectElement>("#lib-category");
+  const progress = document.querySelector<HTMLElement>("#lib-progress");
+  const empty = document.querySelector<HTMLElement>("#lib-empty");
+  const status = document.querySelector<HTMLElement>("#lib-status");
+
+  const db = getFirebaseDb();
+  let uid = "";
+  let read = new Set<string>();
+
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    if (Array.isArray(saved)) read = new Set(saved.map(String));
+  } catch {
+    read = new Set();
+  }
+
+  function persistLocal() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify([...read]));
+    } catch {
+      /* private mode */
+    }
+  }
+
+  function renderRead() {
+    for (const card of cards) {
+      const id = card.dataset.bookId || "";
+      const button = card.querySelector<HTMLButtonElement>(`[data-read-id="${id}"]`);
+      const isRead = read.has(id);
+      card.style.opacity = isRead ? "0.92" : "";
+      if (button) {
+        button.textContent = isRead ? "Read ✓" : "Mark as read";
+        button.setAttribute("aria-pressed", String(isRead));
+        button.classList.toggle("btn-primary", isRead);
+        button.classList.toggle("btn-ghost", !isRead);
+      }
+    }
+    if (progress) progress.textContent = `${cards.length} resources · ${read.size} read`;
+  }
+
+  function applyFilter() {
+    const term = (search?.value || "").trim().toLowerCase();
+    const cat = category?.value || "";
+    let visible = 0;
+    for (const card of cards) {
+      const matchesTerm = !term || (card.dataset.search || "").includes(term);
+      const matchesCat = !cat || card.dataset.category === cat;
+      const show = matchesTerm && matchesCat;
+      card.hidden = !show;
+      if (show) visible += 1;
+    }
+    if (empty) empty.hidden = visible > 0;
+  }
+
+  async function loadRemote() {
+    if (!db || !uid) return;
+    try {
+      const snapshot = await getDocs(collection(db, "users", uid, "reading"));
+      for (const item of snapshot.docs) read.add(item.id);
+      persistLocal();
+      renderRead();
+    } catch {
+      /* offline or rules not deployed yet — local progress still works */
+    }
+  }
+
+  function setStatus(text: string) {
+    if (status) status.textContent = text;
+  }
+
+  grid?.addEventListener("click", async (event) => {
+    const button = (event.target as HTMLElement).closest<HTMLButtonElement>("[data-read-id]");
+    if (!button) return;
+    const id = button.dataset.readId || "";
+    if (!id) return;
+
+    const nowRead = !read.has(id);
+    if (nowRead) read.add(id);
+    else read.delete(id);
+    persistLocal();
+    renderRead();
+    setStatus(nowRead ? "Marked as read." : "Removed from read list.");
+
+    if (!db || !uid) return;
+    try {
+      const ref = doc(db, "users", uid, "reading", id);
+      if (nowRead) {
+        await setDoc(ref, { bookId: id, readAt: new Date().toISOString(), serverReadAt: serverTimestamp() }, { merge: true });
+      } else {
+        await deleteDoc(ref);
+      }
+      setStatus(nowRead ? "Saved to your account." : "Removed from your account.");
+    } catch {
+      setStatus("Saved on this device. Sign in again to sync with your account.");
+    }
+  });
+
+  search?.addEventListener("input", applyFilter);
+  category?.addEventListener("change", applyFilter);
+
+  renderRead();
+  applyFilter();
+  watchAuth((user) => {
+    uid = user?.uid || "";
+    if (uid) loadRemote();
+  });
+</script>

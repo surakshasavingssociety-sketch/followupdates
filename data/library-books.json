@@ -1,5 +1,122 @@
 [
-  {"id":"bk-001","title":"NCERT Mathematics Class 10","category":"book","url":"https://ncert.nic.in/"},
-  {"id":"bk-002","title":"UPSC Strategy & Ethics","category":"reference","url":"https://www.upsc.gov.in/"},
-  {"id":"bk-003","title":"CBSE Sample Papers","category":"exam","url":"https://cbse.gov.in/"}
+  {
+    "id": "bk-ncert-textbooks",
+    "title": "NCERT Textbooks — Classes 1 to 12",
+    "author": "NCERT",
+    "category": "Textbooks",
+    "level": "Class 1–12",
+    "source": "ncert.nic.in",
+    "url": "https://ncert.nic.in/textbook.php",
+    "description": "Official NCERT textbooks for all subjects and classes, free to read online or download chapter-wise."
+  },
+  {
+    "id": "bk-cbse-academic",
+    "title": "CBSE Curriculum, Sample Papers & Marking Schemes",
+    "author": "CBSE",
+    "category": "Papers",
+    "level": "Class 9–12",
+    "source": "cbseacademic.nic.in",
+    "url": "https://cbseacademic.nic.in/",
+    "description": "Syllabus, sample question papers, marking schemes and previous year board papers published by CBSE."
+  },
+  {
+    "id": "bk-egyanKosh",
+    "title": "eGyanKosh — IGNOU Open Learning Repository",
+    "author": "IGNOU",
+    "category": "Reference",
+    "level": "Graduate & PG",
+    "source": "egyankosh.ac.in",
+    "url": "https://egyankosh.ac.in/",
+    "description": "Open university course material, self-learning books and question banks from IGNOU."
+  },
+  {
+    "id": "bk-ndli",
+    "title": "National Digital Library of India",
+    "author": "IIT Kharagpur / MoE",
+    "category": "Reference",
+    "level": "School to Research",
+    "source": "ndl.iitkgp.ac.in",
+    "url": "https://ndl.iitkgp.ac.in/",
+    "description": "Single window to millions of academic books, papers, theses and journals across Indian institutions."
+  },
+  {
+    "id": "bk-upsc-papers",
+    "title": "UPSC Previous Year Question Papers",
+    "author": "UPSC",
+    "category": "Papers",
+    "level": "Civil Services",
+    "source": "upsc.gov.in",
+    "url": "https://upsc.gov.in/examinations/previous-question-papers",
+    "description": "Official previous year question papers for Civil Services, NDA, CDS, IES and other UPSC examinations."
+  },
+  {
+    "id": "bk-ssc-papers",
+    "title": "SSC Question Papers & Answer Keys",
+    "author": "Staff Selection Commission",
+    "category": "Papers",
+    "level": "Graduate & 12th",
+    "source": "ssc.gov.in",
+    "url": "https://ssc.gov.in/",
+    "description": "SSC CGL, CHSL, MTS, CPO question papers, answer keys and official notices."
+  },
+  {
+    "id": "bk-indiacode",
+    "title": "India Code — Central & State Laws",
+    "author": "Ministry of Law and Justice",
+    "category": "Law",
+    "level": "All",
+    "source": "indiacode.nic.in",
+    "url": "https://www.indiacode.nic.in/",
+    "description": "Official repository of central and state legislation, rules, regulations and notifications."
+  },
+  {
+    "id": "bk-constitution",
+    "title": "Constitution of India",
+    "author": "Legislative Department",
+    "category": "Law",
+    "level": "All",
+    "source": "legislative.gov.in",
+    "url": "https://legislative.gov.in/constitution-of-india/",
+    "description": "Full text of the Constitution of India with amendments and schedules."
+  },
+  {
+    "id": "bk-egazette",
+    "title": "e-Gazette of India",
+    "author": "Department of Publication",
+    "category": "Reference",
+    "level": "All",
+    "source": "egazette.gov.in",
+    "url": "https://egazette.gov.in/",
+    "description": "Official gazette notifications, ordinances, appointments and government orders."
+  },
+  {
+    "id": "bk-swayam",
+    "title": "SWAYAM Free Online Courses",
+    "author": "Ministry of Education",
+    "category": "Courses",
+    "level": "School to PG",
+    "source": "swayam.gov.in",
+    "url": "https://swayam.gov.in/",
+    "description": "Government-run free online courses from school to postgraduate level, with certification."
+  },
+  {
+    "id": "bk-nta",
+    "title": "NTA Exams — Syllabus & Papers",
+    "author": "National Testing Agency",
+    "category": "Syllabus",
+    "level": "Entrance exams",
+    "source": "nta.ac.in",
+    "url": "https://nta.ac.in/",
+    "description": "Syllabus, information bulletins and previous papers for JEE, NEET, CUET, UGC-NET and more."
+  },
+  {
+    "id": "bk-ugc",
+    "title": "UGC Guidelines & NET Resources",
+    "author": "University Grants Commission",
+    "category": "Syllabus",
+    "level": "Graduate & PG",
+    "source": "ugc.gov.in",
+    "url": "https://www.ugc.gov.in/",
+    "description": "UGC regulations, NET syllabus, fellowship notifications and university guidelines."
+  }
 ]
