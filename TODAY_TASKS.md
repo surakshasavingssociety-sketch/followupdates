@@ -71,4 +71,4 @@ Isi liye:
 | `9a1d868` | Admin upgrade, owner bootstrap, reset link, stray model files removed | ✅ |
 | `708ab53` | Functional admin settings (brand, Blaze toggles, payments) | ✅ |
 | `6db75bb` | Create owner account flow | ✅ |
-| `TBD` | Duplicate account cleanup + login hardening + task list | pending |
+| `1be6514` | Duplicate account cleanup, login hardening, task list | ✅ |

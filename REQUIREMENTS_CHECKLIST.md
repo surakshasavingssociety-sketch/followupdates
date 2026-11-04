@@ -6,6 +6,8 @@
 - [x] Home page toggle (login → dashboard same page)
 - [x] Footer social buttons (Telegram, WhatsApp, X, IG, YT)
 - [x] Admin settings page (/admin/settings/)
+- [x] Admin login fix: duplicate owner account removed, single verified account (`google.com` + `password`), reset emails working
+- [x] Admin panel: owner bootstrap, friendly auth errors, create-owner + reset link, Settings/View site links
 - [x] Library page (/library/)
 - [x] Scholarship eligibility page (/scholarships/eligibility/)
 - [x] Government services page (/government-services/)
@@ -26,7 +28,7 @@
 - [ ] Logo/name update centralized (admin settings apply everywhere)
 - [ ] Screen auto-adjust (left/right gap) — done partially; full fluid grid for all pages
 - [ ] User data full access from admin (users page expand)
-- [ ] Remove unintended model/openrouter edits (Footer was broken by edit; fixed; verify no other stray edits)
+- [x] Remove unintended model/openrouter edits (stray `src/firebase.js` + `firestore-debug.log` deleted; 0 references remain)
 
 ## Note — Remove openrouter/model stray edits
 Only intended changes should remain. Check:
