@@ -42,7 +42,8 @@ const relatedExams = exams
   .slice(0, 6);
 
 const scopeLabel = exam.stateName || (exam.scope === "central" ? "All India" : "");
-const pageTitle = `${exam.name}${scopeLabel ? ` (${scopeLabel})` : ""} — Notification, Exam Date & Result Cycle`;
+const needsScope = scopeLabel && !exam.name.toLowerCase().includes(scopeLabel.toLowerCase());
+const pageTitle = `${exam.name}${needsScope ? ` (${scopeLabel})` : ""} — Notification, Exam Date & Result Cycle`;
 
 const schema = [
   {
