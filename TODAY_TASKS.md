@@ -104,3 +104,4 @@ Isi liye:
 | `26cf217` | Structure: exam title polish | ✅ |
 | `15ea235` | Admin panel: sticky nav, automation runner, verification approvals, dashboard banner, portfolio + resume foundation | ✅ |
 | `2c4f892` | Queue visibility fix (legacy docs), admin banners/promo removed, 17 category dashboard banners | ✅ |
+| `a2cf11a` | Queue: merge entries missing `status`/`discoveredAt`, faster pending count, automation poll every 5 min | ✅ |

@@ -2,8 +2,9 @@ name: Admin-triggered automation
 
 on:
   schedule:
-    # Poll for admin requests every 10 minutes.
-    - cron: "*/10 * * * *"
+    # Poll for admin requests every 5 minutes. GitHub may delay cron runs
+    # slightly under load, so the admin panel says "within about 10 minutes".
+    - cron: "*/5 * * * *"
   workflow_dispatch:
 
 permissions:
