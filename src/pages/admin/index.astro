@@ -36,13 +36,15 @@ import { CATEGORY_META } from "../../lib/constants";
           </div>
           <button class="btn btn-primary" type="submit">Sign in</button>
           <button class="btn btn-outline" type="button" id="google-login">Continue with Google</button>
+          <button class="btn btn-ghost" type="button" id="create-owner">First time? Create owner account</button>
         </form>
         <p class="small muted" style="margin:12px 0 0">
           Forgot your password?
           <button class="btn btn-ghost btn-sm" type="button" id="reset-password">Send reset link</button>
         </p>
         <p class="small muted" style="margin:6px 0 0">
-          Owner email: <strong>surakshasavingssociety@gmail.com</strong> — first sign-in creates the admin account automatically.
+          Owner email: <strong>surakshasavingssociety@gmail.com</strong>. Fastest option: sign in with Google using this
+          email. “Create owner account” sets an email/password on this device.
         </p>
       </div>
 
@@ -262,6 +264,7 @@ import { CATEGORY_META } from "../../lib/constants";
 <script>
   import {
     GoogleAuthProvider,
+    createUserWithEmailAndPassword,
     onAuthStateChanged,
     sendPasswordResetEmail,
     signInWithEmailAndPassword,
@@ -762,6 +765,37 @@ function authErrorMessage(error: unknown): string {
           await signInWithPopup(auth, new GoogleAuthProvider());
         } catch (error) {
           showMessage(loginMessage, authErrorMessage(error), "error");
+        }
+      });
+
+      document.querySelector("#create-owner")?.addEventListener("click", async () => {
+        const email = document.querySelector<HTMLInputElement>("#login-email")?.value.trim().toLowerCase() || "";
+        const password = document.querySelector<HTMLInputElement>("#login-password")?.value || "";
+
+        if (email !== OWNER_EMAIL) {
+          showMessage(loginMessage, `Owner account can only be created for ${OWNER_EMAIL}. Enter that email above first.`, "error");
+          return;
+        }
+        if (password.length < 6) {
+          showMessage(loginMessage, "Choose a password with at least 6 characters in the Password field, then press “Create owner account”.", "error");
+          return;
+        }
+
+        try {
+          showMessage(loginMessage, "Creating owner account…", "info");
+          await createUserWithEmailAndPassword(auth, email, password);
+          showMessage(loginMessage, "Owner account created. Signing you in…", "success");
+        } catch (error) {
+          const code = (error as { code?: string })?.code || "";
+          if (code === "auth/email-already-in-use") {
+            showMessage(
+              loginMessage,
+              `An account already exists for ${OWNER_EMAIL}. Use “Continue with Google” with that email, or “Send reset link” to set a password.`,
+              "error",
+            );
+          } else {
+            showMessage(loginMessage, authErrorMessage(error), "error");
+          }
         }
       });
 
