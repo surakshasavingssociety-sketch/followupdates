@@ -41,6 +41,9 @@ const relatedExams = exams
   .filter((item) => item.id !== exam.id && (item.stream === exam.stream || (item.stateId && item.stateId === exam.stateId)))
   .slice(0, 6);
 
+const scopeLabel = exam.stateName || (exam.scope === "central" ? "All India" : "");
+const pageTitle = `${exam.name}${scopeLabel ? ` (${scopeLabel})` : ""} — Notification, Exam Date & Result Cycle`;
+
 const schema = [
   {
     "@context": "https://schema.org",
@@ -62,7 +65,7 @@ const schema = [
 ---
 
 <BaseLayout
-  title={`${exam.name} — Notification, Exam Date & Result Cycle`}
+  title={pageTitle}
   description={`${exam.fullName} by ${exam.body}. Check eligibility, official link and the typical notification, exam and result months. Verify the official schedule before applying.`}
   type="article"
   schema={schema}

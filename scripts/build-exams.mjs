@@ -47,7 +47,14 @@ function months(value, fallback) {
 }
 
 function unique(values) {
-  return [...new Set(values.map((value) => String(value).trim()).filter(Boolean))];
+  return [
+    ...new Set(
+      values
+        .filter((value) => value !== undefined && value !== null)
+        .map((value) => String(value).trim())
+        .filter(Boolean),
+    ),
+  ];
 }
 
 function searchTerms(exam) {
@@ -109,7 +116,7 @@ function stateExam(state, type, streams, body) {
     policeConstable: labels.policeConstable || `${state.name} Police Constable`,
     policeSi: labels.policeSi || `${state.name} Police SI`,
     tet: labels.tet || `${state.name} TET`,
-    board: `${body?.[1] || state.name} Board Exams`,
+    board: labels.board || `${state.name} Board Exams`,
   };
   const fullNameByType = {
     psc: `${body?.[0] || state.name} civil services examination`,

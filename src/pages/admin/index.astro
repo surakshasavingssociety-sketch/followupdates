@@ -6,12 +6,13 @@ import { CATEGORY_META } from "../../lib/constants";
 <BaseLayout title="Admin review" description="FollowExam admin review queue." noindex gated={false}>
   <section class="admin-shell">
     <div class="container">
+      <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Review queue</h1>
       <div id="admin-loading" class="panel">
         <p class="muted">Loading the admin workspace…</p>
       </div>
 
       <div id="admin-config" class="panel hidden">
-        <h1 style="font-size:1.4rem">Firebase setup required</h1>
+        <h2 style="font-size:1.4rem">Firebase setup required</h2>
         <p>
           Configure the Firebase project to use the admin queue and alerts. Copy <code>.env.example</code> to
           <code>.env</code> and fill in the <code>PUBLIC_FIREBASE_*</code> values.
@@ -22,7 +23,7 @@ import { CATEGORY_META } from "../../lib/constants";
       </div>
 
       <div id="admin-login" class="form-card hidden">
-        <h1>Admin sign in</h1>
+        <h2>Admin sign in</h2>
         <p class="muted small">Only authorised administrators can open the review queue.</p>
         <div class="form-message" data-login-message role="status"></div>
         <form id="login-form" class="form-grid">
@@ -49,7 +50,7 @@ import { CATEGORY_META } from "../../lib/constants";
       </div>
 
       <div id="admin-denied" class="form-card hidden">
-        <h1>Access denied</h1>
+        <h2>Access denied</h2>
         <p>
           You are signed in as <strong id="denied-email">—</strong> but this account is not on the admin list.
         </p>
@@ -70,7 +71,7 @@ import { CATEGORY_META } from "../../lib/constants";
             <div class="eyebrow" style="background:var(--brand-soft);color:var(--brand);border-color:transparent">
               Admin workspace
             </div>
-            <h1 style="font-size:clamp(1.6rem,3vw,2.2rem);margin:6px 0 0">Review queue</h1>
+            <h2 style="font-size:clamp(1.6rem,3vw,2.2rem);margin:6px 0 0">Review queue</h2>
             <p class="muted small" style="margin:4px 0 0">
               Verify the discovered entries, add the analysed details and official notification link, then publish.
             </p>

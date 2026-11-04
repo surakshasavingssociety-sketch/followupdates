@@ -49,20 +49,37 @@ Isi liye:
 - [x] Admin users / analytics / payments / inquiries / institutions pages live
 - [ ] Login duplicate-account cleanup (today)
 
-## D. Feature backlog (REQUIREMENTS_CHECKLIST.md se)
+## D. Feature backlog — Easy → Medium → Hard (kal ke instructions)
 
-- [ ] Admin analytics charts/reports expand
-- [ ] Admin roles UI (manager, executive) — Firestore role doc + UI
-- [ ] Profile institution verification (govt site check)
-- [ ] Profile portfolio/resume public view
-- [ ] Library PDF direct-read + read-record tracking
-- [ ] Post automation time-based fetch (Blaze toggle)
-- [ ] Post categories enforced (category + official URL + notification URL)
-- [ ] Payment gateway settings (admin toggle + credentials) — page exists, gateway integration pending
-- [ ] Social auto-post / video short (Blaze toggle)
-- [ ] Logo/name centralized from admin settings
-- [ ] Full fluid grid for all pages
-- [ ] Admin full user-data access (users page expand)
+### 🟢 EASY (aaj ho gaye ✅)
+- [x] **Post categories enforced** — category (required), official URL (required), notification URL (required) already enforced in add + edit forms (verified)
+- [x] **Admin roles UI** — Manager + Executive options added (add form + per-admin dropdown + permissions list)
+- [x] **Website structural check** — 551 pages: 0 broken internal links, sitemap poora resolve, 0 duplicate titles, 0 missing description, 0 missing canonical, har page par exactly 1 `<h1>`
+- [x] **Duplicate exam titles fixed** — board/exam pages ab state ke saath unique title (`BSEAP Board Exams (Andhra Pradesh)` vs `(Arunachal Pradesh)`, Delhi Police `(Delhi)` vs `(All India)`)
+- [x] **Data generator bug fixed** — `scripts/build-exams.mjs` ab `"undefined"` aliases/keywords generate nahi karta; board exam names state-wise unique
+- [x] **Admin analytics base** — 5 stat cards + live user/subscriber/admin/enquiry counts + category/state/exam tables (already live)
+
+### 🟡 EASY — next (chhote, safe)
+- [ ] Payments admin page: Firestore `settings/site` se live gateway status dikhao (abhi static JSON)
+- [ ] Admin settings: "Save" ke baad site header/footer par brand name/logo turant apply (localStorage bridge)
+- [ ] Library page: hardcoded 2 cards ki jagah `library-books.json` se list + search/filter
+- [ ] Admin users: profile data (status/institution) bhi list mein dikhao
+
+### 🟠 MEDIUM
+- [ ] Library: PDF direct-read + read-record tracking (`users/{uid}/reading`)
+- [ ] Centralized logo/name poori site par (settings → header/footer/meta)
+- [ ] Analytics: SVG bar charts (category/state/exam)
+- [ ] Profile: portfolio/resume public view
+- [ ] Profile: institution verification form + Verified badge
+- [ ] Admin: full user-data access (users page expand)
+- [ ] Full fluid grid (left/right gap) sab pages par
+
+### 🔴 HARD (baad ke liye — external setup chahiye)
+- [ ] Institution government-site verification (scraping + rules)
+- [ ] Post automation: time-based fetch + publish (Cloud Functions + Blaze)
+- [ ] Payment gateway live integration (Razorpay/Stripe keys + webhook + verification)
+- [ ] Social auto-post / video short (platform APIs + Blaze)
+- [ ] Email digest / Telegram bot (SMTP/Bot token + Blaze)
 
 ## E. Deploy log
 

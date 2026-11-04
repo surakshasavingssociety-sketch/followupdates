@@ -61,7 +61,7 @@ const schema = {
         </p>
       </div>
 
-      <LoginPanel />
+      <LoginPanel headingLevel={2} />
     </div>
 
     <!-- Signed-in view: the dashboard. -->
@@ -69,7 +69,7 @@ const schema = {
       <section class="dash-head">
         <div>
           <div class="eyebrow">Your dashboard</div>
-          <h1>Welcome back, <span id="dash-name">student</span>.</h1>
+          <h2 style="font-size:clamp(1.6rem,3vw,2.2rem)">Welcome back, <span id="dash-name">student</span>.</h2>
           <p class="muted" id="dash-subtitle">
             Here are the latest official notifications, scholarships and institutions that match your profile.
           </p>

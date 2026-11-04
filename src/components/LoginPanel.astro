@@ -8,13 +8,18 @@ type Props = {
   redirectOnSignIn?: boolean;
   heading?: string;
   intro?: string;
+  /** Heading level. Use 2 when the page already has its own h1. */
+  headingLevel?: 1 | 2;
 };
 
 const {
   redirectOnSignIn = false,
   heading = "Welcome to FollowExam",
   intro = "Sign in to see government jobs, scholarships, institutions and your personal career roadmap.",
+  headingLevel = 1,
 } = Astro.props;
+
+const HeadingTag = headingLevel === 2 ? "h2" : "h1";
 ---
 
 <section class="auth-screen" data-auth-screen data-redirect={String(redirectOnSignIn)}>
@@ -27,7 +32,7 @@ const {
       </span>
     </div>
 
-    <h1>{heading}</h1>
+    <HeadingTag>{heading}</HeadingTag>
     <p class="muted">{intro}</p>
 
     <div class="auth-tabs" role="tablist" aria-label="Sign-in method">

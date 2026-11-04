@@ -61,6 +61,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
               <label for="au-new-role">Role</label>
               <select class="select" id="au-new-role">
                 <option value="admin">Admin</option>
+                <option value="manager">Manager</option>
+                <option value="executive">Executive</option>
                 <option value="moderator">Moderator</option>
                 <option value="super_admin">Super Admin</option>
               </select>
@@ -74,6 +76,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
           <ul class="small" style="margin:0;padding-left:18px">
             <li><strong>Super Admin</strong> — everything, including deleting jobs, managing admins and roles.</li>
             <li><strong>Admin</strong> — review and publish notifications, manage CMS fields, view subscribers.</li>
+            <li><strong>Manager</strong> — manage content queues, institutions and payment settings; cannot change admin roles.</li>
+            <li><strong>Executive</strong> — review pending notifications and update details; no admin or billing access.</li>
             <li><strong>Moderator</strong> — review the pending queue and edit fields; cannot manage admins.</li>
           </ul>
         </div>
@@ -163,7 +167,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
           const role = String(admin.role || "");
           const self = admin.uid === currentUid;
           const lastSuper = isSuperAdmin(role) && superCount <= 1;
-          const options = ["super_admin", "admin", "moderator"]
+          const options = ["super_admin", "admin", "manager", "executive", "moderator"]
             .map((option) => `<option value="${option}" ${option === (role || "admin") ? "selected" : ""}>${roleLabel(option)}</option>`)
             .join("");
           return `

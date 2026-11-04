@@ -4274,6 +4274,64 @@
       ]
     },
     {
+      "id": "andhra-pradesh-board",
+      "slug": "andhra-pradesh-board",
+      "name": "Andhra Pradesh Board Exams",
+      "fullName": "Board of Secondary Education Andhra Pradesh class 10 and class 12 board examinations",
+      "stream": "boards",
+      "streamName": "School Boards",
+      "streamIcon": "🏫",
+      "scope": "state",
+      "stateId": "andhra-pradesh",
+      "stateName": "Andhra Pradesh",
+      "region": "South",
+      "body": "Board of Secondary Education Andhra Pradesh",
+      "bodyShort": "BSEAP",
+      "level": "10th / 12th",
+      "qualification": [
+        "10th",
+        "12th"
+      ],
+      "age": "School students",
+      "officialUrl": "https://bse.ap.gov.in/",
+      "frequency": "annual",
+      "aliases": [
+        "BSEAP"
+      ],
+      "cycle": {
+        "notification": [
+          11,
+          12
+        ],
+        "apply": [
+          9,
+          10
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          5,
+          6
+        ]
+      },
+      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
+      "keywords": [
+        "APPSC Group 1",
+        "AP POLYCET",
+        "AP EAMCET",
+        "AP ICET",
+        "AP TET"
+      ],
+      "verified": false,
+      "searchTerms": [
+        "Andhra Pradesh Board Exams",
+        "Board of Secondary Education Andhra Pradesh class 10 and class 12 board examinations",
+        "BSEAP"
+      ]
+    },
+    {
       "id": "andhra-pradesh-police-constable",
       "slug": "andhra-pradesh-police-constable",
       "name": "AP Police Constable",
@@ -4737,6 +4795,61 @@
       ]
     },
     {
+      "id": "arunachal-pradesh-board",
+      "slug": "arunachal-pradesh-board",
+      "name": "Arunachal Pradesh Board Exams",
+      "fullName": "Board of Secondary Education Arunachal Pradesh class 10 and class 12 board examinations",
+      "stream": "boards",
+      "streamName": "School Boards",
+      "streamIcon": "🏫",
+      "scope": "state",
+      "stateId": "arunachal-pradesh",
+      "stateName": "Arunachal Pradesh",
+      "region": "North East",
+      "body": "Board of Secondary Education Arunachal Pradesh",
+      "bodyShort": "BSEAP",
+      "level": "10th / 12th",
+      "qualification": [
+        "10th",
+        "12th"
+      ],
+      "age": "School students",
+      "officialUrl": "https://bsearunachal.nic.in/",
+      "frequency": "annual",
+      "aliases": [
+        "BSEAP"
+      ],
+      "cycle": {
+        "notification": [
+          11,
+          12
+        ],
+        "apply": [
+          9,
+          10
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          5,
+          6
+        ]
+      },
+      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
+      "keywords": [
+        "APPSC Arunachal",
+        "Arunachal Pradesh police recruitment"
+      ],
+      "verified": false,
+      "searchTerms": [
+        "Arunachal Pradesh Board Exams",
+        "Board of Secondary Education Arunachal Pradesh class 10 and class 12 board examinations",
+        "BSEAP"
+      ]
+    },
+    {
       "id": "arunachal-pradesh-tet",
       "slug": "arunachal-pradesh-tet",
       "name": "Arunachal TET",
@@ -4791,6 +4904,63 @@
         "Arunachal TET",
         "Arunachal Pradesh Teacher Eligibility Test",
         "BSEAP"
+      ]
+    },
+    {
+      "id": "assam-board",
+      "slug": "assam-board",
+      "name": "Assam Board Exams",
+      "fullName": "Board of Secondary Education Assam class 10 and class 12 board examinations",
+      "stream": "boards",
+      "streamName": "School Boards",
+      "streamIcon": "🏫",
+      "scope": "state",
+      "stateId": "assam",
+      "stateName": "Assam",
+      "region": "North East",
+      "body": "Board of Secondary Education Assam",
+      "bodyShort": "SEBA",
+      "level": "10th / 12th",
+      "qualification": [
+        "10th",
+        "12th"
+      ],
+      "age": "School students",
+      "officialUrl": "https://sebaonline.org/",
+      "frequency": "annual",
+      "aliases": [
+        "SEBA"
+      ],
+      "cycle": {
+        "notification": [
+          11,
+          12
+        ],
+        "apply": [
+          9,
+          10
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          5,
+          6
+        ]
+      },
+      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
+      "keywords": [
+        "APSC CCE",
+        "Assam Police AB UB",
+        "Assam TET",
+        "SEBA result"
+      ],
+      "verified": false,
+      "searchTerms": [
+        "Assam Board Exams",
+        "Board of Secondary Education Assam class 10 and class 12 board examinations",
+        "SEBA"
       ]
     },
     {
@@ -4969,6 +5139,65 @@
       ]
     },
     {
+      "id": "bihar-board",
+      "slug": "bihar-board",
+      "name": "Bihar Board Exams",
+      "fullName": "Bihar School Examination Board class 10 and class 12 board examinations",
+      "stream": "boards",
+      "streamName": "School Boards",
+      "streamIcon": "🏫",
+      "scope": "state",
+      "stateId": "bihar",
+      "stateName": "Bihar",
+      "region": "East",
+      "body": "Bihar School Examination Board",
+      "bodyShort": "BSEB",
+      "level": "10th / 12th",
+      "qualification": [
+        "10th",
+        "12th"
+      ],
+      "age": "School students",
+      "officialUrl": "https://biharboardonline.bihar.gov.in/",
+      "frequency": "annual",
+      "aliases": [
+        "BSEB"
+      ],
+      "cycle": {
+        "notification": [
+          11,
+          12
+        ],
+        "apply": [
+          9,
+          10
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          5,
+          6
+        ]
+      },
+      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
+      "keywords": [
+        "BPSC TRE",
+        "BPSC 70th",
+        "Bihar Police Constable",
+        "BSEB matric result",
+        "BSEB inter result",
+        "BTET"
+      ],
+      "verified": false,
+      "searchTerms": [
+        "Bihar Board Exams",
+        "Bihar School Examination Board class 10 and class 12 board examinations",
+        "BSEB"
+      ]
+    },
+    {
       "id": "bihar-police-constable",
       "slug": "bihar-police-constable",
       "name": "Bihar Police Constable",
@@ -5089,65 +5318,6 @@
       ]
     },
     {
-      "id": "manipur-board",
-      "slug": "manipur-board",
-      "name": "BOSEM Board Exams",
-      "fullName": "Board of Secondary Education Manipur class 10 and class 12 board examinations",
-      "stream": "boards",
-      "streamName": "School Boards",
-      "streamIcon": "🏫",
-      "scope": "state",
-      "stateId": "manipur",
-      "stateName": "Manipur",
-      "region": "North East",
-      "body": "Board of Secondary Education Manipur",
-      "bodyShort": "BOSEM",
-      "level": "10th / 12th",
-      "qualification": [
-        "10th",
-        "12th"
-      ],
-      "age": "School students",
-      "officialUrl": "https://bosemmanipur.in/",
-      "frequency": "annual",
-      "aliases": [
-        "undefined",
-        "BOSEM"
-      ],
-      "cycle": {
-        "notification": [
-          11,
-          12
-        ],
-        "apply": [
-          9,
-          10
-        ],
-        "exam": [
-          2,
-          3
-        ],
-        "result": [
-          5,
-          6
-        ]
-      },
-      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
-      "keywords": [
-        "undefined",
-        "Manipur PSC",
-        "Manipur Police Constable",
-        "BOSEM result"
-      ],
-      "verified": false,
-      "searchTerms": [
-        "BOSEM Board Exams",
-        "Board of Secondary Education Manipur class 10 and class 12 board examinations",
-        "BOSEM",
-        "undefined"
-      ]
-    },
-    {
       "id": "bihar-psc",
       "slug": "bihar-psc",
       "name": "BPSC CCE",
@@ -5205,371 +5375,6 @@
         "BPSC CCE",
         "Bihar Public Service Commission civil services examination",
         "BPSC"
-      ]
-    },
-    {
-      "id": "odisha-board",
-      "slug": "odisha-board",
-      "name": "BSE Odisha Board Exams",
-      "fullName": "Board of Secondary Education Odisha class 10 and class 12 board examinations",
-      "stream": "boards",
-      "streamName": "School Boards",
-      "streamIcon": "🏫",
-      "scope": "state",
-      "stateId": "odisha",
-      "stateName": "Odisha",
-      "region": "East",
-      "body": "Board of Secondary Education Odisha",
-      "bodyShort": "BSE Odisha",
-      "level": "10th / 12th",
-      "qualification": [
-        "10th",
-        "12th"
-      ],
-      "age": "School students",
-      "officialUrl": "https://bseodisha.ac.in/",
-      "frequency": "annual",
-      "aliases": [
-        "undefined",
-        "BSE Odisha"
-      ],
-      "cycle": {
-        "notification": [
-          11,
-          12
-        ],
-        "apply": [
-          9,
-          10
-        ],
-        "exam": [
-          2,
-          3
-        ],
-        "result": [
-          5,
-          6
-        ]
-      },
-      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
-      "keywords": [
-        "undefined",
-        "OPSC OCS",
-        "OSSC CGL",
-        "Odisha Police Constable",
-        "OTET",
-        "BSE Odisha result"
-      ],
-      "verified": false,
-      "searchTerms": [
-        "BSE Odisha Board Exams",
-        "Board of Secondary Education Odisha class 10 and class 12 board examinations",
-        "BSE Odisha",
-        "undefined"
-      ]
-    },
-    {
-      "id": "telangana-board",
-      "slug": "telangana-board",
-      "name": "BSE Telangana Board Exams",
-      "fullName": "Board of Secondary Education Telangana class 10 and class 12 board examinations",
-      "stream": "boards",
-      "streamName": "School Boards",
-      "streamIcon": "🏫",
-      "scope": "state",
-      "stateId": "telangana",
-      "stateName": "Telangana",
-      "region": "South",
-      "body": "Board of Secondary Education Telangana",
-      "bodyShort": "BSE Telangana",
-      "level": "10th / 12th",
-      "qualification": [
-        "10th",
-        "12th"
-      ],
-      "age": "School students",
-      "officialUrl": "https://bse.telangana.gov.in/",
-      "frequency": "annual",
-      "aliases": [
-        "undefined",
-        "BSE Telangana"
-      ],
-      "cycle": {
-        "notification": [
-          11,
-          12
-        ],
-        "apply": [
-          9,
-          10
-        ],
-        "exam": [
-          2,
-          3
-        ],
-        "result": [
-          5,
-          6
-        ]
-      },
-      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
-      "keywords": [
-        "undefined",
-        "TGPSC Group 1",
-        "TSPSC",
-        "TSLPRB Constable",
-        "TS TET",
-        "TS EAMCET",
-        "TS ICET"
-      ],
-      "verified": false,
-      "searchTerms": [
-        "BSE Telangana Board Exams",
-        "Board of Secondary Education Telangana class 10 and class 12 board examinations",
-        "BSE Telangana",
-        "undefined"
-      ]
-    },
-    {
-      "id": "andhra-pradesh-board",
-      "slug": "andhra-pradesh-board",
-      "name": "BSEAP Board Exams",
-      "fullName": "Board of Secondary Education Andhra Pradesh class 10 and class 12 board examinations",
-      "stream": "boards",
-      "streamName": "School Boards",
-      "streamIcon": "🏫",
-      "scope": "state",
-      "stateId": "andhra-pradesh",
-      "stateName": "Andhra Pradesh",
-      "region": "South",
-      "body": "Board of Secondary Education Andhra Pradesh",
-      "bodyShort": "BSEAP",
-      "level": "10th / 12th",
-      "qualification": [
-        "10th",
-        "12th"
-      ],
-      "age": "School students",
-      "officialUrl": "https://bse.ap.gov.in/",
-      "frequency": "annual",
-      "aliases": [
-        "undefined",
-        "BSEAP"
-      ],
-      "cycle": {
-        "notification": [
-          11,
-          12
-        ],
-        "apply": [
-          9,
-          10
-        ],
-        "exam": [
-          2,
-          3
-        ],
-        "result": [
-          5,
-          6
-        ]
-      },
-      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
-      "keywords": [
-        "undefined",
-        "APPSC Group 1",
-        "AP POLYCET",
-        "AP EAMCET",
-        "AP ICET",
-        "AP TET"
-      ],
-      "verified": false,
-      "searchTerms": [
-        "BSEAP Board Exams",
-        "Board of Secondary Education Andhra Pradesh class 10 and class 12 board examinations",
-        "BSEAP",
-        "undefined"
-      ]
-    },
-    {
-      "id": "arunachal-pradesh-board",
-      "slug": "arunachal-pradesh-board",
-      "name": "BSEAP Board Exams",
-      "fullName": "Board of Secondary Education Arunachal Pradesh class 10 and class 12 board examinations",
-      "stream": "boards",
-      "streamName": "School Boards",
-      "streamIcon": "🏫",
-      "scope": "state",
-      "stateId": "arunachal-pradesh",
-      "stateName": "Arunachal Pradesh",
-      "region": "North East",
-      "body": "Board of Secondary Education Arunachal Pradesh",
-      "bodyShort": "BSEAP",
-      "level": "10th / 12th",
-      "qualification": [
-        "10th",
-        "12th"
-      ],
-      "age": "School students",
-      "officialUrl": "https://bsearunachal.nic.in/",
-      "frequency": "annual",
-      "aliases": [
-        "undefined",
-        "BSEAP"
-      ],
-      "cycle": {
-        "notification": [
-          11,
-          12
-        ],
-        "apply": [
-          9,
-          10
-        ],
-        "exam": [
-          2,
-          3
-        ],
-        "result": [
-          5,
-          6
-        ]
-      },
-      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
-      "keywords": [
-        "undefined",
-        "APPSC Arunachal",
-        "Arunachal Pradesh police recruitment"
-      ],
-      "verified": false,
-      "searchTerms": [
-        "BSEAP Board Exams",
-        "Board of Secondary Education Arunachal Pradesh class 10 and class 12 board examinations",
-        "BSEAP",
-        "undefined"
-      ]
-    },
-    {
-      "id": "bihar-board",
-      "slug": "bihar-board",
-      "name": "BSEB Board Exams",
-      "fullName": "Bihar School Examination Board class 10 and class 12 board examinations",
-      "stream": "boards",
-      "streamName": "School Boards",
-      "streamIcon": "🏫",
-      "scope": "state",
-      "stateId": "bihar",
-      "stateName": "Bihar",
-      "region": "East",
-      "body": "Bihar School Examination Board",
-      "bodyShort": "BSEB",
-      "level": "10th / 12th",
-      "qualification": [
-        "10th",
-        "12th"
-      ],
-      "age": "School students",
-      "officialUrl": "https://biharboardonline.bihar.gov.in/",
-      "frequency": "annual",
-      "aliases": [
-        "undefined",
-        "BSEB"
-      ],
-      "cycle": {
-        "notification": [
-          11,
-          12
-        ],
-        "apply": [
-          9,
-          10
-        ],
-        "exam": [
-          2,
-          3
-        ],
-        "result": [
-          5,
-          6
-        ]
-      },
-      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
-      "keywords": [
-        "undefined",
-        "BPSC TRE",
-        "BPSC 70th",
-        "Bihar Police Constable",
-        "BSEB matric result",
-        "BSEB inter result",
-        "BTET"
-      ],
-      "verified": false,
-      "searchTerms": [
-        "BSEB Board Exams",
-        "Bihar School Examination Board class 10 and class 12 board examinations",
-        "BSEB",
-        "undefined"
-      ]
-    },
-    {
-      "id": "haryana-board",
-      "slug": "haryana-board",
-      "name": "BSEH Board Exams",
-      "fullName": "Board of School Education Haryana class 10 and class 12 board examinations",
-      "stream": "boards",
-      "streamName": "School Boards",
-      "streamIcon": "🏫",
-      "scope": "state",
-      "stateId": "haryana",
-      "stateName": "Haryana",
-      "region": "North",
-      "body": "Board of School Education Haryana",
-      "bodyShort": "BSEH",
-      "level": "10th / 12th",
-      "qualification": [
-        "10th",
-        "12th"
-      ],
-      "age": "School students",
-      "officialUrl": "https://bseh.org.in/",
-      "frequency": "annual",
-      "aliases": [
-        "undefined",
-        "BSEH"
-      ],
-      "cycle": {
-        "notification": [
-          11,
-          12
-        ],
-        "apply": [
-          9,
-          10
-        ],
-        "exam": [
-          2,
-          3
-        ],
-        "result": [
-          5,
-          6
-        ]
-      },
-      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
-      "keywords": [
-        "undefined",
-        "HPSC HCS",
-        "HSSC CET",
-        "Haryana Police Constable",
-        "HTET",
-        "BSEH result"
-      ],
-      "verified": false,
-      "searchTerms": [
-        "BSEH Board Exams",
-        "Board of School Education Haryana class 10 and class 12 board examinations",
-        "BSEH",
-        "undefined"
       ]
     },
     {
@@ -5746,66 +5551,6 @@
         "CG Police SI",
         "Chhattisgarh Police sub-inspector recruitment",
         "CG Police"
-      ]
-    },
-    {
-      "id": "chhattisgarh-board",
-      "slug": "chhattisgarh-board",
-      "name": "CGBSE Board Exams",
-      "fullName": "Chhattisgarh Board of Secondary Education class 10 and class 12 board examinations",
-      "stream": "boards",
-      "streamName": "School Boards",
-      "streamIcon": "🏫",
-      "scope": "state",
-      "stateId": "chhattisgarh",
-      "stateName": "Chhattisgarh",
-      "region": "Central",
-      "body": "Chhattisgarh Board of Secondary Education",
-      "bodyShort": "CGBSE",
-      "level": "10th / 12th",
-      "qualification": [
-        "10th",
-        "12th"
-      ],
-      "age": "School students",
-      "officialUrl": "https://cgbse.nic.in/",
-      "frequency": "annual",
-      "aliases": [
-        "undefined",
-        "CGBSE"
-      ],
-      "cycle": {
-        "notification": [
-          11,
-          12
-        ],
-        "apply": [
-          9,
-          10
-        ],
-        "exam": [
-          2,
-          3
-        ],
-        "result": [
-          5,
-          6
-        ]
-      },
-      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
-      "keywords": [
-        "undefined",
-        "CGPSC State Service",
-        "CG Police Constable",
-        "CGTET",
-        "CGBSE result"
-      ],
-      "verified": false,
-      "searchTerms": [
-        "CGBSE Board Exams",
-        "Chhattisgarh Board of Secondary Education class 10 and class 12 board examinations",
-        "CGBSE",
-        "undefined"
       ]
     },
     {
@@ -6036,6 +5781,63 @@
       ]
     },
     {
+      "id": "chhattisgarh-board",
+      "slug": "chhattisgarh-board",
+      "name": "Chhattisgarh Board Exams",
+      "fullName": "Chhattisgarh Board of Secondary Education class 10 and class 12 board examinations",
+      "stream": "boards",
+      "streamName": "School Boards",
+      "streamIcon": "🏫",
+      "scope": "state",
+      "stateId": "chhattisgarh",
+      "stateName": "Chhattisgarh",
+      "region": "Central",
+      "body": "Chhattisgarh Board of Secondary Education",
+      "bodyShort": "CGBSE",
+      "level": "10th / 12th",
+      "qualification": [
+        "10th",
+        "12th"
+      ],
+      "age": "School students",
+      "officialUrl": "https://cgbse.nic.in/",
+      "frequency": "annual",
+      "aliases": [
+        "CGBSE"
+      ],
+      "cycle": {
+        "notification": [
+          11,
+          12
+        ],
+        "apply": [
+          9,
+          10
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          5,
+          6
+        ]
+      },
+      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
+      "keywords": [
+        "CGPSC State Service",
+        "CG Police Constable",
+        "CGTET",
+        "CGBSE result"
+      ],
+      "verified": false,
+      "searchTerms": [
+        "Chhattisgarh Board Exams",
+        "Chhattisgarh Board of Secondary Education class 10 and class 12 board examinations",
+        "CGBSE"
+      ]
+    },
+    {
       "id": "delhi-police-constable",
       "slug": "delhi-police-constable",
       "name": "Delhi Police Constable",
@@ -6210,68 +6012,6 @@
       ]
     },
     {
-      "id": "tamil-nadu-board",
-      "slug": "tamil-nadu-board",
-      "name": "DGE TN Board Exams",
-      "fullName": "Directorate of Government Examinations Tamil Nadu class 10 and class 12 board examinations",
-      "stream": "boards",
-      "streamName": "School Boards",
-      "streamIcon": "🏫",
-      "scope": "state",
-      "stateId": "tamil-nadu",
-      "stateName": "Tamil Nadu",
-      "region": "South",
-      "body": "Directorate of Government Examinations Tamil Nadu",
-      "bodyShort": "DGE TN",
-      "level": "10th / 12th",
-      "qualification": [
-        "10th",
-        "12th"
-      ],
-      "age": "School students",
-      "officialUrl": "https://dge.tn.gov.in/",
-      "frequency": "annual",
-      "aliases": [
-        "undefined",
-        "DGE TN"
-      ],
-      "cycle": {
-        "notification": [
-          11,
-          12
-        ],
-        "apply": [
-          9,
-          10
-        ],
-        "exam": [
-          2,
-          3
-        ],
-        "result": [
-          5,
-          6
-        ]
-      },
-      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
-      "keywords": [
-        "undefined",
-        "TNPSC Group 1",
-        "TNPSC Group 2",
-        "TNUSRB PC",
-        "TN Police Constable",
-        "TN TET",
-        "TNEA"
-      ],
-      "verified": false,
-      "searchTerms": [
-        "DGE TN Board Exams",
-        "Directorate of Government Examinations Tamil Nadu class 10 and class 12 board examinations",
-        "DGE TN",
-        "undefined"
-      ]
-    },
-    {
       "id": "delhi-psc",
       "slug": "delhi-psc",
       "name": "DSSSB Combined Recruitment",
@@ -6332,7 +6072,7 @@
     {
       "id": "goa-board",
       "slug": "goa-board",
-      "name": "GBSHSE Board Exams",
+      "name": "Goa Board Exams",
       "fullName": "Goa Board of Secondary and Higher Secondary Education class 10 and class 12 board examinations",
       "stream": "boards",
       "streamName": "School Boards",
@@ -6352,7 +6092,6 @@
       "officialUrl": "https://gbshse.gov.in/",
       "frequency": "annual",
       "aliases": [
-        "undefined",
         "GBSHSE"
       ],
       "cycle": {
@@ -6375,17 +6114,15 @@
       },
       "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
       "keywords": [
-        "undefined",
         "GPSC Goa",
         "Goa Police Constable",
         "GBSHSE result"
       ],
       "verified": false,
       "searchTerms": [
-        "GBSHSE Board Exams",
+        "Goa Board Exams",
         "Goa Board of Secondary and Higher Secondary Education class 10 and class 12 board examinations",
-        "GBSHSE",
-        "undefined"
+        "GBSHSE"
       ]
     },
     {
@@ -6678,7 +6415,7 @@
     {
       "id": "gujarat-board",
       "slug": "gujarat-board",
-      "name": "GSEB Board Exams",
+      "name": "Gujarat Board Exams",
       "fullName": "Gujarat Secondary and Higher Secondary Education Board class 10 and class 12 board examinations",
       "stream": "boards",
       "streamName": "School Boards",
@@ -6698,7 +6435,6 @@
       "officialUrl": "https://gseb.org/",
       "frequency": "annual",
       "aliases": [
-        "undefined",
         "GSEB"
       ],
       "cycle": {
@@ -6721,7 +6457,6 @@
       },
       "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
       "keywords": [
-        "undefined",
         "GPSC Class 1-2",
         "GSSSB recruitment",
         "Gujarat Police Constable",
@@ -6730,10 +6465,9 @@
       ],
       "verified": false,
       "searchTerms": [
-        "GSEB Board Exams",
+        "Gujarat Board Exams",
         "Gujarat Secondary and Higher Secondary Education Board class 10 and class 12 board examinations",
-        "GSEB",
-        "undefined"
+        "GSEB"
       ]
     },
     {
@@ -6914,6 +6648,64 @@
       ]
     },
     {
+      "id": "haryana-board",
+      "slug": "haryana-board",
+      "name": "Haryana Board Exams",
+      "fullName": "Board of School Education Haryana class 10 and class 12 board examinations",
+      "stream": "boards",
+      "streamName": "School Boards",
+      "streamIcon": "🏫",
+      "scope": "state",
+      "stateId": "haryana",
+      "stateName": "Haryana",
+      "region": "North",
+      "body": "Board of School Education Haryana",
+      "bodyShort": "BSEH",
+      "level": "10th / 12th",
+      "qualification": [
+        "10th",
+        "12th"
+      ],
+      "age": "School students",
+      "officialUrl": "https://bseh.org.in/",
+      "frequency": "annual",
+      "aliases": [
+        "BSEH"
+      ],
+      "cycle": {
+        "notification": [
+          11,
+          12
+        ],
+        "apply": [
+          9,
+          10
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          5,
+          6
+        ]
+      },
+      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
+      "keywords": [
+        "HPSC HCS",
+        "HSSC CET",
+        "Haryana Police Constable",
+        "HTET",
+        "BSEH result"
+      ],
+      "verified": false,
+      "searchTerms": [
+        "Haryana Board Exams",
+        "Board of School Education Haryana class 10 and class 12 board examinations",
+        "BSEH"
+      ]
+    },
+    {
       "id": "haryana-police-constable",
       "slug": "haryana-police-constable",
       "name": "Haryana Police Constable",
@@ -7090,6 +6882,63 @@
       ]
     },
     {
+      "id": "himachal-pradesh-board",
+      "slug": "himachal-pradesh-board",
+      "name": "Himachal Pradesh Board Exams",
+      "fullName": "Himachal Pradesh Board of School Education class 10 and class 12 board examinations",
+      "stream": "boards",
+      "streamName": "School Boards",
+      "streamIcon": "🏫",
+      "scope": "state",
+      "stateId": "himachal-pradesh",
+      "stateName": "Himachal Pradesh",
+      "region": "North",
+      "body": "Himachal Pradesh Board of School Education",
+      "bodyShort": "HPBOSE",
+      "level": "10th / 12th",
+      "qualification": [
+        "10th",
+        "12th"
+      ],
+      "age": "School students",
+      "officialUrl": "https://hpbose.org/",
+      "frequency": "annual",
+      "aliases": [
+        "HPBOSE"
+      ],
+      "cycle": {
+        "notification": [
+          11,
+          12
+        ],
+        "apply": [
+          9,
+          10
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          5,
+          6
+        ]
+      },
+      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
+      "keywords": [
+        "HPPSC HPAS",
+        "HP Police Constable",
+        "HPTET",
+        "HPBOSE result"
+      ],
+      "verified": false,
+      "searchTerms": [
+        "Himachal Pradesh Board Exams",
+        "Himachal Pradesh Board of School Education class 10 and class 12 board examinations",
+        "HPBOSE"
+      ]
+    },
+    {
       "id": "himachal-pradesh-police-constable",
       "slug": "himachal-pradesh-police-constable",
       "name": "HP Police Constable",
@@ -7261,66 +7110,6 @@
         "HPAS",
         "Himachal Pradesh Public Service Commission civil services examination",
         "HPPSC"
-      ]
-    },
-    {
-      "id": "himachal-pradesh-board",
-      "slug": "himachal-pradesh-board",
-      "name": "HPBOSE Board Exams",
-      "fullName": "Himachal Pradesh Board of School Education class 10 and class 12 board examinations",
-      "stream": "boards",
-      "streamName": "School Boards",
-      "streamIcon": "🏫",
-      "scope": "state",
-      "stateId": "himachal-pradesh",
-      "stateName": "Himachal Pradesh",
-      "region": "North",
-      "body": "Himachal Pradesh Board of School Education",
-      "bodyShort": "HPBOSE",
-      "level": "10th / 12th",
-      "qualification": [
-        "10th",
-        "12th"
-      ],
-      "age": "School students",
-      "officialUrl": "https://hpbose.org/",
-      "frequency": "annual",
-      "aliases": [
-        "undefined",
-        "HPBOSE"
-      ],
-      "cycle": {
-        "notification": [
-          11,
-          12
-        ],
-        "apply": [
-          9,
-          10
-        ],
-        "exam": [
-          2,
-          3
-        ],
-        "result": [
-          5,
-          6
-        ]
-      },
-      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
-      "keywords": [
-        "undefined",
-        "HPPSC HPAS",
-        "HP Police Constable",
-        "HPTET",
-        "HPBOSE result"
-      ],
-      "verified": false,
-      "searchTerms": [
-        "HPBOSE Board Exams",
-        "Himachal Pradesh Board of School Education class 10 and class 12 board examinations",
-        "HPBOSE",
-        "undefined"
       ]
     },
     {
@@ -7559,9 +7348,67 @@
       ]
     },
     {
+      "id": "jammu-and-kashmir-board",
+      "slug": "jammu-and-kashmir-board",
+      "name": "Jammu and Kashmir Board Exams",
+      "fullName": "Jammu and Kashmir Board of School Education class 10 and class 12 board examinations",
+      "stream": "boards",
+      "streamName": "School Boards",
+      "streamIcon": "🏫",
+      "scope": "state",
+      "stateId": "jammu-and-kashmir",
+      "stateName": "Jammu and Kashmir",
+      "region": "North",
+      "body": "Jammu and Kashmir Board of School Education",
+      "bodyShort": "JKBOSE",
+      "level": "10th / 12th",
+      "qualification": [
+        "10th",
+        "12th"
+      ],
+      "age": "School students",
+      "officialUrl": "https://jkbose.nic.in/",
+      "frequency": "annual",
+      "aliases": [
+        "JKBOSE"
+      ],
+      "cycle": {
+        "notification": [
+          11,
+          12
+        ],
+        "apply": [
+          9,
+          10
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          5,
+          6
+        ]
+      },
+      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
+      "keywords": [
+        "JKPSC CCE",
+        "JKSSB recruitment",
+        "J&K Police Constable",
+        "JKTET",
+        "JKBOSE result"
+      ],
+      "verified": false,
+      "searchTerms": [
+        "Jammu and Kashmir Board Exams",
+        "Jammu and Kashmir Board of School Education class 10 and class 12 board examinations",
+        "JKBOSE"
+      ]
+    },
+    {
       "id": "jharkhand-board",
       "slug": "jharkhand-board",
-      "name": "JAC Board Exams",
+      "name": "Jharkhand Board Exams",
       "fullName": "Jharkhand Academic Council class 10 and class 12 board examinations",
       "stream": "boards",
       "streamName": "School Boards",
@@ -7581,7 +7428,6 @@
       "officialUrl": "https://jac.jharkhand.gov.in/",
       "frequency": "annual",
       "aliases": [
-        "undefined",
         "JAC"
       ],
       "cycle": {
@@ -7604,7 +7450,6 @@
       },
       "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
       "keywords": [
-        "undefined",
         "JPSC CCE",
         "JSSC CGL",
         "Jharkhand Police Constable",
@@ -7613,9 +7458,8 @@
       ],
       "verified": false,
       "searchTerms": [
-        "JAC Board Exams",
-        "Jharkhand Academic Council class 10 and class 12 board examinations",
-        "undefined"
+        "Jharkhand Board Exams",
+        "Jharkhand Academic Council class 10 and class 12 board examinations"
       ]
     },
     {
@@ -7734,67 +7578,6 @@
         "Jharkhand Police SI",
         "Jharkhand Staff Selection Commission sub-inspector recruitment",
         "JSSC"
-      ]
-    },
-    {
-      "id": "jammu-and-kashmir-board",
-      "slug": "jammu-and-kashmir-board",
-      "name": "JKBOSE Board Exams",
-      "fullName": "Jammu and Kashmir Board of School Education class 10 and class 12 board examinations",
-      "stream": "boards",
-      "streamName": "School Boards",
-      "streamIcon": "🏫",
-      "scope": "state",
-      "stateId": "jammu-and-kashmir",
-      "stateName": "Jammu and Kashmir",
-      "region": "North",
-      "body": "Jammu and Kashmir Board of School Education",
-      "bodyShort": "JKBOSE",
-      "level": "10th / 12th",
-      "qualification": [
-        "10th",
-        "12th"
-      ],
-      "age": "School students",
-      "officialUrl": "https://jkbose.nic.in/",
-      "frequency": "annual",
-      "aliases": [
-        "undefined",
-        "JKBOSE"
-      ],
-      "cycle": {
-        "notification": [
-          11,
-          12
-        ],
-        "apply": [
-          9,
-          10
-        ],
-        "exam": [
-          2,
-          3
-        ],
-        "result": [
-          5,
-          6
-        ]
-      },
-      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
-      "keywords": [
-        "undefined",
-        "JKPSC CCE",
-        "JKSSB recruitment",
-        "J&K Police Constable",
-        "JKTET",
-        "JKBOSE result"
-      ],
-      "verified": false,
-      "searchTerms": [
-        "JKBOSE Board Exams",
-        "Jammu and Kashmir Board of School Education class 10 and class 12 board examinations",
-        "JKBOSE",
-        "undefined"
       ]
     },
     {
@@ -8028,6 +7811,65 @@
       "searchTerms": [
         "JTET",
         "Jharkhand Teacher Eligibility Test"
+      ]
+    },
+    {
+      "id": "karnataka-board",
+      "slug": "karnataka-board",
+      "name": "Karnataka Board Exams",
+      "fullName": "Karnataka School Examination and Assessment Board class 10 and class 12 board examinations",
+      "stream": "boards",
+      "streamName": "School Boards",
+      "streamIcon": "🏫",
+      "scope": "state",
+      "stateId": "karnataka",
+      "stateName": "Karnataka",
+      "region": "South",
+      "body": "Karnataka School Examination and Assessment Board",
+      "bodyShort": "KSEAB",
+      "level": "10th / 12th",
+      "qualification": [
+        "10th",
+        "12th"
+      ],
+      "age": "School students",
+      "officialUrl": "https://kseab.karnataka.gov.in/",
+      "frequency": "annual",
+      "aliases": [
+        "KSEAB"
+      ],
+      "cycle": {
+        "notification": [
+          11,
+          12
+        ],
+        "apply": [
+          9,
+          10
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          5,
+          6
+        ]
+      },
+      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
+      "keywords": [
+        "KPSC KAS",
+        "KEA recruitment",
+        "Karnataka Police Constable",
+        "KARTET",
+        "KSEAB result",
+        "KCET"
+      ],
+      "verified": false,
+      "searchTerms": [
+        "Karnataka Board Exams",
+        "Karnataka School Examination and Assessment Board class 10 and class 12 board examinations",
+        "KSEAB"
       ]
     },
     {
@@ -8326,6 +8168,64 @@
       ]
     },
     {
+      "id": "kerala-board",
+      "slug": "kerala-board",
+      "name": "Kerala Board Exams",
+      "fullName": "Kerala Pareeksha Bhavan class 10 and class 12 board examinations",
+      "stream": "boards",
+      "streamName": "School Boards",
+      "streamIcon": "🏫",
+      "scope": "state",
+      "stateId": "kerala",
+      "stateName": "Kerala",
+      "region": "South",
+      "body": "Kerala Pareeksha Bhavan",
+      "bodyShort": "Pareeksha Bhavan",
+      "level": "10th / 12th",
+      "qualification": [
+        "10th",
+        "12th"
+      ],
+      "age": "School students",
+      "officialUrl": "https://keralapareekshabhavan.in/",
+      "frequency": "annual",
+      "aliases": [
+        "Pareeksha Bhavan"
+      ],
+      "cycle": {
+        "notification": [
+          11,
+          12
+        ],
+        "apply": [
+          9,
+          10
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          5,
+          6
+        ]
+      },
+      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
+      "keywords": [
+        "Kerala PSC",
+        "Kerala Police Constable",
+        "KTET",
+        "Pareeksha Bhavan result",
+        "KEAM"
+      ],
+      "verified": false,
+      "searchTerms": [
+        "Kerala Board Exams",
+        "Kerala Pareeksha Bhavan class 10 and class 12 board examinations",
+        "Pareeksha Bhavan"
+      ]
+    },
+    {
       "id": "kerala-police-constable",
       "slug": "kerala-police-constable",
       "name": "Kerala Police Constable",
@@ -8441,68 +8341,6 @@
         "Kerala Police SI",
         "Kerala Police sub-inspector recruitment",
         "Kerala Police"
-      ]
-    },
-    {
-      "id": "karnataka-board",
-      "slug": "karnataka-board",
-      "name": "KSEAB Board Exams",
-      "fullName": "Karnataka School Examination and Assessment Board class 10 and class 12 board examinations",
-      "stream": "boards",
-      "streamName": "School Boards",
-      "streamIcon": "🏫",
-      "scope": "state",
-      "stateId": "karnataka",
-      "stateName": "Karnataka",
-      "region": "South",
-      "body": "Karnataka School Examination and Assessment Board",
-      "bodyShort": "KSEAB",
-      "level": "10th / 12th",
-      "qualification": [
-        "10th",
-        "12th"
-      ],
-      "age": "School students",
-      "officialUrl": "https://kseab.karnataka.gov.in/",
-      "frequency": "annual",
-      "aliases": [
-        "undefined",
-        "KSEAB"
-      ],
-      "cycle": {
-        "notification": [
-          11,
-          12
-        ],
-        "apply": [
-          9,
-          10
-        ],
-        "exam": [
-          2,
-          3
-        ],
-        "result": [
-          5,
-          6
-        ]
-      },
-      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
-      "keywords": [
-        "undefined",
-        "KPSC KAS",
-        "KEA recruitment",
-        "Karnataka Police Constable",
-        "KARTET",
-        "KSEAB result",
-        "KCET"
-      ],
-      "verified": false,
-      "searchTerms": [
-        "KSEAB Board Exams",
-        "Karnataka School Examination and Assessment Board class 10 and class 12 board examinations",
-        "KSEAB",
-        "undefined"
       ]
     },
     {
@@ -8791,6 +8629,122 @@
       ]
     },
     {
+      "id": "madhya-pradesh-board",
+      "slug": "madhya-pradesh-board",
+      "name": "Madhya Pradesh Board Exams",
+      "fullName": "Madhya Pradesh Board of Secondary Education class 10 and class 12 board examinations",
+      "stream": "boards",
+      "streamName": "School Boards",
+      "streamIcon": "🏫",
+      "scope": "state",
+      "stateId": "madhya-pradesh",
+      "stateName": "Madhya Pradesh",
+      "region": "Central",
+      "body": "Madhya Pradesh Board of Secondary Education",
+      "bodyShort": "MPBSE",
+      "level": "10th / 12th",
+      "qualification": [
+        "10th",
+        "12th"
+      ],
+      "age": "School students",
+      "officialUrl": "https://mpbse.nic.in/",
+      "frequency": "annual",
+      "aliases": [
+        "MPBSE"
+      ],
+      "cycle": {
+        "notification": [
+          11,
+          12
+        ],
+        "apply": [
+          9,
+          10
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          5,
+          6
+        ]
+      },
+      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
+      "keywords": [
+        "MPPSC State Service",
+        "MP ESB recruitment",
+        "MP Police Constable",
+        "MPTET",
+        "MPBSE result"
+      ],
+      "verified": false,
+      "searchTerms": [
+        "Madhya Pradesh Board Exams",
+        "Madhya Pradesh Board of Secondary Education class 10 and class 12 board examinations",
+        "MPBSE"
+      ]
+    },
+    {
+      "id": "maharashtra-board",
+      "slug": "maharashtra-board",
+      "name": "Maharashtra Board Exams",
+      "fullName": "Maharashtra State Board of Secondary and Higher Secondary Education class 10 and class 12 board examinations",
+      "stream": "boards",
+      "streamName": "School Boards",
+      "streamIcon": "🏫",
+      "scope": "state",
+      "stateId": "maharashtra",
+      "stateName": "Maharashtra",
+      "region": "West",
+      "body": "Maharashtra State Board of Secondary and Higher Secondary Education",
+      "bodyShort": "MSBSHSE",
+      "level": "10th / 12th",
+      "qualification": [
+        "10th",
+        "12th"
+      ],
+      "age": "School students",
+      "officialUrl": "https://mahahsscboard.in/",
+      "frequency": "annual",
+      "aliases": [
+        "MSBSHSE"
+      ],
+      "cycle": {
+        "notification": [
+          11,
+          12
+        ],
+        "apply": [
+          9,
+          10
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          5,
+          6
+        ]
+      },
+      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
+      "keywords": [
+        "MPSC Rajyaseva",
+        "Maharashtra Police Constable",
+        "MAHATET",
+        "MSBSHSE result",
+        "MHT CET"
+      ],
+      "verified": false,
+      "searchTerms": [
+        "Maharashtra Board Exams",
+        "Maharashtra State Board of Secondary and Higher Secondary Education class 10 and class 12 board examinations",
+        "MSBSHSE"
+      ]
+    },
+    {
       "id": "maharashtra-police-constable",
       "slug": "maharashtra-police-constable",
       "name": "Maharashtra Police Constable",
@@ -8965,6 +8919,62 @@
         "MAHATET",
         "Maharashtra Teacher Eligibility Test",
         "MSBSHSE"
+      ]
+    },
+    {
+      "id": "manipur-board",
+      "slug": "manipur-board",
+      "name": "Manipur Board Exams",
+      "fullName": "Board of Secondary Education Manipur class 10 and class 12 board examinations",
+      "stream": "boards",
+      "streamName": "School Boards",
+      "streamIcon": "🏫",
+      "scope": "state",
+      "stateId": "manipur",
+      "stateName": "Manipur",
+      "region": "North East",
+      "body": "Board of Secondary Education Manipur",
+      "bodyShort": "BOSEM",
+      "level": "10th / 12th",
+      "qualification": [
+        "10th",
+        "12th"
+      ],
+      "age": "School students",
+      "officialUrl": "https://bosemmanipur.in/",
+      "frequency": "annual",
+      "aliases": [
+        "BOSEM"
+      ],
+      "cycle": {
+        "notification": [
+          11,
+          12
+        ],
+        "apply": [
+          9,
+          10
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          5,
+          6
+        ]
+      },
+      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
+      "keywords": [
+        "Manipur PSC",
+        "Manipur Police Constable",
+        "BOSEM result"
+      ],
+      "verified": false,
+      "searchTerms": [
+        "Manipur Board Exams",
+        "Board of Secondary Education Manipur class 10 and class 12 board examinations",
+        "BOSEM"
       ]
     },
     {
@@ -9199,7 +9209,7 @@
     {
       "id": "meghalaya-board",
       "slug": "meghalaya-board",
-      "name": "MBOSE Board Exams",
+      "name": "Meghalaya Board Exams",
       "fullName": "Meghalaya Board of School Education class 10 and class 12 board examinations",
       "stream": "boards",
       "streamName": "School Boards",
@@ -9219,7 +9229,6 @@
       "officialUrl": "https://mbose.in/",
       "frequency": "annual",
       "aliases": [
-        "undefined",
         "MBOSE"
       ],
       "cycle": {
@@ -9242,76 +9251,15 @@
       },
       "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
       "keywords": [
-        "undefined",
         "Meghalaya PSC",
         "Meghalaya Police Constable",
         "MBOSE result"
       ],
       "verified": false,
       "searchTerms": [
-        "MBOSE Board Exams",
+        "Meghalaya Board Exams",
         "Meghalaya Board of School Education class 10 and class 12 board examinations",
-        "MBOSE",
-        "undefined"
-      ]
-    },
-    {
-      "id": "mizoram-board",
-      "slug": "mizoram-board",
-      "name": "MBSE Board Exams",
-      "fullName": "Mizoram Board of School Education class 10 and class 12 board examinations",
-      "stream": "boards",
-      "streamName": "School Boards",
-      "streamIcon": "🏫",
-      "scope": "state",
-      "stateId": "mizoram",
-      "stateName": "Mizoram",
-      "region": "North East",
-      "body": "Mizoram Board of School Education",
-      "bodyShort": "MBSE",
-      "level": "10th / 12th",
-      "qualification": [
-        "10th",
-        "12th"
-      ],
-      "age": "School students",
-      "officialUrl": "https://mbse.edu.in/",
-      "frequency": "annual",
-      "aliases": [
-        "undefined",
-        "MBSE"
-      ],
-      "cycle": {
-        "notification": [
-          11,
-          12
-        ],
-        "apply": [
-          9,
-          10
-        ],
-        "exam": [
-          2,
-          3
-        ],
-        "result": [
-          5,
-          6
-        ]
-      },
-      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
-      "keywords": [
-        "undefined",
-        "Mizoram PSC",
-        "Mizoram Police Constable",
-        "MBSE result"
-      ],
-      "verified": false,
-      "searchTerms": [
-        "MBSE Board Exams",
-        "Mizoram Board of School Education class 10 and class 12 board examinations",
-        "MBSE",
-        "undefined"
+        "MBOSE"
       ]
     },
     {
@@ -9541,6 +9489,62 @@
         "Meghalaya TET",
         "Meghalaya Teacher Eligibility Test",
         "MBOSE"
+      ]
+    },
+    {
+      "id": "mizoram-board",
+      "slug": "mizoram-board",
+      "name": "Mizoram Board Exams",
+      "fullName": "Mizoram Board of School Education class 10 and class 12 board examinations",
+      "stream": "boards",
+      "streamName": "School Boards",
+      "streamIcon": "🏫",
+      "scope": "state",
+      "stateId": "mizoram",
+      "stateName": "Mizoram",
+      "region": "North East",
+      "body": "Mizoram Board of School Education",
+      "bodyShort": "MBSE",
+      "level": "10th / 12th",
+      "qualification": [
+        "10th",
+        "12th"
+      ],
+      "age": "School students",
+      "officialUrl": "https://mbse.edu.in/",
+      "frequency": "annual",
+      "aliases": [
+        "MBSE"
+      ],
+      "cycle": {
+        "notification": [
+          11,
+          12
+        ],
+        "apply": [
+          9,
+          10
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          5,
+          6
+        ]
+      },
+      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
+      "keywords": [
+        "Mizoram PSC",
+        "Mizoram Police Constable",
+        "MBSE result"
+      ],
+      "verified": false,
+      "searchTerms": [
+        "Mizoram Board Exams",
+        "Mizoram Board of School Education class 10 and class 12 board examinations",
+        "MBSE"
       ]
     },
     {
@@ -9891,67 +9895,6 @@
       ]
     },
     {
-      "id": "madhya-pradesh-board",
-      "slug": "madhya-pradesh-board",
-      "name": "MPBSE Board Exams",
-      "fullName": "Madhya Pradesh Board of Secondary Education class 10 and class 12 board examinations",
-      "stream": "boards",
-      "streamName": "School Boards",
-      "streamIcon": "🏫",
-      "scope": "state",
-      "stateId": "madhya-pradesh",
-      "stateName": "Madhya Pradesh",
-      "region": "Central",
-      "body": "Madhya Pradesh Board of Secondary Education",
-      "bodyShort": "MPBSE",
-      "level": "10th / 12th",
-      "qualification": [
-        "10th",
-        "12th"
-      ],
-      "age": "School students",
-      "officialUrl": "https://mpbse.nic.in/",
-      "frequency": "annual",
-      "aliases": [
-        "undefined",
-        "MPBSE"
-      ],
-      "cycle": {
-        "notification": [
-          11,
-          12
-        ],
-        "apply": [
-          9,
-          10
-        ],
-        "exam": [
-          2,
-          3
-        ],
-        "result": [
-          5,
-          6
-        ]
-      },
-      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
-      "keywords": [
-        "undefined",
-        "MPPSC State Service",
-        "MP ESB recruitment",
-        "MP Police Constable",
-        "MPTET",
-        "MPBSE result"
-      ],
-      "verified": false,
-      "searchTerms": [
-        "MPBSE Board Exams",
-        "Madhya Pradesh Board of Secondary Education class 10 and class 12 board examinations",
-        "MPBSE",
-        "undefined"
-      ]
-    },
-    {
       "id": "madhya-pradesh-psc",
       "slug": "madhya-pradesh-psc",
       "name": "MPPSC State Service",
@@ -10127,30 +10070,29 @@
       ]
     },
     {
-      "id": "maharashtra-board",
-      "slug": "maharashtra-board",
-      "name": "MSBSHSE Board Exams",
-      "fullName": "Maharashtra State Board of Secondary and Higher Secondary Education class 10 and class 12 board examinations",
+      "id": "nagaland-board",
+      "slug": "nagaland-board",
+      "name": "Nagaland Board Exams",
+      "fullName": "Nagaland Board of School Education class 10 and class 12 board examinations",
       "stream": "boards",
       "streamName": "School Boards",
       "streamIcon": "🏫",
       "scope": "state",
-      "stateId": "maharashtra",
-      "stateName": "Maharashtra",
-      "region": "West",
-      "body": "Maharashtra State Board of Secondary and Higher Secondary Education",
-      "bodyShort": "MSBSHSE",
+      "stateId": "nagaland",
+      "stateName": "Nagaland",
+      "region": "North East",
+      "body": "Nagaland Board of School Education",
+      "bodyShort": "NBSE",
       "level": "10th / 12th",
       "qualification": [
         "10th",
         "12th"
       ],
       "age": "School students",
-      "officialUrl": "https://mahahsscboard.in/",
+      "officialUrl": "https://nbsenl.edu.in/",
       "frequency": "annual",
       "aliases": [
-        "undefined",
-        "MSBSHSE"
+        "NBSE"
       ],
       "cycle": {
         "notification": [
@@ -10172,19 +10114,15 @@
       },
       "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
       "keywords": [
-        "undefined",
-        "MPSC Rajyaseva",
-        "Maharashtra Police Constable",
-        "MAHATET",
-        "MSBSHSE result",
-        "MHT CET"
+        "NPSC Nagaland",
+        "Nagaland Police Constable",
+        "NBSE result"
       ],
       "verified": false,
       "searchTerms": [
-        "MSBSHSE Board Exams",
-        "Maharashtra State Board of Secondary and Higher Secondary Education class 10 and class 12 board examinations",
-        "MSBSHSE",
-        "undefined"
+        "Nagaland Board Exams",
+        "Nagaland Board of School Education class 10 and class 12 board examinations",
+        "NBSE"
       ]
     },
     {
@@ -10417,65 +10355,6 @@
       ]
     },
     {
-      "id": "nagaland-board",
-      "slug": "nagaland-board",
-      "name": "NBSE Board Exams",
-      "fullName": "Nagaland Board of School Education class 10 and class 12 board examinations",
-      "stream": "boards",
-      "streamName": "School Boards",
-      "streamIcon": "🏫",
-      "scope": "state",
-      "stateId": "nagaland",
-      "stateName": "Nagaland",
-      "region": "North East",
-      "body": "Nagaland Board of School Education",
-      "bodyShort": "NBSE",
-      "level": "10th / 12th",
-      "qualification": [
-        "10th",
-        "12th"
-      ],
-      "age": "School students",
-      "officialUrl": "https://nbsenl.edu.in/",
-      "frequency": "annual",
-      "aliases": [
-        "undefined",
-        "NBSE"
-      ],
-      "cycle": {
-        "notification": [
-          11,
-          12
-        ],
-        "apply": [
-          9,
-          10
-        ],
-        "exam": [
-          2,
-          3
-        ],
-        "result": [
-          5,
-          6
-        ]
-      },
-      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
-      "keywords": [
-        "undefined",
-        "NPSC Nagaland",
-        "Nagaland Police Constable",
-        "NBSE result"
-      ],
-      "verified": false,
-      "searchTerms": [
-        "NBSE Board Exams",
-        "Nagaland Board of School Education class 10 and class 12 board examinations",
-        "NBSE",
-        "undefined"
-      ]
-    },
-    {
       "id": "odisha-psc",
       "slug": "odisha-psc",
       "name": "OCS (OPSC)",
@@ -10531,6 +10410,64 @@
       "searchTerms": [
         "Odisha Public Service Commission civil services examination",
         "OPSC"
+      ]
+    },
+    {
+      "id": "odisha-board",
+      "slug": "odisha-board",
+      "name": "Odisha Board Exams",
+      "fullName": "Board of Secondary Education Odisha class 10 and class 12 board examinations",
+      "stream": "boards",
+      "streamName": "School Boards",
+      "streamIcon": "🏫",
+      "scope": "state",
+      "stateId": "odisha",
+      "stateName": "Odisha",
+      "region": "East",
+      "body": "Board of Secondary Education Odisha",
+      "bodyShort": "BSE Odisha",
+      "level": "10th / 12th",
+      "qualification": [
+        "10th",
+        "12th"
+      ],
+      "age": "School students",
+      "officialUrl": "https://bseodisha.ac.in/",
+      "frequency": "annual",
+      "aliases": [
+        "BSE Odisha"
+      ],
+      "cycle": {
+        "notification": [
+          11,
+          12
+        ],
+        "apply": [
+          9,
+          10
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          5,
+          6
+        ]
+      },
+      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
+      "keywords": [
+        "OPSC OCS",
+        "OSSC CGL",
+        "Odisha Police Constable",
+        "OTET",
+        "BSE Odisha result"
+      ],
+      "verified": false,
+      "searchTerms": [
+        "Odisha Board Exams",
+        "Board of Secondary Education Odisha class 10 and class 12 board examinations",
+        "BSE Odisha"
       ]
     },
     {
@@ -10711,67 +10648,6 @@
       ]
     },
     {
-      "id": "kerala-board",
-      "slug": "kerala-board",
-      "name": "Pareeksha Bhavan Board Exams",
-      "fullName": "Kerala Pareeksha Bhavan class 10 and class 12 board examinations",
-      "stream": "boards",
-      "streamName": "School Boards",
-      "streamIcon": "🏫",
-      "scope": "state",
-      "stateId": "kerala",
-      "stateName": "Kerala",
-      "region": "South",
-      "body": "Kerala Pareeksha Bhavan",
-      "bodyShort": "Pareeksha Bhavan",
-      "level": "10th / 12th",
-      "qualification": [
-        "10th",
-        "12th"
-      ],
-      "age": "School students",
-      "officialUrl": "https://keralapareekshabhavan.in/",
-      "frequency": "annual",
-      "aliases": [
-        "undefined",
-        "Pareeksha Bhavan"
-      ],
-      "cycle": {
-        "notification": [
-          11,
-          12
-        ],
-        "apply": [
-          9,
-          10
-        ],
-        "exam": [
-          2,
-          3
-        ],
-        "result": [
-          5,
-          6
-        ]
-      },
-      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
-      "keywords": [
-        "undefined",
-        "Kerala PSC",
-        "Kerala Police Constable",
-        "KTET",
-        "Pareeksha Bhavan result",
-        "KEAM"
-      ],
-      "verified": false,
-      "searchTerms": [
-        "Pareeksha Bhavan Board Exams",
-        "Kerala Pareeksha Bhavan class 10 and class 12 board examinations",
-        "Pareeksha Bhavan",
-        "undefined"
-      ]
-    },
-    {
       "id": "punjab-psc",
       "slug": "punjab-psc",
       "name": "PCS (PPSC)",
@@ -10827,67 +10703,6 @@
       "searchTerms": [
         "Punjab Public Service Commission civil services examination",
         "PPSC"
-      ]
-    },
-    {
-      "id": "punjab-board",
-      "slug": "punjab-board",
-      "name": "PSEB Board Exams",
-      "fullName": "Punjab School Education Board class 10 and class 12 board examinations",
-      "stream": "boards",
-      "streamName": "School Boards",
-      "streamIcon": "🏫",
-      "scope": "state",
-      "stateId": "punjab",
-      "stateName": "Punjab",
-      "region": "North",
-      "body": "Punjab School Education Board",
-      "bodyShort": "PSEB",
-      "level": "10th / 12th",
-      "qualification": [
-        "10th",
-        "12th"
-      ],
-      "age": "School students",
-      "officialUrl": "https://pseb.ac.in/",
-      "frequency": "annual",
-      "aliases": [
-        "undefined",
-        "PSEB"
-      ],
-      "cycle": {
-        "notification": [
-          11,
-          12
-        ],
-        "apply": [
-          9,
-          10
-        ],
-        "exam": [
-          2,
-          3
-        ],
-        "result": [
-          5,
-          6
-        ]
-      },
-      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
-      "keywords": [
-        "undefined",
-        "PPSC PCS",
-        "PSSSB recruitment",
-        "Punjab Police Constable",
-        "PSTET",
-        "PSEB result"
-      ],
-      "verified": false,
-      "searchTerms": [
-        "PSEB Board Exams",
-        "Punjab School Education Board class 10 and class 12 board examinations",
-        "PSEB",
-        "undefined"
       ]
     },
     {
@@ -11062,6 +10877,64 @@
       ]
     },
     {
+      "id": "punjab-board",
+      "slug": "punjab-board",
+      "name": "Punjab Board Exams",
+      "fullName": "Punjab School Education Board class 10 and class 12 board examinations",
+      "stream": "boards",
+      "streamName": "School Boards",
+      "streamIcon": "🏫",
+      "scope": "state",
+      "stateId": "punjab",
+      "stateName": "Punjab",
+      "region": "North",
+      "body": "Punjab School Education Board",
+      "bodyShort": "PSEB",
+      "level": "10th / 12th",
+      "qualification": [
+        "10th",
+        "12th"
+      ],
+      "age": "School students",
+      "officialUrl": "https://pseb.ac.in/",
+      "frequency": "annual",
+      "aliases": [
+        "PSEB"
+      ],
+      "cycle": {
+        "notification": [
+          11,
+          12
+        ],
+        "apply": [
+          9,
+          10
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          5,
+          6
+        ]
+      },
+      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
+      "keywords": [
+        "PPSC PCS",
+        "PSSSB recruitment",
+        "Punjab Police Constable",
+        "PSTET",
+        "PSEB result"
+      ],
+      "verified": false,
+      "searchTerms": [
+        "Punjab Board Exams",
+        "Punjab School Education Board class 10 and class 12 board examinations",
+        "PSEB"
+      ]
+    },
+    {
       "id": "punjab-police-constable",
       "slug": "punjab-police-constable",
       "name": "Punjab Police Constable",
@@ -11177,6 +11050,65 @@
         "Punjab Police SI",
         "Punjab Subordinate Services Selection Board sub-inspector recruitment",
         "PSSSB"
+      ]
+    },
+    {
+      "id": "rajasthan-board",
+      "slug": "rajasthan-board",
+      "name": "Rajasthan Board Exams",
+      "fullName": "Rajasthan Board of Secondary Education class 10 and class 12 board examinations",
+      "stream": "boards",
+      "streamName": "School Boards",
+      "streamIcon": "🏫",
+      "scope": "state",
+      "stateId": "rajasthan",
+      "stateName": "Rajasthan",
+      "region": "North",
+      "body": "Rajasthan Board of Secondary Education",
+      "bodyShort": "RBSE",
+      "level": "10th / 12th",
+      "qualification": [
+        "10th",
+        "12th"
+      ],
+      "age": "School students",
+      "officialUrl": "https://rajeduboard.rajasthan.gov.in/",
+      "frequency": "annual",
+      "aliases": [
+        "RBSE"
+      ],
+      "cycle": {
+        "notification": [
+          11,
+          12
+        ],
+        "apply": [
+          9,
+          10
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          5,
+          6
+        ]
+      },
+      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
+      "keywords": [
+        "RPSC RAS",
+        "RSSB recruitment",
+        "Rajasthan Police Constable",
+        "REET",
+        "RBSE result",
+        "Rajasthan 3rd Grade Teacher"
+      ],
+      "verified": false,
+      "searchTerms": [
+        "Rajasthan Board Exams",
+        "Rajasthan Board of Secondary Education class 10 and class 12 board examinations",
+        "RBSE"
       ]
     },
     {
@@ -11359,68 +11291,6 @@
       ]
     },
     {
-      "id": "rajasthan-board",
-      "slug": "rajasthan-board",
-      "name": "RBSE Board Exams",
-      "fullName": "Rajasthan Board of Secondary Education class 10 and class 12 board examinations",
-      "stream": "boards",
-      "streamName": "School Boards",
-      "streamIcon": "🏫",
-      "scope": "state",
-      "stateId": "rajasthan",
-      "stateName": "Rajasthan",
-      "region": "North",
-      "body": "Rajasthan Board of Secondary Education",
-      "bodyShort": "RBSE",
-      "level": "10th / 12th",
-      "qualification": [
-        "10th",
-        "12th"
-      ],
-      "age": "School students",
-      "officialUrl": "https://rajeduboard.rajasthan.gov.in/",
-      "frequency": "annual",
-      "aliases": [
-        "undefined",
-        "RBSE"
-      ],
-      "cycle": {
-        "notification": [
-          11,
-          12
-        ],
-        "apply": [
-          9,
-          10
-        ],
-        "exam": [
-          2,
-          3
-        ],
-        "result": [
-          5,
-          6
-        ]
-      },
-      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
-      "keywords": [
-        "undefined",
-        "RPSC RAS",
-        "RSSB recruitment",
-        "Rajasthan Police Constable",
-        "REET",
-        "RBSE result",
-        "Rajasthan 3rd Grade Teacher"
-      ],
-      "verified": false,
-      "searchTerms": [
-        "RBSE Board Exams",
-        "Rajasthan Board of Secondary Education class 10 and class 12 board examinations",
-        "RBSE",
-        "undefined"
-      ]
-    },
-    {
       "id": "rajasthan-tet",
       "slug": "rajasthan-tet",
       "name": "REET",
@@ -11478,66 +11348,6 @@
         "REET",
         "Rajasthan Teacher Eligibility Test",
         "RBSE"
-      ]
-    },
-    {
-      "id": "assam-board",
-      "slug": "assam-board",
-      "name": "SEBA Board Exams",
-      "fullName": "Board of Secondary Education Assam class 10 and class 12 board examinations",
-      "stream": "boards",
-      "streamName": "School Boards",
-      "streamIcon": "🏫",
-      "scope": "state",
-      "stateId": "assam",
-      "stateName": "Assam",
-      "region": "North East",
-      "body": "Board of Secondary Education Assam",
-      "bodyShort": "SEBA",
-      "level": "10th / 12th",
-      "qualification": [
-        "10th",
-        "12th"
-      ],
-      "age": "School students",
-      "officialUrl": "https://sebaonline.org/",
-      "frequency": "annual",
-      "aliases": [
-        "undefined",
-        "SEBA"
-      ],
-      "cycle": {
-        "notification": [
-          11,
-          12
-        ],
-        "apply": [
-          9,
-          10
-        ],
-        "exam": [
-          2,
-          3
-        ],
-        "result": [
-          5,
-          6
-        ]
-      },
-      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
-      "keywords": [
-        "undefined",
-        "APSC CCE",
-        "Assam Police AB UB",
-        "Assam TET",
-        "SEBA result"
-      ],
-      "verified": false,
-      "searchTerms": [
-        "SEBA Board Exams",
-        "Board of Secondary Education Assam class 10 and class 12 board examinations",
-        "SEBA",
-        "undefined"
       ]
     },
     {
@@ -11766,30 +11576,29 @@
       ]
     },
     {
-      "id": "tripura-board",
-      "slug": "tripura-board",
-      "name": "TBSE Board Exams",
-      "fullName": "Tripura Board of Secondary Education class 10 and class 12 board examinations",
+      "id": "tamil-nadu-board",
+      "slug": "tamil-nadu-board",
+      "name": "Tamil Nadu Board Exams",
+      "fullName": "Directorate of Government Examinations Tamil Nadu class 10 and class 12 board examinations",
       "stream": "boards",
       "streamName": "School Boards",
       "streamIcon": "🏫",
       "scope": "state",
-      "stateId": "tripura",
-      "stateName": "Tripura",
-      "region": "North East",
-      "body": "Tripura Board of Secondary Education",
-      "bodyShort": "TBSE",
+      "stateId": "tamil-nadu",
+      "stateName": "Tamil Nadu",
+      "region": "South",
+      "body": "Directorate of Government Examinations Tamil Nadu",
+      "bodyShort": "DGE TN",
       "level": "10th / 12th",
       "qualification": [
         "10th",
         "12th"
       ],
       "age": "School students",
-      "officialUrl": "https://tbse.tripura.gov.in/",
+      "officialUrl": "https://dge.tn.gov.in/",
       "frequency": "annual",
       "aliases": [
-        "undefined",
-        "TBSE"
+        "DGE TN"
       ],
       "cycle": {
         "notification": [
@@ -11811,17 +11620,77 @@
       },
       "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
       "keywords": [
-        "undefined",
-        "TPSC Tripura",
-        "Tripura Police Constable",
-        "TBSE result"
+        "TNPSC Group 1",
+        "TNPSC Group 2",
+        "TNUSRB PC",
+        "TN Police Constable",
+        "TN TET",
+        "TNEA"
       ],
       "verified": false,
       "searchTerms": [
-        "TBSE Board Exams",
-        "Tripura Board of Secondary Education class 10 and class 12 board examinations",
-        "TBSE",
-        "undefined"
+        "Tamil Nadu Board Exams",
+        "Directorate of Government Examinations Tamil Nadu class 10 and class 12 board examinations",
+        "DGE TN"
+      ]
+    },
+    {
+      "id": "telangana-board",
+      "slug": "telangana-board",
+      "name": "Telangana Board Exams",
+      "fullName": "Board of Secondary Education Telangana class 10 and class 12 board examinations",
+      "stream": "boards",
+      "streamName": "School Boards",
+      "streamIcon": "🏫",
+      "scope": "state",
+      "stateId": "telangana",
+      "stateName": "Telangana",
+      "region": "South",
+      "body": "Board of Secondary Education Telangana",
+      "bodyShort": "BSE Telangana",
+      "level": "10th / 12th",
+      "qualification": [
+        "10th",
+        "12th"
+      ],
+      "age": "School students",
+      "officialUrl": "https://bse.telangana.gov.in/",
+      "frequency": "annual",
+      "aliases": [
+        "BSE Telangana"
+      ],
+      "cycle": {
+        "notification": [
+          11,
+          12
+        ],
+        "apply": [
+          9,
+          10
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          5,
+          6
+        ]
+      },
+      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
+      "keywords": [
+        "TGPSC Group 1",
+        "TSPSC",
+        "TSLPRB Constable",
+        "TS TET",
+        "TS EAMCET",
+        "TS ICET"
+      ],
+      "verified": false,
+      "searchTerms": [
+        "Telangana Board Exams",
+        "Board of Secondary Education Telangana class 10 and class 12 board examinations",
+        "BSE Telangana"
       ]
     },
     {
@@ -12120,6 +11989,62 @@
         "TNPSC Group 1",
         "Tamil Nadu Public Service Commission civil services examination",
         "TNPSC"
+      ]
+    },
+    {
+      "id": "tripura-board",
+      "slug": "tripura-board",
+      "name": "Tripura Board Exams",
+      "fullName": "Tripura Board of Secondary Education class 10 and class 12 board examinations",
+      "stream": "boards",
+      "streamName": "School Boards",
+      "streamIcon": "🏫",
+      "scope": "state",
+      "stateId": "tripura",
+      "stateName": "Tripura",
+      "region": "North East",
+      "body": "Tripura Board of Secondary Education",
+      "bodyShort": "TBSE",
+      "level": "10th / 12th",
+      "qualification": [
+        "10th",
+        "12th"
+      ],
+      "age": "School students",
+      "officialUrl": "https://tbse.tripura.gov.in/",
+      "frequency": "annual",
+      "aliases": [
+        "TBSE"
+      ],
+      "cycle": {
+        "notification": [
+          11,
+          12
+        ],
+        "apply": [
+          9,
+          10
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          5,
+          6
+        ]
+      },
+      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
+      "keywords": [
+        "TPSC Tripura",
+        "Tripura Police Constable",
+        "TBSE result"
+      ],
+      "verified": false,
+      "searchTerms": [
+        "Tripura Board Exams",
+        "Tripura Board of Secondary Education class 10 and class 12 board examinations",
+        "TBSE"
       ]
     },
     {
@@ -12533,67 +12458,6 @@
       ]
     },
     {
-      "id": "uttarakhand-board",
-      "slug": "uttarakhand-board",
-      "name": "UBSE Board Exams",
-      "fullName": "Uttarakhand Board of School Education class 10 and class 12 board examinations",
-      "stream": "boards",
-      "streamName": "School Boards",
-      "streamIcon": "🏫",
-      "scope": "state",
-      "stateId": "uttarakhand",
-      "stateName": "Uttarakhand",
-      "region": "North",
-      "body": "Uttarakhand Board of School Education",
-      "bodyShort": "UBSE",
-      "level": "10th / 12th",
-      "qualification": [
-        "10th",
-        "12th"
-      ],
-      "age": "School students",
-      "officialUrl": "https://ubse.uk.gov.in/",
-      "frequency": "annual",
-      "aliases": [
-        "undefined",
-        "UBSE"
-      ],
-      "cycle": {
-        "notification": [
-          11,
-          12
-        ],
-        "apply": [
-          9,
-          10
-        ],
-        "exam": [
-          2,
-          3
-        ],
-        "result": [
-          5,
-          6
-        ]
-      },
-      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
-      "keywords": [
-        "undefined",
-        "UKPSC PCS",
-        "UKSSSC recruitment",
-        "UK Police Constable",
-        "UTET",
-        "UBSE result"
-      ],
-      "verified": false,
-      "searchTerms": [
-        "UBSE Board Exams",
-        "Uttarakhand Board of School Education class 10 and class 12 board examinations",
-        "UBSE",
-        "undefined"
-      ]
-    },
-    {
       "id": "uttarakhand-police-constable",
       "slug": "uttarakhand-police-constable",
       "name": "UK Police Constable",
@@ -12767,69 +12631,6 @@
         "UKPSC PCS",
         "Uttarakhand Public Service Commission civil services examination",
         "UKPSC"
-      ]
-    },
-    {
-      "id": "uttar-pradesh-board",
-      "slug": "uttar-pradesh-board",
-      "name": "UP Board Board Exams",
-      "fullName": "Uttar Pradesh Board of High School and Intermediate Education class 10 and class 12 board examinations",
-      "stream": "boards",
-      "streamName": "School Boards",
-      "streamIcon": "🏫",
-      "scope": "state",
-      "stateId": "uttar-pradesh",
-      "stateName": "Uttar Pradesh",
-      "region": "North",
-      "body": "Uttar Pradesh Board of High School and Intermediate Education",
-      "bodyShort": "UP Board",
-      "level": "10th / 12th",
-      "qualification": [
-        "10th",
-        "12th"
-      ],
-      "age": "School students",
-      "officialUrl": "https://upmsp.edu.in/",
-      "frequency": "annual",
-      "aliases": [
-        "undefined",
-        "UP Board"
-      ],
-      "cycle": {
-        "notification": [
-          11,
-          12
-        ],
-        "apply": [
-          9,
-          10
-        ],
-        "exam": [
-          2,
-          3
-        ],
-        "result": [
-          5,
-          6
-        ]
-      },
-      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
-      "keywords": [
-        "undefined",
-        "UPPSC PCS",
-        "UPSSSC PET",
-        "UP Police Constable",
-        "UP Police SI",
-        "UPTET",
-        "UP Board result",
-        "UPSSSC Junior Assistant"
-      ],
-      "verified": false,
-      "searchTerms": [
-        "UP Board Board Exams",
-        "Uttar Pradesh Board of High School and Intermediate Education class 10 and class 12 board examinations",
-        "UP Board",
-        "undefined"
       ]
     },
     {
@@ -13134,6 +12935,124 @@
       ]
     },
     {
+      "id": "uttar-pradesh-board",
+      "slug": "uttar-pradesh-board",
+      "name": "Uttar Pradesh Board Exams",
+      "fullName": "Uttar Pradesh Board of High School and Intermediate Education class 10 and class 12 board examinations",
+      "stream": "boards",
+      "streamName": "School Boards",
+      "streamIcon": "🏫",
+      "scope": "state",
+      "stateId": "uttar-pradesh",
+      "stateName": "Uttar Pradesh",
+      "region": "North",
+      "body": "Uttar Pradesh Board of High School and Intermediate Education",
+      "bodyShort": "UP Board",
+      "level": "10th / 12th",
+      "qualification": [
+        "10th",
+        "12th"
+      ],
+      "age": "School students",
+      "officialUrl": "https://upmsp.edu.in/",
+      "frequency": "annual",
+      "aliases": [
+        "UP Board"
+      ],
+      "cycle": {
+        "notification": [
+          11,
+          12
+        ],
+        "apply": [
+          9,
+          10
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          5,
+          6
+        ]
+      },
+      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
+      "keywords": [
+        "UPPSC PCS",
+        "UPSSSC PET",
+        "UP Police Constable",
+        "UP Police SI",
+        "UPTET",
+        "UP Board result",
+        "UPSSSC Junior Assistant"
+      ],
+      "verified": false,
+      "searchTerms": [
+        "Uttar Pradesh Board Exams",
+        "Uttar Pradesh Board of High School and Intermediate Education class 10 and class 12 board examinations",
+        "UP Board"
+      ]
+    },
+    {
+      "id": "uttarakhand-board",
+      "slug": "uttarakhand-board",
+      "name": "Uttarakhand Board Exams",
+      "fullName": "Uttarakhand Board of School Education class 10 and class 12 board examinations",
+      "stream": "boards",
+      "streamName": "School Boards",
+      "streamIcon": "🏫",
+      "scope": "state",
+      "stateId": "uttarakhand",
+      "stateName": "Uttarakhand",
+      "region": "North",
+      "body": "Uttarakhand Board of School Education",
+      "bodyShort": "UBSE",
+      "level": "10th / 12th",
+      "qualification": [
+        "10th",
+        "12th"
+      ],
+      "age": "School students",
+      "officialUrl": "https://ubse.uk.gov.in/",
+      "frequency": "annual",
+      "aliases": [
+        "UBSE"
+      ],
+      "cycle": {
+        "notification": [
+          11,
+          12
+        ],
+        "apply": [
+          9,
+          10
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          5,
+          6
+        ]
+      },
+      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
+      "keywords": [
+        "UKPSC PCS",
+        "UKSSSC recruitment",
+        "UK Police Constable",
+        "UTET",
+        "UBSE result"
+      ],
+      "verified": false,
+      "searchTerms": [
+        "Uttarakhand Board Exams",
+        "Uttarakhand Board of School Education class 10 and class 12 board examinations",
+        "UBSE"
+      ]
+    },
+    {
       "id": "west-bengal-police-constable",
       "slug": "west-bengal-police-constable",
       "name": "WB Police Constable",
@@ -13314,68 +13233,6 @@
       ]
     },
     {
-      "id": "west-bengal-board",
-      "slug": "west-bengal-board",
-      "name": "WBBSE Board Exams",
-      "fullName": "West Bengal Board of Secondary Education class 10 and class 12 board examinations",
-      "stream": "boards",
-      "streamName": "School Boards",
-      "streamIcon": "🏫",
-      "scope": "state",
-      "stateId": "west-bengal",
-      "stateName": "West Bengal",
-      "region": "East",
-      "body": "West Bengal Board of Secondary Education",
-      "bodyShort": "WBBSE",
-      "level": "10th / 12th",
-      "qualification": [
-        "10th",
-        "12th"
-      ],
-      "age": "School students",
-      "officialUrl": "https://wbbse.wb.gov.in/",
-      "frequency": "annual",
-      "aliases": [
-        "undefined",
-        "WBBSE"
-      ],
-      "cycle": {
-        "notification": [
-          11,
-          12
-        ],
-        "apply": [
-          9,
-          10
-        ],
-        "exam": [
-          2,
-          3
-        ],
-        "result": [
-          5,
-          6
-        ]
-      },
-      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
-      "keywords": [
-        "undefined",
-        "WBCS",
-        "WBPSC",
-        "WB Police Constable",
-        "WB TET",
-        "WBBSE result",
-        "WBJEE"
-      ],
-      "verified": false,
-      "searchTerms": [
-        "WBBSE Board Exams",
-        "West Bengal Board of Secondary Education class 10 and class 12 board examinations",
-        "WBBSE",
-        "undefined"
-      ]
-    },
-    {
       "id": "west-bengal-psc",
       "slug": "west-bengal-psc",
       "name": "WBCS",
@@ -13432,6 +13289,65 @@
         "WBCS",
         "West Bengal Public Service Commission civil services examination",
         "WBPSC"
+      ]
+    },
+    {
+      "id": "west-bengal-board",
+      "slug": "west-bengal-board",
+      "name": "West Bengal Board Exams",
+      "fullName": "West Bengal Board of Secondary Education class 10 and class 12 board examinations",
+      "stream": "boards",
+      "streamName": "School Boards",
+      "streamIcon": "🏫",
+      "scope": "state",
+      "stateId": "west-bengal",
+      "stateName": "West Bengal",
+      "region": "East",
+      "body": "West Bengal Board of Secondary Education",
+      "bodyShort": "WBBSE",
+      "level": "10th / 12th",
+      "qualification": [
+        "10th",
+        "12th"
+      ],
+      "age": "School students",
+      "officialUrl": "https://wbbse.wb.gov.in/",
+      "frequency": "annual",
+      "aliases": [
+        "WBBSE"
+      ],
+      "cycle": {
+        "notification": [
+          11,
+          12
+        ],
+        "apply": [
+          9,
+          10
+        ],
+        "exam": [
+          2,
+          3
+        ],
+        "result": [
+          5,
+          6
+        ]
+      },
+      "cycleNote": "Indicative state cycle assembled from past recruitment patterns. State boards may shift dates; confirm on the official portal.",
+      "keywords": [
+        "WBCS",
+        "WBPSC",
+        "WB Police Constable",
+        "WB TET",
+        "WBBSE result",
+        "WBJEE"
+      ],
+      "verified": false,
+      "searchTerms": [
+        "West Bengal Board Exams",
+        "West Bengal Board of Secondary Education class 10 and class 12 board examinations",
+        "WBBSE"
       ]
     }
   ]
